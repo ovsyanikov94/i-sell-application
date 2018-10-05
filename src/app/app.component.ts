@@ -6,5 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'i-sell-application';
+
+  public fruits: string[];
+
+  constructor(){
+
+    this.fruits = [
+      'Apple',
+      'Orange',
+      'Cherry'
+    ];
+
+
+  }
+
 }
