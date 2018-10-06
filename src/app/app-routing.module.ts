@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { MainComponent } from './components/main/main.component';
+
 
 const routes: Routes = [
   {
@@ -16,6 +18,10 @@ const routes: Routes = [
   {
     path: "**",
     component: AuthorizeComponent
+  },
+  {
+    path: 'main',
+    component: MainComponent
   }
 ];
 

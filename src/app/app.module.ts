@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
+import { MainComponent } from './components/main/main.component';
 
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
@@ -20,6 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 
@@ -30,6 +32,7 @@ import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/
     AuthorizeComponent,
     RegistrationComponent,
     AuthModalComponent,
+    MainComponent,
 
   ],
   imports: [
@@ -43,7 +46,8 @@ import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/
     MatButtonModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule
   ],
   providers: [
   ],
