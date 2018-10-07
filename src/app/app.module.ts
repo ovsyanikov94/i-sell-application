@@ -22,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatSidenavModule} from '@angular/material/sidenav';
-
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -47,7 +48,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatIconModule,
+    MatCardModule
+
   ],
   providers: [
   ],

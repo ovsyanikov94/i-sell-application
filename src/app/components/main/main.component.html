@@ -1,15 +1,23 @@
 <mat-sidenav-container class="example-container" >
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
-               (closed)="events.push('close!')">
-    Sidenav content
+  <mat-sidenav #sidenav mode="side" class="side_bar">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Имя Фамилия</mat-card-title>
+        <mat-card-subtitle>Логин</mat-card-subtitle>
+      </mat-card-header>
+
+    </mat-card>
+
+    <a mat-raised-button routerLink="." color="primary" class="col-12 link">Личный кабинет</a>
+    <a mat-raised-button routerLink="." color="primary" class="col-12 link">Лоты</a>
+    <a mat-raised-button routerLink="." color="primary" class="col-12 link">Подписчики</a>
+    <a mat-raised-button routerLink="." color="primary" class="col-12 link">Сообщения</a>
+
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
-    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
-    <p>Events:</p>
-    <div class="example-events">
-      <div *ngFor="let e of events">{{e}}</div>
-    </div>
+    <p><button mat-button (click)="sidenav.toggle()" style="font-size: 30px"><mat-icon >format_align_justify</mat-icon></button></p>
+
   </mat-sidenav-content>
 </mat-sidenav-container>

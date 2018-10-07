@@ -8,6 +8,10 @@ import { MainComponent } from './components/main/main.component';
 
 const routes: Routes = [
   {
+    path: 'main',
+    component: MainComponent
+  },
+  {
     path: 'authorize',
     component: AuthorizeComponent
   },
@@ -18,10 +22,6 @@ const routes: Routes = [
   {
     path: "**",
     component: AuthorizeComponent
-  },
-  {
-    path: 'main',
-    component: MainComponent
   }
 ];
 
