@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
-
+import { LotComponent } from './components/lot/lot.component';
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -23,14 +23,19 @@ import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/
 
 
 
+
+
+
+
 @NgModule({
+
   declarations: [
 
     AppComponent,
     AuthorizeComponent,
     RegistrationComponent,
     AuthModalComponent,
-
+    LotComponent,
   ],
   imports: [
     BrowserModule,

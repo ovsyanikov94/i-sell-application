@@ -41,6 +41,14 @@ export class User {
     this._userConfirmPassword = value;
   }
 
+  get userPhoto(): string {
+    return this._userPhoto;
+  }
+
+  set userPhoto(value: string) {
+    this._userPhoto = value;
+  }
+
   private _userLogin: string;
   private _userPassword: string;
   private _userConfirmPassword: string;
@@ -48,6 +56,8 @@ export class User {
   private _userName: string;
   private _userLastname: string;
   private _userPhone: string;
+  private _userPhoto: string;
+
 
   get userPassword(): string {
     return this._userPassword;
@@ -73,7 +83,7 @@ export class User {
     this._userLastname = '';
     this._userName = '';
     this._userPhone = '';
-
+    this._userPhoto = '';
   }
 
 }
