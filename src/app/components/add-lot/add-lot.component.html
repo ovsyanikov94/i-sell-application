@@ -1,0 +1,91 @@
+<div class="container-fluid">
+
+  <div class="row justify-content-center">
+
+    <div class="col-6">
+
+      <div class="row justify-content-center text-center">
+        <h3>Добавление лота</h3>
+      </div>
+
+      <div class="row justify-content-center">
+
+        <div class="row justify-content-center mat-elevation-z8 form-auth">
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="lotTitle" matInput placeholder="Название товара" [(ngModel)]="lot.lotTitle" [formControl]="textFormControl">
+            <mat-error *ngIf="textFormControl.hasError('pattern') && !textFormControl.hasError('required')">
+              Введите корректное название. Длина от 3 до 30 символов
+            </mat-error>
+            <mat-error *ngIf="textFormControl.hasError('required')">
+              Название <strong>обязательно</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <textarea name="lotDescription" matInput placeholder="Описание" [(ngModel)]="lot.lotDescription" [formControl]="descriptionFormControl"></textarea>
+            <mat-error *ngIf="descriptionFormControl.hasError('pattern') && !descriptionFormControl.hasError('required')">
+              Введите корректное описание. Длина от 15 до 350 символов
+            </mat-error>
+            <mat-error *ngIf="descriptionFormControl.hasError('required')">
+              Описание <strong>обязательно</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <!--<mat-form-field class="example-full-width col-12">-->
+            <!--<mat-selection-list #categories>-->
+              <!--<mat-list-option *ngFor="let category of categories">-->
+                <!--{{category}}-->
+              <!--</mat-list-option>-->
+            <!--</mat-selection-list>-->
+            <!--<mat-error *ngIf="categories.selectedOptions.selected.length == 0">-->
+              <!--Выберите категорию-->
+            <!--</mat-error>-->
+          <!--</mat-form-field>-->
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="lotStartingPrice" matInput placeholder="Стартовая цена" [(ngModel)]="lot.lotStartingPrice" [formControl]="priceFormControl">
+            <mat-error *ngIf="priceFormControl.hasError('pattern') && !priceFormControl.hasError('required')">
+              Введите корректную цену. Длина от 1 до 30 цифр
+            </mat-error>
+            <mat-error *ngIf="priceFormControl.hasError('required')">
+              Цена <strong>обязательна</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <!--<mat-form-field class="example-full-width col-12">-->
+            <!--<mat-selection-list #types>-->
+              <!--<mat-list-option *ngFor="let type of types">-->
+                <!--{{type}}-->
+              <!--</mat-list-option>-->
+            <!--</mat-selection-list>-->
+            <!--<mat-error *ngIf="categories.selectedOptions.selected.length == 0">-->
+              <!--Выберите тип-->
+            <!--</mat-error>-->
+          <!--</mat-form-field>-->
+
+          <!--<mat-form-field class="example-full-width col-12">-->
+            <!--<input type="file" name="lotPhoto" placeholder="Фото" (change)="onFileSelected($event)" [(ngModel)]="lot.lotPhoto" [formControl]="passwordFormControl">-->
+            <!--<button type="button" (click)="onUpload()">Добавить фото</button>-->
+            <!--<mat-error *ngIf="passwordFormControl.hasError('required')">-->
+              <!--Пароль <strong>обязателен</strong>-->
+            <!--</mat-error>-->
+          <!--</mat-form-field>-->
+
+          <div class="row justify-content-center text-center">
+
+            <div class="col-12">
+              <button (click)="addLot( $event )" class="col-12" mat-stroked-button>Добавить Лот</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

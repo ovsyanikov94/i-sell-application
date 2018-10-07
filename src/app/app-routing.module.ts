@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { AddLotComponent } from "./components/add-lot/add-lot.component";
 
 const routes: Routes = [
   {
@@ -14,9 +15,14 @@ const routes: Routes = [
     component: RegistrationComponent
   },
   {
+    path: "add-lot",
+    component: AddLotComponent
+  },
+  {
     path: "**",
     component: AuthorizeComponent
   }
+
 ];
 
 @NgModule({
