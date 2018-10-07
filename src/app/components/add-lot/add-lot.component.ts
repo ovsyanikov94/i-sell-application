@@ -17,7 +17,7 @@ export class AddLotComponent implements OnInit {
 
   categories: string[] = ['Моб. Телефоны', 'Акссесуары'];
 
-  types: string[] = ['Запланированный', 'Неме'];
+  types: string[] = ['Запланированный', 'Немедленный'];
 
   public lot: Lot = new Lot();
 
@@ -25,17 +25,17 @@ export class AddLotComponent implements OnInit {
 
   public textFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^[a-z]{4,30}$/i),
+    Validators.pattern(/^[a-zа-я]{4,30}$/i),
   ]);
 
   public descriptionFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^[a-z0-9]{15,250}$/i),
+    Validators.pattern(/^[a-zа-я0-9 ]{15,250}$/i),
   ]);
 
   public priceFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^[0-9]{1,10}$/i),
+    Validators.pattern(/^[1-9]\d{0,7}(?:\.\d{1,4})?|\.\d{1,4}$/),
   ]);
 
   onFileSelected(event){
@@ -51,8 +51,16 @@ export class AddLotComponent implements OnInit {
       });
   }
 
-  constructor(public dialog: MatDialog , private http: HttpClient) {
+  categoryChange(event){
+    this.lot.lotCategory = event.value;
+    console.log(this.lot.lotCategory);
+  }
 
+  typeChange(event){
+    this.lot.lotType = event.value;
+  }
+
+  constructor(public dialog: MatDialog , private http: HttpClient) {
   }
 
   addLot( event ){
