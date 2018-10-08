@@ -1,0 +1,28 @@
+<div class="row text-center justify-content-center">
+
+  <div mat-dialog-content  class="row justify-content-center text-center">
+    <h6 >{{betData.lot.lotName}}</h6>
+  </div>
+
+  <div mat-dialog-content  class="col-12" >
+    <img src="{{betData.lot.lotFoto[0]}}"  style="width: 50%">
+  </div>
+  <div mat-dialog-content class="row justify-content-center text-center"  >
+    <h6 class="col-12">Текущая ставка: <span style="color: red; font-size: larger ">{{betData.lot.lotCurrentPrice}} руб.</span></h6>
+  </div>
+
+  <mat-form-field class="example-full-width " style="margin-top: 5%" >
+    <input name="userBet" matInput placeholder="Введите Вашу ставку">
+  </mat-form-field>
+
+  <div  mat-dialog-actions class="col-8" >
+    <button mat-raised-button color="primary" class="col-12" (click)="betDialog()">Сделать ставку</button>
+  </div>
+  <div  mat-dialog-actions class="col-8" style="margin-top: 5%">
+    <button mat-raised-button color="warn" class="col-12" (click)="closeDialog()">Отмена</button>
+  </div>
+
+</div>
+
+
+

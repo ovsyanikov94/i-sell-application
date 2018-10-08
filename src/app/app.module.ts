@@ -14,6 +14,7 @@ import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
+import { BetModalComponent } from './modals/bet.modal/bet.modal.component';
 
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
@@ -39,7 +40,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     LotComponent,
     CardLotComponent,
     MainComponent,
-
+    BetModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +65,8 @@ import {MatBadgeModule} from '@angular/material/badge';
   providers: [
   ],
   entryComponents: [
-    AuthModalComponent
+    AuthModalComponent,
+    BetModalComponent
   ],
   bootstrap: [AppComponent]
 })
