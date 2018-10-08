@@ -24,7 +24,9 @@ import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import {MatCardModule} from '@angular/material/card';
 
   ],
   imports: [
+
     BrowserModule,
     FormsModule,
     AppRoutingModule,
@@ -50,7 +53,10 @@ import {MatCardModule} from '@angular/material/card';
     MatDialogModule,
     MatSidenavModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatDividerModule,
+    MatListModule,
+    MatBadgeModule
 
   ],
   providers: [
