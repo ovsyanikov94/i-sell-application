@@ -14,6 +14,8 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
+import { MainComponent } from './components/main/main.component';
+
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -21,15 +23,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-
-
-
-
-
-
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
-
   declarations: [
 
     AppComponent,
@@ -38,6 +39,8 @@ import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/
     AuthModalComponent,
     LotComponent,
     CardLotComponent,
+    MainComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,13 @@ import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/
     MatFormFieldModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatIconModule
+    MatSidenavModule,
+    MatIconModule,
+    MatCardModule,
+    MatDividerModule,
+    MatListModule,
+    MatBadgeModule
+
   ],
   providers: [
   ],

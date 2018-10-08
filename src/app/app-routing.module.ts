@@ -5,7 +5,14 @@ import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
+import { MainComponent } from './components/main/main.component';
+
+
 const routes: Routes = [
+  {
+    path: 'main',
+    component: MainComponent
+  },
   {
     path: 'authorize',
     component: AuthorizeComponent
@@ -24,9 +31,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    //component: AuthorizeComponent
-    //component: LotComponent
-    component: CardLotComponent
+    component: AuthorizeComponent
   }
 ];
 
