@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LotComponent } from './components/lot/lot.component';
-
+import { CardLotComponent } from './components/cardLot/cardLot.component';
 const routes: Routes = [
   {
     path: 'authorize',
@@ -19,9 +19,14 @@ const routes: Routes = [
     component: LotComponent
   },
   {
+    path: 'card-lot',
+    component: CardLotComponent
+  },
+  {
     path: "**",
     //component: AuthorizeComponent
-    component: LotComponent
+    //component: LotComponent
+    component: CardLotComponent
   }
 ];
 

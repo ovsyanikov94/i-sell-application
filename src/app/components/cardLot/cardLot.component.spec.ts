@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LotComponent } from './lot.component';
+import { CardLotComponent } from './cardLot.component';
 
 describe('CardLotComponent', () => {
-  let component: LotComponent;
-  let fixture: ComponentFixture<LotComponent>;
+  let component: CardLotComponent;
+  let fixture: ComponentFixture<CardLotComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LotComponent ]
+      declarations: [ CardLotComponent ]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LotComponent);
+    fixture = TestBed.createComponent(CardLotComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
