@@ -5,13 +5,14 @@ import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //MY-COMPONENTS
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
+import { LotComponent } from './components/lot/lot.component';
+import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 
 //ANGULAR-MATERIAL
@@ -20,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
@@ -35,11 +36,12 @@ import {MatBadgeModule} from '@angular/material/badge';
     AuthorizeComponent,
     RegistrationComponent,
     AuthModalComponent,
+    LotComponent,
+    CardLotComponent,
     MainComponent,
 
   ],
   imports: [
-
     BrowserModule,
     FormsModule,
     AppRoutingModule,

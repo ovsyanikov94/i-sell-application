@@ -1,0 +1,161 @@
+<div class="container-fluid" xmlns="">
+
+  <div class="row justify-content-center form-lot">
+  <div class="col-5">
+    <div class="row justify-content-start text-left">
+      <a style="font-size: small" routerLink="/card-lot">&larr; Вернуться к лотам</a>
+    </div>
+
+
+    <div class="row justify-content-start text-left" >
+      <div class="container">
+        <div class="buttons">
+
+          <button class="controls" id="previous">&laquo;</button>
+
+          <button class="controls" id="next">&raquo;</button>
+        </div>
+      <ul id="slides">
+        <li class="slide" *ngFor="let photo of lot.lotFoto">
+          <img src="{{photo}}" style="width: 90%">
+        </li>
+
+      </ul>
+
+    </div>
+
+    </div>
+
+
+
+    <div class="row justify-content-end text-right" style="margin-top: 5%">
+
+      <mat-icon md-font-library="material-icons" color="primary" style="cursor: pointer">&#10084;</mat-icon>
+      <small class="text-muted" style="margin-right: 20%">25</small>
+      <mat-icon md-font-library="material-icons" color="primary" style="cursor: pointer">&#9785;</mat-icon>
+      <small class="text-muted" style="margin-right: 10%">5</small>
+    </div>
+
+  </div>
+
+
+  <div class="col-6">
+
+    <div class="row justify-content-start text-left">
+      <h3>{{lot.lotName}}</h3>
+    </div>
+    <div class="row justify-content-start text-left" >
+      <h5><small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory}}</span></small></h5>
+    </div>
+    <div class="row justify-content-start text-left" >
+      <small class="text-muted">Статус: <span style="font-weight: bold ">{{lot.lotStatus}}</span></small>
+    </div>
+    <div class="row justify-content-start text-left" style="margin-top: 2%">
+
+      <small class="text-muted">Дата начала торга: </small>
+
+    </div>
+    <div class="row justify-content-start text-left" >
+      <h6 class="text-muted"><span style="color: darkslategrey ">{{lot.lotStartDate.toLocaleDateString()}}  {{lot.lotStartDate.getHours()}}:{{lot.lotStartDate.getMinutes()}}</span></h6>
+    </div>
+
+
+      <div class="row justify-content-start text-left" style="margin-top:3%">
+        <small class="text-muted">Текущая ставка:</small>
+      </div>
+      <div class="row justify-content-start text-left" style="color: red">
+        <h1>{{lot.lotCurrentPrice}} руб.</h1>
+      </div>
+
+    <div class="row justify-content-start text-left" style="margin-top:1%">
+      <small class="text-muted">Начальная ставка:</small>
+    </div>
+    <div class="row justify-content-start text-left" style="color: cadetblue ">
+      <h4>{{lot.lotStartPrice}} руб.</h4>
+    </div>
+
+    <div class="row justify-content-start text-left" style="margin-top:2%">
+      <h5>Описание:
+        <small class="text-muted">{{lot.lotDescription}}</small>
+      </h5>
+    </div>
+
+    <hr style="height: 2px">
+    <div class="row justify-content-start text-left" style="margin-top:2%">
+      <div class="col-6">
+        <div class="row justify-content-start text-left" style="margin-top:2%">
+          <h5>
+            Продавец:
+          </h5>
+        </div>
+        <div class="row justify-content-start text-left" style="margin-top:2%">
+
+            <div class="row justify-content-start text-left" style="margin-top:2%">
+
+                <div *ngIf="lot.lotSeller.userPhoto===''" style="margin: 0">
+                  <img src="/public/no-foto/unfoto.png" alt="Foto" style="width: 60%; margin: 0">
+                </div>
+                <div *ngIf="lot.lotSeller.userPhoto!==''">
+                  <img src="{{lot.lotSeller.userPhoto}}"  style="width: 60%">
+                </div>
+            </div>
+            <div class="row justify-content-start text-left" style="margin-top:2%;color: cadetblue ">
+
+
+                <h4 *ngIf="lot.lotSeller.userName===''">
+                  Имя покупателя
+                </h4>
+                <h4 *ngIf="lot.lotSeller.userName!==''">
+                  {{lot.lotSeller.userName}}
+                </h4>
+            </div>
+
+
+
+
+        </div>
+      </div>
+
+
+      <div class="col-6">
+        <div class="row justify-content-start text-left" style="margin-top:2%">
+          <h5>
+            Покупатель:
+          </h5>
+        </div>
+        <div class="row justify-content-start text-left" style="margin-top:2%">
+
+            <div class="row justify-content-start text-left" style="margin-top:2%">
+
+              <div *ngIf="lot.lotBuyer.userPhoto===''" style="margin: 0">
+                <img src="/public/no-foto/unfoto.png" alt="Foto" style="width: 60%; margin: 0">
+              </div>
+              <div *ngIf="lot.lotBuyer.userPhoto!==''">
+                <img src="{{lot.lotBuyer.userPhoto}}"  style="width: 60%">
+              </div>
+            </div>
+            <div class="row justify-content-start text-left" style="margin-top:2%;color: cadetblue ">
+
+
+              <h4 *ngIf="lot.lotBuyer.userName===''">
+                Имя продавца
+              </h4>
+              <h4 *ngIf="lot.lotBuyer.userName!==''">
+                {{lot.lotBuyer.userName}}
+              </h4>
+            </div>
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+  </div>
+
+
+</div>
