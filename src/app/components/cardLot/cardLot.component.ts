@@ -21,18 +21,7 @@ export class CardLotComponent implements OnInit {
       new Lot(),
       new Lot(),
       new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
-      // new Lot(),
+
     ];
 
   }

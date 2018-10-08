@@ -1,0 +1,23 @@
+<div style="margin: 5px">
+
+  <mat-card>
+    <mat-list>
+      <mat-list-item>
+        <img  mat-list-avatar src={{blackCart.photo}} alt="Desc 1" style="width: 100px; height: 100px">
+        <h3 mat-line><a routerLink="." >{{blackCart.login}}</a></h3>
+        <p mat-line>
+          <span>{{blackCart.name}}</span>
+        </p>
+        <p mat-line>
+          <span>{{blackCart.lastName}}</span>
+        </p>
+        <div class="button-row">
+          <button mat-raised-button color="primary" style="width: auto">удалить из списка </button>
+        </div>
+
+      </mat-list-item>
+    </mat-list>
+
+  </mat-card>
+</div>
+

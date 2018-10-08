@@ -76,14 +76,14 @@ export class User {
   }
 
   constructor(){
-    this._userLogin = '';
+    this._userLogin = 'aaaaa';
     this._userPassword = '';
     this._userConfirmPassword = '';
     this._userEmail = '';
-    this._userLastname = '';
-    this._userName = '';
+    this._userLastname = 'aaaaa';
+    this._userName = 'aaaaa';
     this._userPhone = '';
-    this._userPhoto = '';
+    this._userPhoto = 'aaaaa';
   }
 
 }

@@ -14,6 +14,8 @@ import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
+import { BlacklistComponent } from './components/blacklist/blacklist.component';
+import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
 
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
@@ -29,6 +31,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
 
+
+
+
 @NgModule({
   declarations: [
 
@@ -39,6 +44,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     LotComponent,
     CardLotComponent,
     MainComponent,
+    BlacklistComponent,
+    BlockBlackListComponent,
+
 
   ],
   imports: [
