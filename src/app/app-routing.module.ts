@@ -11,7 +11,17 @@ import { MainComponent } from './components/main/main.component';
 const routes: Routes = [
   {
     path: 'main',
-    component: MainComponent
+    component: MainComponent,
+    children: [
+      {
+        path: 'lot',
+        component: LotComponent
+      },
+      {
+        path: 'card-lot',
+        component: CardLotComponent
+      },
+    ]
   },
   {
     path: 'authorize',
@@ -20,14 +30,6 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent
-  },
-  {
-    path: 'lot',
-    component: LotComponent
-  },
-  {
-    path: 'card-lot',
-    component: CardLotComponent
   },
   {
     path: "**",

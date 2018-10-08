@@ -30,15 +30,17 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <p>
+    <div>
       <button mat-button (click)="sidenav.toggle()" style="font-size: 30px">
         <mat-icon >
           format_align_justify
         </mat-icon>
       </button>
-      <span class="container">
+
+      <div class="container">
         <router-outlet></router-outlet>
-      </span>
-    </p>
+      </div>
+
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

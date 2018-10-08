@@ -12,9 +12,28 @@ import {Lot} from '../../models/lot/Lot';
 
 export class CardLotComponent implements OnInit {
 
-  public lot: Lot = new Lot();
+  public lots: Lot[];
 
   constructor() {
+
+    this.lots = [
+      new Lot(),
+      new Lot(),
+      new Lot(),
+      new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+      // new Lot(),
+    ];
 
   }
 
