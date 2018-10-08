@@ -1,12 +1,24 @@
 'use strict';
 
-export const passwordValid = function (pasword: string, confPassword: string ): string{
+import {AbstractControl, ValidatorFn} from '@angular/forms';
+import {User} from '../models/user/User';
 
-  if ( pasword === confPassword){
-    return null;
-  }
+export function PasswordConfirmValidator( user: User ): ValidatorFn {
 
+  return (control: AbstractControl): {[key: string]: any} | null => {
 
-  return 'пароль не совпадает';
+    console.log( 'pass: ' , user.userPassword , 'confirm: ' ,  control.value);
 
+    const validatorErrorObject = {
+      'Confirmation': {
+        value: control.value,
+        errorMessage: 'Пароли не совпадают'
+      }
+    };
+
+    const checkConfirm = user.userPassword === control.value;
+
+    return checkConfirm ? null : validatorErrorObject ;
+
+  };
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user/User';
 import {FormControl, Validators} from '@angular/forms';
-import {passwordValid} from '../../Validators/PaswordValidator';
+import { PasswordConfirmValidator } from '../../Validators/PaswordValidator';
 
 @Component({
   selector: 'app-registration',
@@ -33,14 +33,26 @@ export class RegistrationComponent implements OnInit {
     Validators.required,
     Validators.pattern(/^((\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/ )
   ]);
+
   public passwordFormControl = new FormControl('', [
     Validators.required,
   ]);
 
+  public passwordConfirmFormControl = new FormControl('', [
+    Validators.required,
+    PasswordConfirmValidator( this.user )
+  ]);
 
   constructor() { }
 
   ngOnInit() {
+
+    this.user.userName = 'Алексей';
+    this.user.userLastname = 'Фамилия';
+    this.user.userPhone = '+3809238130';
+    this.user.userLogin = 'Alex';
+    this.user.userEmail = 'alex@gmail.com';
+
   }
 
 
