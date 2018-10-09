@@ -15,6 +15,9 @@ import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 
+//ANGULAR IMAGE SLIDER
+import { SliderModule } from 'angular-image-slider';
+
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -58,10 +61,11 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     MatDividerModule,
     MatListModule,
-    MatBadgeModule
-
+    MatBadgeModule,
+    SliderModule
   ],
   providers: [
+
   ],
   entryComponents: [
     AuthModalComponent
