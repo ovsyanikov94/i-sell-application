@@ -6,7 +6,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
-
+import { BlacklistComponent } from './components/blacklist/blacklist.component';
 
 const routes: Routes = [
   {
@@ -21,6 +21,10 @@ const routes: Routes = [
         path: 'card-lot',
         component: CardLotComponent
       },
+      {
+        path: 'blacklist',
+        component: BlacklistComponent
+      }
     ]
   },
   {
