@@ -6,6 +6,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
+import {CommentComponent} from "./components/comment/comment.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent
+  },
+  {
+    path: 'comment',
+    component: CommentComponent
   },
   {
     path: "**",

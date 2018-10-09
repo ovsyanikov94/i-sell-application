@@ -28,6 +28,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     LotComponent,
     CardLotComponent,
     MainComponent,
+    CommentComponent,
 
   ],
   imports: [
