@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthModalComponent } from './auth.modal.component';
 
-describe('AuthModalComponent', () => {
-  let component: AuthModalComponent;
-  let fixture: ComponentFixture<AuthModalComponent>;
+import { BlacklistComponent } from './blacklist.component';
+
+describe('BlacklistComponent', () => {
+  let component: BlacklistComponent;
+  let fixture: ComponentFixture<BlacklistComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthModalComponent ]
+      declarations: [ BlacklistComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthModalComponent);
+    fixture = TestBed.createComponent(BlacklistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

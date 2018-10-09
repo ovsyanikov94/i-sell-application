@@ -1,215 +1,69 @@
-<div class="container">
-  <div class="row m-y-2">
-    <div class="col-lg-8 push-lg-4">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a href="#" data-target="#profile" data-toggle="tab" class="nav-link active" aria-expanded="true">Профиль</a>
-        </li>
-        <li *ngIf="isYourProfile" class="nav-item">
-          <a href="#" data-target="#messages" data-toggle="tab" class="nav-link" aria-expanded="false">Сообщения</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" data-target="#edit" data-toggle="tab" class="nav-link" aria-expanded="false">Инфо</a>
-        </li>
-      </ul>
-      <div class="tab-content p-b-3">
-        <div class="tab-pane active" id="profile" aria-expanded="true">
-          <h4 class="m-y-2">Профиль Пользователя UserName</h4>
-          <div class="row">
-            <div class="col-md-6">
-              <h6>О себе</h6>
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="https://icdn.lenta.ru/images/2015/12/15/11/20151215114126414/pic_a8bf01cef0eaf46338e791bf08db72c1.jpg">
+    <mat-card-title>Фамилия Имя Отчество</mat-card-title>
+    <mat-card-subtitle>UserName</mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-button matBadge="1" matBadgeOverlap="false">Лайки</button>
+      <button mat-button matBadge="2" matBadgeOverlap="false">Рейтинг</button>
+      <button mat-button matBadge="3" matBadgeOverlap="false">Ещё что-то</button>
+    </mat-card-actions>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab label="Посты">
+        <div style="width: 500px; height: auto; margin: 0 auto;">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Shiba Inu</mat-card-title>
+              <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+            <mat-card-content>
               <p>
-                ...
+                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
               </p>
-              <h6>Хобби</h6>
-              <p>
-                ...
-              </p>
-            </div>
-            <div class="col-md-6">
-              <h6>Теги</h6>
-              <a href="#" class="tag tag-default tag-pill">aaa</a>
-              <a href="#" class="tag tag-default tag-pill">bbb</a>
-              <a href="#" class="tag tag-default tag-pill">ccc</a>
-              <a href="#" class="tag tag-default tag-pill">ddd</a>
-              <a href="#" class="tag tag-default tag-pill">eee</a>
-              <a href="#" class="tag tag-default tag-pill">fff</a>
-              <a href="#" class="tag tag-default tag-pill">ggg</a>
-              <a href="#" class="tag tag-default tag-pill">Тут должны быть ваши теги</a>
-              <hr>
-              <span class="tag tag-primary"><i class="fa fa-user"></i> 1000 Подписчиков</span>
-              <span class="tag tag-success"><i class="fa fa-cog"></i> 43 Торгов</span>
-              <span class="tag tag-danger"><i class="fa fa-eye"></i> 245 Комментариев</span>
-            </div>
-            <div class="col-md-12">
-              <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span>Последняя Активность</h4>
-              <table class="table table-hover table-striped">
-                <tbody>
-                <tr>
-                  <td>
-                    <strong>UserName</strong> подписался на <strong>`Новости ...`</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>UserName</strong> удалил коментарий <strong>`Обсуждения`</strong>
-                  </td>
-
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Demo</strong> Demo <strong>`Demo`</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Demo</strong> Demo <strong>`Demo`</strong>
-                  </td>
-
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Demo</strong> Demo <strong>`Demo`</strong>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>LIKE</button>
+              <button mat-button>SHARE</button>
+            </mat-card-actions>
+          </mat-card>
         </div>
-        <div *ngIf="isYourProfile" class="tab-pane" id="messages" aria-expanded="false">
-          <h4 class="m-y-2">Последние сообщения и Уведомления</h4>
-          <div class="alert alert-info alert-dismissable">
-            <a class="panel-close close" data-dismiss="alert">×</a> Это <strong>.alert</strong>. Используйте его, чтобы показывать важные сообщения пользователю.
-          </div>
-          <table class="table table-hover table-striped">
-            <tbody>
-            <tr>
-              <td>
-                <span class="pull-xs-right font-weight-bold">3ч назад</span> ...
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span class="pull-xs-right font-weight-bold">Вчера</span> ...
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span class="pull-xs-right font-weight-bold">Позавчера</span> ...
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span class="pull-xs-right font-weight-bold">Неделю назад</span> ...
-              </td>
-            </tr>
-            </tbody>
-          </table>
+      </mat-tab>
+      <mat-tab label="Информация о пользователе">
+        <div>
+          <mat-list>
+            <mat-list-item>
+              <p>Фамилия: Test</p>
+            </mat-list-item>
+            <mat-list-item>
+              <p>Имя: Test</p>
+            </mat-list-item>
+            <mat-list-item>
+              <p>Отчество: Test</p>
+            </mat-list-item>
+            <mat-list-item>
+              <p>Страна: Test</p>
+            </mat-list-item>
+            <mat-list-item>
+              <p>Город: Test</p>
+            </mat-list-item>
+            <mat-list-item>
+              <p>Ещё информация : ...</p>
+            </mat-list-item>
+            <mat-list-item>
+              <p>Ещё информация : ...</p>
+            </mat-list-item>
+            <mat-list-item>
+              <p>Ещё информация : ...</p>
+            </mat-list-item>
+          </mat-list>
         </div>
-        <div class="tab-pane" id="edit" aria-expanded="false">
-          <h4 class="m-y-2">Информация Пользователя UserName</h4>
-          <form role="form">
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Имя</label>
-              <div class="col-lg-9">
-                <input [disabled]="!isYourProfile" class="form-control" type="text" placeholder="Иван">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Фамилия</label>
-              <div class="col-lg-9">
-                <input [disabled]="!isYourProfile" class="form-control" type="text" placeholder="Иванов">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Отчество</label>
-              <div class="col-lg-9">
-                <input [disabled]="!isYourProfile" class="form-control" type="text" placeholder="Иванович">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Email</label>
-              <div class="col-lg-9">
-                <input [disabled]="!isYourProfile" class="form-control" type="email" placeholder="email@gmail.com">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Компания</label>
-              <div class="col-lg-9">
-                <input [disabled]="!isYourProfile" class="form-control" type="text" value="">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Веб Сайт</label>
-              <div class="col-lg-9">
-                <input [disabled]="!isYourProfile" class="form-control" type="url" value="">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Адресс</label>
-              <div class="col-lg-9">
-                <input [disabled]="!isYourProfile" class="form-control" type="text" value="" placeholder="Улица">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label"></label>
-              <div class="col-lg-6">
-                <input [disabled]="!isYourProfile" class="form-control" type="text" value="" placeholder="Город">
-              </div>
-              <div class="col-lg-3">
-                <input [disabled]="!isYourProfile" class="form-control" type="text" value="" placeholder="Страна">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Часовой Пояс</label>
-              <div class="col-lg-9">
-                <select [disabled]="!isYourProfile" id="user_time_zone" class="form-control" size="0">
-                  <option value="Moscow">(GMT+3) Moscow</option>
-                  <option value="Kiev">(GMT+3) Kiev</option>
-                </select>
-              </div>
-            </div>
-            <div *ngIf="isYourProfile">
-              <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">UserName</label>
-                <div class="col-lg-9">
-                  <input class="form-control" type="text" placeholder="UserName">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                <div class="col-lg-9">
-                  <input class="form-control" type="password" placeholder="Password">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-                <div class="col-lg-9">
-                  <input class="form-control" type="password" placeholder="Confirm password">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label"></label>
-                <div class="col-lg-9">
-                  <input type="reset" class="btn btn-secondary" value="Cancel">
-                  <input type="button" class="btn btn-primary" value="Save Changes">
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 pull-lg-8 text-xs-center">
-      <img src="assets/img/150" class="m-x-auto img-fluid img-circle" alt="avatar">
-      <div *ngIf="isYourProfile">
-        <h6 class="m-t-2">Обновить Аватар</h6>
-        <label class="custom-file">
-          <input type="file" id="file" class="custom-file-input">
-          <span class="custom-file-control"></span>
-        </label>
-      </div>
-    </div>
-  </div>
-</div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
