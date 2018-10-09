@@ -17,6 +17,9 @@ import { MainComponent } from './components/main/main.component';
 import { BlacklistComponent } from './components/blacklist/blacklist.component';
 import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
 
+//ANGULAR IMAGE SLIDER
+import { SliderModule } from 'angular-image-slider';
+
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -30,9 +33,6 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
-
-
-
 
 @NgModule({
   declarations: [
@@ -66,8 +66,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     MatDividerModule,
     MatListModule,
-    MatBadgeModule
-
+    MatBadgeModule,
+    SliderModule
   ],
   providers: [
   ],

@@ -7,10 +7,10 @@
 }
 .side_bar{
   width: 300px;
+
 }
 .example-card {
   max-width: 300px;
-
 }
 
 .example-header-image {
@@ -21,6 +21,8 @@
 .link{
   text-decoration: none;
   margin-top: 3px;
-
 }
 
+.open-button{
+  position: fixed;
+}

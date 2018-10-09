@@ -1,32 +1,21 @@
 <div class="container-fluid" xmlns="">
 
+
+  <div class="row justify-content-start text-left" >
+    <div class="container">
+      <div>
+
+        <angular-image-slider *ngIf="lot.lotFoto.length > 1" [images]="lot.lotFoto"></angular-image-slider>
+
+      </div>
+    </div>
+  </div>
+
   <div class="row justify-content-center form-lot">
   <div class="col-5">
     <div class="row justify-content-start text-left">
       <a style="font-size: small" routerLink="/card-lot">&larr; Вернуться к лотам</a>
     </div>
-
-
-    <div class="row justify-content-start text-left" >
-      <div class="container">
-        <div class="buttons">
-
-          <button class="controls" id="previous">&laquo;</button>
-
-          <button class="controls" id="next">&raquo;</button>
-        </div>
-      <ul id="slides">
-        <li class="slide" *ngFor="let photo of lot.lotFoto">
-          <img src="{{photo}}" style="width: 90%">
-        </li>
-
-      </ul>
-
-    </div>
-
-    </div>
-
-
 
     <div class="row justify-content-end text-right" style="margin-top: 5%">
 
@@ -34,10 +23,10 @@
       <small class="text-muted" style="margin-right: 20%">25</small>
       <mat-icon md-font-library="material-icons" color="primary" style="cursor: pointer">&#9785;</mat-icon>
       <small class="text-muted" style="margin-right: 10%">5</small>
+
     </div>
 
   </div>
-
 
   <div class="col-6">
 
