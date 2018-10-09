@@ -8,6 +8,8 @@ import {Lot} from '../../models/lot/Lot';
   styleUrls: ['./cardLot.component.css'],
 
 })
+
+
 export class CardLotComponent implements OnInit {
 
   public lots: Lot[];

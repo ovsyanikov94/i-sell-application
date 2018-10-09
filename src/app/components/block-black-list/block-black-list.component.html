@@ -1,0 +1,9 @@
+<div>
+  <app-blacklist
+    *ngFor="let user of users"
+    [user]="user"
+    (onUserClick)="foo( $event )"
+  ></app-blacklist>
+</div>
+
+<!--<h2>{{currentUser.userName}}</h2>-->

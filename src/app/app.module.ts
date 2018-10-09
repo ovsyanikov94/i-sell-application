@@ -14,6 +14,8 @@ import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
+import { BlacklistComponent } from './components/blacklist/blacklist.component';
+import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
 
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
@@ -41,7 +43,11 @@ import {MatBadgeModule} from '@angular/material/badge';
     AuthModalComponent,
     LotComponent,
     CardLotComponent,
-    MainComponent
+    MainComponent,
+    BlacklistComponent,
+    BlockBlackListComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -64,7 +70,6 @@ import {MatBadgeModule} from '@angular/material/badge';
     SliderModule
   ],
   providers: [
-
   ],
   entryComponents: [
     AuthModalComponent

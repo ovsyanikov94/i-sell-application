@@ -57,6 +57,10 @@ export class RegistrationComponent implements OnInit {
 
 
   registry(){
-    console.log('rkbr');
+    if ( this.lastNameFormControl.valid){
+      console.log(this.lastNameFormControl.value);
+    }
+
+
   }
 }
