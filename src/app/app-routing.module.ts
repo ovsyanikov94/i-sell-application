@@ -6,6 +6,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
+import {BlockBlackListComponent} from './components/block-black-list/block-black-list.component';
 
 
 const routes: Routes = [
