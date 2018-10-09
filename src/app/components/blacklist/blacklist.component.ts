@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { BlackCardUser } from '../../models/blackcardUser/BlackCardUser';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { User } from '../../models/user/User';
 
 @Component({
@@ -9,11 +8,17 @@ import { User } from '../../models/user/User';
 })
 export class BlacklistComponent implements OnInit {
 
-  @Input() user;
-  public blackCart: BlackCardUser = new BlackCardUser(<User>this.user)
-  constructor() { }
+  @Input( 'user' ) user: User;
 
-  ngOnInit() {
+  @Output( 'onUserClick' ) userClick: EventEmitter<User> = new EventEmitter<User>();
+
+
+  constructor() { }//constructor
+
+  ngOnInit() { }
+
+  onUserMouseClick(){
+    this.userClick.emit( this.user );
   }
 
 }

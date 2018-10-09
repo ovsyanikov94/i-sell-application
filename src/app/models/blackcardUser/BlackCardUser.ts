@@ -40,17 +40,12 @@ export class BlackCardUser{
   private _photo: string;
 
   constructor(user: User){
-  /*this._login = user.userLogin || "Dfcz";
-  this._lastName = user.userLastname || "Dfcz";
-  this._name = user.userName || "Dfcz";
-  this._photo = user.userPhoto || "Dfcz";
-*/
 
-    this._login = "Вася";
-    this._lastName = "Валенок";
-    this._name = "Dfcz";
-    this._photo = "https://cdnimg.rg.ru/img/content/156/70/54/1_d_850.jpg";
+    this._login = user.userLogin || "Dfcz";
+    this._lastName = user.userLastname || "Dfcz";
+    this._name = user.userName || "Dfcz";
+    this._photo = user.userPhoto || "Dfcz";
 
-  }
+  }//constructor
 
 }

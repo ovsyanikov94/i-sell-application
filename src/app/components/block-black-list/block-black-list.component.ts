@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {User} from '../../models/user/User';
 @Component({
   selector: 'app-block-black-list',
@@ -7,20 +7,39 @@ import {User} from '../../models/user/User';
 })
 export class BlockBlackListComponent implements OnInit {
 
-  public users = [
-    {user: new User()},
-    {user: new User()},
-    {user: new User()},
-    {user: new User()},
-    {user: new User()},
-    {user: new User()},
-    {user: new User()},
-    {user: new User()},
+  public currentUser: User;
 
-  ]
-  constructor() { }
+  @Output('nextMessage') message: EventEmitter<User> = new EventEmitter<User>();
+
+  public users: User[] = [
+    new User(),
+    new User(),
+    new User(),
+    new User(),
+    new User(),
+    new User(),
+    new User(),
+    new User(),
+    new User(),
+    new User(),
+    new User(),
+
+  ];
+
+  constructor() {
+
+  }
+
+  foo( user ){
+
+    this.currentUser = user;
+    //alert(user.userLogin);
+    // this.message.emit( this.currentUser );
+
+  }
 
   ngOnInit() {
+
   }
 
 }

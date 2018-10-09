@@ -7,16 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  public fruits: string[];
-
   constructor(){
-
-    this.fruits = [
-      'Apple',
-      'Orange',
-      'Cherry'
-    ];
-
 
   }
 

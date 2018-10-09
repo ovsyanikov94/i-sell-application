@@ -3,16 +3,16 @@
   <mat-card>
     <mat-list>
       <mat-list-item>
-        <img  mat-list-avatar src={{blackCart.photo}} alt="Desc 1" style="width: 100px; height: 100px">
-        <h3 mat-line><a routerLink="." >{{blackCart.login}}</a></h3>
+        <img  mat-list-avatar src="{{user?.userPhoto}}" alt="Desc 1" style="width: 100px; height: 100px">
+        <h3 mat-line><a routerLink="." >{{user?.userLogin}}</a></h3>
         <p mat-line>
-          <span>{{blackCart.name}}</span>
+          <span>{{user?.userName}}</span>
         </p>
         <p mat-line>
-          <span>{{blackCart.lastName}}</span>
+          <span>{{user?.userLastname}}</span>
         </p>
         <div class="button-row">
-          <button mat-raised-button color="primary" style="width: auto">удалить из списка </button>
+          <button (click)="onUserMouseClick()" mat-raised-button color="primary" style="width: auto">удалить из списка </button>
         </div>
 
       </mat-list-item>
