@@ -19,7 +19,8 @@ import { BlockBlackListComponent } from './components/block-black-list/block-bla
 
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
-
+//ANGULAR SEARCH
+import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -33,6 +34,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
+import { SubscriberComponent } from './components/subscriber/subscriber.component';
+import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -46,6 +50,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MainComponent,
     BlacklistComponent,
     BlockBlackListComponent,
+    SubscriberComponent,
+    BlockSubscribersComponent,
 
 
   ],
@@ -67,7 +73,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatDividerModule,
     MatListModule,
     MatBadgeModule,
-    SliderModule
+    SliderModule,
+    NgMatSearchBarModule,
+    MatExpansionModule
   ],
   providers: [
   ],

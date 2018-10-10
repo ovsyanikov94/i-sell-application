@@ -6,8 +6,8 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
-
-
+import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
+import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
 const routes: Routes = [
   {
     path: 'main',
@@ -24,6 +24,10 @@ const routes: Routes = [
       {
         path: 'black-list',
         component: BlockBlackListComponent
+      },
+      {
+        path: 'subscribers',
+        component: BlockSubscribersComponent
       },
     ]
   },
