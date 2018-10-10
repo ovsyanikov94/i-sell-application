@@ -1,0 +1,21 @@
+.example-container {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 50px;
+  right: 0;
+  background: #eee;
+}
+.side_bar{
+  width: 300px;
+
+}
+.example-card {
+  max-width: 300px;
+}
+
+
+.link{
+  text-decoration: none;
+  margin-top: 3px;
+}

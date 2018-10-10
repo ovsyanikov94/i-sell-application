@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <mat-sidenav-container class="example-container " >
+    <mat-sidenav mode="side" class="side_bar" opened>
+      <mat-list>
+        <mat-list-item><a routerLink="." color="primary" class="col-12 link">Личные данные</a></mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item><a routerLink="." color="primary" class="col-12 link">Мои лоты</a></mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item><a routerLink="." color="primary" class="col-12 link">Мои ставки</a></mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item><a routerLink="." color="primary" class="col-12 link">Счет</a></mat-list-item>
+        <mat-divider></mat-divider>
+
+      </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="container">
+      <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+

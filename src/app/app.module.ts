@@ -16,6 +16,7 @@ import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import { BlacklistComponent } from './components/blacklist/blacklist.component';
 import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
+import { PersonalAreaComponent } from './components/personal-area/personal-area/personal-area.component';
 
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
@@ -33,6 +34,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
+import { PersonalDataComponent } from './components/personal-area/personal-data/personal-data.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +49,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MainComponent,
     BlacklistComponent,
     BlockBlackListComponent,
-
+    PersonalAreaComponent,
+    PersonalDataComponent,
 
   ],
   imports: [
