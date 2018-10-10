@@ -8,6 +8,7 @@ import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
 import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
+import {ConfirmationLotComponent} from './components/confirmation-lot/confirmation-lot.component';
 const routes: Routes = [
   {
     path: 'main',
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'subscribers',
         component: BlockSubscribersComponent
+      },
+      {
+        path: 'confirmation',
+        component: ConfirmationLotComponent
       },
     ]
   },

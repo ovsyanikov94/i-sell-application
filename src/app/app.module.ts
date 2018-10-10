@@ -37,6 +37,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { SubscriberComponent } from './components/subscriber/subscriber.component';
 import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ConfirmationLotComponent } from './components/confirmation-lot/confirmation-lot.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     BlockBlackListComponent,
     SubscriberComponent,
     BlockSubscribersComponent,
+    ConfirmationLotComponent,
 
 
   ],
