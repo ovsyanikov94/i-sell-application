@@ -48,6 +48,16 @@ export class User {
   set userPhoto(value: string) {
     this._userPhoto = value;
   }
+  get userCountSum(): number {
+    return this._userCountSum;
+  }
+
+  set userCountSum(value: number) {
+    this._userCountSum = value;
+  }
+
+
+
 
   private _userLogin: string;
   private _userPassword: string;
@@ -57,7 +67,7 @@ export class User {
   private _userLastname: string;
   private _userPhone: string;
   private _userPhoto: string;
-
+  private _userCountSum: number;
 
   get userPassword(): string {
     return this._userPassword;
@@ -84,6 +94,7 @@ export class User {
     this._userName = '';
     this._userPhone = '';
     this._userPhoto = '';
+    this._userCountSum = 0;
   }
 
 }
