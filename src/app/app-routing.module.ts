@@ -31,6 +31,7 @@ const routes: Routes = [
       {
         path: 'personal-area',
         component: PersonalAreaComponent,
+
         children: [
           {
             path: 'personal-information',
