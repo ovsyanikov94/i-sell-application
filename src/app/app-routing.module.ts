@@ -7,7 +7,7 @@ import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import {BlockBlackListComponent} from './components/block-black-list/block-black-list.component';
-
+import {MyProfileComponent} from './components/my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -29,6 +29,10 @@ const routes: Routes = [
       {
         path: 'black-list',
         component: BlockBlackListComponent
+      },
+      {
+        path: 'my-profile',
+        component: MyProfileComponent,
       },
     ]
   },

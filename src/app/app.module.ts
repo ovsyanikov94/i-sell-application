@@ -35,6 +35,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+
+
 
 @NgModule({
   declarations: [
@@ -49,6 +53,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     BetModalComponent,
     BlacklistComponent,
     BlockBlackListComponent,
+    MyProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +74,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatListModule,
     MatBadgeModule,
     SliderModule,
-
+    MatTabsModule
   ],
   providers: [
   ],
