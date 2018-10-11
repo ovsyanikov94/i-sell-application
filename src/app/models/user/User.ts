@@ -1,6 +1,13 @@
 'use strict';
 
 export class User {
+  get userOldPassword(): string {
+    return this._userOldPassword;
+  }
+
+  set userOldPassword(value: string) {
+    this._userOldPassword = value;
+  }
   get userPhone(): string {
     return this._userPhone;
   }
@@ -51,6 +58,7 @@ export class User {
 
   private _userLogin: string;
   private _userPassword: string;
+  private _userOldPassword: string;
   private _userConfirmPassword: string;
   private _userEmail: string;
   private _userName: string;

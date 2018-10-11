@@ -8,6 +8,7 @@ import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import {BlockBlackListComponent} from './components/block-black-list/block-black-list.component';
 import {PersonalAreaComponent} from './components/personal-area/personal-area/personal-area.component';
+import {PersonalDataComponent} from './components/personal-area/personal-data/personal-data.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,7 @@ const routes: Routes = [
         children: [
           {
             path: 'personal-information',
-            component: LotComponent
+            component: PersonalDataComponent
           },
 
         ]
