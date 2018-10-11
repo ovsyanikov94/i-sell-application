@@ -14,10 +14,11 @@ import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
+import { BetModalComponent } from './modals/bet.modal/bet.modal.component';
+import { CommentComponent } from './components/comment/comment.component';
+
 import { BlacklistComponent } from './components/blacklist/blacklist.component';
 import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
-import { PersonalAreaComponent } from './components/personal-area/personal-area/personal-area.component';
-import { PersonalDataComponent } from './components/personal-area/personal-data/personal-data.component';
 
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
@@ -35,6 +36,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 
 
@@ -48,11 +51,11 @@ import {MatBadgeModule} from '@angular/material/badge';
     LotComponent,
     CardLotComponent,
     MainComponent,
+    BetModalComponent,
     BlacklistComponent,
     BlockBlackListComponent,
-    PersonalAreaComponent,
-    PersonalDataComponent,
-
+    MyProfileComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -72,12 +75,14 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatDividerModule,
     MatListModule,
     MatBadgeModule,
-    SliderModule
+    SliderModule,
+    MatTabsModule
   ],
   providers: [
   ],
   entryComponents: [
-    AuthModalComponent
+    AuthModalComponent,
+    BetModalComponent
   ],
   bootstrap: [AppComponent]
 })

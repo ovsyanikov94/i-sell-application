@@ -16,6 +16,9 @@ export class LotComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log(this.lot);
+
   }
 
 }

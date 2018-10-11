@@ -7,15 +7,17 @@ import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import {BlockBlackListComponent} from './components/block-black-list/block-black-list.component';
-import {PersonalAreaComponent} from './components/personal-area/personal-area/personal-area.component';
-import {PersonalDataComponent} from './components/personal-area/personal-data/personal-data.component';
-
+import {MyProfileComponent} from './components/my-profile/my-profile.component';
 
 const routes: Routes = [
   {
     path: 'main',
     component: MainComponent,
     children: [
+      {
+        path: '',
+        component: CardLotComponent
+      },
       {
         path: 'lot',
         component: LotComponent
@@ -29,16 +31,8 @@ const routes: Routes = [
         component: BlockBlackListComponent
       },
       {
-        path: 'personal-area',
-        component: PersonalAreaComponent,
-
-        children: [
-          {
-            path: 'personal-information',
-            component: PersonalDataComponent
-          },
-
-        ]
+        path: 'my-profile',
+        component: MyProfileComponent,
       },
     ]
   },

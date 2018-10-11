@@ -1,7 +1,10 @@
 <div class="container-fluid" xmlns="">
 
+  <div class="row justify-content-start text-left">
+    <a style="font-size: small; margin-left: 2%; margin-bottom: 1%" routerLink="/main/card-lot">&larr; Вернуться к лотам</a>
+  </div>
 
-  <div class="row justify-content-start text-left" >
+  <div class="row justify-content-center text-center" >
     <div class="container">
       <div>
 
@@ -12,27 +15,31 @@
   </div>
 
   <div class="row justify-content-center form-lot">
-  <div class="col-5">
-    <div class="row justify-content-start text-left">
-      <a style="font-size: small" routerLink="/card-lot">&larr; Вернуться к лотам</a>
-    </div>
 
-    <div class="row justify-content-end text-right" style="margin-top: 5%">
 
-      <mat-icon md-font-library="material-icons" color="primary" style="cursor: pointer">&#10084;</mat-icon>
-      <small class="text-muted" style="margin-right: 20%">25</small>
-      <mat-icon md-font-library="material-icons" color="primary" style="cursor: pointer">&#9785;</mat-icon>
-      <small class="text-muted" style="margin-right: 10%">5</small>
-
-    </div>
-
-  </div>
-
-  <div class="col-6">
+    <div class="col-12">
 
     <div class="row justify-content-start text-left">
-      <h3>{{lot.lotName}}</h3>
+      <div class="col-6">
+        <div class="row justify-content-start text-start" >
+         <h3>{{lot.lotName}} </h3>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row justify-content-end text-right" >
+
+          <span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
+              <i class="material-icons">thumb_up</i>
+          </span>
+          <span style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
+            <i class="material-icons">thumb_down</i>
+          </span>
+
+        </div>
+      </div>
+
     </div>
+
     <div class="row justify-content-start text-left" >
       <h5><small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory}}</span></small></h5>
     </div>
@@ -79,28 +86,31 @@
         </div>
         <div class="row justify-content-start text-left" style="margin-top:2%">
 
-            <div class="row justify-content-start text-left" style="margin-top:2%">
-
+          <div class="row justify-content-start text-left">
+            <div class="col-4">
+              <div class="row justify-content-start text-start" >
                 <div *ngIf="lot.lotSeller.userPhoto===''" style="margin: 0">
                   <img src="/public/no-foto/unfoto.png" alt="Foto" style="width: 60%; margin: 0">
                 </div>
                 <div *ngIf="lot.lotSeller.userPhoto!==''">
                   <img src="{{lot.lotSeller.userPhoto}}"  style="width: 60%">
                 </div>
+              </div>
             </div>
-            <div class="row justify-content-start text-left" style="margin-top:2%;color: cadetblue ">
+            <div class="col-6">
+              <div class="row justify-content-start text-left" >
 
-
-                <h4 *ngIf="lot.lotSeller.userName===''">
+                <h6 *ngIf="lot.lotSeller.userLogin===''">
                   Имя покупателя
-                </h4>
-                <h4 *ngIf="lot.lotSeller.userName!==''">
+                </h6>
+                <h6 *ngIf="lot.lotSeller.userLogin!==''">
                   {{lot.lotSeller.userName}}
-                </h4>
+                </h6>
+
+              </div>
             </div>
 
-
-
+          </div>
 
         </div>
       </div>
@@ -114,36 +124,48 @@
         </div>
         <div class="row justify-content-start text-left" style="margin-top:2%">
 
-            <div class="row justify-content-start text-left" style="margin-top:2%">
-
-              <div *ngIf="lot.lotBuyer.userPhoto===''" style="margin: 0">
-                <img src="/public/no-foto/unfoto.png" alt="Foto" style="width: 60%; margin: 0">
-              </div>
-              <div *ngIf="lot.lotBuyer.userPhoto!==''">
-                <img src="{{lot.lotBuyer.userPhoto}}"  style="width: 60%">
+          <div class="row justify-content-start text-left">
+            <div class="col-4">
+              <div class="row justify-content-start text-start" >
+                <div *ngIf="lot.lotBuyer.userPhoto===''" style="margin: 0">
+                  <img src="/public/no-foto/unfoto.png" alt="Foto" style="width: 60%; margin: 0">
+                </div>
+                <div *ngIf="lot.lotBuyer.userPhoto!==''">
+                  <img src="{{lot.lotBuyer.userPhoto}}"  style="width: 60%">
+                </div>
               </div>
             </div>
-            <div class="row justify-content-start text-left" style="margin-top:2%;color: cadetblue ">
+            <div class="col-6">
+              <div class="row justify-content-start text-left" >
 
+                <h6 *ngIf="lot.lotBuyer.userLogin===''">
+                  Имя покупателя
+                </h6>
+                <h6 *ngIf="lot.lotBuyer.userLogin!==''">
+                  {{lot.lotBuyer.userName}}
+                </h6>
 
-              <h4 *ngIf="lot.lotBuyer.userName===''">
-                Имя продавца
-              </h4>
-              <h4 *ngIf="lot.lotBuyer.userName!==''">
-                {{lot.lotBuyer.userName}}
-              </h4>
+              </div>
             </div>
 
-
-
+          </div>
 
         </div>
+      </div>
+
+      <div class="col-12">
+
+          <h3>Комментарии</h3>
+          <app-comment *ngFor="let comment of lot.comments" [userComment]="comment"></app-comment>
+
       </div>
 
     </div>
 
 
   </div>
+
+
   </div>
 
 

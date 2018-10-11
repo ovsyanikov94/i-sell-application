@@ -55,6 +55,16 @@ export class User {
   set userPhoto(value: string) {
     this._userPhoto = value;
   }
+  get userCountSum(): number {
+    return this._userCountSum;
+  }
+
+  set userCountSum(value: number) {
+    this._userCountSum = value;
+  }
+
+
+
 
   private _userLogin: string;
   private _userPassword: string;
@@ -65,7 +75,7 @@ export class User {
   private _userLastname: string;
   private _userPhone: string;
   private _userPhoto: string;
-
+  private _userCountSum: number;
 
   get userPassword(): string {
     return this._userPassword;
@@ -84,14 +94,17 @@ export class User {
   }
 
   constructor(){
-    this._userLogin = 'Login';
+
+    this._userLogin = 'Login 1';
     this._userPassword = '';
     this._userConfirmPassword = '';
     this._userEmail = '';
     this._userLastname = 'Lastname';
-    this._userName = 'aaaaa';
+    this._userName = 'Name';
     this._userPhone = '';
+    this._userCountSum = 0;
     this._userPhoto = 'https://cdnimg.rg.ru/img/content/156/70/54/1_d_850.jpg';
+
   }
 
 }
