@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user/User';
 import {FormControl, Validators} from '@angular/forms';
+
+import { MatDialog } from '@angular/material/dialog';
+import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component';
 import { PasswordConfirmValidator } from '../../Validators/PaswordValidator';
 
 @Component({
@@ -43,7 +46,19 @@ export class RegistrationComponent implements OnInit {
     PasswordConfirmValidator( this.user )
   ]);
 
-  constructor() { }
+  constructor(
+    private registrationDialog: MatDialog
+  ) { }
+
+  openDialog( msg: string ){
+
+    this.registrationDialog.open( AuthModalComponent , {
+      data: {
+        message: msg
+      }
+    });
+
+  }//openDialog
 
   ngOnInit() {
 
@@ -55,8 +70,28 @@ export class RegistrationComponent implements OnInit {
 
   }
 
+  checkAllFields(): boolean{
+
+    return this.nameFormControl.valid &&
+      this.lastNameFormControl.valid &&
+      this.loginFormControl.valid &&
+      this.emailFormControl.valid &&
+      this.phoneFormControl.valid &&
+      this.passwordFormControl.valid &&
+      this.passwordConfirmFormControl.valid;
+
+  }//
+
 
   registry(){
-    console.log('rkbr');
-  }
+
+
+    if ( this.checkAllFields() === true ){
+        //AJAX REGISTER REQUEST
+    }//if
+    else{
+      this.openDialog('Есть ошибки в заполнении формы!');
+    }//else
+
+  }//registry
 }

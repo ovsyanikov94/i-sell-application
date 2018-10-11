@@ -93,8 +93,8 @@ export class User {
     this._userLastname = '';
     this._userName = '';
     this._userPhone = '';
-    this._userPhoto = '';
     this._userCountSum = 0;
+    this._userPhoto = 'https://cdnimg.rg.ru/img/content/156/70/54/1_d_850.jpg';
   }
 
 }

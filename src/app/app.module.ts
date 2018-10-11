@@ -16,10 +16,11 @@ import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import { BetModalComponent } from './modals/bet.modal/bet.modal.component';
 
+import { BlacklistComponent } from './components/blacklist/blacklist.component';
+import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
+
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
-
-
 
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
@@ -46,6 +47,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     CardLotComponent,
     MainComponent,
     BetModalComponent,
+    BlacklistComponent,
+    BlockBlackListComponent,
   ],
   imports: [
     BrowserModule,

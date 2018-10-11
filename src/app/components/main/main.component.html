@@ -1,6 +1,7 @@
-<mat-sidenav-container class="example-container" >
+<mat-sidenav-container
+  class="example-container" (backdropClick)="close()" >
+  <mat-sidenav #sidenav (keydown.escape)="close()" disableClose class="side_bar">
 
-  <mat-sidenav #sidenav mode="side" class="side_bar">
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
@@ -26,21 +27,17 @@
       </mat-list-item>
 
     </mat-list>
-
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div>
-      <button mat-button (click)="sidenav.toggle()" style="font-size: 30px">
-        <mat-icon >
-          format_align_justify
-        </mat-icon>
-      </button>
+    <p><button mat-button (click)="sidenav.open()" class="open-button">
+      <mat-icon >
+        format_align_justify
+      </mat-icon>
+    </button></p>
 
-      <div class="container">
-        <router-outlet></router-outlet>
-      </div>
-
+    <div class="container">
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
