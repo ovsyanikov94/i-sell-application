@@ -15,6 +15,7 @@ import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import { BetModalComponent } from './modals/bet.modal/bet.modal.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 import { BlacklistComponent } from './components/blacklist/blacklist.component';
 import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
@@ -54,6 +55,7 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     BlacklistComponent,
     BlockBlackListComponent,
     MyProfileComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

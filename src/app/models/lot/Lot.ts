@@ -1,5 +1,7 @@
 'use strict';
 import {User} from '../../models/user/User';
+import { Comment } from '../comment/Comment';
+
 
 class MapCoord {
   lat: number;
@@ -13,6 +15,14 @@ class MapCoord {
 }
 
 export class Lot {
+
+  get comments(): Comment[] {
+    return this._comments;
+  }
+
+  set comments(value: Comment[]) {
+    this._comments = value;
+  }
 
   get lotStatus(): string {
     return this._lotStatus;
@@ -132,6 +142,8 @@ export class Lot {
   private _lotAdminAnswerDate: Date;
   private _lotSendDate: Date;
   private _lotStartDate: Date;
+  private _comments: Comment[] = [];
+
 
   constructor(){
     this._lotStatus = 'статус лота';
@@ -142,12 +154,26 @@ export class Lot {
     this._lotFoto = ["/public/lot-images/dell1.jpg", "/public/lot-images/dell2.jpg", "/public/lot-images/dell3.jpg"];
     this._lotDescription = 'Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым для визуально-слухового восприятия.';
     this._lotCategory = 'Категория лота';
-    this._lotStartPrice = 85.20
+    this._lotStartPrice = 85.20;
     this._lotMapPlase = new MapCoord(0, 0);
     this._lotCurrentPrice = 100.54;
     this._lotAdminAnswerDate = new Date();
     this._lotSendDate = new Date();
     this._lotStartDate = new Date();
-  }
+
+    const comment: Comment = new Comment();
+
+    comment.commentSendDate = '2018-10-10 17:00';
+    comment.commentStatus = 1;
+    comment.commentType = 1;
+    comment.commentText = 'Просто комментарий';
+    comment.userSender = new User();
+    comment.userReceiver = this;
+
+    for ( let i = 0 ; i < 10 ; i++ ){
+      this._comments.push(comment);
+    }//for
+
+  }//constructor
 
 }

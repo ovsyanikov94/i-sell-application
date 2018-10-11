@@ -94,15 +94,17 @@ export class User {
   }
 
   constructor(){
-    this._userLogin = '';
+
+    this._userLogin = 'Login 1';
     this._userPassword = '';
     this._userConfirmPassword = '';
     this._userEmail = '';
-    this._userLastname = '';
-    this._userName = '';
+    this._userLastname = 'Lastname';
+    this._userName = 'Name';
     this._userPhone = '';
     this._userCountSum = 0;
     this._userPhoto = 'https://cdnimg.rg.ru/img/content/156/70/54/1_d_850.jpg';
+
   }
 
 }

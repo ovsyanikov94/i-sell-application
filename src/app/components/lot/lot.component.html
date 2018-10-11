@@ -153,6 +153,13 @@
         </div>
       </div>
 
+      <div class="col-12">
+
+          <h3>Комментарии</h3>
+          <app-comment *ngFor="let comment of lot.comments" [userComment]="comment"></app-comment>
+
+      </div>
+
     </div>
 
 
