@@ -19,6 +19,10 @@ export class MainComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
+
+    // console.log(window);
+    // console.log(window.navigator);
+
+  }//ngOnInit
 
 }

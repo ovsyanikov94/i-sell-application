@@ -15,6 +15,10 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
+        path: '',
+        component: CardLotComponent
+      },
+      {
         path: 'lot',
         component: LotComponent
       },
