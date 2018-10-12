@@ -4,6 +4,8 @@ import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component
 
 //MODELS
 import { Lot } from '../../models/lot/Lot';
+import { Category } from '../../models/category/Category';
+import { LotType } from '../../models/lot-type/LotType';
 import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
 import { HttpClient } from '@angular/common/http';
@@ -15,13 +17,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddLotComponent implements OnInit {
 
-  categories: string[] = ['Моб. Телефоны', 'Акссесуары'];
+  public selectedCategory: Category = null;
+  public selectedType: LotType = null;
 
-  types: string[] = ['Запланированный', 'Немедленный'];
+  public categories: Category[] = [
+    new Category( 1 , 'Моб. Телефоны'),
+    new Category( 2, 'Акссесуары')
+  ];
+
+  public lotTypes: LotType[] = [
+    new LotType( 1 , 'Запланированный'),
+    new LotType( 2, 'Немедленный')
+  ];
 
   public lot: Lot = new Lot();
 
-  selectedFile: File = null;
+  selectedFile: File[] = [];
 
   public textFormControl = new FormControl('', [
     Validators.required,
@@ -39,22 +50,12 @@ export class AddLotComponent implements OnInit {
   ]);
 
   onFileSelected(event){
-    this.selectedFile = <File>event.target.files[0];
+    this.selectedFile = <File[]>event.target.files;
   }
 
   onUpload(){
-    const fd = new FormData();
-    fd.append('image', this.selectedFile, this.selectedFile.name);
-    this.http.post("localhost:4200/add-lot" , fd)
-      .subscribe( res => {
-        console.log(res);
-      });
-  }
 
-  categoryChange(event){
-    this.lot.lotCategory = event.value;
-    console.log(this.lot.lotCategory);
-  }
+  }//
 
   typeChange(event){
     this.lot.lotType = event.value;

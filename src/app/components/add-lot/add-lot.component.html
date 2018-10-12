@@ -33,21 +33,28 @@
           </mat-form-field>
 
           <mat-form-field class="example-full-width col-12">
-            <mat-select  [(ngModel)]="lot.lotCategory" (change)="categoryChange($event)" placeholder="Категория">
-              <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+            <mat-select  [(ngModel)]="selectedCategory" placeholder="Категория">
+              <mat-option *ngFor="let category of categories" [value]="category.categoryID">{{category.categoryTitle}}</mat-option>
             </mat-select>
-            <mat-error *ngIf="category == 0">
+            <mat-error *ngIf="selectedCategory === null">
               Выберите категорию
             </mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width col-12">
-            <mat-select [(ngModel)]="lot.lotType" (change)="typeChange($event)" placeholder="Тип">
-              <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+            <mat-select [(ngModel)]="selectedType" placeholder="Тип">
+              <mat-option *ngFor="let type of lotTypes" [value]="type.lotTypeID">{{type.lotTypeTitle}}</mat-option>
             </mat-select>
-            <mat-error *ngIf="type == 0">
+            <mat-error *ngIf="selectedType === null">
               Выберите тип
             </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+
+            <input [disabled]="selectedType && selectedType.lotTypeID === 1" matInput [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+            <owl-date-time #dt1></owl-date-time>
+
           </mat-form-field>
 
           <mat-form-field class="example-full-width col-12">
@@ -61,8 +68,7 @@
           </mat-form-field>
 
           <div  class="example-full-width col-12">
-            <input type="file" name="lotPhoto" placeholder="Фото" (change)="onFileSelected($event)" [(ngModel)]="lot.lotPhoto" [formControl]="passwordFormControl">
-            <button type="button" (click)="onUpload()">Добавить фото</button>
+            <input type="file" name="lotPhoto" placeholder="Фото" (change)="onFileSelected($event)" [(ngModel)]="lot.lotPhoto">
           </div>
 
           <div class="row justify-content-center text-center">
