@@ -148,3 +148,13 @@ left:-10px;
     left:-10px;
   }
 }
+
+
+.example-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}

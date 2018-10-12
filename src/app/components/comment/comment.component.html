@@ -3,12 +3,12 @@
   <mat-card>
     <mat-card-header>
 
-      <div  mat-card-avatar [style.backgroundImage]="comment?.userSender.userPhoto"></div>
+      <!--<div   mat-card-avatar class="user-avatar" [ngStyle]="{ 'background-image': 'url(' + comment?.userSender.userPhoto + ')'}" ></div>-->
 
-      <h3 mat-card-title><a routerLink="." >{{comment?.userSender.userLogin}}</a></h3>
-      <p mat-card-subtitle>Тип: {{comment?.commentType}}</p>
-      <p mat-card-subtitle>Дата лота: {{comment?.commentSendDate}}</p>
-      <p mat-card-subtitle>Статус: {{comment?.commentStatus}}</p>
+      <img mat-card-avatar class="user-avatar" width="50" height="50" src="{{comment?.userSender.userPhoto}}" />
+
+      <mat-card-title><a routerLink="." >{{comment?.userSender.userLogin}}</a></mat-card-title>
+      <p mat-card-subtitle>{{comment?.commentSendDate}}</p>
 
     </mat-card-header>
 

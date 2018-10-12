@@ -1,4 +1,4 @@
-<div class="container-fluid" xmlns="">
+<div class="container-fluid">
 
   <div class="row justify-content-start text-left">
     <a style="font-size: small; margin-left: 2%; margin-bottom: 1%" routerLink="/main/card-lot">&larr; Вернуться к лотам</a>
@@ -78,104 +78,127 @@
 
     <hr style="height: 2px">
     <div class="row justify-content-start text-left" style="margin-top:2%">
-      <div class="col-6">
-        <div class="row justify-content-start text-left" style="margin-top:2%">
-          <h5>
-            Продавец:
-          </h5>
-        </div>
-        <div class="row justify-content-start text-left" style="margin-top:2%">
+      <!--<div class="col-6">-->
+        <!--<div class="row justify-content-start text-left" style="margin-top:2%">-->
+          <!--<h5>-->
+            <!--Продавец:-->
+          <!--</h5>-->
+        <!--</div>-->
+        <!--<div class="row justify-content-start text-left" style="margin-top:2%">-->
 
-          <div class="row justify-content-start text-left">
-            <div class="col-4">
-              <div class="row justify-content-start text-start" >
-                <div *ngIf="lot.lotSeller.userPhoto===''" style="margin: 0">
-                  <img src="/public/no-foto/unfoto.png" alt="Foto" style="width: 60%; margin: 0">
-                </div>
-                <div *ngIf="lot.lotSeller.userPhoto!==''">
-                  <img src="{{lot.lotSeller.userPhoto}}"  style="width: 60%">
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="row justify-content-start text-left" >
+          <!--<div class="row justify-content-start text-left">-->
+            <!--<div class="col-4">-->
+              <!--<div class="row justify-content-start text-start" >-->
+                <!--<div *ngIf="lot.lotSeller.userPhoto===''" style="margin: 0">-->
+                  <!--<img src="/public/no-foto/unfoto.png" alt="Foto" style="width: 60%; margin: 0">-->
+                <!--</div>-->
+                <!--<div *ngIf="lot.lotSeller.userPhoto!==''">-->
+                  <!--<img src="{{lot.lotSeller.userPhoto}}"  style="width: 60%">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-6">-->
+              <!--<div class="row justify-content-start text-left" >-->
 
-                <h6 *ngIf="lot.lotSeller.userLogin===''">
-                  Имя покупателя
-                </h6>
-                <h6 *ngIf="lot.lotSeller.userLogin!==''">
-                  {{lot.lotSeller.userName}}
-                </h6>
+                <!--<h6 *ngIf="lot.lotSeller.userLogin===''">-->
+                  <!--Имя покупателя-->
+                <!--</h6>-->
+                <!--<h6 *ngIf="lot.lotSeller.userLogin!==''">-->
+                  <!--{{lot.lotSeller.userName}}-->
+                <!--</h6>-->
 
-              </div>
-            </div>
+              <!--</div>-->
+            <!--</div>-->
 
-          </div>
+          <!--</div>-->
 
-        </div>
-      </div>
+        <!--</div>-->
+      <!--</div>-->
 
 
-      <div class="col-6">
-        <div class="row justify-content-start text-left" style="margin-top:2%">
-          <h5>
-            Покупатель:
-          </h5>
-        </div>
-        <div class="row justify-content-start text-left" style="margin-top:2%">
+      <!--<div class="col-6">-->
+        <!--<div class="row justify-content-start text-left" style="margin-top:2%">-->
+          <!--<h5>-->
+            <!--Покупатель:-->
+          <!--</h5>-->
+        <!--</div>-->
+        <!--<div class="row justify-content-start text-left" style="margin-top:2%">-->
 
-          <div class="row justify-content-start text-left">
-            <div class="col-4">
-              <div class="row justify-content-start text-start" >
-                <div *ngIf="lot.lotBuyer.userPhoto===''" style="margin: 0">
-                  <img src="/public/no-foto/unfoto.png" alt="Foto" style="width: 60%; margin: 0">
-                </div>
-                <div *ngIf="lot.lotBuyer.userPhoto!==''">
-                  <img src="{{lot.lotBuyer.userPhoto}}"  style="width: 60%">
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="row justify-content-start text-left" >
+          <!--<div class="row justify-content-start text-left">-->
+            <!--<div class="col-4">-->
+              <!--<div class="row justify-content-start text-start" >-->
+                <!--<div *ngIf="lot.lotBuyer.userPhoto===''" style="margin: 0">-->
+                  <!--<img src="/public/no-foto/unfoto.png" alt="Foto" style="width: 60%; margin: 0">-->
+                <!--</div>-->
+                <!--<div *ngIf="lot.lotBuyer.userPhoto!==''">-->
+                  <!--<img src="{{lot.lotBuyer.userPhoto}}"  style="width: 60%">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-6">-->
+              <!--<div class="row justify-content-start text-left" >-->
 
-                <h6 *ngIf="lot.lotBuyer.userLogin===''">
-                  Имя покупателя
-                </h6>
-                <h6 *ngIf="lot.lotBuyer.userLogin!==''">
-                  {{lot.lotBuyer.userName}}
-                </h6>
+                <!--<h6 *ngIf="lot.lotBuyer.userLogin===''">-->
+                  <!--Имя покупателя-->
+                <!--</h6>-->
+                <!--<h6 *ngIf="lot.lotBuyer.userLogin!==''">-->
+                  <!--{{lot.lotBuyer.userName}}-->
+                <!--</h6>-->
 
-              </div>
-            </div>
+              <!--</div>-->
+            <!--</div>-->
 
-          </div>
+          <!--</div>-->
 
-        </div>
-      </div>
+        <!--</div>-->
+      <!--</div>-->
 
       <div class="col-12">
+
+          <div style="margin: 5px">
+
+            <mat-card>
+              <mat-card-header>
+
+                <img mat-card-avatar class="user-avatar" width="50" height="50" src="{{currentUser.userPhoto}}" />
+
+                <mat-card-title><a routerLink="." >{{currentUser.userLogin}}</a></mat-card-title>
+
+              </mat-card-header>
+
+              <mat-card-content>
+
+                <div class="row" style="width: 100%">
+
+                  <mat-form-field class="col-11">
+                    <textarea rows="7" matInput placeholder="Ваш комментарий..." ></textarea>
+                  </mat-form-field>
+
+                  <div class="col-1">
+                    <button mat-fab>
+                      <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
+                    </button>
+                  </div>
+
+                </div>
+
+              </mat-card-content>
+
+
+            </mat-card>
+          </div>
 
           <h3>Комментарии</h3>
           <app-comment *ngFor="let comment of lot.comments" [userComment]="comment"></app-comment>
 
       </div>
 
-      <div style="margin-top: 10px; margin-left: 170px">
 
-        <form action="" method="post">
-          <textarea style="border-radius: 2px" placeholder="Введите ваш комментарий ..." rows="4" cols="100"></textarea>
-          <p><input style="margin-left: 300px;" class="btn btn-secondary" type="submit" value="Отправить"></p>
-        </form>
-
-        </div>
 
       </div>
 
 
     </div>
-
-
-  </div>
 
 
   </div>

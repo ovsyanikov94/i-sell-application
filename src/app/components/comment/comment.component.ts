@@ -11,7 +11,13 @@ export class CommentComponent implements OnInit {
 
   @Input('userComment') comment: Comment;
 
-  constructor() { }
+  public textColor: string;
+
+  constructor() {
+
+    this.textColor = 'red';
+
+  }
 
   ngOnInit() {
   }
