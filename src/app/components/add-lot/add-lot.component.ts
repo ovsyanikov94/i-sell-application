@@ -9,7 +9,7 @@ import { LotType } from '../../models/lot-type/LotType';
 import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
 import { HttpClient } from '@angular/common/http';
-
+import { Hours } from '../../models/hours-radio-button/Hours';
 @Component({
   selector: 'app-add-lot',
   templateUrl: './add-lot.component.html',
@@ -19,6 +19,16 @@ export class AddLotComponent implements OnInit {
 
   public selectedCategory: Category = null;
   public selectedType: LotType = null;
+  public selectedHour: Hours = null;
+  public dateRange: Date[] = [];
+
+  public hours: Hours[] = [
+    new Hours( 1 , 4),
+    new Hours( 2 , 8),
+    new Hours( 3 , 12),
+    new Hours( 4 , 24),
+    new Hours( 5 , 48)
+  ];
 
   public categories: Category[] = [
     new Category( 1 , 'Моб. Телефоны'),
@@ -49,6 +59,19 @@ export class AddLotComponent implements OnInit {
     Validators.pattern(/^[1-9]\d{0,7}(?:\.\d{1,4})?|\.\d{1,4}$/),
   ]);
 
+  public categoryFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  public typeFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  public radioButtonFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+
   onFileSelected(event){
     this.selectedFile = <File[]>event.target.files;
   }
@@ -56,10 +79,6 @@ export class AddLotComponent implements OnInit {
   onUpload(){
 
   }//
-
-  typeChange(event){
-    this.lot.lotType = event.value;
-  }
 
   constructor(public dialog: MatDialog , private http: HttpClient) {
   }

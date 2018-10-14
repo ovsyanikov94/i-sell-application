@@ -22,6 +22,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
+import {MatRadioModule} from '@angular/material/radio';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 
 //DATETIME-PICKER
@@ -51,6 +52,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     ReactiveFormsModule,
     MatDialogModule,
     MatListModule,
+    MatRadioModule,
     HttpClientModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule

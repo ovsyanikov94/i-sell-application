@@ -33,27 +33,38 @@
           </mat-form-field>
 
           <mat-form-field class="example-full-width col-12">
-            <mat-select  [(ngModel)]="selectedCategory" placeholder="Категория">
+            <mat-select  [(ngModel)]="selectedCategory" placeholder="Категория" [formControl]="categoryFormControl">
               <mat-option *ngFor="let category of categories" [value]="category.categoryID">{{category.categoryTitle}}</mat-option>
             </mat-select>
-            <mat-error *ngIf="selectedCategory === null">
+            <mat-error *ngIf="categoryFormControl.hasError('required')">
               Выберите категорию
             </mat-error>
           </mat-form-field>
 
           <mat-form-field class="example-full-width col-12">
-            <mat-select [(ngModel)]="selectedType" placeholder="Тип">
+            <mat-select [(ngModel)]="selectedType" placeholder="Тип" [formControl]="typeFormControl">
               <mat-option *ngFor="let type of lotTypes" [value]="type.lotTypeID">{{type.lotTypeTitle}}</mat-option>
             </mat-select>
-            <mat-error *ngIf="selectedType === null">
+            <mat-error *ngIf="typeFormControl.hasError('required')">
               Выберите тип
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="col-12">
+          <mat-radio-group *ngIf="selectedType === 1" class="col-12" (change)="radioButtonChange()" [(ngModel)]="selectedHour" [formControl]="radioButtonFormControl">
+            <mat-radio-button class="example-radio-button" *ngFor="let hour of hours" [value]="hour.hoursID">
+              {{hour.hoursValue}}
+            </mat-radio-button>
+            <mat-error *ngIf="radioButtonFormControl.hasError('required')">
+              Выберите <strong>кол-во часов</strong>
+            </mat-error>
+          </mat-radio-group>
 
-            <input [disabled]="selectedType && selectedType.lotTypeID === 1" matInput [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time">
-            <owl-date-time #dt1></owl-date-time>
+          <mat-form-field *ngIf="selectedHour != null" class="col-12">
+
+            <mat-label>Date Time Range:</mat-label>
+            <input matInput [disabled]="true" [(ngModel)]="dateRange" [selectMode]="'range'"
+                   [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3">
+            <owl-date-time #dtPicker3></owl-date-time>
 
           </mat-form-field>
 
@@ -88,3 +99,5 @@
   </div>
 
 </div>
+
+
