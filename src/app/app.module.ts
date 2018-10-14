@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 //MY-COMPONENTS
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -39,7 +40,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
-
+//FILTERS
+import {FilterLengthPipe} from './filters/myfilter';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     BlacklistComponent,
     BlockBlackListComponent,
     MyProfileComponent,
-    CommentComponent
+    CommentComponent,
+    FilterLengthPipe
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,9 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     MatListModule,
     MatBadgeModule,
     SliderModule,
-    MatTabsModule
+    MatTabsModule,
+
+
   ],
   providers: [
   ],
