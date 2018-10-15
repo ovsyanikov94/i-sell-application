@@ -8,8 +8,8 @@ import { Category } from '../../models/category/Category';
 import { LotType } from '../../models/lot-type/LotType';
 import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
-import { HttpClient } from '@angular/common/http';
-import { Hours } from '../../models/hours-radio-button/Hours';
+import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthValidator';
+
 @Component({
   selector: 'app-add-lot',
   templateUrl: './add-lot.component.html',
@@ -19,15 +19,15 @@ export class AddLotComponent implements OnInit {
 
   public selectedCategory: Category = null;
   public selectedType: LotType = null;
-  public selectedHour: Hours = null;
-  public dateRange: Date[] = [];
+  public selectedHour: number;
+  public dateRange: Date;
 
-  public hours: Hours[] = [
-    new Hours( 1 , 4),
-    new Hours( 2 , 8),
-    new Hours( 3 , 12),
-    new Hours( 4 , 24),
-    new Hours( 5 , 48)
+  public hours: number[] = [
+    4,
+    8,
+    12,
+    24,
+    48
   ];
 
   public categories: Category[] = [
@@ -42,7 +42,7 @@ export class AddLotComponent implements OnInit {
 
   public lot: Lot = new Lot();
 
-  selectedFile: File[] = [];
+  selectedFiles: File[] = [];
 
   public textFormControl = new FormControl('', [
     Validators.required,
@@ -51,7 +51,7 @@ export class AddLotComponent implements OnInit {
 
   public descriptionFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^[a-zа-я0-9 ]{15,250}$/i),
+    DescriptionLengthValidator(15, 500)
   ]);
 
   public priceFormControl = new FormControl('', [
@@ -71,16 +71,21 @@ export class AddLotComponent implements OnInit {
     Validators.required
   ]);
 
+  public multiplefile = new FormControl('');
 
   onFileSelected(event){
-    this.selectedFile = <File[]>event.target.files;
+
+    console.log(this.multiplefile.value);
+
+    //
+    // this.selectedFiles = <File[]>event.target.files;
+    // console.log(this.selectedFiles);
+
   }
 
-  onUpload(){
-
-  }//
-
-  constructor(public dialog: MatDialog , private http: HttpClient) {
+  constructor(
+    public dialog: MatDialog
+  ) {
   }
 
   addLot( event ){
@@ -111,6 +116,7 @@ export class AddLotComponent implements OnInit {
   }//openDialog
 
   ngOnInit() {
+
   }
 
 }

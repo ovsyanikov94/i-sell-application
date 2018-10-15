@@ -16,12 +16,23 @@ import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import { BetModalComponent } from './modals/bet.modal/bet.modal.component';
 import { CommentComponent } from './components/comment/comment.component';
-
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { ConfirmationLotComponent } from './components/confirmation-lot/confirmation-lot.component';
+import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
+import { SubscriberComponent } from './components/subscriber/subscriber.component';
 import { BlacklistComponent } from './components/blacklist/blacklist.component';
 import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
+import { AddLotComponent } from './components/add-lot/add-lot.component';
 
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
+
+//DATE-TIME PICKER
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
+//FILE UPLOADER
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+
 //ANGULAR SEARCH
 import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 //ANGULAR-MATERIAL
@@ -37,12 +48,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
-import { SubscriberComponent } from './components/subscriber/subscriber.component';
-import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { ConfirmationLotComponent } from './components/confirmation-lot/confirmation-lot.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -63,7 +71,8 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     BlockSubscribersComponent,
     ConfirmationLotComponent,
     MyProfileComponent,
-    CommentComponent
+    CommentComponent,
+    AddLotComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +95,11 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     SliderModule,
     NgMatSearchBarModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    MatRadioModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    MaterialFileInputModule
   ],
   providers: [
   ],
