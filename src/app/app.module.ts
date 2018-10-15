@@ -37,14 +37,14 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
-import {MatTabsModule} from '@angular/material/tabs';
-import { MyProfileComponent } from './components/my-profile/my-profile.component';
-
-
 import { SubscriberComponent } from './components/subscriber/subscriber.component';
 import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ConfirmationLotComponent } from './components/confirmation-lot/confirmation-lot.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+
+
 
 @NgModule({
   declarations: [
@@ -62,8 +62,6 @@ import { ConfirmationLotComponent } from './components/confirmation-lot/confirma
     SubscriberComponent,
     BlockSubscribersComponent,
     ConfirmationLotComponent,
-
-
     MyProfileComponent,
     CommentComponent
   ],
@@ -86,9 +84,9 @@ import { ConfirmationLotComponent } from './components/confirmation-lot/confirma
     MatListModule,
     MatBadgeModule,
     SliderModule,
-    MatTabsModule
     NgMatSearchBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule
   ],
   providers: [
   ],
