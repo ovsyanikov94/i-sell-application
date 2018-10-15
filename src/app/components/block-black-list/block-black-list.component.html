@@ -1,9 +1,23 @@
 <div>
-  <app-blacklist
-    *ngFor="let user of users"
-    [user]="user"
-    (onUserClick)="foo( $event )"
-  ></app-blacklist>
+  <div  style="margin-top: 7% ">
+    <form class="example-form">
+      <mat-form-field class="example-full-width" style="width: 100%">
+        <input  matInput placeholder="Search" value="">
+      </mat-form-field>
+    </form>
+  </div>
+  <div >
+    <div>
+      <app-blacklist
+        *ngFor="let user of users"
+        [user]="user"
+        (onUserClick)="foo( $event )"
+      ></app-blacklist>
+    </div>
+
+  </div>
+
 </div>
+
 
 <!--<h2>{{currentUser.userName}}</h2>-->
