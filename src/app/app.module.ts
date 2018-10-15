@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 //MY-COMPONENTS
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -52,7 +53,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 
-
+//FILTERS
+import {FilterLengthPipe} from './filters/myfilter';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ import {MatRadioModule} from '@angular/material/radio';
     ConfirmationLotComponent,
     MyProfileComponent,
     CommentComponent,
+    FilterLengthPipe
     AddLotComponent
   ],
   imports: [
@@ -93,6 +96,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatListModule,
     MatBadgeModule,
     SliderModule,
+    MatTabsModule,
     NgMatSearchBarModule,
     MatExpansionModule,
     MatTabsModule,

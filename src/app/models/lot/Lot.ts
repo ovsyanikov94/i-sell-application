@@ -185,7 +185,7 @@ export class Lot {
     comment.commentSendDate = '2018-10-10 17:00';
     comment.commentStatus = 1;
     comment.commentType = 1;
-    comment.commentText = 'Просто комментарий';
+    comment.commentText = 'Lorem ipsum dolor sist amet, consectetur adipisicing elit. Delectus dolore earum eveniet necessitatibus officiis omnis, perspiciatis placeat quaerat vel voluptatem. Aliquam molestiae nemo nostrum placeat quam saepe similique sint voluptatum! Lorem ipsum dolor sist amet, consectetur adipisicing elit. Delectus dolore earum eveniet necessitatibus officiis omnis, perspiciatis placeat quaerat vel voluptatem. Aliquam molestiae nemo nostrum placeat quam saepe similique sint voluptatum!';
     comment.userSender = new User();
     comment.userReceiver = this;
 

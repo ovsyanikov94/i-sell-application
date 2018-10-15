@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
 
+
 @Component({
   selector: 'app-lot',
   templateUrl: './lot.component.html',
@@ -19,8 +20,14 @@ export class LotComponent implements OnInit {
 
   ngOnInit() {
 
+
     console.log(this.lot);
 
   }
+
+
+
+
+
 
 }
