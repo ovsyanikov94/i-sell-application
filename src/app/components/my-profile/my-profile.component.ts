@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user/User';
+import {Check} from '../../models/Check/Check';
 import {FormControl, Validators} from '@angular/forms';
 import {PasswordConfirmValidator} from '../../Validators/PaswordValidator';
 import {MatDialog} from '@angular/material';
@@ -13,6 +14,10 @@ import {AuthModalComponent} from '../../modals/auth.modal/auth.modal.component';
 export class MyProfileComponent implements OnInit {
 
   public user: User = new User();
+
+  public  balanse: number;
+
+  public checks: Check[];
 
   public nameFormControl = new FormControl('', [
     Validators.required,
@@ -69,6 +74,13 @@ export class MyProfileComponent implements OnInit {
     this.user.userPhone = '+3809238130';
     this.user.userLogin = 'Alex';
     this.user.userEmail = 'alex@gmail.com';
+    this.balanse = 1000;
+    this.checks = [
+      new Check('15.02.2018', 1, 250),
+      new Check('15.02.2018', 2, 250),
+      new Check('15.02.2018', 3, 250),
+      new Check('15.02.2018', 4, 250)
+    ];
 
   }
 

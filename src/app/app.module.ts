@@ -51,6 +51,7 @@ import {MatListModule} from '@angular/material';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatRadioModule} from '@angular/material/radio';
 
 //FILTERS
@@ -74,7 +75,7 @@ import {FilterLengthPipe} from './filters/myfilter';
     ConfirmationLotComponent,
     MyProfileComponent,
     CommentComponent,
-    FilterLengthPipe
+    FilterLengthPipe,
     AddLotComponent
   ],
   imports: [
@@ -96,6 +97,8 @@ import {FilterLengthPipe} from './filters/myfilter';
     MatListModule,
     MatBadgeModule,
     SliderModule,
+    MatTabsModule,
+    MatSlideToggleModule,
     MatTabsModule,
     NgMatSearchBarModule,
     MatExpansionModule,
