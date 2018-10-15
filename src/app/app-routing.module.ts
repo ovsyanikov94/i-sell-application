@@ -9,6 +9,9 @@ import { MainComponent } from './components/main/main.component';
 import {BlockBlackListComponent} from './components/block-black-list/block-black-list.component';
 import {MyProfileComponent} from './components/my-profile/my-profile.component';
 
+import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
+import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
+import {ConfirmationLotComponent} from './components/confirmation-lot/confirmation-lot.component';
 const routes: Routes = [
   {
     path: 'main',
@@ -33,6 +36,14 @@ const routes: Routes = [
       {
         path: 'my-profile',
         component: MyProfileComponent,
+      },
+      {
+        path: 'subscribers',
+        component: BlockSubscribersComponent
+      },
+      {
+        path: 'confirmation',
+        component: ConfirmationLotComponent
       },
     ]
   },

@@ -22,7 +22,8 @@ import { BlockBlackListComponent } from './components/block-black-list/block-bla
 
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
-
+//ANGULAR SEARCH
+import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -40,6 +41,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 
+import { SubscriberComponent } from './components/subscriber/subscriber.component';
+import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { ConfirmationLotComponent } from './components/confirmation-lot/confirmation-lot.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +59,11 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     BetModalComponent,
     BlacklistComponent,
     BlockBlackListComponent,
+    SubscriberComponent,
+    BlockSubscribersComponent,
+    ConfirmationLotComponent,
+
+
     MyProfileComponent,
     CommentComponent
   ],
@@ -77,6 +87,8 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     MatBadgeModule,
     SliderModule,
     MatTabsModule
+    NgMatSearchBarModule,
+    MatExpansionModule
   ],
   providers: [
   ],
