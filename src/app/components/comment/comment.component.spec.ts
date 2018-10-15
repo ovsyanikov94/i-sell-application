@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthModalComponent } from './auth.modal.component';
 
-describe('AuthModalComponent', () => {
-  let component: AuthModalComponent;
-  let fixture: ComponentFixture<AuthModalComponent>;
+import { CommentComponent } from './comment.component';
+
+describe('CommentComponent', () => {
+  let component: CommentComponent;
+  let fixture: ComponentFixture<CommentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthModalComponent ]
+      declarations: [ CommentComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthModalComponent);
+    fixture = TestBed.createComponent(CommentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

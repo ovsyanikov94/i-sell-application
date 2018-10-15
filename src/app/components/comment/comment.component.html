@@ -1,0 +1,23 @@
+<div style="margin: 5px">
+
+  <mat-card>
+    <mat-card-header>
+
+      <!--<div   mat-card-avatar class="user-avatar" [ngStyle]="{ 'background-image': 'url(' + comment?.userSender.userPhoto + ')'}" ></div>-->
+
+      <img mat-card-avatar class="user-avatar" width="50" height="50" src="{{comment?.userSender.userPhoto}}" />
+
+      <mat-card-title><a routerLink="." >{{comment?.userSender.userLogin}}</a></mat-card-title>
+      <p mat-card-subtitle>{{comment?.commentSendDate}}</p>
+
+    </mat-card-header>
+
+    <mat-card-content>
+      Lorem ipsum dolor sist amet, consectetur adipisicing elit. Delectus dolore earum eveniet necessitatibus officiis omnis, perspiciatis placeat quaerat vel voluptatem. Aliquam molestiae nemo nostrum placeat quam saepe similique sint voluptatum!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dolore earum eveniet necessitatibus officiis omnis, perspiciatis placeat quaerat vel voluptatem. Aliquam molestiae nemo nostrum placeat quam saepe similique sint voluptatum!
+    </mat-card-content>
+
+  </mat-card>
+</div>
+
+

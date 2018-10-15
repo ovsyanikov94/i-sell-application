@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user/User';
 import {FormControl, Validators} from '@angular/forms';
-
-import { MatDialog } from '@angular/material/dialog';
-import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component';
-import { PasswordConfirmValidator } from '../../Validators/PaswordValidator';
+import {PasswordConfirmValidator} from '../../Validators/PaswordValidator';
+import {MatDialog} from '@angular/material';
+import {AuthModalComponent} from '../../modals/auth.modal/auth.modal.component';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  selector: 'app-my-profile',
+  templateUrl: './my-profile.component.html',
+  styleUrls: ['./my-profile.component.css']
 })
-export class RegistrationComponent implements OnInit {
-
+export class MyProfileComponent implements OnInit {
 
   public user: User = new User();
 
@@ -50,6 +48,10 @@ export class RegistrationComponent implements OnInit {
     private registrationDialog: MatDialog
   ) { }
 
+  save(){
+
+  }
+
   openDialog( msg: string ){
 
     this.registrationDialog.open( AuthModalComponent , {
@@ -80,18 +82,6 @@ export class RegistrationComponent implements OnInit {
       this.passwordFormControl.valid &&
       this.passwordConfirmFormControl.valid;
 
-  }//
+  }//checkAllFields
 
-
-  registry(){
-
-
-    if ( this.checkAllFields() === true ){
-        //AJAX REGISTER REQUEST
-    }//if
-    else{
-      this.openDialog('Есть ошибки в заполнении формы!');
-    }//else
-
-  }//registry
 }

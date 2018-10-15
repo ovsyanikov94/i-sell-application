@@ -1,6 +1,13 @@
 'use strict';
 
 export class User {
+  get userOldPassword(): string {
+    return this._userOldPassword;
+  }
+
+  set userOldPassword(value: string) {
+    this._userOldPassword = value;
+  }
   get userPhone(): string {
     return this._userPhone;
   }
@@ -41,13 +48,34 @@ export class User {
     this._userConfirmPassword = value;
   }
 
+  get userPhoto(): string {
+    return this._userPhoto;
+  }
+
+  set userPhoto(value: string) {
+    this._userPhoto = value;
+  }
+  get userCountSum(): number {
+    return this._userCountSum;
+  }
+
+  set userCountSum(value: number) {
+    this._userCountSum = value;
+  }
+
+
+
+
   private _userLogin: string;
   private _userPassword: string;
+  private _userOldPassword: string;
   private _userConfirmPassword: string;
   private _userEmail: string;
   private _userName: string;
   private _userLastname: string;
   private _userPhone: string;
+  private _userPhoto: string;
+  private _userCountSum: number;
 
   get userPassword(): string {
     return this._userPassword;
@@ -66,13 +94,16 @@ export class User {
   }
 
   constructor(){
-    this._userLogin = '';
+
+    this._userLogin = 'Login 1';
     this._userPassword = '';
     this._userConfirmPassword = '';
     this._userEmail = '';
-    this._userLastname = '';
-    this._userName = '';
+    this._userLastname = 'Lastname';
+    this._userName = 'Name';
     this._userPhone = '';
+    this._userCountSum = 0;
+    this._userPhoto = 'https://cdnimg.rg.ru/img/content/156/70/54/1_d_850.jpg';
 
   }
 

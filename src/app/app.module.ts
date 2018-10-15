@@ -5,28 +5,45 @@ import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 
 //MY-COMPONENTS
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
-import { AddLotComponent } from './components/add-lot/add-lot.component';
+import { LotComponent } from './components/lot/lot.component';
+import { CardLotComponent } from './components/cardLot/cardLot.component';
+import { MainComponent } from './components/main/main.component';
+import { BetModalComponent } from './modals/bet.modal/bet.modal.component';
+import { CommentComponent } from './components/comment/comment.component';
 
+import { BlacklistComponent } from './components/blacklist/blacklist.component';
+import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
+
+//ANGULAR IMAGE SLIDER
+import { SliderModule } from 'angular-image-slider';
+//ANGULAR SEARCH
+import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 //ANGULAR-MATERIAL
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatListModule } from '@angular/material/list';
-import {MatRadioModule} from '@angular/material/radio';
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material';
+import {MatBadgeModule} from '@angular/material/badge';
+import { SubscriberComponent } from './components/subscriber/subscriber.component';
+import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { ConfirmationLotComponent } from './components/confirmation-lot/confirmation-lot.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
-//DATETIME-PICKER
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 
 @NgModule({
@@ -36,8 +53,17 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     AuthorizeComponent,
     RegistrationComponent,
     AuthModalComponent,
-    AddLotComponent,
-
+    LotComponent,
+    CardLotComponent,
+    MainComponent,
+    BetModalComponent,
+    BlacklistComponent,
+    BlockBlackListComponent,
+    SubscriberComponent,
+    BlockSubscribersComponent,
+    ConfirmationLotComponent,
+    MyProfileComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -51,16 +77,22 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatCardModule,
+    MatDividerModule,
     MatListModule,
-    MatRadioModule,
-    HttpClientModule,
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule
+    MatBadgeModule,
+    SliderModule,
+    NgMatSearchBarModule,
+    MatExpansionModule,
+    MatTabsModule
   ],
   providers: [
   ],
   entryComponents: [
-    AuthModalComponent
+    AuthModalComponent,
+    BetModalComponent
   ],
   bootstrap: [AppComponent]
 })
