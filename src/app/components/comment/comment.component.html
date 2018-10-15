@@ -3,17 +3,24 @@
   <mat-card>
     <mat-card-header>
 
-      <div  mat-card-avatar [style.backgroundImage]="comment?.userSender.userPhoto"></div>
+      <!--<div   mat-card-avatar class="user-avatar" [ngStyle]="{ 'background-image': 'url(' + comment?.userSender.userPhoto + ')'}" ></div>-->
 
-      <h3 mat-line><a routerLink="." >{{comment?.userSender.userLogin}}</a></h3>
+      <img mat-card-avatar class="user-avatar" width="50" height="50" src="{{comment?.userSender.userPhoto}}" />
+
+      <mat-card-title><a routerLink="." >{{comment?.userSender.userLogin}}</a></mat-card-title>
+      <p mat-card-subtitle>{{comment?.commentSendDate}}</p>
 
     </mat-card-header>
 
-    <mat-card-content>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dolore earum eveniet necessitatibus officiis omnis, perspiciatis placeat quaerat vel voluptatem. Aliquam molestiae nemo nostrum placeat quam saepe similique sint voluptatum!
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dolore earum eveniet necessitatibus officiis omnis, perspiciatis placeat quaerat vel voluptatem. Aliquam molestiae nemo nostrum placeat quam saepe similique sint voluptatum!
+    <mat-card-content >
+      <p>{{comment?.commentText | lenghtFilter:lenght}} </p>
     </mat-card-content>
-
+    <mat-card-footer id="show" [style.display]="More==true?'block':'none'">
+      <button mat-button color="primary" class="small" (click)="ShowMassage()">Читать весь отзыв...</button>
+    </mat-card-footer>
+    <mat-card-footer id="del" [style.display]="Less==true?'block':'none'">
+      <button mat-button color="primary" class="small" (click)="DellMassage()">Свернуть</button>
+    </mat-card-footer>
   </mat-card>
 </div>
 

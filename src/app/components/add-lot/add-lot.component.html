@@ -1,0 +1,107 @@
+<div class="container-fluid">
+
+  <div class="row justify-content-center">
+
+    <div class="col-6">
+
+      <div class="row justify-content-center text-center">
+        <h3>Добавление лота</h3>
+      </div>
+
+      <div class="row justify-content-center">
+
+        <div class="row justify-content-center mat-elevation-z8 form-auth">
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="lotTitle" matInput placeholder="Название товара" [(ngModel)]="lot.lotTitle" [formControl]="textFormControl">
+            <mat-error *ngIf="textFormControl.hasError('pattern') && !textFormControl.hasError('required')">
+              Введите корректное название. Длина от 3 до 30 символов
+            </mat-error>
+            <mat-error *ngIf="textFormControl.hasError('required')">
+              Название <strong>обязательно</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <textarea name="lotDescription" matInput placeholder="Описание" [(ngModel)]="lot.lotDescription" [formControl]="descriptionFormControl"></textarea>
+            <mat-error *ngIf="descriptionFormControl.errors">
+              Введите корректное описание. Длина от 15 до 350 символов
+            </mat-error>
+            <mat-error *ngIf="descriptionFormControl.hasError('required')">
+              Описание <strong>обязательно</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <mat-select  [(ngModel)]="selectedCategory" placeholder="Категория" [formControl]="categoryFormControl">
+              <mat-option *ngFor="let category of categories" [value]="category.categoryID">{{category.categoryTitle}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="categoryFormControl.hasError('required')">
+              Выберите категорию
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <mat-select [(ngModel)]="selectedType" placeholder="Тип" [formControl]="typeFormControl">
+              <mat-option *ngFor="let type of lotTypes" [value]="type.lotTypeID">{{type.lotTypeTitle}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="typeFormControl.hasError('required')">
+              Выберите тип
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="selectedType === 1" class="col-12">
+
+            <mat-label>Date Time Range:</mat-label>
+            <input matInput [(ngModel)]="dateRange"
+                   [owlDateTimeTrigger]="dtPicker3" [owlDateTime]="dtPicker3">
+            <owl-date-time #dtPicker3></owl-date-time>
+          </mat-form-field>
+
+          <mat-radio-group class="col-12" [(ngModel)]="selectedHour" [formControl]="radioButtonFormControl">
+            <mat-radio-button class="example-radio-button" *ngFor="let hour of hours" [value]="hour">
+              {{hour}}
+            </mat-radio-button>
+            <mat-error *ngIf="radioButtonFormControl.hasError('required')">
+              Выберите <strong>кол-во часов</strong>
+            </mat-error>
+          </mat-radio-group>
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="lotStartingPrice" matInput placeholder="Стартовая цена" [(ngModel)]="lot.lotStartingPrice" [formControl]="priceFormControl">
+            <mat-error *ngIf="priceFormControl.hasError('pattern') && !priceFormControl.hasError('required')">
+              Введите корректную цену.
+            </mat-error>
+            <mat-error *ngIf="priceFormControl.hasError('required')">
+              Цена <strong>обязательна</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <div  class="example-full-width col-12">
+
+            <mat-form-field class="col-12">
+              <ngx-mat-file-input [formControl]="multiplefile" placeholder="Прикрепить фото" multiple></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+            </mat-form-field>
+
+          </div>
+
+          <div class="row justify-content-center text-center">
+
+            <div class="col-12">
+              <button (click)="onFileSelected()" class="col-12" mat-stroked-button>Добавить Лот</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+

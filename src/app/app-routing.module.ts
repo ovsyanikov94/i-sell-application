@@ -6,8 +6,11 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
-import {BlockBlackListComponent} from './components/block-black-list/block-black-list.component';
 import {MyProfileComponent} from './components/my-profile/my-profile.component';
+import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
+import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
+import {ConfirmationLotComponent} from './components/confirmation-lot/confirmation-lot.component';
+import { AddLotComponent } from "./components/add-lot/add-lot.component";
 
 const routes: Routes = [
   {
@@ -34,6 +37,18 @@ const routes: Routes = [
         path: 'my-profile',
         component: MyProfileComponent,
       },
+      {
+        path: 'subscribers',
+        component: BlockSubscribersComponent
+      },
+      {
+        path: 'confirmation',
+        component: ConfirmationLotComponent
+      },
+      {
+        path: "add-lot",
+        component: AddLotComponent
+      },
     ]
   },
   {
@@ -55,3 +70,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
+import {User} from '../../models/user/User';
+
 
 @Component({
   selector: 'app-lot',
@@ -10,6 +12,7 @@ import {Lot} from '../../models/lot/Lot';
 export class LotComponent implements OnInit {
 
   public lot: Lot = new Lot();
+  public currentUser: User = new User();
 
   constructor() {
 
@@ -17,8 +20,14 @@ export class LotComponent implements OnInit {
 
   ngOnInit() {
 
+
     console.log(this.lot);
 
   }
+
+
+
+
+
 
 }

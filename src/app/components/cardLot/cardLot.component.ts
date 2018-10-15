@@ -48,6 +48,7 @@ export class CardLotComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   bet( event ){
