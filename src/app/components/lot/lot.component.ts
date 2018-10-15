@@ -14,7 +14,6 @@ export class LotComponent implements OnInit {
   public lot: Lot = new Lot();
   public currentUser: User = new User();
 
-
   constructor() {
 
   }
