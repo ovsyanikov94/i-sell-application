@@ -49,6 +49,8 @@ export class MyProfileComponent implements OnInit {
     PasswordConfirmValidator( this.user )
   ]);
 
+  public avatarControl = new FormControl('');
+
   constructor(
     private registrationDialog: MatDialog
   ) { }
