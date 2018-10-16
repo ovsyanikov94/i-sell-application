@@ -1,5 +1,25 @@
 <div class="container-fluid">
 
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Категории</span>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+
+      <mat-form-field>
+        <mat-select placeholder="Выбрать категорию" [formControl]="categoriesControl" multiple>
+          <mat-option *ngFor="let category of categories" [value]="category.categoryID">{{category.categoryTitle}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <button mat-stroked-button>Применить</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
   <div class="row justify-content-center form-lot">
 
     <div *ngFor="let lot of lots" style="margin-top: 2px;" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">

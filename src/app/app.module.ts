@@ -52,9 +52,12 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 //FILTERS
 import {FilterLengthPipe} from './filters/myfilter';
+import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component';
 
 @NgModule({
   declarations: [
@@ -74,8 +77,10 @@ import {FilterLengthPipe} from './filters/myfilter';
     ConfirmationLotComponent,
     MyProfileComponent,
     CommentComponent,
-    FilterLengthPipe
-    AddLotComponent
+    FilterLengthPipe,
+    AddLotComponent,
+    MyDialogsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -99,11 +104,12 @@ import {FilterLengthPipe} from './filters/myfilter';
     MatTabsModule,
     NgMatSearchBarModule,
     MatExpansionModule,
-    MatTabsModule,
     MatRadioModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    MatSlideToggleModule,
+    MatToolbarModule
   ],
   providers: [
   ],
