@@ -4,7 +4,7 @@ import {MatDialog} from "@angular/material";
 import { BetModalComponent } from '../../modals/bet.modal/bet.modal.component';
 import { BetData } from '../../models/modal.bet/bet.data';
 import {FormControl, Validators} from "@angular/forms";
-
+import { Category } from '../../models/category/Category';
 
 
 @Component({
@@ -19,8 +19,11 @@ export class CardLotComponent implements OnInit {
 
   public lots: Lot[];
 
-
-
+  categoriesControl = new FormControl();
+  categories: Category[] = [
+    new Category(1, 'Моб. устройства'),
+    new Category(1, 'Аксессуары'),
+  ];
 
   constructor( public dialog: MatDialog ) {
 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user/User';
-import {Check} from '../../models/Check/Check';
 import {FormControl, Validators} from '@angular/forms';
 import {PasswordConfirmValidator} from '../../Validators/PaswordValidator';
 import {MatDialog} from '@angular/material';
 import {AuthModalComponent} from '../../modals/auth.modal/auth.modal.component';
+import {Check} from '../../models/check/Check';
 
 @Component({
   selector: 'app-my-profile',
@@ -49,7 +49,7 @@ export class MyProfileComponent implements OnInit {
     PasswordConfirmValidator( this.user )
   ]);
 
-  public avatarControl = new FormControl('');
+  public avatarControl = new FormControl();
 
   constructor(
     private registrationDialog: MatDialog
@@ -83,6 +83,7 @@ export class MyProfileComponent implements OnInit {
       new Check('15.02.2018', 3, 250),
       new Check('15.02.2018', 4, 250)
     ];
+
 
   }
 
