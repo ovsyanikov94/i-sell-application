@@ -24,6 +24,10 @@ import { SubscriberComponent } from './components/subscriber/subscriber.componen
 import { BlacklistComponent } from './components/blacklist/blacklist.component';
 import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
 import { AddLotComponent } from './components/add-lot/add-lot.component';
+import { ComplaintsModalComponent } from './modals/complaints-modal/complaints-modal.component';
+import { FeedbackModalComponent } from './modals/feedback-modal/feedback-modal.component';
+
+
 
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
@@ -59,6 +63,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {FilterLengthPipe} from './filters/myfilter';
 import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component';
 
+
+
+
 @NgModule({
   declarations: [
 
@@ -79,7 +86,11 @@ import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component
     CommentComponent,
     FilterLengthPipe,
     AddLotComponent,
-    MyDialogsComponent
+    MyDialogsComponent,
+    ComplaintsModalComponent,
+    FeedbackModalComponent,
+
+
 
   ],
   imports: [
@@ -115,7 +126,10 @@ import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component
   ],
   entryComponents: [
     AuthModalComponent,
-    BetModalComponent
+    BetModalComponent,
+    ComplaintsModalComponent,
+    FeedbackModalComponent
+
   ],
   bootstrap: [AppComponent]
 })

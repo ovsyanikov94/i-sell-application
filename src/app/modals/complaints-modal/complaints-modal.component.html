@@ -1,0 +1,20 @@
+
+
+
+  <div>
+    {{data.message}} <a routerLink=".">{{data.complaintUser}}</a>
+  </div>
+
+  <textarea style="width: 100%"></textarea>
+
+  <div class="row justify-content-center text-center">
+    <div class="col">
+      <div>
+        <button (click)="close()" mat-raised-button color="warn">Отмена</button>
+        <button (click)="close()" mat-raised-button color="primary">Отправить</button>
+      </div>
+    </div>
+  </div>
+
+
+
