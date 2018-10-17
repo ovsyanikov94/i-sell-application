@@ -19,6 +19,10 @@ export class SubscriberComponent implements OnInit {
 
   }
 
+  public onUserMouseClick() {
+
+  }
+
 }
 
 
