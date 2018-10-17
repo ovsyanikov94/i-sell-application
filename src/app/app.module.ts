@@ -62,6 +62,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 //FILTERS
 import {FilterLengthPipe} from './filters/myfilter';
 import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component';
+import { ComplaintWarningComponent } from './modals/complaint-warning/complaint-warning.component';
 
 
 
@@ -89,6 +90,7 @@ import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component
     MyDialogsComponent,
     ComplaintsModalComponent,
     FeedbackModalComponent,
+    ComplaintWarningComponent,
 
 
 
