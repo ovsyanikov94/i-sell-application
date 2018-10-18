@@ -21,14 +21,28 @@ export class ListDialogsComponent implements OnInit {
     new User(),
   ];
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
 
   }
 
   ngOnInit() {
   }
 
-  removeDialog(){
-    console.log('click');
-  }
-}
+  onItemClick( event , user ): void {
+
+    console.log(event);
+
+    if ( event.target.closest('.button-row') === null ){
+
+      this.router.navigateByUrl( `/main/my-dialog/${user.userLogin}` );
+
+    }//if
+    else{
+      console.log('Remove!');
+    }//else
+
+  }//onItemClick
+
+}//ListDialogsComponent

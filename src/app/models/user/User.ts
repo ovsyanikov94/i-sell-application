@@ -95,7 +95,7 @@ export class User {
 
   constructor(){
 
-    this._userLogin = 'Login 1';
+    this._userLogin = 'Login1';
     this._userPassword = '';
     this._userConfirmPassword = '';
     this._userEmail = '';

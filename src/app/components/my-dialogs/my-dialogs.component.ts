@@ -12,21 +12,24 @@ export class MyDialogsComponent implements OnInit {
   correntUser: User = new User();
   dialogUser: User = new User();
 
- /* @ViewChild('mainContener')elementView: ElementRef;*/
-/*  public winHight: number ;*/
+  public winHeight: number ;
+
   constructor() { }
 
   ngOnInit() {
-    /*this.winHight = this.elementView.nativeElement.scrollHeight;
-    console.log(this.winHight);
-    console.log(this.elementView.nativeElement.scrollHeight);*/
-  }
+
+    this.winHeight = window.innerHeight - 270;
+    console.log(this.winHeight);
+
+  }//ngOnInit
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
 
+    this.winHeight = window.innerHeight - 270;
+    console.log(this.winHeight);
 
-  }
+  }//onResize
 
-
-}
+}//MyDialogsComponent

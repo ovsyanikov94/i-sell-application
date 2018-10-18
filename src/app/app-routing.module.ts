@@ -55,7 +55,7 @@ const routes: Routes = [
         component: ListDialogsComponent
       },
       {
-        path: 'my-dialog',
+        path: 'my-dialog/:userLogin',
         component: MyDialogsComponent
       }
     ]
