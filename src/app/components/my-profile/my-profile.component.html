@@ -202,16 +202,33 @@
 
   <mat-tab label="Личный баланс">
 
-    <div class="container" style="padding: 15px;">
+    <div class="container " style="padding: 15px;">
 
       <div class="row justify-content-center">
 
-        <div class="row justify-content-center mat-elevation-z8">
+        <div class="mat-elevation-z8">
 
-          <div class="col-12" >
+          <div class="example-full-width col-12" >
 
             <h4 class="text-muted">Ваш баланс: {{balanse}} руб.</h4>
 
+            <mat-form-field class="example-full-width col-12">
+              <input name="addSumm" matInput placeholder="Сумма пополнения" [(ngModel)]="addSumm" [formControl]="addSummFormControl">
+              <mat-error *ngIf="addSummFormControl.hasError('pattern') && !addSummFormControl.hasError('required')">
+                Введите только цифры и/или точку
+              </mat-error>
+              <mat-error *ngIf="addSummFormControl.hasError('required')">
+                сумма <strong>обязательна</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <div class="row justify-content-center text-center">
+
+              <div class="col-12" style="padding: 15px">
+                <button (click)="save()"  class="col-12" color="primary" mat-stroked-button>Пополнить</button>
+              </div>
+
+            </div>
 
             <h3>История пополнений баланса</h3>
 
@@ -222,8 +239,12 @@
 
                 <h4 mat-line>Сумма: {{check.checkSumm}}</h4>
 
+                <mat-divider></mat-divider>
+
               </mat-list-item>
             </mat-list>
+
+
 
           </div>
 

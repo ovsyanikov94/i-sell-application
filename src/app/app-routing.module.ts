@@ -7,6 +7,7 @@ import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import {MyProfileComponent} from './components/my-profile/my-profile.component';
+import {ProfileComponent} from './components/profile/profile.component';
 import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
 import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
 import {ConfirmationLotComponent} from './components/confirmation-lot/confirmation-lot.component';
@@ -58,6 +59,10 @@ const routes: Routes = [
         path: 'my-dialog/:userLogin',
         component: MyDialogsComponent
       }
+      {
+        path: 'profile/:id',
+        component: ProfileComponent,
+      },
     ]
   },
   {

@@ -17,6 +17,8 @@ export class MyProfileComponent implements OnInit {
 
   public  balanse: number;
 
+  public  addSumm: number;
+
   public checks: Check[];
 
   public nameFormControl = new FormControl('', [
@@ -38,6 +40,10 @@ export class MyProfileComponent implements OnInit {
   public phoneFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern(/^((\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/ )
+  ]);
+  public addSummFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^\d+/ )
   ]);
 
   public passwordFormControl = new FormControl('', [
