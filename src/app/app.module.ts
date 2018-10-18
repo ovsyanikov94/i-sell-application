@@ -93,7 +93,6 @@ import { ComplaintWarningComponent } from './modals/complaint-warning/complaint-
     ComplaintWarningComponent,
 
 
-
   ],
   imports: [
     BrowserModule,
@@ -130,7 +129,8 @@ import { ComplaintWarningComponent } from './modals/complaint-warning/complaint-
     AuthModalComponent,
     BetModalComponent,
     ComplaintsModalComponent,
-    FeedbackModalComponent
+    FeedbackModalComponent,
+    ComplaintWarningComponent
 
   ],
   bootstrap: [AppComponent]
