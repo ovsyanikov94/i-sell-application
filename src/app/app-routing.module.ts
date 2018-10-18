@@ -11,7 +11,8 @@ import { BlockBlackListComponent } from './components/block-black-list/block-bla
 import { BlockSubscribersComponent } from './components/block-subscribers/block-subscribers.component';
 import {ConfirmationLotComponent} from './components/confirmation-lot/confirmation-lot.component';
 import { AddLotComponent } from "./components/add-lot/add-lot.component";
-
+import {ListDialogsComponent} from './components/list-dialogs/list-dialogs.component';
+import {MyDialogsComponent} from './components/my-dialogs/my-dialogs.component';
 const routes: Routes = [
   {
     path: 'main',
@@ -49,6 +50,14 @@ const routes: Routes = [
         path: "add-lot",
         component: AddLotComponent
       },
+      {
+        path: 'list-dialog',
+        component: ListDialogsComponent
+      },
+      {
+        path: 'my-dialog/:userLogin',
+        component: MyDialogsComponent
+      }
     ]
   },
   {

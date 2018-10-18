@@ -58,6 +58,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 //FILTERS
 import {FilterLengthPipe} from './filters/myfilter';
 import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component';
+import { ListDialogsComponent } from './components/list-dialogs/list-dialogs.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component
     CommentComponent,
     FilterLengthPipe,
     AddLotComponent,
-    MyDialogsComponent
+    MyDialogsComponent,
+    ListDialogsComponent
 
   ],
   imports: [

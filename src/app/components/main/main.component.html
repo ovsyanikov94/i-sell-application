@@ -30,9 +30,15 @@
 
       <mat-list-item>
 
-        <a class="col-12 link" routerLink="." color="primary">
+        <a class="col-12 link" routerLink="list-dialog" color="primary">
           <span matBadge="4" matBadgeOverlap="false" >Сообщения</span>
         </a>
+
+      </mat-list-item>
+
+      <mat-list-item>
+
+        <a class="col-12 link" routerLink="confirmation" color="primary">Активные сделки</a>
 
       </mat-list-item>
 
@@ -40,7 +46,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <p><button mat-button (click)="sidenav.open()" class="open-button">
+    <p  ><button mat-button (click)="sidenav.open()" class="open-button">
       <mat-icon >
         format_align_justify
       </mat-icon>
