@@ -55,6 +55,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
+//LEAFLET
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 //FILTERS
 import {FilterLengthPipe} from './filters/myfilter';
 import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component';
@@ -113,7 +116,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     OwlNativeDateTimeModule,
     MaterialFileInputModule,
     MatSlideToggleModule,
-    MatToolbarModule
+    MatToolbarModule,
+    LeafletModule
   ],
   providers: [
   ],

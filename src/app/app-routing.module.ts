@@ -58,7 +58,7 @@ const routes: Routes = [
       {
         path: 'my-dialog/:userLogin',
         component: MyDialogsComponent
-      }
+      },
       {
         path: 'profile/:id',
         component: ProfileComponent,

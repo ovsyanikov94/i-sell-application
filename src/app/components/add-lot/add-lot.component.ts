@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl , Validators } from '@angular/forms';
 import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
+
 
 //MODELS
 import { Lot } from '../../models/lot/Lot';
@@ -9,6 +11,7 @@ import { LotType } from '../../models/lot-type/LotType';
 import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
 import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthValidator';
+import {icon, latLng, marker, tileLayer} from 'leaflet';
 
 @Component({
   selector: 'app-add-lot',
@@ -21,6 +24,8 @@ export class AddLotComponent implements OnInit {
   public selectedType: LotType = null;
   public selectedHour: number;
   public dateRange: Date;
+
+  // public geosearch: OpenStreetMapProvider = new OpenStreetMapProvider()
 
   public hours: number[] = [
     4,
@@ -73,6 +78,35 @@ export class AddLotComponent implements OnInit {
 
   public multiplefile = new FormControl('');
 
+  options = {
+    layers: [
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+    ],
+    zoom: 5,
+    center: latLng(46.879966, -121.726909)
+  };
+
+  layers = [
+    marker([ 46.879966, -121.726909 ] , {
+      icon: icon({
+        iconSize: [ 25, 41 ],
+        iconAnchor: [ 13, 41 ],
+        iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
+        shadowUrl: '/node_modules/leaflet/dist/images/marker-shadow.png'
+      })
+    })
+  ];
+
+  //https://github.com/smeijer/leaflet-geosearch
+  //https://www.npmjs.com/package/leaflet
+  //https://github.com/Asymmetrik/ngx-leaflet
+
+  onAddressInput( address ){
+
+    console.log(address);
+
+  }//onAddressInput
+
   onFileSelected(event){
 
     console.log(this.multiplefile.value);
@@ -86,6 +120,11 @@ export class AddLotComponent implements OnInit {
   constructor(
     public dialog: MatDialog
   ) {
+
+    // const map = new L.Map('map');
+    // map.addControl(this.searchControl);
+
+
   }
 
   addLot( event ){
