@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl , Validators } from '@angular/forms';
 import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component';
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
+import { OpenStreetMapProvider , GeoSearchControl } from 'leaflet-geosearch';
 
+declare let L;
 
 //MODELS
 import { Lot } from '../../models/lot/Lot';
@@ -10,8 +11,11 @@ import { Category } from '../../models/category/Category';
 import { LotType } from '../../models/lot-type/LotType';
 import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
+import { GeoSearchResult } from '../../models/GeoSearchResult';
+
+
 import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthValidator';
-import {icon, latLng, marker, tileLayer} from 'leaflet';
+import {LatLng, Map, Marker} from 'leaflet';
 
 @Component({
   selector: 'app-add-lot',
@@ -25,7 +29,10 @@ export class AddLotComponent implements OnInit {
   public selectedHour: number;
   public dateRange: Date;
 
-  // public geosearch: OpenStreetMapProvider = new OpenStreetMapProvider()
+
+  public geoSearchResults: GeoSearchResult[] = [];
+
+  public geosearch: OpenStreetMapProvider = new OpenStreetMapProvider();
 
   public hours: number[] = [
     4,
@@ -76,36 +83,47 @@ export class AddLotComponent implements OnInit {
     Validators.required
   ]);
 
+  public marker: Marker;
+  public map: Map;
+
   public multiplefile = new FormControl('');
-
-  options = {
-    layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-    ],
-    zoom: 5,
-    center: latLng(46.879966, -121.726909)
-  };
-
-  layers = [
-    marker([ 46.879966, -121.726909 ] , {
-      icon: icon({
-        iconSize: [ 25, 41 ],
-        iconAnchor: [ 13, 41 ],
-        iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
-        shadowUrl: '/node_modules/leaflet/dist/images/marker-shadow.png'
-      })
-    })
-  ];
 
   //https://github.com/smeijer/leaflet-geosearch
   //https://www.npmjs.com/package/leaflet
   //https://github.com/Asymmetrik/ngx-leaflet
 
-  onAddressInput( address ){
+  async onAddressInput( address ){
 
-    console.log(address);
+    this.geoSearchResults.length = 0;
+
+    const response = await this.geosearch.search({ query: address });
+
+    this.geoSearchResults = response as GeoSearchResult[];
 
   }//onAddressInput
+
+  onAddressSelected( address: GeoSearchResult ){
+
+    const latLng: LatLng = new LatLng(
+      address.y ,
+      address.x
+    );
+
+    const popup = L.popup()
+      .setLatLng(latLng)
+      .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+      .openOn(this.map);
+
+    this.marker.setLatLng( latLng );
+
+    this.marker.setPopupContent(address.label);
+
+    this.map.setView( [
+      address.y ,
+      address.x
+    ], 13);
+
+  }//onAddressSelected
 
   onFileSelected(event){
 
@@ -120,11 +138,6 @@ export class AddLotComponent implements OnInit {
   constructor(
     public dialog: MatDialog
   ) {
-
-    // const map = new L.Map('map');
-    // map.addControl(this.searchControl);
-
-
   }
 
   addLot( event ){
@@ -156,6 +169,44 @@ export class AddLotComponent implements OnInit {
 
   ngOnInit() {
 
-  }
+    window.navigator.geolocation.getCurrentPosition( (position: Position) => {
+
+      this.map = L.map('map').setView( [
+        position.coords.latitude,
+        position.coords.longitude
+      ], 13);
+
+      //
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(this.map);
+
+      const myIcon = L.icon(
+        {
+          iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
+          iconSize: [38, 55],
+        }
+      );
+
+      this.marker = L.marker(
+        [
+          position.coords.latitude,
+          position.coords.longitude
+        ],
+        {icon: myIcon}
+      ).addTo(this.map);
+
+      //
+      // //
+      this.map.on('click' , ( event: any ) => {
+
+        this.marker.setLatLng( event.latlng );
+
+      });
+
+    } );
+
+  }//ngOnInit
 
 }

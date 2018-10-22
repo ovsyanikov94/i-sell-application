@@ -30,6 +30,7 @@
     "hammerjs": "^2.0.8",
     "leaflet": "^1.3.4",
     "leaflet-geosearch": "^2.7.0",
+    "leaflet-search": "^2.9.7",
     "ng-mat-search-bar": "^2.0.0-beta.1",
     "ng-pick-datetime": "^6.0.16",
     "ngx-hm-carousel": "^1.2.6",

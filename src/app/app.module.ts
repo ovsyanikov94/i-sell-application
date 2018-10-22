@@ -54,7 +54,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 //LEAFLET
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
@@ -117,7 +117,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     MaterialFileInputModule,
     MatSlideToggleModule,
     MatToolbarModule,
-    LeafletModule
+    LeafletModule,
+    MatAutocompleteModule
   ],
   providers: [
   ],

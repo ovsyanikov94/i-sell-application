@@ -86,22 +86,19 @@
 
           </div>
 
-          <div class="col-12">
+          <mat-form-field class="col-12">
+            <input #address matInput placeholder="State" aria-label="State" [matAutocomplete]="auto" (keyup)="onAddressInput(address.value)">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let result of geoSearchResults" [value]="result.label">
+                <span (click)="onAddressSelected(result)" >{{result.label}}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
 
-            <mat-form-field class="col-12">
-              <input #address matInput placeholder="Введите адрес..." (keyup)="onAddressInput(address.value)">
-            </mat-form-field>
+
+          <div id="map" style="height: 300px; width: 100%">
 
           </div>
-
-          <div  style="height: 300px; width: 100%"
-               leaflet
-               [leafletOptions]="options"
-               [leafletLayers]="layers"
-          >
-          </div>
-
-          <!--<div id="map" style="height: 300px; width: 100%"></div>-->
 
           <div class="row justify-content-center text-center">
 
