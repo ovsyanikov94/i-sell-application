@@ -12,6 +12,17 @@ import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
 import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthValidator';
 import {icon, latLng, marker, tileLayer} from 'leaflet';
+import L from 'leaflet';
+import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+
+const provider = new OpenStreetMapProvider();
+
+const searchControl = new GeoSearchControl({
+  provider: provider,
+});
+
+const map = new L.Map('map');
+map.addControl(searchControl);
 
 @Component({
   selector: 'app-add-lot',
@@ -102,8 +113,6 @@ export class AddLotComponent implements OnInit {
   //https://github.com/Asymmetrik/ngx-leaflet
 
   onAddressInput( address ){
-
-    console.log(address);
 
   }//onAddressInput
 
