@@ -213,7 +213,6 @@ export class AddLotComponent implements OnInit {
         this.marker
           .bindPopup(result.display_name)
           .openPopup();
-
       });
 
     } );
