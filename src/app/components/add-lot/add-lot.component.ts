@@ -206,9 +206,6 @@ export class AddLotComponent implements OnInit {
       // //
       this.map.on('click' , async ( event: any ) => {
 
-
-        console.log(event.latlng);
-
         this.marker.setLatLng( event.latlng );
 
         const result: GeoSearchByCoordsModel = await this.geoSearchService.getAddressByCords(event.latlng);
@@ -216,8 +213,6 @@ export class AddLotComponent implements OnInit {
         this.marker
           .bindPopup(result.display_name)
           .openPopup();
-
-        console.log(result);
 
       });
 
