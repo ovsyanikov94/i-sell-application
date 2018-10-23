@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -64,6 +65,10 @@ import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component
 import { ListDialogsComponent } from './components/list-dialogs/list-dialogs.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+//SERVICES
+import { GeoSearchService } from "./services/geo-search.service";
+
+
 @NgModule({
   declarations: [
 
@@ -118,9 +123,11 @@ import { ProfileComponent } from './components/profile/profile.component';
     MatSlideToggleModule,
     MatToolbarModule,
     LeafletModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    HttpClientModule
   ],
   providers: [
+    GeoSearchService
   ],
   entryComponents: [
     AuthModalComponent,

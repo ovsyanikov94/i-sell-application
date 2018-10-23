@@ -11,11 +11,15 @@ import { Category } from '../../models/category/Category';
 import { LotType } from '../../models/lot-type/LotType';
 import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
-import { GeoSearchResult } from '../../models/GeoSearchResult';
+import { GeoSearchResult } from '../../models/geo-search/GeoSearchResult';
 
 
 import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthValidator';
 import {LatLng, Map, Marker} from 'leaflet';
+
+//SERVICES
+import { GeoSearchService } from '../../services/geo-search.service';
+import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
 
 @Component({
   selector: 'app-add-lot',
@@ -111,7 +115,7 @@ export class AddLotComponent implements OnInit {
 
     const popup = L.popup()
       .setLatLng(latLng)
-      .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+      .setContent(`<p>${address.label}</p>`)
       .openOn(this.map);
 
     this.marker.setLatLng( latLng );
@@ -136,7 +140,8 @@ export class AddLotComponent implements OnInit {
   }
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private geoSearchService: GeoSearchService
   ) {
   }
 
@@ -199,9 +204,20 @@ export class AddLotComponent implements OnInit {
 
       //
       // //
-      this.map.on('click' , ( event: any ) => {
+      this.map.on('click' , async ( event: any ) => {
+
+
+        console.log(event.latlng);
 
         this.marker.setLatLng( event.latlng );
+
+        const result: GeoSearchByCoordsModel = await this.geoSearchService.getAddressByCords(event.latlng);
+
+        this.marker
+          .bindPopup(result.display_name)
+          .openPopup();
+
+        console.log(result);
 
       });
 
