@@ -4,7 +4,7 @@ import {User} from '../../models/user/User';
 
 import {LatLng, Map, Marker} from 'leaflet';
 import {MatTabChangeEvent} from '@angular/material';
-import { GeoSearchService } from '../../services/geo-search.service';
+import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
 
 declare let L;

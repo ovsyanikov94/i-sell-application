@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
   ]);
   public emailFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(/.+@.+\..+/i)
+    Validators.email
   ]);
   public phoneFormControl = new FormControl('', [
     Validators.required,

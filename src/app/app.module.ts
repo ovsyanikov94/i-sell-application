@@ -69,7 +69,9 @@ import { ListDialogsComponent } from './components/list-dialogs/list-dialogs.com
 import { ProfileComponent } from './components/profile/profile.component';
 
 //SERVICES
-import { GeoSearchService } from "./services/geo-search.service";
+import { GeoSearchService } from "./services/LeafletGeoSearch/geo-search.service";
+import { PasswordRecoveryRequestComponent } from './components/password-recovery-request/password-recovery-request.component';
+import { PasswordRecoveryConfirmComponent } from './components/password-recovery-confirm/password-recovery-confirm.component';
 
 
 @NgModule({
@@ -97,7 +99,9 @@ import { GeoSearchService } from "./services/geo-search.service";
     AuthModalComponent,
     RemoveFromBlacklistComponent,
     ComplaintsModalComponent,
-    FeedbackModalComponent
+    FeedbackModalComponent,
+    PasswordRecoveryRequestComponent,
+    PasswordRecoveryConfirmComponent
   ],
   imports: [
     BrowserModule,

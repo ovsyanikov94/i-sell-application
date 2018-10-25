@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { LatLng } from 'leaflet';
-import {GeoSearchByCoordsModel} from '../models/geo-search/GeoSearchByCoordsModel';
+import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
 
 @Injectable({
   providedIn: 'root'

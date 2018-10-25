@@ -44,7 +44,7 @@
 
           <mat-form-field class="example-full-width col-12">
             <input name="userEmail" matInput placeholder="Email" [(ngModel)]="user.userEmail" [formControl]="emailFormControl">
-            <mat-error *ngIf="emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')">
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
               Введите корректный email. название@наименованиен.домен
             </mat-error>
             <mat-error *ngIf="emailFormControl.hasError('required')">

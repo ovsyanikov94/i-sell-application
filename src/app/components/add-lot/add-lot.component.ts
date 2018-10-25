@@ -18,7 +18,7 @@ import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthVa
 import {LatLng, Map, Marker} from 'leaflet';
 
 //SERVICES
-import { GeoSearchService } from '../../services/geo-search.service';
+import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
 
 @Component({
