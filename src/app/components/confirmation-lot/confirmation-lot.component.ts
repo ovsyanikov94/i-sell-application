@@ -3,9 +3,8 @@ import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
 import {MatDialog} from "@angular/material";
 
-import { ComplaintWarningComponent } from "../../modals/complaint-warning/complaint-warning.component";
-
 import {FeedbackModalComponent} from "../../modals/feedback-modal/feedback-modal.component";
+import {ComplaintsModalComponent} from "../../modals/complaints-modal/complaints-modal.component";
 
 
 @Component({
@@ -51,7 +50,7 @@ export class ConfirmationLotComponent implements OnInit {
 
   public complaintModal(){
 
-    this.dialog.open(ComplaintWarningComponent, { data: { message: 'Жалоба на пользователя', complaintUser: this.user.userLogin}});
+    this.dialog.open(ComplaintsModalComponent, { data: { message: 'Жалоба на пользователя', complaintUser: this.user.userLogin}});
 
   }//complaintModal
 

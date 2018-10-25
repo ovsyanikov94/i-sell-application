@@ -22,8 +22,10 @@ export class ComplaintsModalComponent implements OnInit {
   }//close
 
   public complaintWarning(){
+
     this.warningMessage = "Ваша жалоба может привести к блокировке учётной записи пользователя. Вы уверены, что хотите отправить жалобу?";
-    this.warningDialog.open(FeedbackModalComponent, { data: { message: this.warningMessage }});
+    // this.warningDialog.open(FeedbackModalComponent, { data: { message: this.warningMessage }});
+
   }//complaintWarning
 
 }
