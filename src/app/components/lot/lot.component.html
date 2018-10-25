@@ -30,20 +30,14 @@
           </span>
     </div>
   </div>
-  <mat-tab-group [dynamicHeight]="true" style="padding: 15px" color="primary">
+
+  <mat-tab-group (selectedTabChange)="onTabChanged($event)" [dynamicHeight]="true" style="padding: 15px" color="primary">
 
     <mat-tab label="Информация о лоте">
 
       <div class="container-fluid" style="padding: 15px;">
 
         <div class="row justify-content-start">
-
-
-
-
-
-
-
 
                 <div class="col-12">
 
@@ -109,7 +103,9 @@
             </h5>
           </div>
 
+          <div id="map" style="height: 250px; width: 100%">
 
+          </div>
 
         </div>
 

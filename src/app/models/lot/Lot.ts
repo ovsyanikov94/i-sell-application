@@ -4,9 +4,9 @@ import { Comment } from '../comment/Comment';
 
 
 class MapCoord {
-  lat: number;
-  log: number;
 
+  public lat: number;
+  public log: number;
 
   constructor(lat: number, log: number){
     this.lat = lat;
