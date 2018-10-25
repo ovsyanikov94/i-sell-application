@@ -40,8 +40,8 @@
         </mat-card>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" style="width: auto">Подтвердить сделку</button>
-        <button mat-raised-button color="warn">жалоба на продавца</button>
+        <button (click)="feedBackModal()" mat-raised-button color="primary" style="width: auto">Подтвердить сделку</button>
+        <button (click)="complaintModal()" mat-raised-button color="warn">жалоба на продавца</button>
       </mat-card-actions>
     </mat-card>
   </div>
