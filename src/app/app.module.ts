@@ -17,6 +17,7 @@ import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import { BetModalComponent } from './modals/bet.modal/bet.modal.component';
+import { RemoveFromBlacklistComponent } from './modals/remove-from-blacklist/remove-from-blacklist.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { ConfirmationLotComponent } from './components/confirmation-lot/confirmation-lot.component';
@@ -75,11 +76,9 @@ import { GeoSearchService } from "./services/geo-search.service";
     AppComponent,
     AuthorizeComponent,
     RegistrationComponent,
-    AuthModalComponent,
     LotComponent,
     CardLotComponent,
     MainComponent,
-    BetModalComponent,
     BlacklistComponent,
     BlockBlackListComponent,
     SubscriberComponent,
@@ -91,8 +90,10 @@ import { GeoSearchService } from "./services/geo-search.service";
     AddLotComponent,
     ListDialogsComponent,
     MyDialogsComponent,
-    ProfileComponent
-
+    ProfileComponent,
+    BetModalComponent,
+    AuthModalComponent,
+    RemoveFromBlacklistComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +132,8 @@ import { GeoSearchService } from "./services/geo-search.service";
   ],
   entryComponents: [
     AuthModalComponent,
-    BetModalComponent
+    BetModalComponent,
+    RemoveFromBlacklistComponent
   ],
   bootstrap: [AppComponent]
 })

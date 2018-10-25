@@ -5,6 +5,7 @@ import {PasswordConfirmValidator} from '../../Validators/PaswordValidator';
 import {MatDialog} from '@angular/material';
 import {AuthModalComponent} from '../../modals/auth.modal/auth.modal.component';
 import {Check} from '../../models/check/Check';
+import {Lot} from '../../models/lot/Lot';
 
 @Component({
   selector: 'app-my-profile',
@@ -20,6 +21,26 @@ export class MyProfileComponent implements OnInit {
   public  addSumm: number;
 
   public checks: Check[];
+
+  public lots: Lot[] = [
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+    new Lot(),
+  ];
+
 
   public nameFormControl = new FormControl('', [
     Validators.required,

@@ -1,4 +1,4 @@
-<div>
+<div class="container">
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -26,7 +26,6 @@
       <app-subscriber
         *ngFor="let user of users"
         [user]="user"
-        (onUserClick)="foo( $event )"
       ></app-subscriber>
     </div>
 
