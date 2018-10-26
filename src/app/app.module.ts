@@ -59,6 +59,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 //LEAFLET
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
@@ -133,6 +135,7 @@ import { PasswordRecoveryConfirmComponent } from './components/password-recovery
     MatToolbarModule,
     LeafletModule,
     MatAutocompleteModule,
+    MatPaginatorModule,
     HttpClientModule
   ],
   providers: [

@@ -16,6 +16,7 @@ import {ListDialogsComponent} from './components/list-dialogs/list-dialogs.compo
 import {MyDialogsComponent} from './components/my-dialogs/my-dialogs.component';
 import {PasswordRecoveryRequestComponent} from './components/password-recovery-request/password-recovery-request.component';
 import {PasswordRecoveryConfirmComponent} from './components/password-recovery-confirm/password-recovery-confirm.component';
+
 const routes: Routes = [
   {
     path: 'main',

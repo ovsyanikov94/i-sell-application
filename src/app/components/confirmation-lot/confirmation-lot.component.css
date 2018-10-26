@@ -1,0 +1,9 @@
+.search-paginator{
+
+  padding: 5px;
+  position: fixed;
+  top: 0;
+  z-index: 999999;
+  background-color: #dadada;
+
+}

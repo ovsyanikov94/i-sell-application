@@ -1,7 +1,6 @@
 ///<reference path="../../../../node_modules/@angular/core/src/di/injector.d.ts"/>
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
-import {FeedbackModalComponent} from "../feedback-modal/feedback-modal.component";
 
 @Component({
   selector: 'app-complaints-modal',

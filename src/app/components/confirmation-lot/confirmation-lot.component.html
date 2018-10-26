@@ -1,11 +1,20 @@
-<div class="container">
-  <div>
+
+<div class="container" style="margin-top: 140px;">
+
+  <div class="search-paginator container" style="width: 82%">
+
     <form class="example-form">
       <mat-form-field class="example-full-width" style="width: 100%">
         <input  matInput placeholder="Search" value="">
       </mat-form-field>
     </form>
+    <mat-paginator [length]="100"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+
   </div>
+
   <div *ngFor="let lot of lots " style="margin-bottom: 5px">
     <mat-card class="example-card">
       <mat-card-header>
@@ -23,7 +32,7 @@
           <mat-list>
             <mat-list-item>
               <img  mat-list-avatar src="{{lot?.lotSeller.userPhoto}}" alt="Desc 1" style="width: 100px; height: 100px">
-              <h3 mat-line><a routerLink="." >{{lot?.lotSeller.userLogin}}</a></h3>
+              <h3 mat-line><a routerLink="/main/profile/{{lot?.lotSeller.userLogin}}" >{{lot?.lotSeller.userLogin}}</a></h3>
               <p mat-line>
                 <span>{{lot?.lotSeller.userName}}</span>
               </p>
