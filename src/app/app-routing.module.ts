@@ -50,6 +50,7 @@ const routes: Routes = [
         path: 'confirmation',
         component: ConfirmationLotComponent
       },
+
       {
         path: "add-lot",
         component: AddLotComponent
