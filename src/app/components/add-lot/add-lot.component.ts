@@ -12,7 +12,9 @@ import { LotType } from '../../models/lot-type/LotType';
 import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
 import { GeoSearchResult } from '../../models/geo-search/GeoSearchResult';
-
+import {ServerResponse} from "../../models/server/ServerResponse";
+import {Constants} from "../../models/Constants";
+import {MapCoord} from "../../models/MapCoord/MapCoord";
 
 import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthValidator';
 import {LatLng, Map, Marker} from 'leaflet';
@@ -20,6 +22,9 @@ import {LatLng, Map, Marker} from 'leaflet';
 //SERVICES
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
+
+import {LotService} from '../../services/lot/lot.service';
+import {CategoryService} from '../../services/category/category.service';
 
 @Component({
   selector: 'app-add-lot',
@@ -46,19 +51,15 @@ export class AddLotComponent implements OnInit {
     48
   ];
 
-  public categories: Category[] = [
-    new Category( 1 , 'Моб. Телефоны'),
-    new Category( 2, 'Акссесуары')
-  ];
+  public categories: Category[];
 
-  public lotTypes: LotType[] = [
-    new LotType( 1 , 'Запланированный'),
-    new LotType( 2, 'Немедленный')
-  ];
+  public lotTypes: LotType[];
 
   public lot: Lot = new Lot();
 
-  selectedFiles: File[] = [];
+  public mapLot: MapCoord ;
+
+  public selectedFiles: File[] = [];
 
   public textFormControl = new FormControl('', [
     Validators.required,
@@ -113,6 +114,8 @@ export class AddLotComponent implements OnInit {
       address.x
     );
 
+    this.mapLot = new MapCoord( address.y,  address.x);
+
     const popup = L.popup()
       .setLatLng(latLng)
       .setContent(`<p>${address.label}</p>`)
@@ -141,9 +144,66 @@ export class AddLotComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private geoSearchService: GeoSearchService
+    private geoSearchService: GeoSearchService,
+    private lotService: LotService,
+    private categoryService: CategoryService
+
   ) {
-  }
+
+    this.categoryService.getCategories(
+      Constants.APP_OFFSET,
+      Constants.APP_LIMIT
+    ).then( this.onCategoryResponse.bind(this) );
+
+    this.lotService.getTypeLot(
+      Constants.APP_OFFSET,
+      Constants.APP_LIMIT
+    ).then( this.onLotTypesResponse.bind(this) );
+
+  }//constructor
+
+  onCategoryResponse(response: ServerResponse){
+
+    console.log(response);
+
+    try{
+
+      if ( response.status === 200 ){
+
+        this.categories = response.data as Category[];
+
+      }//if
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+  }//onCategoryResponse
+
+  onLotTypesResponse(response: ServerResponse){
+
+    console.log(response);
+
+    try{
+
+      if ( response.status === 200 ){
+
+        this.lotTypes = response.data as LotType[];
+
+      }//if
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+  }//onLotTypesResponse
+
 
   addLot( event ){
 
@@ -181,6 +241,7 @@ export class AddLotComponent implements OnInit {
         position.coords.longitude
       ], 13);
 
+      this.mapLot = new MapCoord( position.coords.latitude, position.coords.longitude);
       //
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -207,6 +268,8 @@ export class AddLotComponent implements OnInit {
       this.map.on('click' , async ( event: any ) => {
 
         this.marker.setLatLng( event.latlng );
+
+        this.mapLot = new MapCoord( event.latlng.latitude, event.latlng.longitude);
 
         const result: GeoSearchByCoordsModel = await this.geoSearchService.getAddressByCords(event.latlng);
 
