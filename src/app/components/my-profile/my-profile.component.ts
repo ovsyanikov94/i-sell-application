@@ -115,9 +115,10 @@ export class MyProfileComponent implements OnInit {
 
   getUserRes(response: ServerResponse){
 
+    console.log(response);
    try {
      if ( response.status === 200){
-       this.user = response.data as User;
+       this.user = response.data[0] as User;
      }
    }
    catch (ex){
@@ -154,6 +155,7 @@ export class MyProfileComponent implements OnInit {
   }
   async updateUserInfo(){
 
+    console.log('nene');
     const authData: AuthData = new class implements AuthData {
       message: string;
     };
@@ -162,7 +164,7 @@ export class MyProfileComponent implements OnInit {
     try {
 
       const response = await this.authSersice.changeUserInfo( this.user );
-
+      console.log('ОТВЕТ', response);
       this.openDialog({
         message: response.message
       });
