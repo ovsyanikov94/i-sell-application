@@ -3,7 +3,7 @@
 
 export class ApiRoutes{
 
-  static readonly SERVER_URL: string = 'http://localhost:5012/i-sell-admin-api/api/';
+  static readonly SERVER_URL: string = 'http://localhost:7000/i-sell-admin-api/api/';
 
   //LOT
   static readonly GET_LOT_LIST: string = 'lotList';
@@ -21,6 +21,7 @@ export class ApiRoutes{
   //USER
   static readonly USER_REGISTER: string = 'registryUser';
   static readonly USER_AUTHORIZE: string = 'auth-user';
-
+  static readonly USER_CHANGE_PARAMS: string = 'updateUserInfo';
+  static readonly USER_INFO: string = 'getUser';
 
 }
