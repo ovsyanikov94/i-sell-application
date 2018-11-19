@@ -19,7 +19,7 @@ import {Constants} from '../../models/Constants';
 export class AuthorizeComponent implements OnInit {
 
   public user: User = new User();
-  public constants: Constants = Constants;
+
 
   public loginFormControl = new FormControl('', [
     Validators.required

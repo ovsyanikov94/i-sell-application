@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user/User';
 import { ApiRoutes } from '../../models/ApiRoutes';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServerResponse} from '../../models/server/ServerResponse';
 
 @Injectable({
@@ -45,4 +45,18 @@ export class AuthService {
 
   }//authorize
 
+  async geyUserById( userId: String ): Promise<ServerResponse>{
+
+    const httpParams: HttpParams = new HttpParams()
+      .set('id' , userId.toString());
+
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_USER_BYID}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getTypeLot
 }

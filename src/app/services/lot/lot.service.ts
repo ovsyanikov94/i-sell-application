@@ -32,7 +32,7 @@ export class LotService {
 
   }//getTypeLot
 
-  getLot( lot: Lot ): Promise<ServerResponse>{
+  addLot( lot: Lot ): Promise<ServerResponse>{
 
     const formData = new FormData();
 
