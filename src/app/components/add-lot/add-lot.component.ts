@@ -61,6 +61,8 @@ export class AddLotComponent implements OnInit {
 
   public selectedFiles: File[] = [];
 
+  public constants: Constants;
+
   public textFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern(/^[a-zа-я]{4,30}$/i),
@@ -141,6 +143,8 @@ export class AddLotComponent implements OnInit {
     // console.log(this.selectedFiles);
 
   }
+
+
 
   constructor(
     public dialog: MatDialog,

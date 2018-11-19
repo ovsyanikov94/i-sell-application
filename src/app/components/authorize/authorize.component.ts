@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
 import {AuthService} from '../../services/user/auth.service';
 import {Router} from '@angular/router';
+import {Constants} from '../../models/Constants';
 
 
 @Component({
@@ -18,6 +19,7 @@ import {Router} from '@angular/router';
 export class AuthorizeComponent implements OnInit {
 
   public user: User = new User();
+  public constants: Constants = Constants;
 
   public loginFormControl = new FormControl('', [
     Validators.required
