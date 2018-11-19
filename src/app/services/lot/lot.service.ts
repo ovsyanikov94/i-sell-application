@@ -6,6 +6,8 @@ import {ServerResponse} from "../../models/server/ServerResponse";
 
 import {HttpClient, HttpParams, HttpRequest} from "@angular/common/http";
 
+import { Lot } from '../../models/lot/Lot';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,16 +32,14 @@ export class LotService {
 
   }//getTypeLot
 
-  getLot( offset: number, limit: number ): Promise<ServerResponse>{
+  getLot( lot: Lot ): Promise<ServerResponse>{
 
-    const httpParams: HttpParams = new HttpParams()
-      .set('limit' , limit.toString())
-      .set('offset' , offset.toString());
+    const formData = new FormData();
 
-    return this.http.get(
-      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_TYPES_LIST}`,
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.ADD_LOT}`,
       {
-        params: httpParams
+        lotTitle: lot.lotTitle
       }
     ).toPromise() as Promise<ServerResponse>;
 
