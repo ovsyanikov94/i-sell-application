@@ -36,18 +36,19 @@ export class LotComponent implements OnInit {
 
       this.initMap();
 
+
     }//if
 
   }//onTabChanged
 
   async initMap(){
 
-    this.lot.lotMapPlase.log = 37.7981509736429;
-    this.lot.lotMapPlase.lat = 48.01950945;
+    this.lot.mapLot.lon = 37.7981509736429;
+    this.lot.mapLot.lat = 48.01950945;
 
     this.map = L.map('map').setView( [
-      this.lot.lotMapPlase.lat,
-      this.lot.lotMapPlase.log
+      this.lot.mapLot.lat,
+      this.lot.mapLot.lon
     ], 13);
 
     //
@@ -65,14 +66,15 @@ export class LotComponent implements OnInit {
 
     this.marker = L.marker(
       [
-        this.lot.lotMapPlase.lat,
-        this.lot.lotMapPlase.log
+        this.lot.mapLot.lat,
+        this.lot.mapLot.lon
       ],
       {icon: myIcon}
     ).addTo(this.map);
 
-    const response: GeoSearchByCoordsModel = await  this.geoService.getAddressByCords(new LatLng(this.lot.lotMapPlase.lat,
-      this.lot.lotMapPlase.log));
+    const response: GeoSearchByCoordsModel = await  this.geoService.getAddressByCords(
+      new LatLng(this.lot.mapLot.lat, this.lot.mapLot.lon)
+    );
 
     this.marker
       .bindPopup(response.display_name)

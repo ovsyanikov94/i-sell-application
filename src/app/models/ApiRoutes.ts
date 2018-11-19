@@ -18,5 +18,9 @@ export class ApiRoutes{
 
   static readonly GET_LOT_TYPES_LIST: string = 'lotType';
 
+  //USER
+  static readonly USER_REGISTER: string = 'registryUser';
+  static readonly USER_AUTHORIZE: string = 'auth-user';
+
 
 }

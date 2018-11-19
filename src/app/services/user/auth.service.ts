@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user/User';
+import { ApiRoutes } from '../../models/ApiRoutes';
 import {HttpClient} from '@angular/common/http';
+import {ServerResponse} from '../../models/server/ServerResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +17,32 @@ export class AuthService {
     return true;
   }
 
-  async register( user: User ){
+  async register( user: User ): Promise<ServerResponse>{
 
       return this.http.post(
-
-      );
+          `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_REGISTER}`,
+          {
+            login: user.userLogin,
+            email: user.userEmail,
+            firstName: user.userName,
+            lastName: user.userLastname,
+            phone: user.userPhone,
+            password: user.userPassword
+          }
+      ).toPromise() as Promise<ServerResponse>;
 
   }//register
+
+  async authorize( user: User ): Promise<ServerResponse> {
+
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_AUTHORIZE}`,
+      {
+        userLogin: user.userLogin,
+        userPassword: user.userPassword
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//authorize
 
 }
