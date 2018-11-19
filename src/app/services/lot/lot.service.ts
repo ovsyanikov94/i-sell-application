@@ -1,0 +1,47 @@
+import { Injectable } from '@angular/core';
+
+import { ApiRoutes } from '../../models/ApiRoutes';
+
+import {ServerResponse} from "../../models/server/ServerResponse";
+
+import {HttpClient, HttpParams, HttpRequest} from "@angular/common/http";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LotService {
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  getTypeLot( offset: number, limit: number ): Promise<ServerResponse>{
+
+    const httpParams: HttpParams = new HttpParams()
+      .set('limit' , limit.toString())
+      .set('offset' , offset.toString());
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_TYPES_LIST}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getTypeLot
+
+  getLot( offset: number, limit: number ): Promise<ServerResponse>{
+
+    const httpParams: HttpParams = new HttpParams()
+      .set('limit' , limit.toString())
+      .set('offset' , offset.toString());
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_TYPES_LIST}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getLot
+}
