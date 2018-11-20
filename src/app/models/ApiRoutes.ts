@@ -21,6 +21,8 @@ export class ApiRoutes{
   //USER
   static readonly USER_REGISTER: string = 'registryUser';
   static readonly USER_AUTHORIZE: string = 'auth-user';
-
+  static readonly GET_USER_BYID: string = 'getUserByID';
+  static readonly USER_CHANGE_PARAMS: string = 'updateUserInfo';
+  static readonly USER_INFO: string = 'getUser';
 
 }
