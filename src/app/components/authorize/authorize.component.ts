@@ -6,6 +6,9 @@ import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component
 import { User } from '../../models/user/User';
 import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
+import {AuthService} from '../../services/user/auth.service';
+import {Router} from '@angular/router';
+import {Constants} from '../../models/Constants';
 
 
 @Component({
@@ -16,10 +19,10 @@ import { AuthData} from '../../models/modal.data/auth.data';
 export class AuthorizeComponent implements OnInit {
 
   public user: User = new User();
+  public constants: Constants = Constants;
 
   public loginFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern(/^[a-z]{4,20}$/i),
+    Validators.required
   ]);
 
   public passwordFormControl = new FormControl('', [
@@ -28,8 +31,14 @@ export class AuthorizeComponent implements OnInit {
 
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private router: Router
+
   ) {
+
+    this.user.userLogin = 'Alex';
+    this.user.userPassword = '123456';
 
   }
 
@@ -37,9 +46,9 @@ export class AuthorizeComponent implements OnInit {
 
   }
 
-  authorize( event ){
+  async authorize( event ){
 
-    if ( this.loginFormControl.hasError('required') || this.loginFormControl.hasError('pattern')){
+    if ( this.loginFormControl.hasError('required')){
       return;
     }//if
 
@@ -53,12 +62,33 @@ export class AuthorizeComponent implements OnInit {
 
     authData.message = "Вы вошли!";
 
-    if ( event instanceof KeyboardEvent && event.code === "Enter" ){
-      this.openDialog(authData);
-    }//if
-    else if ( event instanceof  MouseEvent){
-      this.openDialog(authData);
-    }//else if
+    try{
+
+      const response = await this.authService.authorize( this.user );
+
+      if ( response.status === 200 ){
+
+        this.router.navigateByUrl('/main/my-profile');
+
+      }//if
+      else{
+
+        this.openDialog({
+          message: response.message
+        });
+
+      }//else
+
+    }//try
+    catch (ex){
+
+      console.log('Ex: ' , ex);
+
+      this.openDialog({
+        message: ex.error.message
+      });
+
+    }//catch
 
 
   }//authorize
