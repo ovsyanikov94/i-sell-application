@@ -37,6 +37,9 @@ export class AuthorizeComponent implements OnInit {
 
   ) {
 
+    this.user.userLogin = 'Alex';
+    this.user.userPassword = '123456';
+
   }
 
   ngOnInit() {
@@ -65,7 +68,7 @@ export class AuthorizeComponent implements OnInit {
 
       if ( response.status === 200 ){
 
-        this.router.navigateByUrl('/main');
+        this.router.navigateByUrl('/main/my-profile');
 
       }//if
       else{
