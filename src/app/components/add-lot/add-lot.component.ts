@@ -188,11 +188,9 @@ export class AddLotComponent implements OnInit {
 
       if ( response.status === 200 ){
 
-        this.lotTypes = response.data.status as LotType[];
+        this.lotTypes = response.data as LotType[];
 
-        const responseUser = await this.authService.geyUserById(response.data.userId);
 
-        this.lot.seller = responseUser.data as User;
 
       }//if
 
