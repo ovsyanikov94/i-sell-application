@@ -20,6 +20,8 @@ import {MapCoord} from "../../models/MapCoord/MapCoord";
 import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthValidator';
 import {LatLng, Map, Marker} from 'leaflet';
 
+import * as moment from 'moment';
+
 //SERVICES
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
@@ -112,6 +114,7 @@ export class AddLotComponent implements OnInit {
   }//onAddressInput
 
   onAddressSelected( address: GeoSearchResult ){
+
 
     const latLng: LatLng = new LatLng(
       address.y ,
@@ -223,6 +226,13 @@ export class AddLotComponent implements OnInit {
     };
 
     authData.message = "Лот добавлен!";
+
+    this.lotService
+      .addLot(this.lot , this.multiplefile.value)
+      .then( ( response: ServerResponse ) => {
+        console.log(response);
+      } )
+      .catch( error => console.log(error) );
 
     if ( event instanceof KeyboardEvent && event.code === "Enter" ){
       this.openDialog(authData);

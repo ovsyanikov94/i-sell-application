@@ -7,6 +7,7 @@ import {ServerResponse} from "../../models/server/ServerResponse";
 import {HttpClient, HttpParams, HttpRequest} from "@angular/common/http";
 
 import { Lot } from '../../models/lot/Lot';
+import {FileInput} from 'ngx-material-file-input';
 
 @Injectable({
   providedIn: 'root'
@@ -32,15 +33,23 @@ export class LotService {
 
   }//getTypeLot
 
-  addLot( lot: Lot ): Promise<ServerResponse>{
+  addLot( lot: Lot, files: FileInput ): Promise<ServerResponse>{
+
+    console.log('files' , files);
 
     const formData = new FormData();
 
+    [].forEach.call(files.files , ( file ) => {
+      formData.append('files' , file );
+    });
+
+    formData.append('lotTitle' , lot.lotTitle) ;
+
+    console.log('files' , files);
+
     return this.http.post(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.ADD_LOT}`,
-      {
-        lotTitle: lot.lotTitle
-      }
+      formData
     ).toPromise() as Promise<ServerResponse>;
 
   }//getLot
