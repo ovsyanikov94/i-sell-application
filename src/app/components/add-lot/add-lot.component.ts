@@ -190,8 +190,6 @@ export class AddLotComponent implements OnInit {
 
         this.lotTypes = response.data as LotType[];
 
-
-
       }//if
 
 
