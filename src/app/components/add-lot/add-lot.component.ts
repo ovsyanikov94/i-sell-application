@@ -38,9 +38,7 @@ import {AuthService} from "../../services/user/auth.service";
 })
 export class AddLotComponent implements OnInit {
 
-  public selectedCategory: Category = null;
-  public selectedType: LotType = null;
-  public selectedHour: number;
+  public selectedType: number;
   public dateRange: Date;
   public constants: Constants = Constants;
 
@@ -63,9 +61,6 @@ export class AddLotComponent implements OnInit {
   public lot: Lot = new Lot();
 
   public mapLot: MapCoord  = new MapCoord();
-
-  public selectedFiles: File[] = [];
-
 
   public textFormControl = new FormControl('', [
     Validators.required,
@@ -150,6 +145,10 @@ export class AddLotComponent implements OnInit {
 
   ) {
 
+    this.lot.lotTitle = 'Новый лот';
+    this.lot.lotDescription = 'Это самый лучший в мире лот';
+    this.lot.startPrice = 10;
+
     this.categoryService.getCategories(
       Constants.APP_OFFSET,
       Constants.APP_LIMIT
@@ -183,11 +182,10 @@ export class AddLotComponent implements OnInit {
 
   }//onCategoryResponse
 
-  async onLotTypesResponse(response: ServerResponse){
+   onLotTypesResponse(response: ServerResponse){
 
     console.log('onLotTypesResponse', response);
 
-    try{
 
       if ( response.status === 200 ){
 
@@ -195,31 +193,22 @@ export class AddLotComponent implements OnInit {
 
       }//if
 
-
-
-    }//try
-    catch ( ex ){
-
-      if ( response.status === 401){
-        this.router.navigateByUrl('/authorize');
-      }
-      
-      console.log( "Exception: " , ex );
-
-    }//catch
-
   }//onLotTypesResponse
 
 
-  addLot( event ){
+  async addLot( event ){
 
-    console.log('lot', this.lot);
-    console.log('lotImagePath', this.multiplefile.value);
-    console.log('categories', this.categoryFormControl.value);
+
+    const typeLot = await this.lotService.getTypeLotById(this.selectedType);
+    this.lot.typeLot = typeLot.data;
+    this.lot.mapLot = this.mapLot;
+
     console.log('startPrice', this.priceFormControl.value);
     console.log('mapLot', this.mapLot);
-    console.log('countHourTrade', this.radioButtonFormControl.value);
+
     console.log('datePlacement', this.dateRange);
+
+    console.log('lot', this.lot);
 
     const authData: AuthData = new class implements AuthData {
       message: string;

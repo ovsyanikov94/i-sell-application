@@ -33,15 +33,33 @@ export class LotService {
 
   }//getTypeLot
 
+  getTypeLotById( id: number ): Promise<ServerResponse>{
+
+    if (id) {
+      const httpParams: HttpParams = new HttpParams()
+        .set('id', id.toString());
+
+      return this.http.get(
+        `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_TYPE_BYID}`,
+        {
+          params: httpParams
+        }
+      ).toPromise() as Promise<ServerResponse>;
+    }//if
+  }//getTypeLot
+
   addLot( lot: Lot, files: FileInput ): Promise<ServerResponse>{
 
     console.log('files' , files);
 
     const formData = new FormData();
 
-    [].forEach.call(files.files , ( file ) => {
-      formData.append('files' , file );
-    });
+    if ( files ){
+      [].forEach.call(files.files , ( file ) => {
+        formData.append('images' , file );
+      });
+    }//if
+
 
     formData.append('lotTitle' , lot.lotTitle) ;
 

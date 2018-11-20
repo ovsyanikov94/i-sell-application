@@ -34,7 +34,7 @@
 
 
           <mat-form-field class="example-full-width col-12">
-            <mat-select  placeholder="Категория" [formControl]="categoryFormControl" multiple>
+            <mat-select  placeholder="Категория" [(ngModel)]="lot.categories" [formControl]="categoryFormControl" multiple>
               <mat-option *ngFor="let category of categories" [value]="category._id">{{category.title}}</mat-option>
             </mat-select>
             <mat-error *ngIf="categoryFormControl.hasError('required')">
@@ -61,7 +61,7 @@
 
           </mat-form-field>
 
-          <mat-radio-group class="col-12" [(ngModel)]="selectedHour" [formControl]="radioButtonFormControl">
+          <mat-radio-group class="col-12" [(ngModel)]="lot.countHourTrade" [formControl]="radioButtonFormControl">
             <mat-radio-button class="example-radio-button" *ngFor="let hour of hours" [value]="hour">
               {{hour}}
             </mat-radio-button>
