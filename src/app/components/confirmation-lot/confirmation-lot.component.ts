@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
+import {MatDialog} from "@angular/material";
+
+import {FeedbackModalComponent} from "../../modals/feedback-modal/feedback-modal.component";
+import {ComplaintsModalComponent} from "../../modals/complaints-modal/complaints-modal.component";
 
 
 @Component({
@@ -11,7 +15,9 @@ import {User} from '../../models/user/User';
 export class ConfirmationLotComponent implements OnInit {
 
   public lots: Lot[];
-  constructor() {
+  public user: User;
+
+  constructor(public dialog: MatDialog) {
 
     this.lots = [
       new Lot(),
@@ -31,9 +37,25 @@ export class ConfirmationLotComponent implements OnInit {
       new Lot(),
       new Lot(),
     ];
-  }
+
+    this.user = new User();
+
+  }//constructor
+
+
 
   ngOnInit() {
-  }
+
+  }//ngOnInit
+
+  public complaintModal(){
+
+    this.dialog.open(ComplaintsModalComponent, { data: { message: 'Жалоба на пользователя', complaintUserLogin: this.user.userLogin}});
+
+  }//complaintModal
+
+  public feedBackModal(){
+    this.dialog.open(FeedbackModalComponent, { data: { message: 'Оставьте свой отзыв для пользователя', complaintUserLogin: this.user.userLogin}});
+  }//feedBackModal
 
 }

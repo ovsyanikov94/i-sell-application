@@ -12,7 +12,7 @@
           <span>{{user?.userLastname}}</span>
         </p>
         <div class="button-row">
-          <button (click)="onUserMouseClick()" mat-raised-button color="primary" style="width: auto">Написать</button>
+          <a target="_blank" routerLink="/main/my-dialog/{{user?.userLogin}}" class="link" mat-raised-button color="primary" style="width: auto">Написать</a>
         </div>
 
       </mat-list-item>

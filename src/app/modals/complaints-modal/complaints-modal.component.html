@@ -1,0 +1,21 @@
+
+  <div>
+    {{data.message}} <a routerLink="/main/profile/{{data.complaintUserLogin}}">{{data.complaintUserLogin}}</a>
+  </div>
+
+  <mat-form-field style="width: 100%" >
+    <textarea matInput placeholder="Введите отзыв"></textarea>
+  </mat-form-field>
+
+
+  <div class="row justify-content-center text-center">
+    <div class="col">
+      <div>
+        <button (click)="close()" mat-raised-button color="warn">Отмена</button>
+        <button (click)="complaintWarning()" mat-raised-button color="primary">Отправить</button>
+      </div>
+    </div>
+  </div>
+
+
+

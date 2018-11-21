@@ -14,10 +14,15 @@ import {ConfirmationLotComponent} from './components/confirmation-lot/confirmati
 import { AddLotComponent } from "./components/add-lot/add-lot.component";
 import {ListDialogsComponent} from './components/list-dialogs/list-dialogs.component';
 import {MyDialogsComponent} from './components/my-dialogs/my-dialogs.component';
+import {PasswordRecoveryRequestComponent} from './components/password-recovery-request/password-recovery-request.component';
+import {PasswordRecoveryConfirmComponent} from './components/password-recovery-confirm/password-recovery-confirm.component';
+import {AuthGuardGuard} from './guards/auth-guard.guard';
+
 const routes: Routes = [
   {
     path: 'main',
     component: MainComponent,
+
     children: [
       {
         path: '',
@@ -47,6 +52,7 @@ const routes: Routes = [
         path: 'confirmation',
         component: ConfirmationLotComponent
       },
+
       {
         path: "add-lot",
         component: AddLotComponent
@@ -62,16 +68,25 @@ const routes: Routes = [
       {
         path: 'profile/:id',
         component: ProfileComponent,
+        canActivate: [ AuthGuardGuard ]
       },
     ]
+  },
+  {
+    path: 'register',
+    component: RegistrationComponent
   },
   {
     path: 'authorize',
     component: AuthorizeComponent
   },
   {
-    path: 'register',
-    component: RegistrationComponent
+    path: 'recovery',
+    component: PasswordRecoveryRequestComponent
+  },
+  {
+    path: 'recovery/confirm',
+    component: PasswordRecoveryConfirmComponent
   },
   {
     path: "**",

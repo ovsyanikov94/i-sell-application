@@ -34,14 +34,6 @@ export class BetModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  betDialog(): void {
-
-
-
-
-
-  }//betDialog()
-
   ngOnInit(){
 
   }

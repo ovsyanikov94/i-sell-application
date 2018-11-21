@@ -18,11 +18,6 @@ export class SubscriberComponent implements OnInit {
   ngOnInit() {
 
   }
-
-  public onUserMouseClick() {
-
-  }
-
 }
 
 

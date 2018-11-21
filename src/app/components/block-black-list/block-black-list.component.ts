@@ -1,5 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {User} from '../../models/user/User';
+import {MatDialog} from '@angular/material';
+
+import { RemoveFromBlacklistComponent } from '../../modals/remove-from-blacklist/remove-from-blacklist.component'
+
 @Component({
   selector: 'app-block-black-list',
   templateUrl: './block-black-list.component.html',
@@ -30,13 +34,6 @@ export class BlockBlackListComponent implements OnInit {
 
   }
 
-  foo( user ){
-
-    this.currentUser = user;
-    //alert(user.userLogin);
-    // this.message.emit( this.currentUser );
-
-  }
 
   ngOnInit() {
 

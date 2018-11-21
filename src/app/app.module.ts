@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { LotComponent } from './components/lot/lot.component';
 import { CardLotComponent } from './components/cardLot/cardLot.component';
 import { MainComponent } from './components/main/main.component';
 import { BetModalComponent } from './modals/bet.modal/bet.modal.component';
+import { RemoveFromBlacklistComponent } from './modals/remove-from-blacklist/remove-from-blacklist.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { ConfirmationLotComponent } from './components/confirmation-lot/confirmation-lot.component';
@@ -24,6 +26,8 @@ import { SubscriberComponent } from './components/subscriber/subscriber.componen
 import { BlacklistComponent } from './components/blacklist/blacklist.component';
 import { BlockBlackListComponent } from './components/block-black-list/block-black-list.component';
 import { AddLotComponent } from './components/add-lot/add-lot.component';
+import { ComplaintsModalComponent } from './modals/complaints-modal/complaints-modal.component';
+import { FeedbackModalComponent } from './modals/feedback-modal/feedback-modal.component';
 
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
@@ -54,6 +58,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 //LEAFLET
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
@@ -64,17 +70,21 @@ import { MyDialogsComponent } from './components/my-dialogs/my-dialogs.component
 import { ListDialogsComponent } from './components/list-dialogs/list-dialogs.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+//SERVICES
+import { GeoSearchService } from "./services/LeafletGeoSearch/geo-search.service";
+import { PasswordRecoveryRequestComponent } from './components/password-recovery-request/password-recovery-request.component';
+import { PasswordRecoveryConfirmComponent } from './components/password-recovery-confirm/password-recovery-confirm.component';
+
+
 @NgModule({
   declarations: [
 
     AppComponent,
     AuthorizeComponent,
     RegistrationComponent,
-    AuthModalComponent,
     LotComponent,
     CardLotComponent,
     MainComponent,
-    BetModalComponent,
     BlacklistComponent,
     BlockBlackListComponent,
     SubscriberComponent,
@@ -86,8 +96,14 @@ import { ProfileComponent } from './components/profile/profile.component';
     AddLotComponent,
     ListDialogsComponent,
     MyDialogsComponent,
-    ProfileComponent
-
+    ProfileComponent,
+    BetModalComponent,
+    AuthModalComponent,
+    RemoveFromBlacklistComponent,
+    ComplaintsModalComponent,
+    FeedbackModalComponent,
+    PasswordRecoveryRequestComponent,
+    PasswordRecoveryConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -117,13 +133,20 @@ import { ProfileComponent } from './components/profile/profile.component';
     MaterialFileInputModule,
     MatSlideToggleModule,
     MatToolbarModule,
-    LeafletModule
+    LeafletModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    HttpClientModule
   ],
   providers: [
+    GeoSearchService
   ],
   entryComponents: [
     AuthModalComponent,
-    BetModalComponent
+    BetModalComponent,
+    RemoveFromBlacklistComponent,
+    ComplaintsModalComponent,
+    FeedbackModalComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,28 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl , Validators } from '@angular/forms';
 import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component';
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
+import { OpenStreetMapProvider , GeoSearchControl } from 'leaflet-geosearch';
 
+declare let L;
 
 //MODELS
 import { Lot } from '../../models/lot/Lot';
+import { User } from '../../models/user/User';
 import { Category } from '../../models/category/Category';
 import { LotType } from '../../models/lot-type/LotType';
 import { MatDialog } from '@angular/material';
 import { AuthData} from '../../models/modal.data/auth.data';
+import { GeoSearchResult } from '../../models/geo-search/GeoSearchResult';
+import {ServerResponse} from "../../models/server/ServerResponse";
+import {Constants} from "../../models/Constants";
+import {MapCoord} from "../../models/MapCoord/MapCoord";
+
 import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthValidator';
-import {icon, latLng, marker, tileLayer} from 'leaflet';
-import L from 'leaflet';
-import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+import {LatLng, Map, Marker} from 'leaflet';
 
-const provider = new OpenStreetMapProvider();
+import * as moment from 'moment';
 
-const searchControl = new GeoSearchControl({
-  provider: provider,
-});
+//SERVICES
+import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
+import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
 
-const map = new L.Map('map');
-map.addControl(searchControl);
+import {LotService} from '../../services/lot/lot.service';
+import {CategoryService} from '../../services/category/category.service';
+import {Router} from "@angular/router";
+import {AuthService} from "../../services/user/auth.service";
 
 @Component({
   selector: 'app-add-lot',
@@ -35,8 +42,11 @@ export class AddLotComponent implements OnInit {
   public selectedType: LotType = null;
   public selectedHour: number;
   public dateRange: Date;
+  public constants: Constants = Constants;
 
-  // public geosearch: OpenStreetMapProvider = new OpenStreetMapProvider()
+  public geoSearchResults: GeoSearchResult[] = [];
+
+  public geosearch: OpenStreetMapProvider = new OpenStreetMapProvider();
 
   public hours: number[] = [
     4,
@@ -46,23 +56,20 @@ export class AddLotComponent implements OnInit {
     48
   ];
 
-  public categories: Category[] = [
-    new Category( 1 , 'Моб. Телефоны'),
-    new Category( 2, 'Акссесуары')
-  ];
+  public categories: Category[];
 
-  public lotTypes: LotType[] = [
-    new LotType( 1 , 'Запланированный'),
-    new LotType( 2, 'Немедленный')
-  ];
+  public lotTypes: LotType[];
 
   public lot: Lot = new Lot();
 
-  selectedFiles: File[] = [];
+  public mapLot: MapCoord  = new MapCoord();
+
+  public selectedFiles: File[] = [];
+
 
   public textFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^[a-zа-я]{4,30}$/i),
+    Validators.pattern(/^[a-zа-я0-9\s]{1,50}$/i),
   ]);
 
   public descriptionFormControl = new FormControl('', [
@@ -87,62 +94,145 @@ export class AddLotComponent implements OnInit {
     Validators.required
   ]);
 
+  public marker: Marker;
+  public map: Map;
+
   public multiplefile = new FormControl('');
-
-  options = {
-    layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-    ],
-    zoom: 5,
-    center: latLng(46.879966, -121.726909)
-  };
-
-  layers = [
-    marker([ 46.879966, -121.726909 ] , {
-      icon: icon({
-        iconSize: [ 25, 41 ],
-        iconAnchor: [ 13, 41 ],
-        iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
-        shadowUrl: '/node_modules/leaflet/dist/images/marker-shadow.png'
-      })
-    })
-  ];
 
   //https://github.com/smeijer/leaflet-geosearch
   //https://www.npmjs.com/package/leaflet
   //https://github.com/Asymmetrik/ngx-leaflet
 
-  onAddressInput( address ){
+  async onAddressInput( address ){
+
+    this.geoSearchResults.length = 0;
+
+    const response = await this.geosearch.search({ query: address });
+
+    this.geoSearchResults = response as GeoSearchResult[];
 
   }//onAddressInput
 
-  onFileSelected(event){
+  onAddressSelected( address: GeoSearchResult ){
 
-    console.log(this.multiplefile.value);
 
-    //
-    // this.selectedFiles = <File[]>event.target.files;
-    // console.log(this.selectedFiles);
+    const latLng: LatLng = new LatLng(
+      address.y ,
+      address.x
+    );
 
-  }
+    this.mapLot.lat = address.y;
+    this.mapLot.lon = address.x;
+
+    const popup = L.popup()
+      .setLatLng(latLng)
+      .setContent(`<p>${address.label}</p>`)
+      .openOn(this.map);
+
+    this.marker.setLatLng( latLng );
+
+    this.marker.setPopupContent(address.label);
+
+    this.map.setView( [
+      address.y ,
+      address.x
+    ], 13);
+
+  }//onAddressSelected
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private geoSearchService: GeoSearchService,
+    private lotService: LotService,
+    private categoryService: CategoryService,
+    private router: Router,
+    private authService: AuthService,
+
   ) {
 
-    // const map = new L.Map('map');
-    // map.addControl(this.searchControl);
+    this.categoryService.getCategories(
+      Constants.APP_OFFSET,
+      Constants.APP_LIMIT
+    ).then( this.onCategoryResponse.bind(this) );
+
+    this.lotService.getTypeLot(
+      Constants.APP_OFFSET,
+      Constants.APP_LIMIT
+    ).then( this.onLotTypesResponse.bind(this) );
+
+  }//constructor
+
+  onCategoryResponse(response: ServerResponse){
+
+    console.log(response);
+
+    try{
+
+      if ( response.status === 200 ){
+
+        this.categories = response.data as Category[];
+
+      }//if
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+  }//onCategoryResponse
+
+  async onLotTypesResponse(response: ServerResponse){
+
+    console.log('onLotTypesResponse', response);
+
+    try{
+
+      if ( response.status === 200 ){
+
+        this.lotTypes = response.data as LotType[];
+
+      }//if
 
 
-  }
+
+    }//try
+    catch ( ex ){
+
+      if ( response.status === 401){
+        this.router.navigateByUrl('/authorize');
+      }
+      
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+  }//onLotTypesResponse
+
 
   addLot( event ){
+
+    console.log('lot', this.lot);
+    console.log('lotImagePath', this.multiplefile.value);
+    console.log('categories', this.categoryFormControl.value);
+    console.log('startPrice', this.priceFormControl.value);
+    console.log('mapLot', this.mapLot);
+    console.log('countHourTrade', this.radioButtonFormControl.value);
+    console.log('datePlacement', this.dateRange);
 
     const authData: AuthData = new class implements AuthData {
       message: string;
     };
 
     authData.message = "Лот добавлен!";
+
+    this.lotService
+      .addLot(this.lot , this.multiplefile.value)
+      .then( ( response: ServerResponse ) => {
+        console.log(response);
+      } )
+      .catch( error => console.log(error) );
 
     if ( event instanceof KeyboardEvent && event.code === "Enter" ){
       this.openDialog(authData);
@@ -165,6 +255,53 @@ export class AddLotComponent implements OnInit {
 
   ngOnInit() {
 
-  }
+    window.navigator.geolocation.getCurrentPosition( (position: Position) => {
+
+      this.map = L.map('map').setView( [
+        position.coords.latitude,
+        position.coords.longitude
+      ], 13);
+
+      this.mapLot.lat = position.coords.latitude;
+      this.mapLot.lon = position.coords.longitude;
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(this.map);
+
+      const myIcon = L.icon(
+        {
+          iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
+          iconSize: [38, 55],
+        }
+      );
+
+      this.marker = L.marker(
+        [
+          position.coords.latitude,
+          position.coords.longitude
+        ],
+        {icon: myIcon}
+      ).addTo(this.map);
+
+      //
+      // //
+      this.map.on('click' , async ( event: any ) => {
+
+        this.marker.setLatLng( event.latlng );
+
+        this.mapLot.lat = event.latlng.lat;
+        this.mapLot.lon = event.latlng.lng;
+
+        const result: GeoSearchByCoordsModel = await this.geoSearchService.getAddressByCords(event.latlng);
+
+        this.marker
+          .bindPopup(result.display_name)
+          .openPopup();
+      });
+
+    } );
+
+  }//ngOnInit
 
 }

@@ -1,0 +1,12 @@
+<h4>Сообщение</h4>
+
+<p>
+  Вы действительно хотите удалить пользователя <b>{{user.userLogin}}</b>
+  из черного списка ?
+</p>
+
+<div class="row justify-content-around">
+  <button class="col-3" mat-raised-button color="primary" >Да</button>
+  <button class="col-3" (click)="closeDialog()" mat-raised-button color="warn" >Нет</button>
+</div>
+
