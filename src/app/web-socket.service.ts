@@ -17,7 +17,7 @@ export class WebSocketService {
 
   connect(): Rx.Subject<MessageEvent> {
 
-    // If you aren't familiar with environment variables then.
+    // If you aren't familiar with environment variables thezn.
     // you can hard code `environment.ws_url` as `http://localhost:5000`
     this.socket = io('http://localhost:5000');
 
