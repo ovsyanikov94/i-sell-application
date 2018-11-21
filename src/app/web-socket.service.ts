@@ -32,7 +32,7 @@ export class WebSocketService {
 
       return () => {
         this.socket.disconnect();
-      }
+      } // Return
 
     });
 
