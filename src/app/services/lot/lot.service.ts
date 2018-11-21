@@ -63,11 +63,9 @@ export class LotService {
       });
     }//if
 
-
     const categoriesIds = lot.categories.map(c => {
       return c._id;
-    })
-
+    });
 
     formData.append('lotTitle' , lot.lotTitle) ;
     formData.append('startPrice' , lot.startPrice.toString()) ;
@@ -88,4 +86,19 @@ export class LotService {
     ).toPromise() as Promise<ServerResponse>;
 
   }//getLot
+
+  getLotList( offset: number, limit: number ): Promise<ServerResponse>{
+
+    const httpParams: HttpParams = new HttpParams()
+      .set('limit' , limit.toString())
+      .set('offset' , offset.toString());
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_LIST}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getTypeLot
 }

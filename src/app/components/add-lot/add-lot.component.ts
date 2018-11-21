@@ -206,19 +206,21 @@ export class AddLotComponent implements OnInit {
         this.lot.typeLot = typeLotResponse.data;
       }//if
 
+      const lots = await this.lotService.getLotList(
+        Constants.APP_OFFSET,
+        Constants.APP_LIMIT
+      );
+
+      console.log('lots', lots);
+
       this.lot.mapLot = this.mapLot;
 
       if ( this.selectedType === Constants.LOT_PLANED ){
         this.lot.dateStartTrade = moment(this.dateRange).unix();
-        console.log( this.lot.dateStartTrade);
+
       }//if
 
-      console.log('lot', this.lot);
-
       const LotResponse = await this.lotService.addLot(this.lot, this.multiplefile.value);
-
-
-      console.log('LotResponse', LotResponse);
 
       const authData: AuthData = {
         message: LotResponse.message
@@ -235,7 +237,7 @@ export class AddLotComponent implements OnInit {
     catch (ex){
       console.log(ex);
       const authData: AuthData = {
-        message: ex.error.message
+        message: ex.error.message || ex.message
       }
       this.openDialog( authData);
     }//catch
