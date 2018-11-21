@@ -199,36 +199,49 @@ export class AddLotComponent implements OnInit {
   async addLot( event ){
 
 
-    const typeLot = await this.lotService.getTypeLotById(this.selectedType);
-    this.lot.typeLot = typeLot.data;
-    this.lot.mapLot = this.mapLot;
+    try{
 
-    console.log('startPrice', this.priceFormControl.value);
-    console.log('mapLot', this.mapLot);
+      if (this.selectedType) {
+        const typeLotResponse = await this.lotService.getTypeLotById(this.selectedType);
+        this.lot.typeLot = typeLotResponse.data;
+      }//if
 
-    console.log('datePlacement', this.dateRange);
+      this.lot.mapLot = this.mapLot;
 
-    console.log('lot', this.lot);
+      if ( this.selectedType === Constants.LOT_PLANED ){
+        this.lot.dateStartTrade = moment(this.dateRange).unix();
+        console.log( this.lot.dateStartTrade);
+      }//if
 
-    const authData: AuthData = new class implements AuthData {
-      message: string;
-    };
+      console.log('lot', this.lot);
 
-    authData.message = "Лот добавлен!";
+      const LotResponse = await this.lotService.addLot(this.lot, this.multiplefile.value);
 
-    this.lotService
-      .addLot(this.lot , this.multiplefile.value)
-      .then( ( response: ServerResponse ) => {
-        console.log(response);
-      } )
-      .catch( error => console.log(error) );
 
-    if ( event instanceof KeyboardEvent && event.code === "Enter" ){
-      this.openDialog(authData);
-    }//if
-    else if ( event instanceof  MouseEvent){
-      this.openDialog(authData);
-    }//else if
+      console.log('LotResponse', LotResponse);
+
+      const authData: AuthData = {
+        message: LotResponse.message
+      }
+      
+      if ( event instanceof KeyboardEvent && event.code === "Enter" ){
+        this.openDialog(authData);
+      }//if
+      else if ( event instanceof  MouseEvent){
+        this.openDialog(authData);
+      }//else if
+
+    }//try
+    catch (ex){
+      console.log(ex);
+      const authData: AuthData = {
+        message: ex.error.message
+      }
+      this.openDialog( authData);
+    }//catch
+
+
+
 
 
   }//authorize
@@ -260,7 +273,7 @@ export class AddLotComponent implements OnInit {
 
       const myIcon = L.icon(
         {
-          iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
+          iconUrl: 'modules/leaflet/dist/images/marker-icon.png',
           iconSize: [38, 55],
         }
       );

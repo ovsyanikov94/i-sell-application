@@ -8,6 +8,7 @@ import {HttpClient, HttpParams, HttpRequest} from "@angular/common/http";
 
 import { Lot } from '../../models/lot/Lot';
 import {FileInput} from 'ngx-material-file-input';
+import {Constants} from "../../models/Constants";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,9 @@ export class LotService {
 
   getTypeLotById( id: number ): Promise<ServerResponse>{
 
-    if (id) {
+
+
+
       const httpParams: HttpParams = new HttpParams()
         .set('id', id.toString());
 
@@ -45,7 +48,7 @@ export class LotService {
           params: httpParams
         }
       ).toPromise() as Promise<ServerResponse>;
-    }//if
+
   }//getTypeLot
 
   addLot( lot: Lot, files: FileInput ): Promise<ServerResponse>{
@@ -61,9 +64,23 @@ export class LotService {
     }//if
 
 
-    formData.append('lotTitle' , lot.lotTitle) ;
+    const categoriesIds = lot.categories.map(c => {
+      return c._id;
+    })
 
-    console.log('files' , files);
+
+    formData.append('lotTitle' , lot.lotTitle) ;
+    formData.append('startPrice' , lot.startPrice.toString()) ;
+    formData.append('lotDescription' , lot.lotDescription) ;
+    formData.append('mapLot' , JSON.stringify(lot.mapLot)) ;
+    formData.append('countHourTrade' , lot.countHourTrade.toString()) ;
+    formData.append('typeLot' , lot.typeLot.typeID.toString()) ;
+    formData.append('categories' , JSON.stringify(categoriesIds)) ;
+
+    if (lot.typeLot.typeID === Constants.LOT_PLANED){
+      formData.append('dateStartTrade' , lot.dateStartTrade.toString()) ;
+    }//if
+
 
     return this.http.post(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.ADD_LOT}`,

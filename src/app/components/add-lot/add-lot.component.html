@@ -35,7 +35,7 @@
 
           <mat-form-field class="example-full-width col-12">
             <mat-select  placeholder="Категория" [(ngModel)]="lot.categories" [formControl]="categoryFormControl" multiple>
-              <mat-option *ngFor="let category of categories" [value]="category._id">{{category.title}}</mat-option>
+              <mat-option *ngFor="let category of categories" [value]="category">{{category.title}}</mat-option>
             </mat-select>
             <mat-error *ngIf="categoryFormControl.hasError('required')">
               Выберите категорию
