@@ -33,6 +33,23 @@ export class LotService {
 
   }//getTypeLot
 
+  getSingleLot( id: string ): Promise<ServerResponse>{
+
+    if (id) {
+      const httpParams: HttpParams = new HttpParams()
+        .set('id', id);
+
+      return this.http.get(
+        `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_SINGLE_LOT}`,
+        {
+          params: httpParams
+        }
+      ).toPromise() as Promise<ServerResponse>;
+
+    }//if
+
+  }//getSingleLot
+
   addLot( lot: Lot, files: FileInput ): Promise<ServerResponse>{
 
     console.log('files' , files);
