@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^6.1.10",
     "@angular/router": "^6.1.10",
     "@asymmetrik/ngx-leaflet": "^4.0.0",
+    "@types/socket.io-client": "^1.4.32",
     "angular-file-uploader": "^4.1.3",
     "angular-image-slider": "0.0.8",
     "bootstrap": "^4.1.3",
@@ -38,7 +39,8 @@
     "ngx-material-file-input": "^0.3.0",
     "ngx-siema": "^2.0.1",
     "owl.carousel": "^2.3.4",
-    "rxjs": "~6.2.0",
+    "rxjs": "^6.2.2",
+    "socket.io-client": "^2.1.1",
     "ui-carousel": "^0.2.0",
     "zone.js": "~0.8.26"
   },

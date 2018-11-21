@@ -203,7 +203,7 @@ export class AddLotComponent implements OnInit {
       if ( response.status === 401){
         this.router.navigateByUrl('/authorize');
       }
-      
+
       console.log( "Exception: " , ex );
 
     }//catch
@@ -240,6 +240,7 @@ export class AddLotComponent implements OnInit {
     else if ( event instanceof  MouseEvent){
       this.openDialog(authData);
     }//else if
+
 
 
   }//authorize
