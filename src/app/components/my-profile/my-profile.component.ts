@@ -23,7 +23,11 @@ export class MyProfileComponent implements OnInit {
   public  addSumm: number;
 
   public checks: Check[];
-
+  foods: Food[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
   public lots: Lot[] = [
     new Lot(),
     new Lot(),
@@ -58,7 +62,7 @@ export class MyProfileComponent implements OnInit {
   ]);
   public phoneFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^((\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/ )
+    Validators.pattern(/^\+\d{2}\(\d{3}\)\d{3}-\d{2}-\d{2}$/i )
   ]);
   public addSummFormControl = new FormControl('', [
     Validators.required,
@@ -118,7 +122,7 @@ export class MyProfileComponent implements OnInit {
     console.log(response);
    try {
      if ( response.status === 200){
-       this.user = response.data[0] as User;
+       this.user = response.data as User;
      }
    }
    catch (ex){
@@ -127,12 +131,15 @@ export class MyProfileComponent implements OnInit {
   }//getUserRes
 
   async updatePassword(){
-
-    if ( !this.oldPasswordFormControl.valid &&
-          !this.newPasswordConfirmFormControl.valid
+    if ( !this.oldPasswordFormControl.valid ||
+      !this.newPasswordConfirmFormControl.valid
     ){
+      this.openDialog({
+        message: 'некорректные значения'
+      });
       return;
     }//if
+
     const authData: AuthData = new class implements AuthData {
       message: string;
     };
@@ -155,7 +162,17 @@ export class MyProfileComponent implements OnInit {
   }
   async updateUserInfo(){
 
-    console.log('nene');
+    if ( !this.nameFormControl.valid ||
+      !this.lastNameFormControl.valid ||
+      !this.emailFormControl.valid ||
+      !this.phoneFormControl.valid
+    ){
+      this.openDialog({
+        message: 'некорректные значения'
+      });
+      return;
+    }//if
+
     const authData: AuthData = new class implements AuthData {
       message: string;
     };
@@ -164,7 +181,10 @@ export class MyProfileComponent implements OnInit {
     try {
 
       const response = await this.authSersice.changeUserInfo( this.user );
-      console.log('ОТВЕТ', response);
+      console.log('ОТВЕТ', response)
+      if ( response.status === 200){
+        this.user = response.data as User;
+      }
       this.openDialog({
         message: response.message
       });
