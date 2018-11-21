@@ -7,8 +7,10 @@ import {AuthModalComponent} from '../../modals/auth.modal/auth.modal.component';
 import {Check} from '../../models/check/Check';
 import {Lot} from '../../models/lot/Lot';
 import {AuthService} from "../../services/user/auth.service";
+import {LotService} from '../../services/lot/lot.service';
 import { AuthData} from '../../models/modal.data/auth.data';
 import {ServerResponse} from "../../models/server/ServerResponse";
+import {LotStatus} from "../../models/lot-status/Lot-status";
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
@@ -16,37 +18,22 @@ import {ServerResponse} from "../../models/server/ServerResponse";
 })
 export class MyProfileComponent implements OnInit {
 
+  public offsetBuy: number = 0;
+  public offsetSale: number = 0;
+  public selectedBuy: string;
+  public selectedSale: string;
   public user: User = new User();
 
   public  balanse: number;
 
   public  addSumm: number;
-
   public checks: Check[];
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
-  public lots: Lot[] = [
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-    new Lot(),
-  ];
 
+  public lotstatusListBuy: LotStatus[] ;
+  public lotstatusListSale: LotStatus[] ;
+
+  public lotsBuy: Lot[] = null;
+  public lotsSale: Lot[] = null;
 
   public nameFormControl = new FormControl('', [
     Validators.required,
@@ -85,14 +72,28 @@ export class MyProfileComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private authSersice: AuthService
+    private authSersice: AuthService,
+    private lotService: LotService
   ) {
-    const response = this.authSersice.getUser()
-      .then(this.getUserRes.bind(this));
+    this.offsetBuy = 0;
+    this.offsetSale = 0;
+    const responseBuy = this.lotService.getStatusLotBuy()
+      .then(this.getListLotStatusBuy.bind(this));
+    const responseSale = this.lotService.getStatusLotSale()
+      .then(this.getListLotStatusSale.bind(this));
+    const responseLots = this.lotService.GetUserBuyLot( '', this.offsetBuy,10)
+      .then(this.getListLotBuy.bind(this));
+
   }
 
 
    ngOnInit() {
+      if (this.lotstatusListBuy.length !== 0){
+       this.selectedBuy = this.lotstatusListBuy[0].toString();
+      }//if
+      if ( this.lotstatusListSale.length !== 0){
+       this.selectedSale = this.lotstatusListSale[0].toString();
+      }//if
 
     this.balanse = 1000;
     this.checks = [
@@ -117,18 +118,49 @@ export class MyProfileComponent implements OnInit {
 
   }//checkAllFields
 
-  getUserRes(response: ServerResponse){
+   addOffsetBuy(){
+    this.offsetBuy += 12;
+     this.getLotBuy(this.selectedBuy);
+  }
+   addOffsetSale(){
+    this.offsetSale += 12;
+     this.getLotSale(this.selectedSale);
+  }
 
+  async getListLotBuy(response: ServerResponse){
     console.log(response);
-   try {
-     if ( response.status === 200){
-       this.user = response.data as User;
-     }
-   }
-   catch (ex){
-     console.log( "Exception: " , ex );
-   }
-  }//getUserRes
+    try {
+      if ( response.status === 200){
+        console.log(response);
+      }
+    }
+    catch (ex){
+      console.log( "Exception: " , ex );
+    }
+  }
+  async getListLotStatusSale(response: ServerResponse){
+    console.log(response);
+    try {
+      if ( response.status === 200){
+        this.lotstatusListSale = response.data as LotStatus[];
+      }
+    }
+    catch (ex){
+      console.log( "Exception: " , ex );
+    }
+  }
+
+  async getListLotStatusBuy(response: ServerResponse){
+    console.log(response);
+    try {
+      if ( response.status === 200){
+        this.lotstatusListBuy = response.data as LotStatus[];
+      }
+    }
+    catch (ex){
+      console.log( "Exception: " , ex );
+    }
+  }
 
   async updatePassword(){
     if ( !this.oldPasswordFormControl.valid ||
@@ -197,7 +229,40 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
+  async getLotBuy(value){
+    const selectOld =  this.selectedBuy
+    this.selectedBuy = value;
+
+    const response = await this.lotService.GetUserBuyLot(value, this.offsetBuy ,10);
+    if (response.status === 200 ){
+
+
+      // тут тело ответа парсим в масив лотов
+      if ( selectOld !== value){
+        this.offsetBuy = 0;
+      }
+    }
+  }
+  async getLotSale(value){
+    const selectOld =  this.selectedSale
+    this.selectedSale = value;
+
+    const response = await this.lotService.GetUserSaleLot(value, this.offsetSale ,10);
+    if (response.status === 200 ){
+
+      // тут тело ответа парсим в масив лотов
+
+      if ( selectOld !== value){
+        this.offsetSale = 0;
+      }
+    }
+  }
+
+  selectedTabs(event){
+   console.log(event);
+  }//selectedTabs
   openDialog( authData: AuthData ): void {
+
 
     const dialogRef = this.dialog.open(AuthModalComponent, {
       width: '400px',

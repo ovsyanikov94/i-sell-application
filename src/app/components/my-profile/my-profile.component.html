@@ -5,15 +5,15 @@
 
     <div class="col-12">
 
-      <mat-tab-group [dynamicHeight]="true" style="padding: 15px" color="primary">
+      <mat-tab-group [dynamicHeight]="true" (selectChange)="selectedTabs($event)" style="padding: 15px" color="primary">
         <mat-tab label="Покупки">
 
             <div class="row justify-content-center text-center" style="width: 100%">
               <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
                 <mat-form-field style="width: 100%">
-                  <mat-select placeholder="Выберите статус лота ">
-                    <mat-option *ngFor="let food of foods" [value]="food.value">
-                      {{food.viewValue}}
+                  <mat-select  placeholder="Выберите статус лота " (selectionChange)="getLotBuy($event.value)">
+                    <mat-option *ngFor="let litStatus of lotstatusListBuy" [value]="litStatus._id">
+                      {{litStatus.statusTitle}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -99,7 +99,7 @@
               <div class="row justify-content-center text-center" style="width: 100%; padding-top: 1%">
 
                 <div  class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
-                  <button style="width: 100%" color="primary" mat-stroked-button>еще</button>
+                  <button (click)="addOffsetBuy()" style="width: 100%" color="primary" mat-stroked-button>еще</button>
                 </div>
 
 
@@ -113,9 +113,9 @@
           <div class="row justify-content-center text-center" style="width: 100%">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
               <mat-form-field style="width: 100%">
-                <mat-select placeholder="Выберите статус лота ">
-                  <mat-option *ngFor="let food of foods" [value]="food.value">
-                    {{food.viewValue}}
+                <mat-select placeholder="Выберите статус лота " (selectionChange)="getLotSale($event.value)">
+                  <mat-option *ngFor="let litStatus of lotstatusListSale" [value]="litStatus._id">
+                    {{litStatus.statusTitle}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -201,7 +201,7 @@
               <div class="row justify-content-center text-center" style="width: 100%; padding-top: 1%">
 
               <div  class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
-                <button style="width: 100%" color="primary" mat-stroked-button>еще</button>
+                <button (click)="addOffsetSale()" style="width: 100%" color="primary" mat-stroked-button>еще</button>
               </div>
 
 
