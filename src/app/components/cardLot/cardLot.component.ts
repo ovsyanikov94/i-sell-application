@@ -6,7 +6,11 @@ import { BetData } from '../../models/modal.bet/bet.data';
 import {FormControl, Validators} from "@angular/forms";
 import { Category } from '../../models/category/Category';
 
-
+//SERVICES
+import {LotService} from '../../services/lot/lot.service';
+import {CategoryService} from '../../services/category/category.service';
+import {Constants} from "../../models/Constants";
+import {ServerResponse} from "../../models/server/ServerResponse";
 @Component({
   selector: 'app-card-lot',
   templateUrl: './cardLot.component.html',
@@ -20,35 +24,40 @@ export class CardLotComponent implements OnInit {
   public lots: Lot[];
 
   categoriesControl = new FormControl();
-  categories: Category[] = [
-    new Category('1', 'Моб. устройства'),
-    new Category('1', 'Аксессуары'),
-  ];
+  categories: Category[] ;
 
-  constructor( public dialog: MatDialog ) {
-
-    this.lots = [
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-      new Lot(),
-    ];
+  constructor(
+    public dialog: MatDialog ,
+    private lotService: LotService,
+    private categoryService: CategoryService,
+  ) {
 
 
+    this.categoryService.getCategories(
+      Constants.APP_OFFSET,
+      Constants.APP_LIMIT
+    ).then( this.onCategoryResponse.bind(this) );
 
   }
+
+  onCategoryResponse(response: ServerResponse){
+
+    try{
+
+      if ( response.status === 200 ){
+
+        this.categories = response.data as Category[];
+
+      }//if
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+  }//onCategoryResponse
 
   ngOnInit() {
 
