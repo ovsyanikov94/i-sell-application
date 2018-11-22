@@ -20,8 +20,8 @@ export class MyProfileComponent implements OnInit {
 
   public offsetBuy = 0;
   public offsetSale = 0;
-  public selectedBuy: string;
-  public selectedSale: string;
+  public selectedBuy: number;
+  public selectedSale: number;
   public user: User = new User();
 
   public  balanse: number;
