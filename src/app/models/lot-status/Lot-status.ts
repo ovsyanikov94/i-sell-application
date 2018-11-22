@@ -3,6 +3,7 @@
 export class LotStatus{
 
   public _id: string;
+  public statusID: number;
   public statusTitle: string;
 
 

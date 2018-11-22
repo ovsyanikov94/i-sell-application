@@ -18,8 +18,8 @@ import {LotStatus} from "../../models/lot-status/Lot-status";
 })
 export class MyProfileComponent implements OnInit {
 
-  public offsetBuy: number = 0;
-  public offsetSale: number = 0;
+  public offsetBuy = 0;
+  public offsetSale = 0;
   public selectedBuy: string;
   public selectedSale: string;
   public user: User = new User();
@@ -77,17 +77,18 @@ export class MyProfileComponent implements OnInit {
   ) {
     this.offsetBuy = 0;
     this.offsetSale = 0;
+    
     const responseBuy = this.lotService.getStatusLotBuy()
       .then(this.getListLotStatusBuy.bind(this));
+    
     const responseSale = this.lotService.getStatusLotSale()
       .then(this.getListLotStatusSale.bind(this));
-    const responseLots = this.lotService.GetUserBuyLot( '', this.offsetBuy,10)
-      .then(this.getListLotBuy.bind(this));
 
   }
 
 
    ngOnInit() {
+
       if (this.lotstatusListBuy.length !== 0){
        this.selectedBuy = this.lotstatusListBuy[0].toString();
       }//if
@@ -122,12 +123,14 @@ export class MyProfileComponent implements OnInit {
     this.offsetBuy += 12;
      this.getLotBuy(this.selectedBuy);
   }
+  
    addOffsetSale(){
     this.offsetSale += 12;
      this.getLotSale(this.selectedSale);
   }
 
   async getListLotBuy(response: ServerResponse){
+
     console.log(response);
     try {
       if ( response.status === 200){
@@ -138,6 +141,7 @@ export class MyProfileComponent implements OnInit {
       console.log( "Exception: " , ex );
     }
   }
+  
   async getListLotStatusSale(response: ServerResponse){
     console.log(response);
     try {
@@ -151,10 +155,22 @@ export class MyProfileComponent implements OnInit {
   }
 
   async getListLotStatusBuy(response: ServerResponse){
+
     console.log(response);
+
     try {
       if ( response.status === 200){
+
         this.lotstatusListBuy = response.data as LotStatus[];
+
+        this.selectedSale = this.lotstatusListBuy[0].statusID;
+
+        const responseLots = this.lotService.GetUserBuyLot(
+          this.lotstatusListBuy[0].statusID,
+          this.offsetBuy,
+          10 )
+          .then(this.getListLotBuy.bind(this));
+
       }
     }
     catch (ex){
@@ -213,7 +229,9 @@ export class MyProfileComponent implements OnInit {
     try {
 
       const response = await this.authSersice.changeUserInfo( this.user );
-      console.log('ОТВЕТ', response)
+      
+      console.log('ОТВЕТ', response);
+      
       if ( response.status === 200){
         this.user = response.data as User;
       }
@@ -230,10 +248,11 @@ export class MyProfileComponent implements OnInit {
   }
 
   async getLotBuy(value){
-    const selectOld =  this.selectedBuy
+    
+    const selectOld =  this.selectedBuy;
     this.selectedBuy = value;
 
-    const response = await this.lotService.GetUserBuyLot(value, this.offsetBuy ,10);
+    const response = await this.lotService.GetUserBuyLot(value, this.offsetBuy , 10 );
     if (response.status === 200 ){
 
 
@@ -244,10 +263,11 @@ export class MyProfileComponent implements OnInit {
     }
   }
   async getLotSale(value){
-    const selectOld =  this.selectedSale
+    
+    const selectOld =  this.selectedSale;
     this.selectedSale = value;
 
-    const response = await this.lotService.GetUserSaleLot(value, this.offsetSale ,10);
+    const response = await this.lotService.GetUserSaleLot(value, this.offsetSale , 10 );
     if (response.status === 200 ){
 
       // тут тело ответа парсим в масив лотов

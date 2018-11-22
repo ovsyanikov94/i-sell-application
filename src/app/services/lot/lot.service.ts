@@ -17,9 +17,10 @@ export class LotService {
   constructor(
     private http: HttpClient
   ) { }
-  GetUserBuyLot(statusId: string, offset: number, limit: number ): Promise<ServerResponse>{
+  GetUserBuyLot(statusId: number, offset: number, limit: number ): Promise<ServerResponse>{
+
     const formData = new FormData();
-    formData.append('idStatus' , statusId) ;
+    formData.append('idStatus' , statusId.toString()) ;
     formData.append('limit' , limit.toString()) ;
     formData.append('offset' , offset.toString()) ;
 
@@ -29,9 +30,10 @@ export class LotService {
     ).toPromise() as Promise<ServerResponse>;
 
   }//GetUserBuyLot
-  GetUserSaleLot(statusId: string, offset: number, limit: number ): Promise<ServerResponse>{
+
+  GetUserSaleLot(statusId: number, offset: number, limit: number ): Promise<ServerResponse>{
     const formData = new FormData();
-    formData.append('idStatus' , statusId) ;
+    formData.append('idStatus' , statusId.toString()) ;
     formData.append('limit' , limit.toString()) ;
     formData.append('offset' , offset.toString()) ;
     return this.http.post(
