@@ -12,7 +12,7 @@
               <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
                 <mat-form-field style="width: 100%">
                   <mat-select  placeholder="Выберите статус лота " (selectionChange)="getLotBuy($event.value)">
-                    <mat-option *ngFor="let litStatus of lotstatusListBuy" [value]="litStatus._id">
+                    <mat-option *ngFor="let litStatus of lotstatusListBuy" [value]="litStatus.statusID">
                       {{litStatus.statusTitle}}
                     </mat-option>
                   </mat-select>
@@ -114,7 +114,7 @@
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
               <mat-form-field style="width: 100%">
                 <mat-select placeholder="Выберите статус лота " (selectionChange)="getLotSale($event.value)">
-                  <mat-option *ngFor="let litStatus of lotstatusListSale" [value]="litStatus._id">
+                  <mat-option *ngFor="let litStatus of lotstatusListSale" [value]="litStatus.statusID">
                     {{litStatus.statusTitle}}
                   </mat-option>
                 </mat-select>

@@ -90,10 +90,10 @@ export class MyProfileComponent implements OnInit {
    ngOnInit() {
 
       if (this.lotstatusListBuy.length !== 0){
-       this.selectedBuy = this.lotstatusListBuy[0].toString();
+       this.selectedBuy = this.lotstatusListBuy[0].statusID;
       }//if
       if ( this.lotstatusListSale.length !== 0){
-       this.selectedSale = this.lotstatusListSale[0].toString();
+       this.selectedSale = this.lotstatusListSale[0].statusID;
       }//if
 
     this.balanse = 1000;
@@ -255,6 +255,7 @@ export class MyProfileComponent implements OnInit {
     const response = await this.lotService.GetUserBuyLot(value, this.offsetBuy , 10 );
     if (response.status === 200 ){
 
+      console.log('response: ' , response );
 
       // тут тело ответа парсим в масив лотов
       if ( selectOld !== value){
