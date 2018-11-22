@@ -255,6 +255,7 @@ export class MyProfileComponent implements OnInit {
     const response = await this.lotService.GetUserBuyLot(value, this.offsetBuy , 10 );
     if (response.status === 200 ){
 
+      console.log('response: ' , response );
 
       // тут тело ответа парсим в масив лотов
       if ( selectOld !== value){
