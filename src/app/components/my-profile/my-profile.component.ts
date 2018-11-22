@@ -77,10 +77,10 @@ export class MyProfileComponent implements OnInit {
   ) {
     this.offsetBuy = 0;
     this.offsetSale = 0;
-    
+
     const responseBuy = this.lotService.getStatusLotBuy()
       .then(this.getListLotStatusBuy.bind(this));
-    
+
     const responseSale = this.lotService.getStatusLotSale()
       .then(this.getListLotStatusSale.bind(this));
 
@@ -123,7 +123,7 @@ export class MyProfileComponent implements OnInit {
     this.offsetBuy += 12;
      this.getLotBuy(this.selectedBuy);
   }
-  
+
    addOffsetSale(){
     this.offsetSale += 12;
      this.getLotSale(this.selectedSale);
@@ -134,6 +134,7 @@ export class MyProfileComponent implements OnInit {
     console.log(response);
     try {
       if ( response.status === 200){
+
         console.log(response);
       }
     }
@@ -141,12 +142,13 @@ export class MyProfileComponent implements OnInit {
       console.log( "Exception: " , ex );
     }
   }
-  
+
   async getListLotStatusSale(response: ServerResponse){
     console.log(response);
     try {
       if ( response.status === 200){
         this.lotstatusListSale = response.data as LotStatus[];
+        this.selectedSale = this.lotstatusListSale[0].statusID;
       }
     }
     catch (ex){
@@ -229,9 +231,9 @@ export class MyProfileComponent implements OnInit {
     try {
 
       const response = await this.authSersice.changeUserInfo( this.user );
-      
+
       console.log('ОТВЕТ', response);
-      
+
       if ( response.status === 200){
         this.user = response.data as User;
       }
@@ -248,7 +250,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   async getLotBuy(value){
-    
+    console.log(value);
     const selectOld =  this.selectedBuy;
     this.selectedBuy = value;
 
@@ -264,15 +266,18 @@ export class MyProfileComponent implements OnInit {
     }
   }
   async getLotSale(value){
-    
+
+    console.log(value);
     const selectOld =  this.selectedSale;
     this.selectedSale = value;
 
     const response = await this.lotService.GetUserSaleLot(value, this.offsetSale , 10 );
     if (response.status === 200 ){
 
-      // тут тело ответа парсим в масив лотов
+      console.log('response: ' , response );
 
+      this.lotsSale = response.data.lots as Lot[];
+      console.log('LOTS: ' , this.lotsSale );
       if ( selectOld !== value){
         this.offsetSale = 0;
       }
