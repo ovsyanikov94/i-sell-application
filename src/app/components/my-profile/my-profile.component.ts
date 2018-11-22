@@ -90,10 +90,10 @@ export class MyProfileComponent implements OnInit {
    ngOnInit() {
 
       if (this.lotstatusListBuy.length !== 0){
-       this.selectedBuy = this.lotstatusListBuy[0].toString();
+       this.selectedBuy = this.lotstatusListBuy[0].statusID;
       }//if
       if ( this.lotstatusListSale.length !== 0){
-       this.selectedSale = this.lotstatusListSale[0].toString();
+       this.selectedSale = this.lotstatusListSale[0].statusID;
       }//if
 
     this.balanse = 1000;
