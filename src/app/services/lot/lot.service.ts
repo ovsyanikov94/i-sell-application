@@ -97,6 +97,7 @@ export class LotService {
     const formData = new FormData();
 
     if ( files ){
+
       [].forEach.call(files.files , ( file ) => {
         formData.append('images' , file );
       });
