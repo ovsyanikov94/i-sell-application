@@ -18,6 +18,45 @@ export class LotService {
   constructor(
     private http: HttpClient
   ) { }
+  GetUserBuyLot(statusId: number, offset: number, limit: number ): Promise<ServerResponse>{
+
+    const formData = new FormData();
+    formData.append('idStatus' , statusId.toString()) ;
+    formData.append('limit' , limit.toString()) ;
+    formData.append('offset' , offset.toString()) ;
+
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_USER_LOT_BUY}`,
+      formData
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//GetUserBuyLot
+
+  GetUserSaleLot(statusId: number, offset: number, limit: number ): Promise<ServerResponse>{
+    const formData = new FormData();
+    formData.append('idStatus' , statusId.toString()) ;
+    formData.append('limit' , limit.toString()) ;
+    formData.append('offset' , offset.toString()) ;
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_USER_LOT_SALE}`,
+      formData
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//GetUserSaleLot
+  getStatusLotBuy(): Promise<ServerResponse>{
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_STATUS_LOT_BUY}`,
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getStatusLotBuy
+  getStatusLotSale(): Promise<ServerResponse>{
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_STATUS_LOT_SALE}`,
+    ).toPromise() as Promise<ServerResponse>;
+
+  } //getStatusLotSale
+
 
   getTypeLot( offset: number, limit: number ): Promise<ServerResponse>{
 
