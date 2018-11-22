@@ -37,7 +37,7 @@ export class AuthorizeComponent implements OnInit {
 
   ) {
 
-    this.user.userLogin = 'Alex';
+    this.user.userLogin = 'Olga';
     this.user.userPassword = '123456';
 
   }
