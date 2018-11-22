@@ -211,6 +211,7 @@ export class AddLotComponent implements OnInit {
         Constants.APP_LIMIT
       );
 
+
       console.log('lots', lots);
 
       this.lot.mapLot = this.mapLot;
@@ -241,8 +242,6 @@ export class AddLotComponent implements OnInit {
       }
       this.openDialog( authData);
     }//catch
-
-
 
 
 
