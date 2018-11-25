@@ -95,7 +95,7 @@ export class LotComponent implements OnInit {
   ngOnInit() {
 
     const idLot = this.router.snapshot.paramMap.get("id");
-    
+
     this.lotService.getLotById(
       idLot
     ).then(this.onLotResponse.bind(this));
@@ -113,7 +113,7 @@ export class LotComponent implements OnInit {
        for ( let i = 0; i < this.lot.lotImagePath.length; i++){
 
          const image = this.lot.lotImagePath[i];
-         this.images.push(image.path)
+         this.images.push(image.path);
 
        }//for
         this.images = this.lot.lotImagePath.map(function(image) {
@@ -130,5 +130,5 @@ export class LotComponent implements OnInit {
     }//catch
 
   }//onCategoryResponse
-  
+
 }//LotComponent
