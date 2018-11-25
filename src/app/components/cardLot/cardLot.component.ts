@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
 import {MatDialog} from "@angular/material";
 import { BetModalComponent } from '../../modals/bet.modal/bet.modal.component';
@@ -13,6 +13,12 @@ import {LotService} from '../../services/lot/lot.service';
 import {CategoryService} from '../../services/category/category.service';
 import {Constants} from "../../models/Constants";
 import {ServerResponse} from "../../models/server/ServerResponse";
+import {DOCUMENT} from "@angular/common";
+import {Router} from "@angular/router";
+
+
+
+
 @Component({
   selector: 'app-card-lot',
   templateUrl: './cardLot.component.html',
@@ -36,6 +42,9 @@ export class CardLotComponent implements OnInit {
     public dialog: MatDialog ,
     private lotService: LotService,
     private categoryService: CategoryService,
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router
+
   ) {
 
 
@@ -64,6 +73,7 @@ export class CardLotComponent implements OnInit {
       const moreLots =  responsLots.data as Lot[];
 
       moreLots.forEach(l => {
+
         this.lots.push (l);
       });
 
@@ -77,6 +87,7 @@ export class CardLotComponent implements OnInit {
     
 
   }//MoreLots
+
   onCategoryResponse(response: ServerResponse){
 
     try{
@@ -104,6 +115,7 @@ export class CardLotComponent implements OnInit {
 
         this.lots = response.data as Lot[];
 
+
       }//if
 
     }//try
@@ -116,17 +128,28 @@ export class CardLotComponent implements OnInit {
 
   }//onLotsResponse
 
+  @HostListener("window:scroll", [])
+
+  Top(){
+
+    window.scroll(0, 0 );
+    console.log(window);
+    const offset = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
+    console.log(offset);
+
+  }
+  
   ngOnInit() {
 
   }
 
-  bet( event ){
+  bet( event, lot: Lot ){
 
     const betData: BetData = new class implements BetData {
       lot: Lot;
     };
 
-    betData.lot = new Lot();
+    betData.lot = lot;
 
     if ( event instanceof KeyboardEvent && event.code === "Enter" ){
       this.openDialog(betData);
@@ -147,6 +170,10 @@ export class CardLotComponent implements OnInit {
 
   }//openDialog
 
-
+  SingleLot(id){
+    //this.router.navigateByUrl(`/main/lot/${id}`);
+    //routerLink="/main/lot/{{lot._id}}"
+    console.log("single lot", id);
+  }
 
 }

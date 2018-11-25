@@ -29,6 +29,8 @@ export class Lot {
   public statusLot: LotStatus;
   public comments: Comment[];
   public categories: Category[];
+  public countLikes: number;
+  public countDisLikes: number;
 
 
   constructor(){

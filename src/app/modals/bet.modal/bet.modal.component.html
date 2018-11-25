@@ -1,14 +1,14 @@
 <div class="row text-center justify-content-center">
 
   <div mat-dialog-content  class="row justify-content-center text-center">
-    <h6 >{{betData.lot.lotName}}</h6>
+    <h6 >{{betData.lot.lotTitle}}</h6>
   </div>
 
   <div mat-dialog-content  class="col-12" >
-    <img src="{{betData.lot.lotFoto[0]}}"  style="width: 50%">
+    <img src="{{betData.lot.lotImagePath[0].path}}"  style="width: 50%">
   </div>
   <div mat-dialog-content class="row justify-content-center text-center"  >
-    <h6 class="col-12">Текущая ставка: <span style="color: red; font-size: larger ">{{betData.lot.lotCurrentPrice}} руб.</span></h6>
+    <h6 class="col-12">Текущая ставка: <span style="color: red; font-size: larger ">{{betData.lot.currentRate}} руб.</span></h6>
   </div>
   <div mat-dialog-content class="row justify-content-center text-center"  >
     <h5 class="col-12">На Вашем счету: <span style="color: red; font-size: larger ">{{user.userCountSum}} руб.</span></h5>

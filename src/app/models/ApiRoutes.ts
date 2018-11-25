@@ -10,6 +10,7 @@ export class ApiRoutes{
   static readonly ADD_LOT:        string = 'lot';
   static readonly DELETE_LOT:     string = 'deleteLot/:id';
   static readonly UPDATE_LOT:     string = 'updateLot/:id';
+  static readonly GET_LOT_BY_ID:     string = 'singleLot';
   static readonly GET_STATUS_LOT_BUY: string = 'GetListLotStatusBuy';
   static readonly GET_STATUS_LOT_SALE: string = 'GetListLotStatusSale';
   static readonly GET_USER_LOT_BUY: string = 'GetUserBuyLot';
