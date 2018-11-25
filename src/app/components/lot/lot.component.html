@@ -8,24 +8,24 @@
     <div class="container">
       <div>
 
-        <angular-image-slider *ngIf="lot.lotImagePath.length > 1" [images]="lot.lotImagePath"></angular-image-slider>
+        <angular-image-slider *ngIf="lot.lotImagePath.length > 1" [images]="images"></angular-image-slider>
 
       </div>
     </div>
   </div>
   <div class="row justify-content-end" style="margin-top: 1%">
     <div class="col-1" >
-       <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="4" matBadgeOverlap="false" >
+       <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="{{lot.countLikes}}" matBadgeOverlap="false" >
               <i class="material-icons">thumb_up</i>
           </span>
     </div>
     <div class="col-1">
-      <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
+      <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.countDisLikes}}" matBadgeOverlap="false" >
             <i class="material-icons">thumb_down</i>
           </span>
     </div>
     <div class="col-1">
-      <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
+      <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.comments.length}}" matBadgeOverlap="false" >
             <i class="material-icons">speaker_notes</i>
           </span>
     </div>
@@ -44,7 +44,7 @@
                   <div class="row justify-content-start text-left">
                     <div class="col-6">
                       <div class="row justify-content-start text-start" >
-                        <h3>{{lot.lotName}} </h3>
+                        <h3>{{lot.lotTitle}} </h3>
                       </div>
                     </div>
 

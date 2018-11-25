@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
+import {LotImage} from '../../models/LotImage/lotImage';
 
 import {LatLng, Map, Marker} from 'leaflet';
 import {MatTabChangeEvent} from '@angular/material';
@@ -27,7 +28,7 @@ export class LotComponent implements OnInit {
   public marker: Marker;
   public map: Map;
 
-  public images: String[];
+  public images: string[];
 
   constructor(
     private geoService: GeoSearchService,
@@ -110,12 +111,6 @@ export class LotComponent implements OnInit {
 
         this.lot = response.data as Lot;
 
-       for ( let i = 0; i < this.lot.lotImagePath.length; i++){
-
-         const image = this.lot.lotImagePath[i];
-         this.images.push(image.path)
-
-       }//for
         this.images = this.lot.lotImagePath.map(function(image) {
           return image.path;
         });
