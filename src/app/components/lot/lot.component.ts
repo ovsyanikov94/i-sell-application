@@ -6,6 +6,11 @@ import {LatLng, Map, Marker} from 'leaflet';
 import {MatTabChangeEvent} from '@angular/material';
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
+import {Router, ActivatedRoute, ParamMap} from "@angular/router";
+import {LotService} from "../../services/lot/lot.service";
+import { switchMap } from 'rxjs/operators';
+import {ServerResponse} from "../../models/server/ServerResponse";
+import {Category} from "../../models/category/Category";
 
 declare let L;
 
@@ -17,13 +22,17 @@ declare let L;
 })
 export class LotComponent implements OnInit {
 
-  public lot: Lot = new Lot();
+  public lot: Lot ;
   public currentUser: User = new User();
   public marker: Marker;
   public map: Map;
 
+  public images: String[];
+
   constructor(
-    private geoService: GeoSearchService
+    private geoService: GeoSearchService,
+    private router: ActivatedRoute,
+    private lotService: LotService,
 
   ) {
 
@@ -43,8 +52,8 @@ export class LotComponent implements OnInit {
 
   async initMap(){
 
-    this.lot.mapLot.lon = 37.7981509736429;
-    this.lot.mapLot.lat = 48.01950945;
+    // this.lot.mapLot.lon = 37.7981509736429;
+    // this.lot.mapLot.lat = 48.01950945;
 
     this.map = L.map('map').setView( [
       this.lot.mapLot.lat,
@@ -85,7 +94,41 @@ export class LotComponent implements OnInit {
 
   ngOnInit() {
 
+    const idLot = this.router.snapshot.paramMap.get("id");
+    
+    this.lotService.getLotById(
+      idLot
+    ).then(this.onLotResponse.bind(this));
 
   }//ngOnInit
 
+  onLotResponse(response: ServerResponse){
+
+    try{
+
+      if ( response.status === 200 ){
+
+        this.lot = response.data as Lot;
+
+       for ( let i = 0; i < this.lot.lotImagePath.length; i++){
+
+         const image = this.lot.lotImagePath[i];
+         this.images.push(image.path)
+
+       }//for
+        this.images = this.lot.lotImagePath.map(function(image) {
+          return image.path;
+        });
+
+      }//if
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+  }//onCategoryResponse
+  
 }//LotComponent

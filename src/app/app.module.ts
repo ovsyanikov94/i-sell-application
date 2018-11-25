@@ -61,6 +61,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
+//GO_TOP_BUTTON
+
+
+
 //LEAFLET
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
@@ -136,10 +140,12 @@ import { PasswordRecoveryConfirmComponent } from './components/password-recovery
     LeafletModule,
     MatAutocompleteModule,
     MatPaginatorModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [
-    GeoSearchService
+    GeoSearchService,
+
   ],
   entryComponents: [
     AuthModalComponent,
