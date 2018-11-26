@@ -12,7 +12,10 @@ import {LotService} from "../../services/lot/lot.service";
 import { switchMap } from 'rxjs/operators';
 import {ServerResponse} from "../../models/server/ServerResponse";
 import {Category} from "../../models/category/Category";
+import {LotType} from "../../models/lot-type/LotType";
+import {LotStatus} from "../../models/lot-status/Lot-status";
 
+import * as moment from 'moment';
 declare let L;
 
 @Component({
@@ -29,6 +32,8 @@ export class LotComponent implements OnInit {
   public map: Map;
 
   public images: string[];
+
+  public moment  = moment;
 
   constructor(
     private geoService: GeoSearchService,
@@ -103,7 +108,7 @@ export class LotComponent implements OnInit {
 
   }//ngOnInit
 
-  onLotResponse(response: ServerResponse){
+  async onLotResponse(response: ServerResponse){
 
     try{
 
@@ -111,11 +116,23 @@ export class LotComponent implements OnInit {
 
         this.lot = response.data as Lot;
 
-        console.log('this.lot', this.lot);
+        const typeLotResponse = await this.lotService.getTypeLotById(+this.lot.typeLot);
+
+        if (typeLotResponse.status === 200) {
+          this.lot.typeLot = typeLotResponse.data as LotType;
+        }
+
+        const statusLotResponse = await this.lotService.getStatusLotById(+this.lot.statusLot);
+
+        if (statusLotResponse.status === 200) {
+          this.lot.statusLot = statusLotResponse.data as LotStatus;
+        }
+
         this.images = this.lot.lotImagePath.map(function(image) {
           return image.path;
         });
 
+        console.log('this.images', this.images);
       }//if
 
     }//try
