@@ -47,12 +47,14 @@ export class LotService {
     ).toPromise() as Promise<ServerResponse>;
 
   }//GetUserSaleLot
+
   getStatusLotBuy(): Promise<ServerResponse>{
     return this.http.get(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_STATUS_LOT_BUY}`,
     ).toPromise() as Promise<ServerResponse>;
 
   }//getStatusLotBuy
+
   getStatusLotSale(): Promise<ServerResponse>{
 
     return this.http.get(
@@ -60,7 +62,6 @@ export class LotService {
     ).toPromise() as Promise<ServerResponse>;
 
   } //getStatusLotSale
-
 
 
   getTypeLot( offset: number, limit: number ): Promise<ServerResponse>{
@@ -95,6 +96,21 @@ export class LotService {
 
   }//getTypeLot
 
+  getStatusLotById( id: number ): Promise<ServerResponse>{
+
+    const httpParams: HttpParams = new HttpParams()
+      .set('id', id.toString());
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_STATUS_BYID}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getTypeLot
+
+
   addLot( lot: Lot, files: FileInput ): Promise<ServerResponse>{
 
     console.log('files' , files);
@@ -102,6 +118,7 @@ export class LotService {
     const formData = new FormData();
 
     if ( files ){
+
       [].forEach.call(files.files , ( file ) => {
         formData.append('images' , file );
       });
@@ -191,3 +208,19 @@ export class LotService {
 }//LotService
 
 
+  }//getLotList
+
+  getLotById( id: string ): Promise<ServerResponse>{
+
+    const httpParams: HttpParams = new HttpParams()
+      .set('id' , id);
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_BY_ID}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getLotList
+}

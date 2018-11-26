@@ -203,16 +203,11 @@ export class AddLotComponent implements OnInit {
 
       if (this.selectedType) {
         const typeLotResponse = await this.lotService.getTypeLotById(this.selectedType);
-        this.lot.typeLot = typeLotResponse.data;
+
+        if (typeLotResponse.status === 200) {
+          this.lot.typeLot = typeLotResponse.data;
+        }
       }//if
-
-      const lots = await this.lotService.getLotList(
-        Constants.APP_OFFSET,
-        Constants.APP_LIMIT
-      );
-
-
-      console.log('lots', lots);
 
       this.lot.mapLot = this.mapLot;
 

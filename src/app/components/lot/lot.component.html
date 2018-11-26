@@ -8,7 +8,7 @@
     <div class="container">
       <div>
 
-        <angular-image-slider *ngIf="lot.lotFoto.length > 1" [images]="lot.lotFoto"></angular-image-slider>
+        <angular-image-slider *ngIf="images.length > 1" [images]="images"></angular-image-slider>
 
       </div>
     </div>
@@ -19,17 +19,20 @@
     <div class="col-1" >
        <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="4" matBadgeOverlap="false" >
               <i class="material-icons" >thumb_up</i>
+       <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="{{lot.countLikes}}" matBadgeOverlap="false" >
+              <i class="material-icons">thumb_up</i>
           </span>
     </div>
 
     <div (click)="likeOrDislikeLot(lot, currentUser, constants.DISLIKE)" class="col-1">
       <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
+    <div class="col-1">
+      <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.countDisLikes}}" matBadgeOverlap="false" >
             <i class="material-icons">thumb_down</i>
           </span>
     </div>
-
     <div class="col-1">
-      <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
+      <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.comments.length}}" matBadgeOverlap="false" >
             <i class="material-icons">speaker_notes</i>
           </span>
     </div>
@@ -45,7 +48,6 @@
 
 
   </div>
-  <!-----------------------LIKE-DISLIKE0-COMMENTS-BUTTONS----------------------->
 
   <mat-tab-group (selectedTabChange)="onTabChanged($event)" [dynamicHeight]="true" style="padding: 15px" color="primary">
 
@@ -60,7 +62,7 @@
                   <div class="row justify-content-start text-left">
                     <div class="col-6">
                       <div class="row justify-content-start text-start" >
-                        <h3>{{lot.lotName}} </h3>
+                        <h3>{{lot.lotTitle}} </h3>
                       </div>
                     </div>
 
@@ -68,10 +70,10 @@
                   </div>
 
                   <div class="row justify-content-start text-left" >
-                    <h5><small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory}}</span></small></h5>
+                    <h5> <small class="text-muted"><span  *ngFor="let cat of lot.categories" style="font-weight: bold "> {{cat.title}}</span></small></h5>
                   </div>
                   <div class="row justify-content-start text-left" >
-                    <small class="text-muted">Статус: <span style="font-weight: bold ">{{lot.lotStatus}}</span></small>
+                    <small class="text-muted">Статус: <span style="font-weight: bold ">{{lot.statusLot.statusTitle}}</span></small>
                   </div>
                   <div class="row justify-content-start text-left" style="margin-top: 2%">
 
@@ -79,7 +81,7 @@
 
                   </div>
                   <div class="row justify-content-start text-left" >
-                    <h6 class="text-muted"><span style="color: darkslategrey ">{{lot.lotStartDate.toLocaleDateString()}}  {{lot.lotStartDate.getHours()}}:{{lot.lotStartDate.getMinutes()}}</span></h6>
+                    <h6 class="text-muted"><span style="color: darkslategrey ">{{moment.unix(lot.dateStartTrade).format('DD-MM-YYYY HH:mm')}}</span></h6>
                   </div>
 
 
@@ -87,14 +89,14 @@
                     <small class="text-muted">Текущая ставка:</small>
                   </div>
                   <div class="row justify-content-start text-left" style="color: red">
-                    <h1>{{lot.lotCurrentPrice}} руб.</h1>
+                    <h1>{{lot.currentRate}} руб.</h1>
                   </div>
 
                   <div class="row justify-content-start text-left" style="margin-top:1%">
                     <small class="text-muted">Начальная ставка:</small>
                   </div>
                   <div class="row justify-content-start text-left" style="color: cadetblue ">
-                    <h4>{{lot.lotStartPrice}} руб.</h4>
+                    <h4>{{lot.startPrice}} руб.</h4>
                   </div>
 
                 </div>

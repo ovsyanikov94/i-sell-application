@@ -78,6 +78,7 @@ import { GeoSearchService } from "./services/LeafletGeoSearch/geo-search.service
 import { PasswordRecoveryRequestComponent } from './components/password-recovery-request/password-recovery-request.component';
 import { PasswordRecoveryConfirmComponent } from './components/password-recovery-confirm/password-recovery-confirm.component';
 import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component';
+import {LotResolverService} from './services/lot/lot-resolver.service';
 
 
 @NgModule({
@@ -106,7 +107,6 @@ import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-mo
     RemoveFromBlacklistComponent,
     ComplaintsModalComponent,
     FeedbackModalComponent,
-    PasswordRecoveryRequestComponent,
     PasswordRecoveryConfirmComponent,
     LikeDislikeViewerModalComponent
   ],
@@ -145,7 +145,8 @@ import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-mo
     TooltipModule
   ],
   providers: [
-    GeoSearchService
+    GeoSearchService,
+    LotResolverService
   ],
   entryComponents: [
     AuthModalComponent,

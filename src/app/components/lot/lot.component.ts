@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
+import {LotImage} from '../../models/LotImage/lotImage';
 
 import {MatDialog} from "@angular/material";
 import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
@@ -11,6 +12,13 @@ import {LatLng, Map, Marker} from 'leaflet';
 import {MatTabChangeEvent} from '@angular/material';
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
+import {Router, ActivatedRoute, ParamMap} from "@angular/router";
+import {LotService} from "../../services/lot/lot.service";
+import { switchMap } from 'rxjs/operators';
+import {ServerResponse} from "../../models/server/ServerResponse";
+import {Category} from "../../models/category/Category";
+import {LotType} from "../../models/lot-type/LotType";
+import {LotStatus} from "../../models/lot-status/Lot-status";
 
 declare let L;
 
@@ -22,17 +30,39 @@ declare let L;
 })
 export class LotComponent implements OnInit {
 
-  public lot: Lot = new Lot();
+  public lot: Lot ;
   public currentUser: User = new User();
   public marker: Marker;
   public map: Map;
 
   public constants: Constants;
 
+  public images: string[] = [];
+
+  public moment  = moment;
+
   constructor(
     private geoService: GeoSearchService,
     public dialog: MatDialog
   ){  }//constructor
+    private geoService: GeoSearchService,
+    private route: ActivatedRoute,
+    private lotService: LotService,
+
+  ) {
+
+    this.route.data.subscribe( (resolvedData: any ) => {
+
+      console.log('resolved data:' , resolvedData);
+      this.lot = resolvedData.lotResponse.data as Lot;
+
+      this.images = this.lot.lotImagePath.map(function(image) {
+        return image.path;
+      });
+
+    } );
+
+  }//constructor
 
 
   onTabChanged( event: MatTabChangeEvent ){
@@ -48,8 +78,8 @@ export class LotComponent implements OnInit {
 
   async initMap(){
 
-    this.lot.mapLot.lon = 37.7981509736429;
-    this.lot.mapLot.lat = 48.01950945;
+    // this.lot.mapLot.lon = 37.7981509736429;
+    // this.lot.mapLot.lat = 48.01950945;
 
     this.map = L.map('map').setView( [
       this.lot.mapLot.lat,
@@ -90,6 +120,11 @@ export class LotComponent implements OnInit {
 
   ngOnInit() {
 
+    // const idLot = this.router.snapshot.paramMap.get("id");
+    //
+    // this.lotService.getLotById(
+    //   idLot
+    // ).then(this.onLotResponse.bind(this));
 
   }//ngOnInit
 

@@ -12,4 +12,6 @@ export class Constants {
   static readonly DISLIKE: number = 0;
   static readonly LIKE: number = 1;
 
+  static readonly APP_LIMIT_LOT: number = 4;
+  static readonly APP_OFFSET_LOT: number = 0;
 }
