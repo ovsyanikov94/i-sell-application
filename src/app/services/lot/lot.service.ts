@@ -173,6 +173,7 @@ export class LotService {
     }//else if
 
     if (mark === Constants.LIKE){
+
       return this.http.post(
         `${ApiRoutes.SERVER_URL}${ApiRoutes.ADD_LOT_MARK}`,
         {
@@ -181,6 +182,7 @@ export class LotService {
           mark: likeOrDislike
         }
       ).toPromise() as Promise<ServerResponse>;
+
     }//if
 
   }//likeLot
