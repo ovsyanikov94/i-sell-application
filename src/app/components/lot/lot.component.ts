@@ -101,7 +101,8 @@ export class LotComponent implements OnInit {
   ngOnInit() {
 
     const idLot = this.router.snapshot.paramMap.get("id");
-    
+
+
     this.lotService.getLotById(
       idLot
     ).then(this.onLotResponse.bind(this));
