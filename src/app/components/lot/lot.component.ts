@@ -111,6 +111,7 @@ export class LotComponent implements OnInit {
 
         this.lot = response.data as Lot;
 
+        console.log('this.lot', this.lot);
         this.images = this.lot.lotImagePath.map(function(image) {
           return image.path;
         });
