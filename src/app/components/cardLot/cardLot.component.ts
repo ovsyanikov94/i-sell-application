@@ -21,8 +21,8 @@ export class CardLotComponent implements OnInit {
 
   categoriesControl = new FormControl();
   categories: Category[] = [
-    new Category(1, 'Моб. устройства'),
-    new Category(1, 'Аксессуары'),
+    new Category('1', 'Моб. устройства'),
+    new Category('1', 'Аксессуары'),
   ];
 
   constructor( public dialog: MatDialog ) {

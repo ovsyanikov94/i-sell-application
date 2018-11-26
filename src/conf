@@ -1,0 +1,22 @@
+
+ProxyPass        /i-sell-admin  http://localhost:4200 retry=0
+ProxyPassReverse /i-sell-admin  http://localhost:4200
+
+ProxyPass        /i-sell/modules  http://localhost:5012/i-sell-application/node_modules retry=0
+ProxyPassReverse /i-sell/modules  http://localhost:5012/i-sell-application/node_modules
+
+
+ProxyPass        /i-sell  http://localhost:4201 retry=0
+ProxyPassReverse /i-sell  http://localhost:4201
+
+#ProxyPass        /vtaminka/modules  http://localhost:5012/VtaminkaProduction/node_modules retry=0
+#ProxyPassReverse /vtaminka/modules  http://localhost:5012/VtaminkaProduction/node_modules
+
+#ProxyPass        /vtaminka  http://localhost:5012/VtaminkaProduction/public retry=0
+#ProxyPassReverse /vtaminka  http://localhost:5012/VtaminkaProduction/public
+
+#ProxyPass        /admin  http://localhost:3000 retry=0
+#ProxyPassReverse /admin  http://localhost:3000
+
+ProxyPass        /i-sell-admin-api  http://localhost:3000 retry=0
+ProxyPassReverse /i-sell-admin-api  http://localhost:3000

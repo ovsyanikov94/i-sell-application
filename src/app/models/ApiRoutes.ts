@@ -10,6 +10,10 @@ export class ApiRoutes{
   static readonly ADD_LOT:        string = 'lot';
   static readonly DELETE_LOT:     string = 'deleteLot/:id';
   static readonly UPDATE_LOT:     string = 'updateLot/:id';
+  static readonly GET_STATUS_LOT_BUY: string = 'GetListLotStatusBuy';
+  static readonly GET_STATUS_LOT_SALE: string = 'GetListLotStatusSale';
+  static readonly GET_USER_LOT_BUY: string = 'GetUserBuyLot';
+  static readonly GET_USER_LOT_SALE: string = 'GetUserSaleLot';
 
   static readonly ADD_LOT_MARK: string = 'add-lot-mark';
   static readonly LOT_MARK_LIST: string = 'lot-mark-list';
@@ -21,10 +25,13 @@ export class ApiRoutes{
   //typelot
 
   static readonly GET_LOT_TYPES_LIST: string = 'lotType';
+  static readonly GET_LOT_TYPE_BYID: string = 'lotTypeById';
 
   //USER
   static readonly USER_REGISTER: string = 'registryUser';
   static readonly USER_AUTHORIZE: string = 'auth-user';
-
+  static readonly GET_USER_BYID: string = 'getUserByID';
+  static readonly USER_CHANGE_PARAMS: string = 'updateUserInfo';
+  static readonly USER_INFO: string = 'getUser';
 
 }
