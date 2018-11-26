@@ -170,10 +170,4 @@ export class CardLotComponent implements OnInit {
 
   }//openDialog
 
-  SingleLot(id){
-    //this.router.navigateByUrl(`/main/lot/${id}`);
-    //routerLink="/main/lot/{{lot._id}}"
-    console.log("single lot", id);
-  }
-
 }

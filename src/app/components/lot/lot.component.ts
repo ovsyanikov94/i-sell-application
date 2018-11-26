@@ -22,7 +22,7 @@ declare let L;
 })
 export class LotComponent implements OnInit {
 
-  public lot: Lot ;
+  public lot: Lot = new Lot();
   public currentUser: User = new User();
   public marker: Marker;
   public map: Map;
@@ -52,8 +52,8 @@ export class LotComponent implements OnInit {
 
   async initMap(){
 
-    // this.lot.mapLot.lon = 37.7981509736429;
-    // this.lot.mapLot.lat = 48.01950945;
+    this.lot.mapLot.lon = 37.7981509736429;
+    this.lot.mapLot.lat = 48.01950945;
 
     this.map = L.map('map').setView( [
       this.lot.mapLot.lat,
@@ -113,12 +113,12 @@ export class LotComponent implements OnInit {
        for ( let i = 0; i < this.lot.lotImagePath.length; i++){
 
          const image = this.lot.lotImagePath[i];
-         this.images.push(image.path);
+         //this.images.push(image.path);
 
        }//for
-        this.images = this.lot.lotImagePath.map(function(image) {
-          return image.path;
-        });
+        // this.images = this.lot.lotImagePath.map(function(image) {
+        //   return image.path;
+        // });
 
       }//if
 
