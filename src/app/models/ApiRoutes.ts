@@ -39,4 +39,4 @@ export class ApiRoutes{
   //COMMENTS
   static readonly COMMENT_ADD_NEW: string = 'comment';
 
-}
+}//ApiRoutes

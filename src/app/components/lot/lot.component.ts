@@ -20,6 +20,7 @@ import {Category} from "../../models/category/Category";
 import {LotType} from "../../models/lot-type/LotType";
 import {LotStatus} from "../../models/lot-status/Lot-status";
 
+import * as moment from 'moment';
 declare let L;
 
 @Component({
@@ -43,12 +44,9 @@ export class LotComponent implements OnInit {
 
   constructor(
     private geoService: GeoSearchService,
-    public dialog: MatDialog
-  ){  }//constructor
-    private geoService: GeoSearchService,
     private route: ActivatedRoute,
     private lotService: LotService,
-
+    public dialog: MatDialog
   ) {
 
     this.route.data.subscribe( (resolvedData: any ) => {
@@ -118,7 +116,7 @@ export class LotComponent implements OnInit {
 
   }//initMap
 
-  ngOnInit() {
+  ngOnInit(){
 
     // const idLot = this.router.snapshot.paramMap.get("id");
     //

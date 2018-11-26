@@ -32,10 +32,7 @@ const routes: Routes = [
         path: 'lot/:id',
         component: LotComponent,
         resolve: {
-          lotResponse: LotResolverService,
-          lotResponse2: LotResolverService,
-          lotResponse3: LotResolverService,
-          lotResponse4: LotResolverService,
+          lotResponse: LotResolverService
         }
       },
       {
@@ -82,7 +79,7 @@ const routes: Routes = [
     path: 'register',
     component: RegistrationComponent
   },
-  
+
   {
     path: 'authorize',
     component: AuthorizeComponent

@@ -108,7 +108,9 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     ComplaintsModalComponent,
     FeedbackModalComponent,
     PasswordRecoveryConfirmComponent,
-    LikeDislikeViewerModalComponent
+    PasswordRecoveryRequestComponent,
+    LikeDislikeViewerModalComponent,
+
   ],
   imports: [
     BrowserModule,

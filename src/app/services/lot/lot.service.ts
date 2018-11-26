@@ -18,10 +18,8 @@ import {User} from '../../models/user/User';
 })
 export class LotService {
 
-  constructor(
-    private http: HttpClient
+  constructor( private http: HttpClient ) { }//constructor
 
-  ) { }//constructor
   GetUserBuyLot(statusId: number, offset: number, limit: number ): Promise<ServerResponse>{
 
     const formData = new FormData();
@@ -62,7 +60,6 @@ export class LotService {
     ).toPromise() as Promise<ServerResponse>;
 
   } //getStatusLotSale
-
 
   getTypeLot( offset: number, limit: number ): Promise<ServerResponse>{
 
@@ -109,7 +106,6 @@ export class LotService {
     ).toPromise() as Promise<ServerResponse>;
 
   }//getTypeLot
-
 
   addLot( lot: Lot, files: FileInput ): Promise<ServerResponse>{
 
@@ -205,15 +201,9 @@ export class LotService {
 
   }//getLikeDislikeList
 
-}//LotService
+  getLotById( id: string ): Promise<ServerResponse> {
 
-
-  }//getLotList
-
-  getLotById( id: string ): Promise<ServerResponse>{
-
-    const httpParams: HttpParams = new HttpParams()
-      .set('id' , id);
+    const httpParams: HttpParams = new HttpParams().set('id', id);
 
     return this.http.get(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_BY_ID}`,
@@ -221,6 +211,11 @@ export class LotService {
         params: httpParams
       }
     ).toPromise() as Promise<ServerResponse>;
+  }//getLotById
 
-  }//getLotList
-}
+}//LotService
+
+
+
+
+

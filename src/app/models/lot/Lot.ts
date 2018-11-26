@@ -64,4 +64,4 @@ export class Lot {
 
   }//constructor
 
-}
+}//Lot

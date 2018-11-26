@@ -14,4 +14,5 @@ export class Constants {
 
   static readonly APP_LIMIT_LOT: number = 4;
   static readonly APP_OFFSET_LOT: number = 0;
-}
+
+}//Constants
