@@ -43,7 +43,6 @@ export class CardLotComponent implements OnInit {
     private lotService: LotService,
     private categoryService: CategoryService,
     @Inject(DOCUMENT) private document: Document,
-    private router: Router
 
   ) {
 
@@ -169,5 +168,6 @@ export class CardLotComponent implements OnInit {
     });
 
   }//openDialog
+
 
 }

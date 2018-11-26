@@ -88,6 +88,21 @@ export class LotService {
 
   }//getTypeLot
 
+  getStatusLotById( id: number ): Promise<ServerResponse>{
+
+    const httpParams: HttpParams = new HttpParams()
+      .set('id', id.toString());
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_STATUS_BYID}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getTypeLot
+
+
   addLot( lot: Lot, files: FileInput ): Promise<ServerResponse>{
 
     console.log('files' , files);

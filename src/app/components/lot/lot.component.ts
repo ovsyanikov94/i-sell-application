@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
+import {LotImage} from '../../models/LotImage/lotImage';
 
 import {LatLng, Map, Marker} from 'leaflet';
 import {MatTabChangeEvent} from '@angular/material';
@@ -11,7 +12,10 @@ import {LotService} from "../../services/lot/lot.service";
 import { switchMap } from 'rxjs/operators';
 import {ServerResponse} from "../../models/server/ServerResponse";
 import {Category} from "../../models/category/Category";
+import {LotType} from "../../models/lot-type/LotType";
+import {LotStatus} from "../../models/lot-status/Lot-status";
 
+import * as moment from 'moment';
 declare let L;
 
 @Component({
@@ -22,12 +26,14 @@ declare let L;
 })
 export class LotComponent implements OnInit {
 
-  public lot: Lot = new Lot();
+  public lot: Lot ;
   public currentUser: User = new User();
   public marker: Marker;
   public map: Map;
 
-  public images: String[];
+  public images: string[];
+
+  public moment  = moment;
 
   constructor(
     private geoService: GeoSearchService,
@@ -52,8 +58,8 @@ export class LotComponent implements OnInit {
 
   async initMap(){
 
-    this.lot.mapLot.lon = 37.7981509736429;
-    this.lot.mapLot.lat = 48.01950945;
+    // this.lot.mapLot.lon = 37.7981509736429;
+    // this.lot.mapLot.lat = 48.01950945;
 
     this.map = L.map('map').setView( [
       this.lot.mapLot.lat,
@@ -95,14 +101,14 @@ export class LotComponent implements OnInit {
   ngOnInit() {
 
     const idLot = this.router.snapshot.paramMap.get("id");
-
+    
     this.lotService.getLotById(
       idLot
     ).then(this.onLotResponse.bind(this));
 
   }//ngOnInit
 
-  onLotResponse(response: ServerResponse){
+  async onLotResponse(response: ServerResponse){
 
     try{
 
@@ -110,16 +116,23 @@ export class LotComponent implements OnInit {
 
         this.lot = response.data as Lot;
 
-       for ( let i = 0; i < this.lot.lotImagePath.length; i++){
+        const typeLotResponse = await this.lotService.getTypeLotById(+this.lot.typeLot);
 
-         const image = this.lot.lotImagePath[i];
-         //this.images.push(image.path);
+        if (typeLotResponse.status === 200) {
+          this.lot.typeLot = typeLotResponse.data as LotType;
+        }
 
-       }//for
-        // this.images = this.lot.lotImagePath.map(function(image) {
-        //   return image.path;
-        // });
+        const statusLotResponse = await this.lotService.getStatusLotById(+this.lot.statusLot);
 
+        if (statusLotResponse.status === 200) {
+          this.lot.statusLot = statusLotResponse.data as LotStatus;
+        }
+
+        this.images = this.lot.lotImagePath.map(function(image) {
+          return image.path;
+        });
+
+        console.log('this.images', this.images);
       }//if
 
     }//try
@@ -130,5 +143,5 @@ export class LotComponent implements OnInit {
     }//catch
 
   }//onCategoryResponse
-
+  
 }//LotComponent

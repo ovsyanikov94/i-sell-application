@@ -5,6 +5,7 @@ import { LotType } from '../lot-type/LotType';
 import { LotStatus } from '../lot-status/Lot-status';
 import { Category } from "../category/Category";
 import { MapCoord } from "../MapCoord/MapCoord";
+import { LotImage } from "../LotImage/lotImage";
 
 
 
@@ -16,7 +17,7 @@ export class Lot {
   public customer: User;
   public seller: User;
   public lotDescription: string;
-  public lotImagePath: string[];
+  public lotImagePath: LotImage[];
   public startPrice: number;
   public mapLot: MapCoord;
   public currentRate: number;
