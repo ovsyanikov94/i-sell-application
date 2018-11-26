@@ -58,4 +58,4 @@ export class ConfirmationLotComponent implements OnInit {
     this.dialog.open(FeedbackModalComponent, { data: { message: 'Оставьте свой отзыв для пользователя', complaintUserLogin: this.user.userLogin}});
   }//feedBackModal
 
-}
+}//ConfirmationLotComponent

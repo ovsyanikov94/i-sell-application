@@ -11,6 +11,10 @@ export class ApiRoutes{
   static readonly DELETE_LOT:     string = 'deleteLot/:id';
   static readonly UPDATE_LOT:     string = 'updateLot/:id';
 
+  static readonly ADD_LOT_MARK: string = 'add-lot-mark';
+  static readonly LOT_MARK_LIST: string = 'lot-mark-list';
+  static readonly REMOVE_LOT_MARK: string = 'remove-lot-mark';
+  static readonly UPDATE_LOT_MARK: string = 'update-lot-mark';
 
   //CATEGORIES
   static readonly GET_CATEGORIES_LIST: string = 'category/list';

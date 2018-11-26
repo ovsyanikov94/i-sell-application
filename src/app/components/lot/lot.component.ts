@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
 
+import {MatDialog} from "@angular/material";
+import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
+
+import { Constants } from "../../models/Constants";
+
 import {LatLng, Map, Marker} from 'leaflet';
 import {MatTabChangeEvent} from '@angular/material';
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
@@ -22,12 +27,12 @@ export class LotComponent implements OnInit {
   public marker: Marker;
   public map: Map;
 
+  public constants: Constants;
+
   constructor(
-    private geoService: GeoSearchService
-
-  ) {
-
-  }
+    private geoService: GeoSearchService,
+    public dialog: MatDialog
+  ){  }//constructor
 
 
   onTabChanged( event: MatTabChangeEvent ){
@@ -87,5 +92,13 @@ export class LotComponent implements OnInit {
 
 
   }//ngOnInit
+
+
+  public showLikeDislikeModal(){
+
+    this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
+
+  }//showLikeDislikeModal
+
 
 }//LotComponent

@@ -13,23 +13,39 @@
       </div>
     </div>
   </div>
-  <div class="row justify-content-end" style="margin-top: 1%">
+
+  <!-----------------------LIKE-DISLIKE-COMMENTS-BUTTONS----------------------->
+  <div (click)="likeOrDislikeLot(lot, currentUser, constants.LIKE)"  class="row justify-content-end" style="margin-top: 1%">
     <div class="col-1" >
        <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="4" matBadgeOverlap="false" >
-              <i class="material-icons">thumb_up</i>
+              <i class="material-icons" >thumb_up</i>
           </span>
     </div>
-    <div class="col-1">
+
+    <div (click)="likeOrDislikeLot(lot, currentUser, constants.DISLIKE)" class="col-1">
       <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
             <i class="material-icons">thumb_down</i>
           </span>
     </div>
+
     <div class="col-1">
       <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
             <i class="material-icons">speaker_notes</i>
           </span>
     </div>
+
+    <button (click)="showLikeDislikeModal()" mat-button color="primary">Like/Dislike</button>
+
+
+      <!--<tooltip-content #myTooltip>-->
+        <!--<b>tooltip</b>-->
+      <!--</tooltip-content>-->
+
+      <!--<button mat-button color="primary" [tooltip]="myTooltip">hover this button to see a tooltip</button>-->
+
+
   </div>
+  <!-----------------------LIKE-DISLIKE0-COMMENTS-BUTTONS----------------------->
 
   <mat-tab-group (selectedTabChange)="onTabChanged($event)" [dynamicHeight]="true" style="padding: 15px" color="primary">
 
