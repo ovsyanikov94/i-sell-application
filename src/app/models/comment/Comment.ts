@@ -48,8 +48,16 @@ export class Comment{
     this._userSender = value;
   }
 
+  get lot(): Lot {
+    return this._lot;
+  }
+  set lot(value: Lot){
+    this._lot = value;
+  }
+
   private _userSender: User;
-  private _userReceiver: User | Lot;
+  private _userReceiver: User;
+  private _lot: Lot;
   private _commentText: string;
   private _commentSendDate: string;
   private _commentType: number;

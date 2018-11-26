@@ -8,6 +8,8 @@ import {HttpClient, HttpParams, HttpRequest} from "@angular/common/http";
 
 import {Comment} from '../../models/comment/Comment';
 
+import {Constants} from "../../models/Constants";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,20 +38,26 @@ export class CommentService {
 
   addComment( comment: Comment ): Promise<ServerResponse>{
 
-    const formData = new FormData();
+    const commentData = new FormData();
+    commentData.append('commentText' , comment.commentText);
+    commentData.append('commentStatus' , comment.commentStatus.toString()) ;
+    commentData.append('commentType' , comment.commentType.toString()) ;
+    commentData.append('commentSendDate' , comment.commentSendDate.toString()) ;
+    commentData.append('userSender' , comment.userSender.toString()) ;
 
-    formData.append('commentText' , comment.commentText) ;
-    formData.append('commentStatus' , comment.commentStatus) ;
-    formData.append('commentType' , comment.commentType) ;
-    formData.append('commentSendDate' , comment.commentSendDate) ;
-    formData.append('userSender' , comment.userSender) ;
-    formData.append('receiver' , comment.userReceiver) ;
+    if (+comment.commentType === Constants.COMMENT_TYPE_LOT){
+      commentData.append('lot' , comment.lot.toString()) ;
+    }//if
+
+    else if (+comment.commentType === Constants.COMMENT_TYPE_PERSONAL){
+      commentData.append('userReceiver' , comment.userReceiver.toString()) ;
+    }//if
 
     return this.http.post(
-      `${ApiRoutes.SERVER_URL}${ApiRoutes.ADD_COMMENT}`,
-      formData
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.COMMENT_ADD_NEW}`
+      , commentData
     ).toPromise() as Promise<ServerResponse>;
 
-  }//getLot
+  }//addComment
 
 }
