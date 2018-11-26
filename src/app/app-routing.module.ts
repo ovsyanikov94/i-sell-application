@@ -29,7 +29,7 @@ const routes: Routes = [
         component: CardLotComponent
       },
       {
-        path: 'lot',
+        path: 'lot/:id',
         component: LotComponent
       },
       {

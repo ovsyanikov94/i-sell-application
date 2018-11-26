@@ -9,4 +9,6 @@ export class Constants {
   static readonly LOT_PLANED: number = 1; //запланированный
   static readonly LOT_INSTANT: number = 2; //немедленный
 
+  static readonly APP_LIMIT_LOT: number = 4;
+  static readonly APP_OFFSET_LOT: number = 0;
 }

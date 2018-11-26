@@ -29,6 +29,8 @@ export class Lot {
   public statusLot: LotStatus;
   public comments: Comment[];
   public categories: Category[];
+  public countLikes: number;
+  public countDisLikes: number;
 
 
   constructor(){
@@ -47,7 +49,7 @@ export class Lot {
     // this._lotSendDate = new Date();
     // this._lotStartDate = new Date();
     // this._lotEndDate = new Date();
-    //
+
     // const comment: Comment = new Comment();
     //
     // comment.commentSendDate = '2018-10-10 17:00';

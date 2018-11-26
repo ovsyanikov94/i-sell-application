@@ -8,6 +8,7 @@ import {HttpClient, HttpParams, HttpRequest} from "@angular/common/http";
 
 import { Lot } from '../../models/lot/Lot';
 import {FileInput} from 'ngx-material-file-input';
+import {Constants} from "../../models/Constants";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,46 @@ export class LotService {
   constructor(
     private http: HttpClient
   ) { }
+  GetUserBuyLot(statusId: number, offset: number, limit: number ): Promise<ServerResponse>{
+
+    const formData = new FormData();
+    formData.append('idStatus' , statusId.toString()) ;
+    formData.append('limit' , limit.toString()) ;
+    formData.append('offset' , offset.toString()) ;
+
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_USER_LOT_BUY}`,
+      formData
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//GetUserBuyLot
+
+  GetUserSaleLot(statusId: number, offset: number, limit: number ): Promise<ServerResponse>{
+    const formData = new FormData();
+    formData.append('idStatus' , statusId.toString()) ;
+    formData.append('limit' , limit.toString()) ;
+    formData.append('offset' , offset.toString()) ;
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_USER_LOT_SALE}`,
+      formData
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//GetUserSaleLot
+
+  getStatusLotBuy(): Promise<ServerResponse>{
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_STATUS_LOT_BUY}`,
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getStatusLotBuy
+
+  getStatusLotSale(): Promise<ServerResponse>{
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_STATUS_LOT_SALE}`,
+    ).toPromise() as Promise<ServerResponse>;
+
+  } //getStatusLotSale
 
   getTypeLot( offset: number, limit: number ): Promise<ServerResponse>{
 
@@ -30,6 +71,20 @@ export class LotService {
         params: httpParams
       }
     ).toPromise() as Promise<ServerResponse>;
+
+  }//getTypeLot
+
+  getTypeLotById( id: number ): Promise<ServerResponse>{
+
+      const httpParams: HttpParams = new HttpParams()
+        .set('id', id.toString());
+
+      return this.http.get(
+        `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_TYPE_BYID}`,
+        {
+          params: httpParams
+        }
+      ).toPromise() as Promise<ServerResponse>;
 
   }//getTypeLot
 
@@ -56,13 +111,29 @@ export class LotService {
 
     const formData = new FormData();
 
-    [].forEach.call(files.files , ( file ) => {
-      formData.append('files' , file );
+    if ( files ){
+
+      [].forEach.call(files.files , ( file ) => {
+        formData.append('images' , file );
+      });
+    }//if
+
+    const categoriesIds = lot.categories.map(c => {
+      return c._id;
     });
 
     formData.append('lotTitle' , lot.lotTitle) ;
+    formData.append('startPrice' , lot.startPrice.toString()) ;
+    formData.append('lotDescription' , lot.lotDescription) ;
+    formData.append('mapLot' , JSON.stringify(lot.mapLot)) ;
+    formData.append('countHourTrade' , lot.countHourTrade.toString()) ;
+    formData.append('typeLot' , lot.typeLot.typeID.toString()) ;
+    formData.append('categories' , JSON.stringify(categoriesIds)) ;
 
-    console.log('files' , files);
+    if (lot.typeLot.typeID === Constants.LOT_PLANED){
+      formData.append('dateStartTrade' , lot.dateStartTrade.toString()) ;
+    }//if
+
 
     return this.http.post(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.ADD_LOT}`,
@@ -70,4 +141,33 @@ export class LotService {
     ).toPromise() as Promise<ServerResponse>;
 
   }//getLot
+
+  getLotList( offset: number, limit: number ): Promise<ServerResponse>{
+
+    const httpParams: HttpParams = new HttpParams()
+      .set('limit' , limit.toString())
+      .set('offset' , offset.toString());
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_LIST}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getLotList
+
+  getLotById( id: string ): Promise<ServerResponse>{
+
+    const httpParams: HttpParams = new HttpParams()
+      .set('id' , id);
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_BY_ID}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getLotList
 }

@@ -10,13 +10,20 @@ export class ApiRoutes{
   static readonly ADD_LOT:        string = 'lot';
   static readonly DELETE_LOT:     string = 'deleteLot/:id';
   static readonly UPDATE_LOT:     string = 'updateLot/:id';
+  static readonly GET_LOT_BY_ID:     string = 'singleLot';
+  static readonly GET_STATUS_LOT_BUY: string = 'GetListLotStatusBuy';
+  static readonly GET_STATUS_LOT_SALE: string = 'GetListLotStatusSale';
+  static readonly GET_USER_LOT_BUY: string = 'GetUserBuyLot';
+  static readonly GET_USER_LOT_SALE: string = 'GetUserSaleLot';
+
   static readonly GET_SINGLE_LOT: string = 'lot/:id';
 
   //CATEGORIES
   static readonly GET_CATEGORIES_LIST: string = 'category/list';
-  //typelot
+
 
   static readonly GET_LOT_TYPES_LIST: string = 'lotType';
+  static readonly GET_LOT_TYPE_BYID: string = 'lotTypeById';
 
   //USER
   static readonly USER_REGISTER: string = 'registryUser';
@@ -26,8 +33,10 @@ export class ApiRoutes{
   static readonly USER_INFO: string = 'getUser';
 
   //COMMENTS
-  static readonly ADD_COMMENT: string = 'comment';
+  static readonly COMMENT_ADD_NEW: string = 'comment';
   static readonly UPDATE_COMMENT: string = 'updateComment/:id';
   static readonly DELETE_COMMENT: string = 'deleteComment/:id';
   static readonly GET_COMMENTS: string = 'comment/list';
+
+
 }
