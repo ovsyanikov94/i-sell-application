@@ -29,14 +29,14 @@ import {Router} from "@angular/router";
 
 export class CardLotComponent implements OnInit {
 
-  public lots: Lot[];
+  public lots: Lot[] = [];
 
   public moment  = moment;
   public limit: number = Constants.APP_LIMIT_LOT;
   public offset: number = Constants.APP_OFFSET_LOT;
 
   categoriesControl = new FormControl();
-  categories: Category[] ;
+  categories: Category[] = [];
 
   constructor(
     public dialog: MatDialog ,

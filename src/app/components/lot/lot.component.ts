@@ -31,18 +31,29 @@ export class LotComponent implements OnInit {
   public marker: Marker;
   public map: Map;
 
-  public images: string[];
+  public images: string[] = [];
 
   public moment  = moment;
 
   constructor(
     private geoService: GeoSearchService,
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
     private lotService: LotService,
 
   ) {
 
-  }
+    this.route.data.subscribe( (resolvedData: any ) => {
+
+      console.log('resolved data:' , resolvedData);
+      this.lot = resolvedData.lotResponse.data as Lot;
+
+      this.images = this.lot.lotImagePath.map(function(image) {
+        return image.path;
+      });
+
+    } );
+
+  }//constructor
 
 
   onTabChanged( event: MatTabChangeEvent ){
@@ -100,12 +111,11 @@ export class LotComponent implements OnInit {
 
   ngOnInit() {
 
-    const idLot = this.router.snapshot.paramMap.get("id");
-
-
-    this.lotService.getLotById(
-      idLot
-    ).then(this.onLotResponse.bind(this));
+    // const idLot = this.router.snapshot.paramMap.get("id");
+    //
+    // this.lotService.getLotById(
+    //   idLot
+    // ).then(this.onLotResponse.bind(this));
 
   }//ngOnInit
 

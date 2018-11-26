@@ -78,6 +78,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { GeoSearchService } from "./services/LeafletGeoSearch/geo-search.service";
 import { PasswordRecoveryRequestComponent } from './components/password-recovery-request/password-recovery-request.component';
 import { PasswordRecoveryConfirmComponent } from './components/password-recovery-confirm/password-recovery-confirm.component';
+import {LotResolverService} from './services/lot/lot-resolver.service';
 
 
 @NgModule({
@@ -145,7 +146,7 @@ import { PasswordRecoveryConfirmComponent } from './components/password-recovery
   ],
   providers: [
     GeoSearchService,
-
+    LotResolverService
   ],
   entryComponents: [
     AuthModalComponent,
