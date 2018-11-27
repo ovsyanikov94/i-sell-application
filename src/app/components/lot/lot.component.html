@@ -35,13 +35,22 @@
           </span>
     </div>
 
-    <button (click)="showLikeDislikeModal()" mat-button color="primary">Like/Dislike</button>
+      <div>
+        <tooltip-content #myTooltip [animation]="true" placement="left">
+          <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+          <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
+        </tooltip-content>
 
-      <tooltip-content #myTooltip>
-        <b>tooltip</b>
-      </tooltip-content>
+        <button [tooltip]="myTooltip">hover this button to see a tooltip</button>
+      </div>
 
-      <button mat-button color="primary" [tooltip]="myTooltip">hover this button to see a tooltip</button>
+      <!--<button (click)="showLikeDislikeModal()" mat-button color="primary">Like/Dislike</button>-->
+
+      <!--<tooltip-content #myTooltip>-->
+        <!--<b>tooltip</b>-->
+      <!--</tooltip-content>-->
+
+      <!--<button mat-button color="primary" [tooltip]="myTooltip">hover this button to see a tooltip</button>-->
 
   </div>
 
