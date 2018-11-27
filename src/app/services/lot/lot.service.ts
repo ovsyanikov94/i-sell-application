@@ -163,6 +163,7 @@ export class LotService {
   //поставить лайк или дизлайк лоту
   async addLikeOrDislikeLot( lot: Lot, user: User, mark: number ): Promise<ServerResponse>{
 
+
     let likeOrDislike: number;
 
     if (mark === Constants.LIKE){
