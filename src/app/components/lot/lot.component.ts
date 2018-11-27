@@ -4,7 +4,7 @@ import {User} from '../../models/user/User';
 import {LotImage} from '../../models/LotImage/lotImage';
 
 import {MatDialog} from "@angular/material";
-import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
+//import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
 
 import { Constants } from "../../models/Constants";
 
@@ -127,9 +127,13 @@ export class LotComponent implements OnInit {
   }//ngOnInit
 
 
+  async addLikeOrDislikeLot( lot: Lot, user: User, mark: number ){
+
+  }//addLikeOrDislikeLot
+
   public showLikeDislikeModal(){
 
-    this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
+    //this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
 
   }//showLikeDislikeModal
 
