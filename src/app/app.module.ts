@@ -77,7 +77,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { GeoSearchService } from "./services/LeafletGeoSearch/geo-search.service";
 import { PasswordRecoveryRequestComponent } from './components/password-recovery-request/password-recovery-request.component';
 import { PasswordRecoveryConfirmComponent } from './components/password-recovery-confirm/password-recovery-confirm.component';
-//import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component';
+import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component';
 import {LotResolverService} from './services/lot/lot-resolver.service';
 
 
@@ -109,7 +109,7 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     FeedbackModalComponent,
     PasswordRecoveryConfirmComponent,
     PasswordRecoveryRequestComponent,
-   // LikeDislikeViewerModalComponent,
+    LikeDislikeViewerModalComponent,
 
   ],
   imports: [
@@ -155,7 +155,8 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     BetModalComponent,
     RemoveFromBlacklistComponent,
     ComplaintsModalComponent,
-    FeedbackModalComponent
+    FeedbackModalComponent,
+    LikeDislikeViewerModalComponent
   ],
   bootstrap: [AppComponent]
 })

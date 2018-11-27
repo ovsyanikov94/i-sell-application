@@ -4,7 +4,7 @@ import {User} from '../../models/user/User';
 import {LotImage} from '../../models/LotImage/lotImage';
 
 import {MatDialog} from "@angular/material";
-//import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
+import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
 
 import { Constants } from "../../models/Constants";
 
@@ -36,7 +36,7 @@ export class LotComponent implements OnInit {
   public marker: Marker;
   public map: Map;
 
-  public constants: Constants;
+  public constants: Constants = Constants;
 
   public images: string[] = [];
 
@@ -127,13 +127,30 @@ export class LotComponent implements OnInit {
   }//ngOnInit
 
 
-  async addLikeOrDislikeLot( lot: Lot, user: User, mark: number ){
+  async addLikeOrDislikeLot( lot: Lot, mark: number ){
+
+    try{
+
+      const response: ServerResponse = await this.lotService.addLikeOrDislikeLot(lot , mark);
+
+      console.log('response: ' , response);
+
+      if ( response.status === 200 ){
+        //lot.countLikes++;
+      }//if
+
+    }//try
+    catch (ex){
+
+      console.log('Ex: ' , ex);
+
+    }//catch
 
   }//addLikeOrDislikeLot
 
   public showLikeDislikeModal(){
 
-    //this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
+    this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
 
   }//showLikeDislikeModal
 

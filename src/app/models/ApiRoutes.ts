@@ -16,9 +16,7 @@ export class ApiRoutes{
   static readonly GET_USER_LOT_BUY: string = 'GetUserBuyLot';
   static readonly GET_USER_LOT_SALE: string = 'GetUserSaleLot';
 
-  static readonly ADD_LOT_MARK: string = 'add-lot-mark';
   static readonly LOT_MARK_LIST: string = 'lot-mark-list';
-  static readonly REMOVE_LOT_MARK: string = 'remove-lot-mark';
   static readonly UPDATE_LOT_MARK: string = 'update-lot-mark';
 
   //CATEGORIES

@@ -161,30 +161,15 @@ export class LotService {
   }//getLot
 
   //поставить лайк или дизлайк лоту
-  async addLikeOrDislikeLot( lot: Lot, user: User, mark: number ): Promise<ServerResponse>{
+  async addLikeOrDislikeLot( lot: Lot, mark: number ): Promise<ServerResponse>{
 
-
-    let likeOrDislike: number;
-
-    if (mark === Constants.LIKE){
-      likeOrDislike = Constants.LIKE;
-    }//if
-    else if (mark === Constants.DISLIKE){
-      likeOrDislike = Constants.DISLIKE;
-    }//else if
-
-    if (mark === Constants.LIKE){
-
-      return this.http.post(
-        `${ApiRoutes.SERVER_URL}${ApiRoutes.ADD_LOT_MARK}`,
-        {
-          sender: user,
-          receiver: lot,
-          mark: likeOrDislike
-        }
-      ).toPromise() as Promise<ServerResponse>;
-
-    }//if
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.UPDATE_LOT_MARK}`,
+      {
+        receiver: lot._id,
+        mark: mark
+      }
+    ).toPromise() as Promise<ServerResponse>;
 
   }//likeLot
 
