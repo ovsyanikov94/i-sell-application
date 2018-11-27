@@ -8,28 +8,44 @@
     <div class="container">
       <div>
 
-        <angular-image-slider *ngIf="images.length > 1" [images]="images"></angular-image-slider>
+        <!--<angular-image-slider *ngIf="images.length > 1" [images]="images"></angular-image-slider>-->
+        <angular-image-slider [images]="images"></angular-image-slider>
 
       </div>
     </div>
   </div>
-  <div class="row justify-content-end" style="margin-top: 1%">
-    <div class="col-1" >
-       <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="{{lot.countLikes}}" matBadgeOverlap="false" >
-              <i class="material-icons">thumb_up</i>
-          </span>
-    </div>
+
+  <!-----------------------LIKE-DISLIKE-COMMENTS-BUDGES----------------------->
+    <div   class="row justify-content-end" style="margin-top: 1%">
+      <div class="col-1" >
+         <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="{{lot.countLikes}}" matBadgeOverlap="false" >
+                <i (click)="addLikeOrDislikeLot(lot, constants.LIKE)" class="material-icons">thumb_up</i>
+            </span>
+      </div>
+
     <div class="col-1">
-      <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.countDisLikes}}" matBadgeOverlap="false" >
-            <i class="material-icons">thumb_down</i>
-          </span>
+        <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.countDisLikes}}" matBadgeOverlap="false" >
+              <i (click)="addLikeOrDislikeLot(lot, constants.DISLIKE)" class="material-icons">thumb_down</i>
+        </span>
     </div>
+
     <div class="col-1">
       <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.comments.length}}" matBadgeOverlap="false" >
             <i class="material-icons">speaker_notes</i>
           </span>
     </div>
+
+    <button (click)="showLikeDislikeModal()" mat-button color="primary">Like/Dislike</button>
+
+      <tooltip-content #myTooltip>
+        <b>tooltip</b>
+      </tooltip-content>
+
+      <button mat-button color="primary" [tooltip]="myTooltip">hover this button to see a tooltip</button>
+
   </div>
+
+  <!-----------------------LIKE-DISLIKE-COMMENTS-BUDGES----------------------->
 
   <mat-tab-group (selectedTabChange)="onTabChanged($event)" [dynamicHeight]="true" style="padding: 15px" color="primary">
 

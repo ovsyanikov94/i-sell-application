@@ -12,14 +12,13 @@ import {LotStatus} from '../../models/lot-status/Lot-status';
 })
 export class LotResolverService implements Resolve<ServerResponse>{
 
-  constructor(
-    private lotService: LotService
-  ) { }
+  constructor( private lotService: LotService ){ }//constructor
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
     : Observable<ServerResponse> | Promise<ServerResponse> | ServerResponse {
     return this.lotService.getLotById(
       route.params.id
     );
-  }
-}
+  }//resolve
+
+}//LotResolverService
