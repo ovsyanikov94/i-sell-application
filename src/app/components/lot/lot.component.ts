@@ -103,31 +103,30 @@ export class LotComponent implements OnInit {
   }//ngOnInit
 
   onLotResponse(response: ServerResponse){
-
-    try{
-
-      if ( response.status === 200 ){
-
-        this.lot = response.data as Lot;
-
-       for ( let i = 0; i < this.lot.lotImagePath.length; i++){
-
-         const image = this.lot.lotImagePath[i];
-         this.images.push(image.path);
-
-       }//for
-        this.images = this.lot.lotImagePath.map(function(image) {
-          return image.path;
-        });
-
-      }//if
-
-    }//try
-    catch ( ex ){
-
-      console.log( "Exception: " , ex );
-
-    }//catch
+    //
+    // try{
+    //
+    //   if ( response.status === 200 ){
+    //
+    //     this.lot = response.data as Lot;
+    //
+    //    for ( let i = 0; i < this.lot.lotImagePath.length; i++){
+    //
+    //      const image = this.lot.lotImagePath[i];
+    //    //  this.images.push(image.path);
+    //    }//for
+    //     this.images = this.lot.lotImagePath.map(function(image) {
+    //    //   return image.path;
+    //     });
+    //
+    //   }//if
+    //
+    // }//try
+    // catch ( ex ){
+    //
+    //   console.log( "Exception: " , ex );
+    //
+    // }//catch
 
   }//onCategoryResponse
 
