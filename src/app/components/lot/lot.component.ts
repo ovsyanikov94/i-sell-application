@@ -14,15 +14,16 @@ import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.ser
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
 import {Router, ActivatedRoute, ParamMap} from "@angular/router";
 import {LotService} from "../../services/lot/lot.service";
+import {CommentService} from '../../services/comment/comment.service';
 import { switchMap } from 'rxjs/operators';
 import {ServerResponse} from "../../models/server/ServerResponse";
+import {Comment} from "../../models/comment/Comment";
 import {Category} from "../../models/category/Category";
 import {LotType} from "../../models/lot-type/LotType";
 import {LotStatus} from "../../models/lot-status/Lot-status";
 
 import * as moment from 'moment';
 declare let L;
-
 @Component({
   selector: 'app-lot',
   templateUrl: './lot.component.html',
@@ -36,6 +37,8 @@ export class LotComponent implements OnInit {
   public marker: Marker;
   public map: Map;
 
+  public comments: Comments[];
+
   public constants: Constants = Constants;
 
   public images: string[] = [];
@@ -46,6 +49,7 @@ export class LotComponent implements OnInit {
     private geoService: GeoSearchService,
     private route: ActivatedRoute,
     private lotService: LotService,
+    private commentService: CommentService,
     public dialog: MatDialog
   ) {
 
@@ -59,6 +63,11 @@ export class LotComponent implements OnInit {
       });
 
     } );
+
+    this.commentService.getLotComments(
+      Constants.APP_OFFSET,
+      Constants.APP_LIMIT
+    ).then( this.onCommentResponse.bind(this) );
 
   }//constructor
 
@@ -126,6 +135,27 @@ export class LotComponent implements OnInit {
 
   }//ngOnInit
 
+
+  onCommentResponse(response: ServerResponse){
+
+    console.log(response);
+
+    try{
+
+      if ( response.status === 200 ){
+
+        this.comments = response.data as Comment[];
+
+      }//if
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+  }//onCategoryResponse
 
   async addLikeOrDislikeLot( lot: Lot, mark: number ){
 
