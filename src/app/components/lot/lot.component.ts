@@ -60,8 +60,38 @@ export class LotComponent implements OnInit {
 
     } );
 
+    this.onLotResponse();
   }//constructor
 
+  async onLotResponse(){
+
+    try{
+
+
+
+        const typeLotResponse = await this.lotService.getTypeLotById(+this.lot.typeLot);
+
+        if (typeLotResponse.status === 200){
+          this.lot.typeLot = typeLotResponse.data as LotType;
+        }//if
+
+        const statusLotResponse = await this.lotService.getStatusLotById(+this.lot.statusLot);
+
+        if (statusLotResponse.status === 200){
+          this.lot.statusLot = statusLotResponse.data as LotStatus;
+        }//if
+
+
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+
+  }//onLotsResponse
 
   onTabChanged( event: MatTabChangeEvent ){
 

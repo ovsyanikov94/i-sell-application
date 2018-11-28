@@ -44,12 +44,8 @@
           <small class="text-muted">Категории: </small>
         </div>
 
-        <div class="row justify-content-center text-center" >
-          <small class="text-muted"><span  *ngFor="let cat of lot.categories" style="font-weight: bold "> {{cat.title}}</span></small>
-        </div>
-
         <div>
-          <img src="{{lot.lotImagePath[0].path}}"  style="width: 100%">
+          <img src="{{lot.lotImagePath[0].path}}"  style="width: 100%; height: 180px">
         </div>
 
         <div class="row justify-content-center text-center" style="margin-top: 15px ">
