@@ -6,7 +6,7 @@ export class ApiRoutes{
   static readonly SERVER_URL: string = 'http://localhost:5012/i-sell-admin-api/api/';
 
   //LOT
-  static readonly GET_LOT_LIST: string = 'lotList';
+  static readonly GET_LOT_LIST:  string = 'lotList';
   static readonly ADD_LOT:        string = 'lot';
   static readonly DELETE_LOT:     string = 'deleteLot/:id';
   static readonly UPDATE_LOT:     string = 'updateLot/:id';

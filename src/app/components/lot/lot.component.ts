@@ -7,6 +7,8 @@ import {MatTabChangeEvent} from '@angular/material';
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
 
+import { RegistrationComponent } from '../../components/registration/registration.component';
+
 declare let L;
 
 @Component({
@@ -19,6 +21,7 @@ export class LotComponent implements OnInit {
 
   public lot: Lot = new Lot();
   public currentUser: User = new User();
+
   public marker: Marker;
   public map: Map;
 
@@ -26,7 +29,7 @@ export class LotComponent implements OnInit {
     private geoService: GeoSearchService
 
   ) {
-
+    this.currentUser = RegistrationComponent.user;
   }
 
 
