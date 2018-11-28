@@ -16,14 +16,16 @@ export class ApiRoutes{
   static readonly GET_USER_LOT_BUY: string = 'GetUserBuyLot';
   static readonly GET_USER_LOT_SALE: string = 'GetUserSaleLot';
 
-  static readonly GET_SINGLE_LOT: string = 'lot/:id';
+  static readonly LOT_MARK_LIST: string = 'lot-mark-list';
+  static readonly UPDATE_LOT_MARK: string = 'update-lot-mark';
 
   //CATEGORIES
   static readonly GET_CATEGORIES_LIST: string = 'category/list';
-
+  //typelot
 
   static readonly GET_LOT_TYPES_LIST: string = 'lotType';
   static readonly GET_LOT_TYPE_BYID: string = 'lotTypeById';
+  static readonly GET_LOT_STATUS_BYID: string = 'lotStatusById';
 
   //USER
   static readonly USER_REGISTER: string = 'registryUser';

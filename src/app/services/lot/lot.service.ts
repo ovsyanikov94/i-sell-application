@@ -2,22 +2,24 @@ import { Injectable } from '@angular/core';
 
 import { ApiRoutes } from '../../models/ApiRoutes';
 
+import { Constants } from '../../models/Constants';
+
 import {ServerResponse} from "../../models/server/ServerResponse";
 
 import {HttpClient, HttpParams, HttpRequest} from "@angular/common/http";
 
 import { Lot } from '../../models/lot/Lot';
 import {FileInput} from 'ngx-material-file-input';
-import {Constants} from "../../models/Constants";
+
+import {User} from '../../models/user/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LotService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor( private http: HttpClient ) { }//constructor
+
   GetUserBuyLot(statusId: number, offset: number, limit: number ): Promise<ServerResponse>{
 
     const formData = new FormData();
@@ -76,6 +78,9 @@ export class LotService {
 
   getTypeLotById( id: number ): Promise<ServerResponse>{
 
+
+
+
       const httpParams: HttpParams = new HttpParams()
         .set('id', id.toString());
 
@@ -88,22 +93,19 @@ export class LotService {
 
   }//getTypeLot
 
-  getSingleLot( id: string ): Promise<ServerResponse>{
+  getStatusLotById( id: number ): Promise<ServerResponse>{
 
-    if (id) {
-      const httpParams: HttpParams = new HttpParams()
-        .set('id', id);
+    const httpParams: HttpParams = new HttpParams()
+      .set('id', id.toString());
 
-      return this.http.get(
-        `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_SINGLE_LOT}`,
-        {
-          params: httpParams
-        }
-      ).toPromise() as Promise<ServerResponse>;
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_STATUS_BYID}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
 
-    }//if
-
-  }//getSingleLot
+  }//getTypeLot
 
   addLot( lot: Lot, files: FileInput ): Promise<ServerResponse>{
 
@@ -155,12 +157,41 @@ export class LotService {
       }
     ).toPromise() as Promise<ServerResponse>;
 
-  }//getLotList
 
-  getLotById( id: string ): Promise<ServerResponse>{
+  }//getLot
+
+  //поставить лайк или дизлайк лоту
+  async addLikeOrDislikeLot( lot: Lot, mark: number ): Promise<ServerResponse>{
+
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.UPDATE_LOT_MARK}`,
+      {
+        receiver: lot._id,
+        mark: mark
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//likeLot
+
+  //получение списка оценок лота
+  getLikeDislikeList( offset: number, limit: number ): Promise<ServerResponse>{
 
     const httpParams: HttpParams = new HttpParams()
-      .set('id' , id);
+      .set('limit' , limit.toString())
+      .set('offset' , offset.toString());
+
+    return this.http.get(
+
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.LOT_MARK_LIST}`,
+      { params: httpParams }
+
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//getLikeDislikeList
+
+  getLotById( id: string ): Promise<ServerResponse> {
+
+    const httpParams: HttpParams = new HttpParams().set('id', id);
 
     return this.http.get(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_BY_ID}`,
@@ -168,6 +199,11 @@ export class LotService {
         params: httpParams
       }
     ).toPromise() as Promise<ServerResponse>;
+  }//getLotById
 
-  }//getLotList
-}
+}//LotService
+
+
+
+
+
