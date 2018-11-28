@@ -16,16 +16,26 @@
   </div>
 
   <!-----------------------LIKE-DISLIKE-COMMENTS-BUDGES----------------------->
-    <div   class="row justify-content-end" style="margin-top: 1%">
+
+    <ng-template #likeListLink>
+      <div (click)="showLikeDislikeModal(lot, constants.LIKE, constants.APP_LIMIT_LOT, constants.APP_OFFSET_LOT)" >Показать всех</div>
+    </ng-template>
+
+    <div class="row justify-content-end" style="margin-top: 1%">
       <div class="col-1" >
          <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="{{lot.countLikes}}" matBadgeOverlap="false" >
-                <i (click)="addLikeOrDislikeLot(lot, constants.LIKE)" class="material-icons">thumb_up</i>
+                <i data-toggle="tooltip" title="Нравится" [ngbTooltip]="likeListLink" (click)="addLikeOrDislikeLot(lot, constants.LIKE)" class="material-icons" id="likeIcon">thumb_up</i>
             </span>
       </div>
 
+
+      <ng-template #dislikeListLink>
+        <div (click)="showLikeDislikeModal(lot, constants.DISLIKE, constants.APP_LIMIT_LOT, constants.APP_OFFSET_LOT)" >Показать всех</div>
+      </ng-template>
+
     <div class="col-1">
         <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.countDisLikes}}" matBadgeOverlap="false" >
-              <i (click)="addLikeOrDislikeLot(lot, constants.DISLIKE)" class="material-icons">thumb_down</i>
+              <i data-toggle="tooltip" title="Не нравится" [ngbTooltip]="dislikeListLink" (click)="addLikeOrDislikeLot(lot, constants.DISLIKE)" class="material-icons" id="dislikeIcon">thumb_down</i>
         </span>
     </div>
 
@@ -34,23 +44,6 @@
             <i class="material-icons">speaker_notes</i>
           </span>
     </div>
-
-      <div>
-        <tooltip-content #myTooltip [animation]="true" placement="left">
-          <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
-          <b><i><span style="color: #ffc520">Tooltip With</span></i></b> <small>Html support</small>.
-        </tooltip-content>
-
-        <button [tooltip]="myTooltip">hover this button to see a tooltip</button>
-      </div>
-
-      <!--<button (click)="showLikeDislikeModal()" mat-button color="primary">Like/Dislike</button>-->
-
-      <!--<tooltip-content #myTooltip>-->
-        <!--<b>tooltip</b>-->
-      <!--</tooltip-content>-->
-
-      <!--<button mat-button color="primary" [tooltip]="myTooltip">hover this button to see a tooltip</button>-->
 
   </div>
 

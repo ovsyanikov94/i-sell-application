@@ -3,6 +3,8 @@ import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
 import {LotImage} from '../../models/LotImage/lotImage';
 
+import * as $ from 'jquery';
+
 import {MatDialog} from "@angular/material";
 import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
 
@@ -20,14 +22,17 @@ import {Category} from "../../models/category/Category";
 import {LotType} from "../../models/lot-type/LotType";
 import {LotStatus} from "../../models/lot-status/Lot-status";
 
+import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
+
 import * as moment from 'moment';
+import {logging} from "selenium-webdriver";
 declare let L;
 
 @Component({
   selector: 'app-lot',
   templateUrl: './lot.component.html',
   styleUrls: ['./lot.component.css'],
-
+  providers: [NgbTooltipConfig]
 })
 export class LotComponent implements OnInit {
 
@@ -46,7 +51,8 @@ export class LotComponent implements OnInit {
     private geoService: GeoSearchService,
     private route: ActivatedRoute,
     private lotService: LotService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public tooltipConfig: NgbTooltipConfig
   ) {
 
     this.route.data.subscribe( (resolvedData: any ) => {
@@ -60,6 +66,10 @@ export class LotComponent implements OnInit {
 
     } );
 
+    this.tooltipConfig.placement = 'top';
+    this.tooltipConfig.triggers = 'click';
+    this.tooltipConfig.autoClose = 'outside';
+
   }//constructor
 
 
@@ -68,7 +78,6 @@ export class LotComponent implements OnInit {
     if (event.index === 1 && !this.map ){
 
       this.initMap();
-
 
     }//if
 
@@ -118,6 +127,8 @@ export class LotComponent implements OnInit {
 
   ngOnInit(){
 
+
+
     // const idLot = this.router.snapshot.paramMap.get("id");
     //
     // this.lotService.getLotById(
@@ -125,7 +136,6 @@ export class LotComponent implements OnInit {
     // ).then(this.onLotResponse.bind(this));
 
   }//ngOnInit
-
 
   async addLikeOrDislikeLot( lot: Lot, mark: number ){
 
@@ -136,7 +146,26 @@ export class LotComponent implements OnInit {
       console.log('response: ' , response);
 
       if ( response.status === 200 ){
-        //lot.countLikes++;
+
+        const like: number = response.data.like;
+        const dislike: number = response.data.dislike;
+
+        console.log('like, dislike', like, dislike);
+
+        lot.countLikes += +like;
+        lot.countDisLikes += +dislike;
+
+        const likeMarkIcon = document.querySelector("#likeIcon");
+        const dislikeMarkIcon = document.querySelector("#dislikeIcon");
+
+        if (+like !== 0){
+          likeMarkIcon.classList.toggle("LikeMark");
+        }//if
+
+        if (+dislike !== 0){
+          dislikeMarkIcon.classList.toggle("DislikeMark");
+        }//if
+
       }//if
 
     }//try
@@ -148,11 +177,27 @@ export class LotComponent implements OnInit {
 
   }//addLikeOrDislikeLot
 
-  public showLikeDislikeModal(){
+  async showLikeDislikeModal(lot: Lot, mark: number){
 
-    this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
+    try{
+        const response: ServerResponse = await this.lotService.getUsersListWithLikeDislike(lot, mark, Constants.APP_LIMIT_LOT, Constants.APP_OFFSET_LOT );
+
+        console.log('response1', response);
+
+        if (response.status === 200 && response.data !== null){
+
+          this.dialog.open(LikeDislikeViewerModalComponent, { data: { users: response.data }});
+
+        }//if
+        else{
+
+        }//else
+
+    }//try
+    catch (ex){
+      console.log('Ex: ' , ex);
+    }//catch
 
   }//showLikeDislikeModal
-
 
 }//LotComponent
