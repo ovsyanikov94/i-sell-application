@@ -3,3 +3,10 @@
 }
 
 
+.custom-class {
+  position: fixed;
+  background-color: pink;
+  border-color: green;
+  height: 30px;
+  width: 30px;
+}

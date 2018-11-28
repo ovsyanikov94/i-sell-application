@@ -45,4 +45,38 @@ export class AuthService {
 
   }//authorize
 
+  async changeUserInfo( user: User ): Promise<ServerResponse> {
+
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_CHANGE_PARAMS}`,
+      {
+        email: user.userEmail,
+        firstName: user.userName,
+        lastName: user.userLastname,
+        phone: user.userPhone,
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//authorize
+
+
+  async changePassword( user: User ): Promise<ServerResponse> {
+
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_CHANGE_PARAMS}`,
+      {
+        newPassword: user.userConfirmPassword,
+        oldPassword: user.userOldPassword
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//authorize
+
+  async getUser(): Promise<ServerResponse> {
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`,
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//authorize
 }

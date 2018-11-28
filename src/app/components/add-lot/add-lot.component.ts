@@ -7,6 +7,7 @@ declare let L;
 
 //MODELS
 import { Lot } from '../../models/lot/Lot';
+import { User } from '../../models/user/User';
 import { Category } from '../../models/category/Category';
 import { LotType } from '../../models/lot-type/LotType';
 import { MatDialog } from '@angular/material';
@@ -19,12 +20,16 @@ import {MapCoord} from "../../models/MapCoord/MapCoord";
 import { DescriptionLengthValidator } from '../../Validators/DescriptionLengthValidator';
 import {LatLng, Map, Marker} from 'leaflet';
 
+import * as moment from 'moment';
+
 //SERVICES
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
 
 import {LotService} from '../../services/lot/lot.service';
 import {CategoryService} from '../../services/category/category.service';
+import {Router} from "@angular/router";
+import {AuthService} from "../../services/user/auth.service";
 
 @Component({
   selector: 'app-add-lot',
@@ -33,11 +38,9 @@ import {CategoryService} from '../../services/category/category.service';
 })
 export class AddLotComponent implements OnInit {
 
-  public selectedCategory: Category = null;
-  public selectedType: LotType = null;
-  public selectedHour: number;
+  public selectedType: number;
   public dateRange: Date;
-
+  public constants: Constants = Constants;
 
   public geoSearchResults: GeoSearchResult[] = [];
 
@@ -57,15 +60,11 @@ export class AddLotComponent implements OnInit {
 
   public lot: Lot = new Lot();
 
-  public mapLot: MapCoord ;
-
-  public selectedFiles: File[] = [];
-
-  public constants: Constants;
+  public mapLot: MapCoord  = new MapCoord();
 
   public textFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^[a-zа-я]{4,30}$/i),
+    Validators.pattern(/^[a-zа-я0-9\s]{1,50}$/i),
   ]);
 
   public descriptionFormControl = new FormControl('', [
@@ -111,12 +110,14 @@ export class AddLotComponent implements OnInit {
 
   onAddressSelected( address: GeoSearchResult ){
 
+
     const latLng: LatLng = new LatLng(
       address.y ,
       address.x
     );
 
-    this.mapLot = new MapCoord( address.y,  address.x);
+    this.mapLot.lat = address.y;
+    this.mapLot.lon = address.x;
 
     const popup = L.popup()
       .setLatLng(latLng)
@@ -134,25 +135,19 @@ export class AddLotComponent implements OnInit {
 
   }//onAddressSelected
 
-  onFileSelected(event){
-
-    console.log(this.multiplefile.value);
-
-    //
-    // this.selectedFiles = <File[]>event.target.files;
-    // console.log(this.selectedFiles);
-
-  }
-
-
-
   constructor(
     public dialog: MatDialog,
     private geoSearchService: GeoSearchService,
     private lotService: LotService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router,
+    private authService: AuthService,
 
   ) {
+
+    this.lot.lotTitle = 'Новый лот';
+    this.lot.lotDescription = 'Это самый лучший в мире лот';
+    this.lot.startPrice = 10;
 
     this.categoryService.getCategories(
       Constants.APP_OFFSET,
@@ -187,11 +182,10 @@ export class AddLotComponent implements OnInit {
 
   }//onCategoryResponse
 
-  onLotTypesResponse(response: ServerResponse){
+   onLotTypesResponse(response: ServerResponse){
 
-    console.log(response);
+    console.log('onLotTypesResponse', response);
 
-    try{
 
       if ( response.status === 200 ){
 
@@ -199,30 +193,51 @@ export class AddLotComponent implements OnInit {
 
       }//if
 
-    }//try
-    catch ( ex ){
-
-      console.log( "Exception: " , ex );
-
-    }//catch
-
   }//onLotTypesResponse
 
 
-  addLot( event ){
+  async addLot( event ){
 
-    const authData: AuthData = new class implements AuthData {
-      message: string;
-    };
 
-    authData.message = "Лот добавлен!";
+    try{
 
-    if ( event instanceof KeyboardEvent && event.code === "Enter" ){
-      this.openDialog(authData);
-    }//if
-    else if ( event instanceof  MouseEvent){
-      this.openDialog(authData);
-    }//else if
+      if (this.selectedType) {
+        const typeLotResponse = await this.lotService.getTypeLotById(this.selectedType);
+
+        if (typeLotResponse.status === 200) {
+          this.lot.typeLot = typeLotResponse.data;
+        }
+      }//if
+
+      this.lot.mapLot = this.mapLot;
+
+      if ( this.selectedType === Constants.LOT_PLANED ){
+        this.lot.dateStartTrade = moment(this.dateRange).unix();
+
+      }//if
+
+      const LotResponse = await this.lotService.addLot(this.lot, this.multiplefile.value);
+
+      const authData: AuthData = {
+        message: LotResponse.message
+      }
+      
+      if ( event instanceof KeyboardEvent && event.code === "Enter" ){
+        this.openDialog(authData);
+      }//if
+      else if ( event instanceof  MouseEvent){
+        this.openDialog(authData);
+      }//else if
+
+    }//try
+    catch (ex){
+      console.log(ex);
+      const authData: AuthData = {
+        message: ex.error.message || ex.message
+      }
+      this.openDialog( authData);
+    }//catch
+
 
 
   }//authorize
@@ -245,8 +260,8 @@ export class AddLotComponent implements OnInit {
         position.coords.longitude
       ], 13);
 
-      this.mapLot = new MapCoord( position.coords.latitude, position.coords.longitude);
-      //
+      this.mapLot.lat = position.coords.latitude;
+      this.mapLot.lon = position.coords.longitude;
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -254,7 +269,7 @@ export class AddLotComponent implements OnInit {
 
       const myIcon = L.icon(
         {
-          iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
+          iconUrl: 'modules/leaflet/dist/images/marker-icon.png',
           iconSize: [38, 55],
         }
       );
@@ -273,7 +288,8 @@ export class AddLotComponent implements OnInit {
 
         this.marker.setLatLng( event.latlng );
 
-        this.mapLot = new MapCoord( event.latlng.latitude, event.latlng.longitude);
+        this.mapLot.lat = event.latlng.lat;
+        this.mapLot.lon = event.latlng.lng;
 
         const result: GeoSearchByCoordsModel = await this.geoSearchService.getAddressByCords(event.latlng);
 
