@@ -209,14 +209,6 @@ export class AddLotComponent implements OnInit {
         }
       }//if
 
-      const lots = await this.lotService.getLotList(
-        Constants.APP_OFFSET,
-        Constants.APP_LIMIT
-      );
-
-
-      console.log('lots', lots);
-
       this.lot.mapLot = this.mapLot;
 
       if ( this.selectedType === Constants.LOT_PLANED ){

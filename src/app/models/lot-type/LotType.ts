@@ -4,7 +4,7 @@ export class LotType{
 
 
 
-  public _id: number;
+  public _id: string;
   public typeTitle: string;
   public typeID: number;
 
