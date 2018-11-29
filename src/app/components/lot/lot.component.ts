@@ -3,7 +3,6 @@ import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
 import {LotImage} from '../../models/LotImage/lotImage';
 
-import * as $ from 'jquery';
 
 import {MatDialog} from "@angular/material";
 import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
@@ -22,17 +21,16 @@ import {Category} from "../../models/category/Category";
 import {LotType} from "../../models/lot-type/LotType";
 import {LotStatus} from "../../models/lot-status/Lot-status";
 
-import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
-
 import * as moment from 'moment';
+
 import {logging} from "selenium-webdriver";
+
 declare let L;
 
 @Component({
   selector: 'app-lot',
   templateUrl: './lot.component.html',
-  styleUrls: ['./lot.component.css'],
-  providers: [NgbTooltipConfig]
+  styleUrls: ['./lot.component.css']
 })
 export class LotComponent implements OnInit {
 
@@ -47,12 +45,14 @@ export class LotComponent implements OnInit {
 
   public moment  = moment;
 
+  public likeMarkIcon = null;
+  public dislikeMarkIcon = null;
+
   constructor(
     private geoService: GeoSearchService,
     private route: ActivatedRoute,
     private lotService: LotService,
-    public dialog: MatDialog,
-    public tooltipConfig: NgbTooltipConfig
+    public dialog: MatDialog
   ) {
 
     this.route.data.subscribe( (resolvedData: any ) => {
@@ -65,10 +65,6 @@ export class LotComponent implements OnInit {
       });
 
     } );
-
-    this.tooltipConfig.placement = 'top';
-    this.tooltipConfig.triggers = 'click';
-    this.tooltipConfig.autoClose = 'outside';
 
   }//constructor
 
@@ -127,30 +123,29 @@ export class LotComponent implements OnInit {
 
   ngOnInit(){
 
+    this.likeMarkIcon = document.querySelector("#likeIcon");
+    this.dislikeMarkIcon = document.querySelector("#dislikeIcon");
+
     this.lotService.getCurrentLotMarkFromUser(this.lot)
       .then( (response: ServerResponse) => {
 
           console.log('response INFO: ', response);
 
           if ( response.data === Constants.DISLIKE ){
-            const dislikeMarkIcon = document.querySelector("#dislikeIcon");
-            dislikeMarkIcon.classList.toggle("DislikeMark");
 
-            console.log('dislikeMarkIcon : ', dislikeMarkIcon);
-
+            this.dislikeMarkIcon.classList.toggle("DislikeMark");
 
           }//if
           else if ( response.data === Constants.LIKE ){
-            const likeMarkIcon = document.querySelector("#likeIcon");
-            likeMarkIcon.classList.toggle("LikeMark");
 
-            console.log('likeMarkIcon : ', likeMarkIcon);
+            this.likeMarkIcon.classList.toggle("LikeMark");
 
           }//else if
 
       } )
-      .catch( error => {  } );
+      .catch( error => {
 
+      } ); //getCurrentLotMarkFromUser
 
     // const idLot = this.router.snapshot.paramMap.get("id");
     //
@@ -178,15 +173,12 @@ export class LotComponent implements OnInit {
         lot.countLikes += +like;
         lot.countDisLikes += +dislike;
 
-        const likeMarkIcon = document.querySelector("#likeIcon");
-        const dislikeMarkIcon = document.querySelector("#dislikeIcon");
-
         if (+like !== 0){
-          likeMarkIcon.classList.toggle("LikeMark");
+          this.likeMarkIcon.classList.toggle("LikeMark");
         }//if
 
         if (+dislike !== 0){
-          dislikeMarkIcon.classList.toggle("DislikeMark");
+          this.dislikeMarkIcon.classList.toggle("DislikeMark");
         }//if
 
       }//if

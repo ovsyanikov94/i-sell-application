@@ -8,9 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
 //MY-COMPONENTS
 import { AuthorizeComponent } from './components/authorize/authorize.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -79,6 +76,9 @@ import { PasswordRecoveryConfirmComponent } from './components/password-recovery
 import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component';
 import {LotResolverService} from './services/lot/lot-resolver.service';
 
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -143,7 +143,8 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     MatAutocompleteModule,
     MatPaginatorModule,
     HttpClientModule,
-    NgbModule,
+    PopoverModule.forRoot(),
+    TooltipModule.forRoot(),
   ],
   providers: [
     GeoSearchService,
