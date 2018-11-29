@@ -127,6 +127,29 @@ export class LotComponent implements OnInit {
 
   ngOnInit(){
 
+    this.lotService.getCurrentLotMarkFromUser(this.lot)
+      .then( (response: ServerResponse) => {
+
+          console.log('response INFO: ', response);
+
+          if ( response.data === Constants.DISLIKE ){
+            const dislikeMarkIcon = document.querySelector("#dislikeIcon");
+            dislikeMarkIcon.classList.toggle("DislikeMark");
+
+            console.log('dislikeMarkIcon : ', dislikeMarkIcon);
+
+
+          }//if
+          else if ( response.data === Constants.LIKE ){
+            const likeMarkIcon = document.querySelector("#likeIcon");
+            likeMarkIcon.classList.toggle("LikeMark");
+
+            console.log('likeMarkIcon : ', likeMarkIcon);
+
+          }//else if
+
+      } )
+      .catch( error => {  } );
 
 
     // const idLot = this.router.snapshot.paramMap.get("id");
