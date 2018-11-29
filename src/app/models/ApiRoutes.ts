@@ -38,7 +38,7 @@ export class ApiRoutes{
   static readonly COMMENT_ADD_NEW: string = 'comment';
   static readonly UPDATE_COMMENT: string = 'updateComment/:id';
   static readonly DELETE_COMMENT: string = 'deleteComment/:id';
-  static readonly GET_COMMENTS: string = 'comment/list';
+  static readonly GET_COMMENTS: string = 'comment/:id';
 
 
 }

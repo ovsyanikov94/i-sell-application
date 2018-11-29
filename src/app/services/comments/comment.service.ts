@@ -21,11 +21,13 @@ export class CommentService {
 
   ) { }
 
-  getLotComments( offset: number, limit: number ): Promise<ServerResponse>{
+  getLotComments( id: string, offset: number, limit: number ): Promise<ServerResponse>{
 
     const httpParams: HttpParams = new HttpParams()
+      .set('id', id)
       .set('limit' , limit.toString())
       .set('offset' , offset.toString());
+
 
     return this.http.get(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_COMMENTS}`,
@@ -42,15 +44,15 @@ export class CommentService {
     commentData.append('commentText' , comment.commentText);
     commentData.append('commentStatus' , comment.commentStatus.toString()) ;
     commentData.append('commentType' , comment.commentType.toString()) ;
-    commentData.append('commentSendDate' , comment.commentSendDate.toString()) ;
-    commentData.append('userSender' , comment.userSender.toString()) ;
+    commentData.append('commentSendDate' , comment.commentSendDate) ;
+    commentData.append('userSender' , comment.userSender) ;
 
     if (+comment.commentType === Constants.COMMENT_TYPE_LOT){
-      commentData.append('lot' , comment.lot.toString()) ;
+      commentData.append('lot' , comment.lot) ;
     }//if
 
     else if (+comment.commentType === Constants.COMMENT_TYPE_PERSONAL){
-      commentData.append('userReceiver' , comment.userReceiver.toString()) ;
+      commentData.append('userReceiver' , comment.userReceiver) ;
     }//if
 
     return this.http.post(
