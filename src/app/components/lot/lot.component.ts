@@ -14,7 +14,7 @@ import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.ser
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
 import {Router, ActivatedRoute, ParamMap} from "@angular/router";
 import {LotService} from "../../services/lot/lot.service";
-import {CommentService} from '../../services/comment/comment.service';
+import { CommentService } from '../../services/comments/comment.service';
 import { switchMap } from 'rxjs/operators';
 import {ServerResponse} from "../../models/server/ServerResponse";
 import {Comment} from "../../models/comment/Comment";
@@ -37,7 +37,7 @@ export class LotComponent implements OnInit {
   public marker: Marker;
   public map: Map;
 
-  public comments: Comments[];
+  public comments: Comment[];
 
   public constants: Constants = Constants;
 
