@@ -306,7 +306,7 @@ export class MyProfileComponent implements OnInit {
 
   async getUserInfo(){
 
-    const response = await this.authSersice.getUser();
+    const response = await this.authSersice.getUser(null);
     if (response.status === 200){
       console.log(response.data);
       this.user = response.data as User;

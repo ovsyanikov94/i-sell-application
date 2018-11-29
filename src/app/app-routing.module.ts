@@ -69,7 +69,8 @@ const routes: Routes = [
         component: MyDialogsComponent
       },
       {
-        path: 'profile/:id',
+       // path: 'profile/:id',
+        path: 'profile',
         component: ProfileComponent,
         canActivate: [ AuthGuardGuard ]
       },
