@@ -33,7 +33,10 @@ export class ApiRoutes{
   static readonly GET_USER_BYID: string = 'getUserByID';
   static readonly USER_CHANGE_PARAMS: string = 'updateUserInfo';
   static readonly USER_INFO: string = 'getUser';
-
+  static readonly USER_SUBSCRIBERS: string = 'getSubscribers';
+  static readonly USER_SUBSCRIPTION: string = 'getSubscriptions';
+  static readonly USER_ADD_IN_SUBSCRIBERS: string = 'addInSubscribers';
+  static readonly USER_REMOVE_IN_SUBSCRIBERS: string = 'removeInSubscribers';
   //COMMENTS
   static readonly COMMENT_ADD_NEW: string = 'comment';
   static readonly UPDATE_COMMENT: string = 'updateComment/:id';

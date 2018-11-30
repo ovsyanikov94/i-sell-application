@@ -79,6 +79,7 @@ import { PasswordRecoveryRequestComponent } from './components/password-recovery
 import { PasswordRecoveryConfirmComponent } from './components/password-recovery-confirm/password-recovery-confirm.component';
 import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component';
 import {LotResolverService} from './services/lot/lot-resolver.service';
+import {ProfileService} from './services/profile/profile.service';
 
 
 @NgModule({

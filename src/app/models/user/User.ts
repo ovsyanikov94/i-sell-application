@@ -63,6 +63,7 @@ export class User {
   //   this._userCountSum = value;
   // }
 
+<<<<<<< HEAD
   get userID(): string {
       return this._id;
     }
@@ -73,6 +74,9 @@ export class User {
 
 
   private _id: string;
+=======
+  public _id: string;
+>>>>>>> master
   public userLogin: string;
   public userPassword: string;
   public userOldPassword: string;
