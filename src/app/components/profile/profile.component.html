@@ -1,4 +1,4 @@
-<mat-tab-group [dynamicHeight]="true" style="padding: 15px" color="primary">
+<mat-tab-group [dynamicHeight]="true"  (selectedTabChange)="onTabChanged($event)" style="padding: 15px" color="primary">
 
   <mat-tab label="Личные данные">
 
@@ -6,11 +6,11 @@
 
       <div class="row justify-content-center">
 
-        <div class="col-6">
+        <div class="col-8">
 
           <div class="row justify-content-center">
 
-            <div class="mat-elevation-z8">
+            <div class="col-8">
 
               <mat-list>
                 <mat-list-item style="width:100%; height: 100%">
@@ -33,25 +33,28 @@
                 <mat-list-item>{{user.userEmail}}</mat-list-item>
                 <mat-divider></mat-divider>
 
-
-
-
               </mat-list>
 
 
 
               <div class="row justify-content-center text-center">
 
-              <div class="col-12" style="padding: 15px">
-                <button (click)="Subscribe()"  class="col-12" color="primary" mat-stroked-button>Подписаться</button>
+              <div *ngIf="!statusSubscribe; else unSubscribestatus" class="col-12" style="padding: 15px">
+                <button (click)="Subscribe()"  class="col-12" color="primary"  mat-raised-button>Подписаться</button>
               </div>
+              <ng-template #unSubscribestatus>
+                <div  class="col-12" style="padding: 15px">
+                  <button (click)="unSubscribe()"  class="col-12" color="warn"  mat-raised-button>Отписаться</button>
+                </div>
+              </ng-template>
 
-              </div>
+
+            </div>
 
               <div class="row justify-content-center text-center">
 
                 <div class="col-12" style="padding: 15px">
-                  <a routerLink="/main/my-dialog/{{user.userLogin}}" target="_blank" (click)="Subscribe()"  class="col-12" color="primary" mat-stroked-button>Написать</a>
+                  <a routerLink="/main/my-dialog/{{user.userLogin}}" target="_blank" (click)="Subscribe()"  class="col-12" color="primary"  mat-raised-button>Написать</a>
                 </div>
 
               </div>
@@ -122,7 +125,7 @@
 
             <div class="mat-elevation-z8">
 
-              <mat-card *ngFor="let user of subscribers">
+              <mat-card *ngFor="let user of Subscriptions">
                 <mat-list>
                   <mat-list-item style="width: 600px">
                     <img  mat-list-avatar src="{{user?.userPhoto}}" alt="Desc 1" style="width: 100px; height: 100px">
@@ -152,257 +155,262 @@
 
   </mat-tab>
 
-  <mat-tab label="Лоты пользователя "  >
+  <!--<mat-tab label="Лоты пользователя "  >-->
 
 
-    <div class="container" style="padding: 15px;">
+    <!--<div class="container" style="padding: 15px;">-->
 
-      <div class="row justify-content-center">
+      <!--<div class="row justify-content-center">-->
 
-        <div class="col-12">
+        <!--<div class="col-12">-->
 
-          <div class="row justify-content-center">
+          <!--<div class="row justify-content-center">-->
 
-            <div class=" row mat-elevation-z8 col-12">
+            <!--<div class=" row mat-elevation-z8 col-12">-->
 
-              <div *ngFor="let lot of lots" style="margin-top: 2px;" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+              <!--<div *ngFor="let lot of lots" style="margin-top: 2px;" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">-->
 
-                <div style="margin: 2px; box-shadow: 0 2px 4px 2px #666666;">
+                <!--<div style="margin: 2px; box-shadow: 0 2px 4px 2px #666666;">-->
 
-                  <div class="row justify-content-center text-center">
-                    <h6 >{{lot.lotName}}</h6>
-                  </div>
-                  <div class="row justify-content-center text-center" >
-                    <small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory}}</span></small>
-                  </div>
-                  <div>
-                    <img src="{{lot.lotFoto[0]}}"  style="width: 100%">
-                  </div>
+                  <!--<div class="row justify-content-center text-center">-->
+                    <!--&lt;!&ndash;<h6 >{{lot.lotName}}</h6>&ndash;&gt;-->
+                    <!--<h6 >Название</h6>-->
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
+                    <!--&lt;!&ndash;<small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory}}</span></small>&ndash;&gt;-->
+                    <!--<small class="text-muted">Категория: <span style="font-weight: bold ">Категории</span></small>-->
+                  <!--</div>-->
+                  <!--<div>-->
+                    <!--&lt;!&ndash;<img src="{{lot.lotFoto[0]}}"  style="width: 100%">&ndash;&gt;-->
+                    <!--<img src="https://www.google.com.ua/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjj17ytofreAhWChiwKHYndCu4QjRx6BAgBEAU&url=https%3A%2F%2Fnews.rambler.ru%2Finternet%2F40639219-google-chrome-poluchit-rezhim-kartinka-v-kartinke%2F&psig=AOvVaw3vRH_w8mv36VwV9V9Yt1ym&ust=1543603443511441"  style="width: 100%">-->
+                  <!--</div>-->
 
-                  <div class="row justify-content-center text-center" >
+                  <!--<div class="row justify-content-center text-center" >-->
 
-                    <span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
-                          <i class="material-icons">thumb_up</i>
-                    </span>
-                                <span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
-                        <i class="material-icons">thumb_down</i>
-                    </span>
-                                <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
-                        <i class="material-icons">speaker_notes</i>
-                      </span>
-                  </div>
+                    <!--<span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >-->
+                          <!--<i class="material-icons">thumb_up</i>-->
+                    <!--</span>-->
+                                <!--<span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >-->
+                        <!--<i class="material-icons">thumb_down</i>-->
+                    <!--</span>-->
+                                <!--<span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >-->
+                        <!--<i class="material-icons">speaker_notes</i>-->
+                      <!--</span>-->
+                  <!--</div>-->
 
 
-                  <div class="row justify-content-center text-center" style="margin-top: 5%" >
+                  <!--<div class="row justify-content-center text-center" style="margin-top: 5%" >-->
 
-                    <small class="text-muted">Цена за лот: </small>
+                    <!--<small class="text-muted">Цена за лот: </small>-->
 
-                  </div>
-                  <div class="row justify-content-center text-center" >
-                    <h4 class="text-muted"><span style="color: red ">{{lot.lotCurrentPrice}} руб.</span></h4>
-                  </div>
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
+                    <!--&lt;!&ndash;<h4 class="text-muted"><span style="color: red ">{{lot.lotCurrentPrice}} руб.</span></h4>&ndash;&gt;-->
+                    <!--<h4 class="text-muted"><span style="color: red ">345 руб.</span></h4>-->
+                  <!--</div>-->
 
-                  <div class="row justify-content-center text-center" >
+                  <!--<div class="row justify-content-center text-center" >-->
 
-                    <small class="text-muted">Дата начала торга: </small>
+                    <!--<small class="text-muted">Дата начала торга: </small>-->
 
-                  </div>
-                  <div class="row justify-content-center text-center" >
-                    <h6 class="text-muted"><span style="color: darkslategrey ">{{lot.lotStartDate.toLocaleDateString()}}  {{lot.lotStartDate.getHours()}}:{{lot.lotStartDate.getMinutes()}}</span></h6>
-                  </div>
-                  <div class="row justify-content-center text-center" >
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
+                    <!--&lt;!&ndash;<h6 class="text-muted"><span style="color: darkslategrey ">{{lot.lotStartDate.toLocaleDateString()}}  {{lot.lotStartDate.getHours()}}:{{lot.lotStartDate.getMinutes()}}</span></h6>&ndash;&gt;-->
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
 
 
 
-                  <div class="row justify-content-center text-center">
-                    <a style="font-size: small; margin: 3%" routerLink="/main/lot">Подробнее о лоте</a>
-                  </div>
+                  <!--<div class="row justify-content-center text-center">-->
+                    <!--<a style="font-size: small; margin: 3%" routerLink="/main/lot">Подробнее о лоте</a>-->
+                  <!--</div>-->
 
-                </div>
+                <!--</div>-->
 
-              </div>
+              <!--</div>-->
 
 
-              </div>
+              <!--</div>-->
 
-            </div>
+            <!--</div>-->
 
-          </div>
+          <!--</div>-->
 
-        </div>
+        <!--</div>-->
 
-      </div>
+      <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
-  </mat-tab>
+  <!--</mat-tab>-->
 
-  <mat-tab label="Покупки пользователя">
+  <!--<mat-tab label="Покупки пользователя">-->
 
-    <div class="container-fluid" style="padding: 15px;">
+    <!--<div class="container-fluid" style="padding: 15px;">-->
 
-      <div class="row justify-content-center">
+      <!--<div class="row justify-content-center">-->
 
-        <div class="col-12">
+        <!--<div class="col-12">-->
 
-          <div class="row justify-content-center">
+          <!--<div class="row justify-content-center">-->
 
-            <div class="row mat-elevation-z8 col-12">
+            <!--<div class="row mat-elevation-z8 col-12">-->
 
-              <div *ngFor="let lot of lots" style="margin-top: 2px;" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+              <!--<div *ngFor="let lot of lots" style="margin-top: 2px;" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">-->
 
-                <div style="margin: 2px; box-shadow: 0 2px 4px 2px #666666;">
+                <!--<div style="margin: 2px; box-shadow: 0 2px 4px 2px #666666;">-->
 
-                  <div class="row justify-content-center text-center">
-                    <h6 >{{lot.lotName}}</h6>
-                  </div>
-                  <div class="row justify-content-center text-center" >
-                    <small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory}}</span></small>
-                  </div>
-                  <div>
-                    <img src="{{lot.lotFoto[0]}}"  style="width: 100%">
-                  </div>
+                  <!--<div class="row justify-content-center text-center">-->
+                    <!--<h6 >{{lot.lotName}}</h6>-->
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
+                    <!--&lt;!&ndash;<small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory}}</span></small>&ndash;&gt;-->
+                    <!--<small class="text-muted">Категория: <span style="font-weight: bold ">Категория</span></small>-->
+                  <!--</div>-->
+                  <!--<div>-->
+                    <!--<img src="{{lot.lotFoto[0]}}"  style="width: 100%">-->
+                  <!--</div>-->
 
-                  <div class="row justify-content-center text-center" >
+                  <!--<div class="row justify-content-center text-center" >-->
 
-                    <span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
-                          <i class="material-icons">thumb_up</i>
-                    </span>
-                    <span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
-                        <i class="material-icons">thumb_down</i>
-                    </span>
-                    <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
-                        <i class="material-icons">speaker_notes</i>
-                      </span>
-                  </div>
+                    <!--<span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >-->
+                          <!--<i class="material-icons">thumb_up</i>-->
+                    <!--</span>-->
+                    <!--<span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >-->
+                        <!--<i class="material-icons">thumb_down</i>-->
+                    <!--</span>-->
+                    <!--<span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >-->
+                        <!--<i class="material-icons">speaker_notes</i>-->
+                      <!--</span>-->
+                  <!--</div>-->
 
 
-                  <div class="row justify-content-center text-center" style="margin-top: 5%" >
+                  <!--<div class="row justify-content-center text-center" style="margin-top: 5%" >-->
 
-                    <small class="text-muted">Цена за лот: </small>
+                    <!--<small class="text-muted">Цена за лот: </small>-->
 
-                  </div>
-                  <div class="row justify-content-center text-center" >
-                    <h4 class="text-muted"><span style="color: red ">{{lot.lotCurrentPrice}} руб.</span></h4>
-                  </div>
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
+                    <!--<h4 class="text-muted"><span style="color: red ">{{lot.lotCurrentPrice}} руб.</span></h4>-->
+                  <!--</div>-->
 
-                  <div class="row justify-content-center text-center" >
+                  <!--<div class="row justify-content-center text-center" >-->
 
-                    <small class="text-muted">Дата начала торга: </small>
+                    <!--<small class="text-muted">Дата начала торга: </small>-->
 
-                  </div>
-                  <div class="row justify-content-center text-center" >
-                    <h6 class="text-muted"><span style="color: darkslategrey ">{{lot.lotStartDate.toLocaleDateString()}}  {{lot.lotStartDate.getHours()}}:{{lot.lotStartDate.getMinutes()}}</span></h6>
-                  </div>
-                  <div class="row justify-content-center text-center" >
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
+                    <!--<h6 class="text-muted"><span style="color: darkslategrey ">{{lot.lotStartDate.toLocaleDateString()}}  {{lot.lotStartDate.getHours()}}:{{lot.lotStartDate.getMinutes()}}</span></h6>-->
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
 
 
 
-                    <div class="row justify-content-center text-center">
-                      <a style="font-size: small; margin: 3%" routerLink="/main/lot">Подробнее о лоте</a>
-                    </div>
+                    <!--<div class="row justify-content-center text-center">-->
+                      <!--<a style="font-size: small; margin: 3%" routerLink="/main/lot">Подробнее о лоте</a>-->
+                    <!--</div>-->
 
-                  </div>
+                  <!--</div>-->
 
-                </div>
+                <!--</div>-->
 
 
-              </div>
+              <!--</div>-->
 
-            </div>
+            <!--</div>-->
 
-          </div>
+          <!--</div>-->
 
-        </div>
+        <!--</div>-->
 
-      </div>
+      <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
-  </mat-tab>
+  <!--</mat-tab>-->
 
-  <mat-tab label="Текущие ставки">
+  <!--<mat-tab label="Текущие ставки">-->
 
-    <div class="container-fluid" style="padding: 15px;">
+    <!--<div class="container-fluid" style="padding: 15px;">-->
 
-      <div class="row justify-content-center">
+      <!--<div class="row justify-content-center">-->
 
-        <div class="col-12">
+        <!--<div class="col-12">-->
 
-          <div class="row justify-content-center">
+          <!--<div class="row justify-content-center">-->
 
-            <div class="row mat-elevation-z8 col-12">
+            <!--<div class="row mat-elevation-z8 col-12">-->
 
-              <div *ngFor="let lot of lots" style="margin-top: 2px;" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+              <!--<div *ngFor="let lot of lots" style="margin-top: 2px;" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">-->
 
-                <div style="margin: 2px; box-shadow: 0 2px 4px 2px #666666;">
+                <!--<div style="margin: 2px; box-shadow: 0 2px 4px 2px #666666;">-->
 
-                  <div class="row justify-content-center text-center">
-                    <h6 >{{lot.lotName}}</h6>
-                  </div>
-                  <div class="row justify-content-center text-center" >
-                    <small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory}}</span></small>
-                  </div>
-                  <div>
-                    <img src="{{lot.lotFoto[0]}}"  style="width: 100%">
-                  </div>
+                  <!--<div class="row justify-content-center text-center">-->
+                    <!--<h6 >{{lot.lotName}}</h6>-->
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
+                    <!--<small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory}}</span></small>-->
+                  <!--</div>-->
+                  <!--<div>-->
+                    <!--<img src="{{lot.lotFoto[0]}}"  style="width: 100%">-->
+                  <!--</div>-->
 
-                  <div class="row justify-content-center text-center" >
+                  <!--<div class="row justify-content-center text-center" >-->
 
-                    <span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
-                          <i class="material-icons">thumb_up</i>
-                    </span>
-                    <span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
-                        <i class="material-icons">thumb_down</i>
-                    </span>
-                    <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
-                        <i class="material-icons">speaker_notes</i>
-                      </span>
-                  </div>
+                    <!--<span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >-->
+                          <!--<i class="material-icons">thumb_up</i>-->
+                    <!--</span>-->
+                    <!--<span style="margin-right: 30px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >-->
+                        <!--<i class="material-icons">thumb_down</i>-->
+                    <!--</span>-->
+                    <!--<span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >-->
+                        <!--<i class="material-icons">speaker_notes</i>-->
+                      <!--</span>-->
+                  <!--</div>-->
 
 
-                  <div class="row justify-content-center text-center" style="margin-top: 5%" >
+                  <!--<div class="row justify-content-center text-center" style="margin-top: 5%" >-->
 
-                    <small class="text-muted">Цена за лот: </small>
+                    <!--<small class="text-muted">Цена за лот: </small>-->
 
-                  </div>
-                  <div class="row justify-content-center text-center" >
-                    <h4 class="text-muted"><span style="color: red ">{{lot.lotCurrentPrice}} руб.</span></h4>
-                  </div>
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
+                    <!--<h4 class="text-muted"><span style="color: red ">{{lot.lotCurrentPrice}} руб.</span></h4>-->
+                  <!--</div>-->
 
-                  <div class="row justify-content-center text-center" >
+                  <!--<div class="row justify-content-center text-center" >-->
 
-                    <small class="text-muted">Дата начала торга: </small>
+                    <!--<small class="text-muted">Дата начала торга: </small>-->
 
-                  </div>
-                  <div class="row justify-content-center text-center" >
-                    <h6 class="text-muted"><span style="color: darkslategrey ">{{lot.lotStartDate.toLocaleDateString()}}  {{lot.lotStartDate.getHours()}}:{{lot.lotStartDate.getMinutes()}}</span></h6>
-                  </div>
-                  <div class="row justify-content-center text-center" >
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
+                    <!--<h6 class="text-muted"><span style="color: darkslategrey ">{{lot.lotStartDate.toLocaleDateString()}}  {{lot.lotStartDate.getHours()}}:{{lot.lotStartDate.getMinutes()}}</span></h6>-->
+                  <!--</div>-->
+                  <!--<div class="row justify-content-center text-center" >-->
 
 
 
-                    <div class="row justify-content-center text-center">
-                      <a style="font-size: small; margin: 3%" routerLink="/main/lot">Подробнее о лоте</a>
-                    </div>
+                    <!--<div class="row justify-content-center text-center">-->
+                      <!--<a style="font-size: small; margin: 3%" routerLink="/main/lot">Подробнее о лоте</a>-->
+                    <!--</div>-->
 
-                  </div>
+                  <!--</div>-->
 
-                </div>
+                <!--</div>-->
 
 
-              </div>
+              <!--</div>-->
 
-            </div>
+            <!--</div>-->
 
-          </div>
+          <!--</div>-->
 
-        </div>
+        <!--</div>-->
 
-      </div>
+      <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
-  </mat-tab>
+  <!--</mat-tab>-->
 
 </mat-tab-group>

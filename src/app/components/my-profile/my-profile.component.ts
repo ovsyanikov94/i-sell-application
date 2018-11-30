@@ -294,7 +294,6 @@ export class MyProfileComponent implements OnInit {
     }
     if (event.index === 1){
 
-     console.log( this.selectedBuyElement);
       this.getListLotStatusSale();
 
     }
