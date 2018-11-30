@@ -1,28 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
+import {Comment} from "../../models/comment/Comment";
+import { AuthData} from '../../models/modal.data/auth.data';
+import {Category} from "../../models/category/Category";
+import {LotType} from "../../models/lot-type/LotType";
+import {LotStatus} from "../../models/lot-status/Lot-status";
 import {LotImage} from '../../models/LotImage/lotImage';
+import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
+import {ServerResponse} from "../../models/server/ServerResponse";
 
 import {MatDialog} from "@angular/material";
+import {MatTabChangeEvent} from '@angular/material';
+
 import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
+import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component';
+import {Router, ActivatedRoute, ParamMap} from "@angular/router";
+import { FormControl , Validators } from '@angular/forms';
 
 import { Constants } from "../../models/Constants";
 
 import {LatLng, Map, Marker} from 'leaflet';
-import {MatTabChangeEvent} from '@angular/material';
+
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
-import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
-import {Router, ActivatedRoute, ParamMap} from "@angular/router";
 import {LotService} from "../../services/lot/lot.service";
+import { CommentService } from '../../services/comments/comment.service';
+
 import { switchMap } from 'rxjs/operators';
-import {ServerResponse} from "../../models/server/ServerResponse";
-import {Category} from "../../models/category/Category";
-import {LotType} from "../../models/lot-type/LotType";
-import {LotStatus} from "../../models/lot-status/Lot-status";
+
 
 import * as moment from 'moment';
 declare let L;
-
 @Component({
   selector: 'app-lot',
   templateUrl: './lot.component.html',
@@ -36,17 +44,29 @@ export class LotComponent implements OnInit {
   public marker: Marker;
   public map: Map;
 
+  public comments: Comment[];
+
+  public comment: Comment = new Comment();
+
+  public commentText = null;
+
   public constants: Constants = Constants;
 
   public images: string[] = [];
 
   public moment  = moment;
 
+  public commentFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+
   constructor(
     private geoService: GeoSearchService,
     private route: ActivatedRoute,
     private router: Router,
     private lotService: LotService,
+    private commentService: CommentService,
     public dialog: MatDialog
   ) {
 
@@ -72,6 +92,12 @@ export class LotComponent implements OnInit {
       });
 
     } );
+
+    this.commentService.getLotComments(
+      this.lot._id,
+      Constants.APP_OFFSET,
+      Constants.APP_LIMIT
+    ).then( this.onCommentResponse.bind(this) );
 
   }//constructor
 
@@ -145,6 +171,27 @@ export class LotComponent implements OnInit {
   }//ngOnInit
 
 
+  onCommentResponse(response: ServerResponse){
+
+    console.log(response);
+
+    try{
+
+      if ( response.status === 200 ){
+
+        this.comments = response.data as Comment[];
+
+      }//if
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+  }//onCategoryResponse
+
   async addLikeOrDislikeLot( lot: Lot, mark: number ){
 
     try{
@@ -172,6 +219,55 @@ export class LotComponent implements OnInit {
     this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
 
   }//showLikeDislikeModal
+
+  openDialog( authData: AuthData ): void {
+
+    const dialogRef = this.dialog.open(AuthModalComponent, {
+      width: '400px',
+      data: authData
+    });
+
+  }//openDialog
+
+  async addComment( event ){
+
+    try{
+
+      this.comment.commentText = this.commentText;
+
+      this.comment.commentType = Constants.COMMENT_TYPE_LOT;
+
+      this.comment.commentStatus = Constants.COMMENT_STATUS_READ;
+
+      this.comment.commentSendDate = Date.now().toString();
+
+      this.comment.lot = this.lot._id;
+
+      const CommentResponse = await this.commentService.addComment(this.comment);
+
+      const authData: AuthData = {
+        message: CommentResponse.message
+      };
+
+      if ( event instanceof KeyboardEvent && event.code === "Enter" ){
+        this.openDialog(authData);
+      }//if
+      else if ( event instanceof  MouseEvent){
+        this.openDialog(authData);
+      }//else if
+
+    }//try
+    catch (ex){
+      console.log(ex);
+      const authData: AuthData = {
+        message: ex.error.message || ex.message
+      };
+      this.openDialog( authData);
+    }//catch
+
+
+
+  }//authorize
 
 
 }//LotComponent

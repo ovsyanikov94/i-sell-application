@@ -33,23 +33,33 @@ export class Comment{
   set commentText(value: string) {
     this._commentText = value;
   }
-  get userReceiver(): User | Lot {
+
+  get userReceiver(): string{
     return this._userReceiver;
   }
 
-  set userReceiver(value: User | Lot) {
+  set userReceiver(value: string) {
     this._userReceiver = value;
   }
-  get userSender(): User {
+  get userSender(): string {
     return this._userSender;
   }
 
-  set userSender(value: User) {
+  set userSender(value: string) {
     this._userSender = value;
   }
 
-  private _userSender: User;
-  private _userReceiver: User | Lot;
+  get lot(): string {
+    return this._lot;
+  }
+  set lot(value: string){
+    this._lot = value;
+  }
+
+  public _id: string;
+  private _userSender: string;
+  private _userReceiver: string;
+  private _lot: string;
   private _commentText: string;
   private _commentSendDate: string;
   private _commentType: number;
