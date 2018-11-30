@@ -13,9 +13,13 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  isAuth(): boolean{
-    return true;
-  }
+  isAuth(): Promise<ServerResponse>{
+
+    return (this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.IS_USER_AUTHORIZED}`
+    ).toPromise() as Promise<ServerResponse>);
+
+  }//isAuth
 
   async register( user: User ): Promise<ServerResponse>{
 

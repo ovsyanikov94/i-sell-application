@@ -37,6 +37,8 @@ export class ApiRoutes{
   static readonly USER_SUBSCRIPTION: string = 'getSubscriptions';
   static readonly USER_ADD_IN_SUBSCRIBERS: string = 'addInSubscribers';
   static readonly USER_REMOVE_IN_SUBSCRIBERS: string = 'removeInSubscribers';
+  static readonly IS_USER_AUTHORIZED: string = 'check-user-access';
+
   //COMMENTS
   static readonly COMMENT_ADD_NEW: string = 'comment';
   static readonly UPDATE_COMMENT: string = 'updateComment/:id';
