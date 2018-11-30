@@ -5,8 +5,7 @@ import { LotType } from '../lot-type/LotType';
 import { LotStatus } from '../lot-status/Lot-status';
 import { Category } from "../category/Category";
 import { MapCoord } from "../MapCoord/MapCoord";
-
-
+import { LotImage } from "../LotImage/lotImage";
 
 
 export class Lot {
@@ -16,7 +15,7 @@ export class Lot {
   public customer: User;
   public seller: User;
   public lotDescription: string;
-  public lotImagePath: string[];
+  public lotImagePath: LotImage[];
   public startPrice: number;
   public mapLot: MapCoord;
   public currentRate: number;
@@ -49,7 +48,7 @@ export class Lot {
     // this._lotSendDate = new Date();
     // this._lotStartDate = new Date();
     // this._lotEndDate = new Date();
-
+    //
     // const comment: Comment = new Comment();
     //
     // comment.commentSendDate = '2018-10-10 17:00';
@@ -65,4 +64,4 @@ export class Lot {
 
   }//constructor
 
-}
+}//Lot

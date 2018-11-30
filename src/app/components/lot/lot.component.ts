@@ -129,7 +129,7 @@ export class LotComponent implements OnInit {
 
   }//initMap
 
-  ngOnInit(){
+  ngOnInit() {
 
     //Получение всех параметров, указанных через :ИмяПараметра
     this.route.params.subscribe( (params) => {
@@ -158,9 +158,9 @@ export class LotComponent implements OnInit {
       }//if
 
     }//try
-    catch (ex){
+    catch ( ex ){
 
-      console.log('Ex: ' , ex);
+      console.log( "Exception: " , ex );
 
     }//catch
 

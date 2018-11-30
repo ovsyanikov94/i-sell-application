@@ -29,21 +29,20 @@ import {Router} from "@angular/router";
 
 export class CardLotComponent implements OnInit {
 
-  public lots: Lot[];
+  public lots: Lot[] = [];
 
   public moment  = moment;
   public limit: number = Constants.APP_LIMIT_LOT;
   public offset: number = Constants.APP_OFFSET_LOT;
 
   categoriesControl = new FormControl();
-  categories: Category[] ;
+  categories: Category[] = [];
 
   constructor(
     public dialog: MatDialog ,
     private lotService: LotService,
     private categoryService: CategoryService,
     @Inject(DOCUMENT) private document: Document,
-    private router: Router
 
   ) {
 
@@ -170,10 +169,5 @@ export class CardLotComponent implements OnInit {
 
   }//openDialog
 
-  SingleLot(id){
-    //this.router.navigateByUrl(`/main/lot/${id}`);
-    //routerLink="/main/lot/{{lot._id}}"
-    console.log("single lot", id);
-  }
 
 }

@@ -23,6 +23,7 @@ const routes: Routes = [
   {
     path: 'main',
     component: MainComponent,
+
     children: [
       {
         path: '',
@@ -79,7 +80,6 @@ const routes: Routes = [
     path: 'register',
     component: RegistrationComponent
   },
-
   {
     path: 'authorize',
     component: AuthorizeComponent
