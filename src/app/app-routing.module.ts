@@ -17,12 +17,12 @@ import {MyDialogsComponent} from './components/my-dialogs/my-dialogs.component';
 import {PasswordRecoveryRequestComponent} from './components/password-recovery-request/password-recovery-request.component';
 import {PasswordRecoveryConfirmComponent} from './components/password-recovery-confirm/password-recovery-confirm.component';
 import {AuthGuardGuard} from './guards/auth-guard.guard';
+import {LotResolverService} from './services/lot/lot-resolver.service';
 
 const routes: Routes = [
   {
     path: 'main',
     component: MainComponent,
-
     children: [
       {
         path: '',
@@ -30,7 +30,10 @@ const routes: Routes = [
       },
       {
         path: 'lot/:id',
-        component: LotComponent
+        component: LotComponent,
+        resolve: {
+          lotResponse: LotResolverService,
+        }
       },
       {
         path: 'card-lot',
@@ -76,6 +79,7 @@ const routes: Routes = [
     path: 'register',
     component: RegistrationComponent
   },
+
   {
     path: 'authorize',
     component: AuthorizeComponent

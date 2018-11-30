@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
+import {LotImage} from '../../models/LotImage/lotImage';
+
+import {MatDialog} from "@angular/material";
+import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
+
+import { Constants } from "../../models/Constants";
 
 import {LatLng, Map, Marker} from 'leaflet';
 import {MatTabChangeEvent} from '@angular/material';
@@ -11,7 +17,10 @@ import {LotService} from "../../services/lot/lot.service";
 import { switchMap } from 'rxjs/operators';
 import {ServerResponse} from "../../models/server/ServerResponse";
 import {Category} from "../../models/category/Category";
+import {LotType} from "../../models/lot-type/LotType";
+import {LotStatus} from "../../models/lot-status/Lot-status";
 
+import * as moment from 'moment';
 declare let L;
 
 @Component({
@@ -27,16 +36,44 @@ export class LotComponent implements OnInit {
   public marker: Marker;
   public map: Map;
 
-  public images: String[];
+  public constants: Constants = Constants;
+
+  public images: string[] = [];
+
+  public moment  = moment;
 
   constructor(
     private geoService: GeoSearchService,
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private lotService: LotService,
-
+    public dialog: MatDialog
   ) {
 
-  }
+    //Получение всех параметров, указанных через :ИмяПараметра
+    this.route.params.subscribe( (params) => {
+      console.log('params: ' , params);
+
+      setTimeout( _ => {
+
+        console.log('server response');
+
+      } , 2500 );
+
+    } );
+
+    this.route.data.subscribe( (resolvedData: any ) => {
+
+      console.log('resolved data:' , resolvedData);
+      this.lot = resolvedData.lotResponse.data as Lot;
+
+      this.images = this.lot.lotImagePath.map(function(image) {
+        return image.path;
+      });
+
+    } );
+
+  }//constructor
 
 
   onTabChanged( event: MatTabChangeEvent ){
@@ -92,43 +129,48 @@ export class LotComponent implements OnInit {
 
   }//initMap
 
-  ngOnInit() {
+  ngOnInit(){
 
-    const idLot = this.router.snapshot.paramMap.get("id");
+    //Получение всех параметров, указанных через :ИмяПараметра
+    this.route.params.subscribe( (params) => {
+      console.log('params: ' , params);
+    } );
 
-    this.lotService.getLotById(
-      idLot
-    ).then(this.onLotResponse.bind(this));
+    // const idLot = this.router.snapshot.paramMap.get("id");
+    //
+    // this.lotService.getLotById(
+    //   idLot
+    // ).then(this.onLotResponse.bind(this));
 
   }//ngOnInit
 
-  onLotResponse(response: ServerResponse){
+
+  async addLikeOrDislikeLot( lot: Lot, mark: number ){
 
     try{
 
+      const response: ServerResponse = await this.lotService.addLikeOrDislikeLot(lot , mark);
+
+      console.log('response: ' , response);
+
       if ( response.status === 200 ){
-
-        this.lot = response.data as Lot;
-
-       for ( let i = 0; i < this.lot.lotImagePath.length; i++){
-
-         const image = this.lot.lotImagePath[i];
-         this.images.push(image.path);
-
-       }//for
-        this.images = this.lot.lotImagePath.map(function(image) {
-          return image.path;
-        });
-
+        //lot.countLikes++;
       }//if
 
     }//try
-    catch ( ex ){
+    catch (ex){
 
-      console.log( "Exception: " , ex );
+      console.log('Ex: ' , ex);
 
     }//catch
 
-  }//onCategoryResponse
+  }//addLikeOrDislikeLot
+
+  public showLikeDislikeModal(){
+
+    this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
+
+  }//showLikeDislikeModal
+
 
 }//LotComponent
