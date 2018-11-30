@@ -3,6 +3,11 @@ import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
 import {LotImage} from '../../models/LotImage/lotImage';
 
+import {MatDialog} from "@angular/material";
+import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
+
+import { Constants } from "../../models/Constants";
+
 import {LatLng, Map, Marker} from 'leaflet';
 import {MatTabChangeEvent} from '@angular/material';
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
@@ -31,6 +36,8 @@ export class LotComponent implements OnInit {
   public marker: Marker;
   public map: Map;
 
+  public constants: Constants = Constants;
+
   public images: string[] = [];
 
   public moment  = moment;
@@ -39,7 +46,7 @@ export class LotComponent implements OnInit {
     private geoService: GeoSearchService,
     private route: ActivatedRoute,
     private lotService: LotService,
-
+    public dialog: MatDialog
   ) {
 
     this.route.data.subscribe( (resolvedData: any ) => {
@@ -109,7 +116,7 @@ export class LotComponent implements OnInit {
 
   }//initMap
 
-  ngOnInit() {
+  ngOnInit(){
 
     // const idLot = this.router.snapshot.paramMap.get("id");
     //
@@ -119,40 +126,33 @@ export class LotComponent implements OnInit {
 
   }//ngOnInit
 
-  async onLotResponse(response: ServerResponse){
+
+  async addLikeOrDislikeLot( lot: Lot, mark: number ){
 
     try{
 
+      const response: ServerResponse = await this.lotService.addLikeOrDislikeLot(lot , mark);
+
+      console.log('response: ' , response);
+
       if ( response.status === 200 ){
-
-        this.lot = response.data as Lot;
-
-        const typeLotResponse = await this.lotService.getTypeLotById(+this.lot.typeLot);
-
-        if (typeLotResponse.status === 200) {
-          this.lot.typeLot = typeLotResponse.data as LotType;
-        }
-
-        const statusLotResponse = await this.lotService.getStatusLotById(+this.lot.statusLot);
-
-        if (statusLotResponse.status === 200) {
-          this.lot.statusLot = statusLotResponse.data as LotStatus;
-        }
-
-        this.images = this.lot.lotImagePath.map(function(image) {
-          return image.path;
-        });
-
-        console.log('this.images', this.images);
+        //lot.countLikes++;
       }//if
 
     }//try
-    catch ( ex ){
+    catch (ex){
 
-      console.log( "Exception: " , ex );
+      console.log('Ex: ' , ex);
 
     }//catch
 
-  }//onCategoryResponse
-  
+  }//addLikeOrDislikeLot
+
+  public showLikeDislikeModal(){
+
+    this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
+
+  }//showLikeDislikeModal
+
+
 }//LotComponent

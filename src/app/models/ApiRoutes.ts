@@ -15,6 +15,10 @@ export class ApiRoutes{
   static readonly GET_STATUS_LOT_SALE: string = 'GetListLotStatusSale';
   static readonly GET_USER_LOT_BUY: string = 'GetUserBuyLot';
   static readonly GET_USER_LOT_SALE: string = 'GetUserSaleLot';
+
+  static readonly LOT_MARK_LIST: string = 'lot-mark-list';
+  static readonly UPDATE_LOT_MARK: string = 'update-lot-mark';
+
   //CATEGORIES
   static readonly GET_CATEGORIES_LIST: string = 'category/list';
   //typelot
@@ -33,4 +37,4 @@ export class ApiRoutes{
   //COMMENTS
   static readonly COMMENT_ADD_NEW: string = 'comment';
 
-}
+}//ApiRoutes

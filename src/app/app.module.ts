@@ -32,6 +32,9 @@ import { FeedbackModalComponent } from './modals/feedback-modal/feedback-modal.c
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
 
+//TOOLTIP MODULE
+import {TooltipModule} from "ngx-tooltip";
+
 //DATE-TIME PICKER
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
@@ -61,10 +64,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
-//GO_TOP_BUTTON
-
-
-
 //LEAFLET
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
@@ -78,6 +77,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { GeoSearchService } from "./services/LeafletGeoSearch/geo-search.service";
 import { PasswordRecoveryRequestComponent } from './components/password-recovery-request/password-recovery-request.component';
 import { PasswordRecoveryConfirmComponent } from './components/password-recovery-confirm/password-recovery-confirm.component';
+import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component';
 import {LotResolverService} from './services/lot/lot-resolver.service';
 
 
@@ -107,8 +107,10 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     RemoveFromBlacklistComponent,
     ComplaintsModalComponent,
     FeedbackModalComponent,
+    PasswordRecoveryConfirmComponent,
     PasswordRecoveryRequestComponent,
-    PasswordRecoveryConfirmComponent
+    LikeDislikeViewerModalComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -142,7 +144,7 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     MatAutocompleteModule,
     MatPaginatorModule,
     HttpClientModule,
-
+    TooltipModule
   ],
   providers: [
     GeoSearchService,
@@ -153,7 +155,8 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     BetModalComponent,
     RemoveFromBlacklistComponent,
     ComplaintsModalComponent,
-    FeedbackModalComponent
+    FeedbackModalComponent,
+    LikeDislikeViewerModalComponent
   ],
   bootstrap: [AppComponent]
 })
