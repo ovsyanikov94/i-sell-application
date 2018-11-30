@@ -299,6 +299,7 @@ export class MyProfileComponent implements OnInit {
     }
    if (event.index === 3){
      this.getUserInfo();
+
    }
 
   }//onTabChanged
