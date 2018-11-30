@@ -63,9 +63,7 @@ export class User {
   //   this._userCountSum = value;
   // }
 
-
-
-
+  public _id: string;
   public userLogin: string;
   public userPassword: string;
   public userOldPassword: string;

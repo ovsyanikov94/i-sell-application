@@ -72,11 +72,23 @@ export class AuthService {
 
   }//authorize
 
-  async getUser(): Promise<ServerResponse> {
+  async getUser( user: User): Promise<ServerResponse> {
 
-    return this.http.get(
-      `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`,
-    ).toPromise() as Promise<ServerResponse>;
+    if ( user === null){
+      return this.http.post(
+        `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`,
+        {}
+      ).toPromise() as Promise<ServerResponse>;
+    }
+    else{
+      return this.http.post(
+        `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`,
+        {
+          userId: user._id
+        }
+      ).toPromise() as Promise<ServerResponse>;
+    }
+
 
   }//authorize
 }

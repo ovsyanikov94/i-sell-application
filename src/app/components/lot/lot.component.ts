@@ -45,9 +45,22 @@ export class LotComponent implements OnInit {
   constructor(
     private geoService: GeoSearchService,
     private route: ActivatedRoute,
+    private router: Router,
     private lotService: LotService,
     public dialog: MatDialog
   ) {
+
+    //Получение всех параметров, указанных через :ИмяПараметра
+    this.route.params.subscribe( (params) => {
+      console.log('params: ' , params);
+
+      setTimeout( _ => {
+
+        console.log('server response');
+
+      } , 2500 );
+
+    } );
 
     this.route.data.subscribe( (resolvedData: any ) => {
 
@@ -116,7 +129,12 @@ export class LotComponent implements OnInit {
 
   }//initMap
 
-  ngOnInit(){
+  ngOnInit() {
+
+    //Получение всех параметров, указанных через :ИмяПараметра
+    this.route.params.subscribe( (params) => {
+      console.log('params: ' , params);
+    } );
 
     // const idLot = this.router.snapshot.paramMap.get("id");
     //
@@ -140,9 +158,9 @@ export class LotComponent implements OnInit {
       }//if
 
     }//try
-    catch (ex){
+    catch ( ex ){
 
-      console.log('Ex: ' , ex);
+      console.log( "Exception: " , ex );
 
     }//catch
 
