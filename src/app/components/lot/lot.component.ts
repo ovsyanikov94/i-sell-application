@@ -86,6 +86,7 @@ export class LotComponent implements OnInit {
 
       console.log('resolved data:' , resolvedData);
       this.lot = resolvedData.lotResponse.data as Lot;
+      this.comments = this.lot.comments;
 
       this.images = this.lot.lotImagePath.map(function(image) {
         return image.path;
@@ -93,11 +94,11 @@ export class LotComponent implements OnInit {
 
     } );
 
-    this.commentService.getLotComments(
-      this.lot._id,
-      Constants.APP_OFFSET,
-      Constants.APP_LIMIT
-    ).then( this.onCommentResponse.bind(this) );
+    // this.commentService.getLotComments(
+    //   this.lot._id,
+    //   Constants.APP_OFFSET,
+    //   Constants.APP_LIMIT
+    // ).then( this.onCommentResponse.bind(this) );
 
   }//constructor
 
@@ -243,18 +244,24 @@ export class LotComponent implements OnInit {
 
       this.comment.lot = this.lot._id;
 
-      const CommentResponse = await this.commentService.addComment(this.comment);
+      const CommentResponse: ServerResponse = await this.commentService.addComment(this.comment);
 
-      const authData: AuthData = {
-        message: CommentResponse.message
-      };
+      if ( CommentResponse.status === 200 ){
 
-      if ( event instanceof KeyboardEvent && event.code === "Enter" ){
-        this.openDialog(authData);
+        this.comments.push( this.comment );
+
       }//if
-      else if ( event instanceof  MouseEvent){
-        this.openDialog(authData);
-      }//else if
+
+      // const authData: AuthData = {
+      //   message: CommentResponse.message
+      // };
+      //
+      // if ( event instanceof KeyboardEvent && event.code === "Enter" ){
+      //   this.openDialog(authData);
+      // }//if
+      // else if ( event instanceof  MouseEvent){
+      //   this.openDialog(authData);
+      // }//else if
 
     }//try
     catch (ex){

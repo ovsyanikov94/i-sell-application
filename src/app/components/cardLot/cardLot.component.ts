@@ -1,6 +1,6 @@
-import {Component, HostListener, Inject, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnInit, ViewChild} from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSidenav} from '@angular/material';
 import { BetModalComponent } from '../../modals/bet.modal/bet.modal.component';
 import { BetData } from '../../models/modal.bet/bet.data';
 import {FormControl, Validators} from "@angular/forms";
@@ -29,6 +29,9 @@ import {Router} from "@angular/router";
 
 export class CardLotComponent implements OnInit {
 
+  @ViewChild('sidenav')
+  sidenav: MatSidenav;
+
   public lots: Lot[] = [];
 
   public moment  = moment;
@@ -37,6 +40,10 @@ export class CardLotComponent implements OnInit {
 
   categoriesControl = new FormControl();
   categories: Category[] = [];
+
+  close() {
+    this.sidenav.close();
+  }
 
   constructor(
     public dialog: MatDialog ,
@@ -114,7 +121,6 @@ export class CardLotComponent implements OnInit {
 
         this.lots = response.data as Lot[];
 
-
       }//if
 
     }//try
@@ -127,14 +133,13 @@ export class CardLotComponent implements OnInit {
 
   }//onLotsResponse
 
-  @HostListener("window:scroll", [])
-
+  //@HostListener("window:scroll", [])
   Top(){
 
-    window.scroll(0, 0 );
-    console.log(window);
-    const offset = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
-    console.log(offset);
+    // window.scroll(0, 0 );
+    // console.log(window);
+    // const offset = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
+    // console.log(offset);
 
   }
   
