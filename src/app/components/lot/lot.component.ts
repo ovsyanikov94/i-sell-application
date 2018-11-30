@@ -144,6 +144,7 @@ export class LotComponent implements OnInit {
 
       console.log('Ex: ' , ex);
 
+
     }//catch
 
   }//addLikeOrDislikeLot
