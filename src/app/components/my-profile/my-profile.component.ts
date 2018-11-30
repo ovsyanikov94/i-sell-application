@@ -294,7 +294,6 @@ export class MyProfileComponent implements OnInit {
     }
     if (event.index === 1){
 
-     console.log( this.selectedBuyElement);
       this.getListLotStatusSale();
 
     }
@@ -306,7 +305,7 @@ export class MyProfileComponent implements OnInit {
 
   async getUserInfo(){
 
-    const response = await this.authSersice.getUser(null);
+    const response = await this.authSersice.getUser();
     if (response.status === 200){
       console.log(response.data);
       this.user = response.data as User;

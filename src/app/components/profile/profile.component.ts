@@ -5,6 +5,7 @@ import {MatTabChangeEvent} from "@angular/material";
 import {AuthService} from "../../services/user/auth.service";
 import {ProfileService} from "../../services/profile/profile.service";
 import {ServerResponse} from "../../models/server/ServerResponse";
+import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -19,11 +20,23 @@ export class ProfileComponent implements OnInit {
   public statusSubscribe: boolean;
   constructor(
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private route: ActivatedRoute
   ) {
-    const responseBuy = this.authService.getUser(null);
-    console.log(responseBuy);
-    this.statusSubscribe = false;
+
+
+    this.route.params.subscribe( async (params) => {
+
+      console.log('params: ' , params);
+
+      const responseBuy = await this.authService.getUser(params.id);
+      console.log(responseBuy);
+      this.statusSubscribe = false;
+
+
+
+    } );
+
   }
 
   ngOnInit() {

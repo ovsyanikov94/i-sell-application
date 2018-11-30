@@ -294,6 +294,10 @@
                     </div>
 
                     <mat-form-field class="example-full-width col-12">
+                      <input name="userName" matInput disabled [(ngModel)]="user.userLogin">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width col-12">
                       <input name="userName" matInput placeholder="Имя" [(ngModel)]="user.userName" [formControl]="nameFormControl">
                       <mat-error *ngIf="nameFormControl.hasError('pattern') && !nameFormControl.hasError('required')">
                         Введите корректный имя. Длина от 2 до 25 латинских символов
