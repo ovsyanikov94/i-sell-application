@@ -241,8 +241,6 @@ export class LotComponent implements OnInit {
 
       this.comment.commentSendDate = Date.now().toString();
 
-      this.comment.userSender = "5be0442e4ae5f602c4668dbc";
-
       this.comment.lot = this.lot._id;
 
       const CommentResponse = await this.commentService.addComment(this.comment);

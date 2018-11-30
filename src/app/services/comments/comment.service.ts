@@ -45,7 +45,6 @@ export class CommentService {
     commentData.append('commentStatus' , comment.commentStatus.toString()) ;
     commentData.append('commentType' , comment.commentType.toString()) ;
     commentData.append('commentSendDate' , comment.commentSendDate) ;
-    commentData.append('userSender' , comment.userSender) ;
 
     if (+comment.commentType === Constants.COMMENT_TYPE_LOT){
       commentData.append('lot' , comment.lot) ;
