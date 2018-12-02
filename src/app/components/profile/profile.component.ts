@@ -5,7 +5,7 @@ import {MatTabChangeEvent} from "@angular/material";
 import {AuthService} from "../../services/user/auth.service";
 import {ProfileService} from "../../services/profile/profile.service";
 import {ServerResponse} from "../../models/server/ServerResponse";
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
 
 
@@ -30,6 +31,10 @@ export class ProfileComponent implements OnInit {
       console.log('params: ' , params);
 
       const responseBuy = await this.authService.getUser(params.id);
+      if (responseBuy.data === null){
+        this.router.navigateByUrl('main/my-profile');
+        return;
+      }//if
       if (responseBuy.status === 200){
         this.user = responseBuy.data as User;
       }//if
