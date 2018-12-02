@@ -60,6 +60,9 @@ export class LotComponent implements OnInit {
     Validators.required
   ]);
 
+  public commentOffset = 0;
+
+  public selectedComment = 0;
 
   constructor(
     private geoService: GeoSearchService,
@@ -113,6 +116,26 @@ export class LotComponent implements OnInit {
     }//if
 
   }//onTabChanged
+
+  addCommentsOffset(){
+    this.commentOffset += Constants.APP_OFFSET;
+    this.getCommentsOffset(this.selectedComment);
+  }
+
+  async getCommentsOffset(comment){
+
+    const selectOld =  this.selectedComment;
+    this.selectedComment = comment;
+
+    const response = await this.commentService.getLotComments(this.lot._id, Constants.APP_OFFSET , Constants.APP_LIMIT );
+    if (response.status === 200 ){
+
+      this.comments = response.data.comments as Comment[];
+      if ( selectOld !== comment){
+        this.commentOffset = 0;
+      }
+    }
+  }
 
   async initMap(){
 

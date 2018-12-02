@@ -173,8 +173,11 @@
             </div>
 
             <h3>Комментарии</h3>
-            <app-comment *ngFor="let comment of comments" [userComment]="comment"></app-comment>
-            <div *ngIf = "comments?.length === 0">
+            <app-comment *ngFor="let comment of lot.comments" [userComment]="comment"></app-comment>
+            <div  class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
+              <button (click)="addCommentsOffset()" style="width: 100%" color="primary" mat-stroked-button>Еще</button>
+            </div>
+            <div *ngIf = "lot.comments?.length === 0">
               У данного лота еще нет комментариев
             </div>
           </div>
