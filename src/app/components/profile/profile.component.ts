@@ -30,12 +30,14 @@ export class ProfileComponent implements OnInit {
       console.log('params: ' , params);
 
       const responseBuy = await this.authService.getUser(params.id);
-      this.user = responseBuy.data as User;
-      console.log(responseBuy);
-      this.statusSubscribe = false;
+      if (responseBuy.status === 200){
+        this.user = responseBuy.data as User;
+      }//if
 
-
-
+      const response = await this.profileService.inListSubstriber(this.user);
+      if (response.status === 200){
+        this.statusSubscribe = response.data;
+      }//if
     } );
 
   }
