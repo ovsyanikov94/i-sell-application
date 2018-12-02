@@ -18,7 +18,7 @@ import {Router} from "@angular/router";
 
 import {LotComponent} from '../../components/lot/lot.component';
 
-
+import { CardLotMarksFromUser } from '../../models/cardLotMarksFromUser/CardLotMarksFromUser';
 
 
 @Component({
@@ -45,11 +45,13 @@ export class CardLotComponent implements OnInit {
 
   public constants: Constants = Constants;
 
+  public cardLotMarksFromUser: CardLotMarksFromUser;
+
   constructor(
     public dialog: MatDialog ,
     private lotService: LotService,
     private categoryService: CategoryService,
-    @Inject(DOCUMENT) private document: Document,
+    @Inject(DOCUMENT) private document: Document
   ) {
 
     this.categoryService.getCategories(
@@ -143,33 +145,33 @@ export class CardLotComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.likeMarkIcon = document.querySelector("#likeIcon");
-    // this.dislikeMarkIcon = document.querySelector("#dislikeIcon");
+    this.likeMarkIcon = document.querySelectorAll("#likeIcon");
+    this.dislikeMarkIcon = document.querySelectorAll("#dislikeIcon");
 
-    // for (let i = 0; i < this.lots.length; i++){
-    //
-    //   this.lotService.getCurrentLotMarkFromUser(this.lots[i])
-    //     .then( (response: ServerResponse) => {
-    //
-    //       console.log('response INFO: ', response);
-    //
-    //       if ( response.data === Constants.DISLIKE ){
-    //
-    //         this.dislikeMarkIcon.classList.toggle("DislikeMark");
-    //
-    //       }//if
-    //       else if ( response.data === Constants.LIKE ){
-    //
-    //         this.likeMarkIcon.classList.toggle("LikeMark");
-    //
-    //       }//else if
-    //
-    //     } )
-    //     .catch( error => {
-    //
-    //     } ); //getCurrentLotMarkFromUser
-    //
-    // }//for i
+    for (let i = 0; i < this.lots.length; i++){
+
+      this.lotService.getCurrentLotMarkFromUser(this.lots[i])
+        .then( (response: ServerResponse) => {
+
+          console.log('response INFO: ', response);
+
+          if ( response.data === Constants.DISLIKE ){
+
+            this.dislikeMarkIcon.classList.toggle("DislikeMark");
+
+          }//if
+          else if ( response.data === Constants.LIKE ){
+
+            this.likeMarkIcon.classList.toggle("LikeMark");
+
+          }//else if
+
+        } )
+        .catch( error => {
+
+        } ); //getCurrentLotMarkFromUser
+
+    }//for i
 
   }//ngOnInit
 
@@ -219,11 +221,11 @@ export class CardLotComponent implements OnInit {
         lot.countDisLikes += +dislike;
 
         if (+like !== 0){
-          this.likeMarkIcon.classList.toggle("LikeMark");
+          //this.likeMarkIcon.classList.toggle("LikeMark");
         }//if
 
         if (+dislike !== 0){
-          this.dislikeMarkIcon.classList.toggle("DislikeMark");
+          //this.dislikeMarkIcon.classList.toggle("DislikeMark");
         }//if
 
       }//if

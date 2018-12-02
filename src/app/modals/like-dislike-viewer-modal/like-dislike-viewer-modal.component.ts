@@ -16,13 +16,26 @@ export class LikeDislikeViewerModalComponent implements OnInit {
   public limit: number = Constants.APP_LIMIT_LOT;
   public offset: number = Constants.APP_OFFSET_LOT;
 
-  public usersWithMark: User[] = [];
+
+
+  public currentMark: number;
+  public currentLot: Lot;
+  public usersWithMark = [];
+
 
   constructor(private matDialogRef: MatDialogRef<LikeDislikeViewerModalComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private lotService: LotService) {
+
+    console.log('modal data: ', data);
+    this.usersWithMark = data.users;
+    this.currentMark = data.mark;
+    this.currentLot = data.lot;
+
 
   }//constructor
 
   ngOnInit() {
+
+
 
   }//ngOnInit
 
@@ -30,28 +43,25 @@ export class LikeDislikeViewerModalComponent implements OnInit {
     this.matDialogRef.close();
   }//close
 
-  async MoreMarkedUsers(lot, mark){
+  async MoreMarkedUsers(currentLot, currentMark){
 
     this.offset += this.limit;
 
-    const responseUsers = await this.lotService.getUsersListWithLikeDislike( lot, mark, this.offset, this.limit );
+    const responseUsers = await this.lotService.getUsersListWithLikeDislike( currentLot, currentMark, this.limit, this.offset );
 
     if ( responseUsers.status === 200){
 
-      const moreLots =  responseUsers.data;
+      const moreUsers =  responseUsers.data;
 
-      moreLots.forEach(l => {
+      moreUsers.forEach(l => {
 
         this.usersWithMark.push (l);
 
       });
 
-      if ( moreLots.length === 0 ){
+      if ( moreUsers.length === 0 ){
         this.offset += this.usersWithMark.length;
-      }//
-
-      console.log('this.offset', this.offset);
-      console.log('users', this.usersWithMark);
+      }//if
 
     }//if
 

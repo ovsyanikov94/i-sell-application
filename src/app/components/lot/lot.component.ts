@@ -48,6 +48,8 @@ export class LotComponent implements OnInit {
   public likeMarkIcon = null;
   public dislikeMarkIcon = null;
 
+  public usersWithMarks = [];
+
   constructor(
     private geoService: GeoSearchService,
     private route: ActivatedRoute,
@@ -125,6 +127,8 @@ export class LotComponent implements OnInit {
     this.likeMarkIcon = document.querySelector("#likeIcon");
     this.dislikeMarkIcon = document.querySelector("#dislikeIcon");
 
+    console.log('this.likeMarkIcon', this.likeMarkIcon);
+
     this.lotService.getCurrentLotMarkFromUser(this.lot)
       .then( (response: ServerResponse) => {
 
@@ -193,6 +197,8 @@ export class LotComponent implements OnInit {
 
   async showLikeDislikeModal(lot: Lot, mark: number){
 
+    this.usersWithMarks = [];
+
     try{
         const response: ServerResponse = await this.lotService.getUsersListWithLikeDislike(lot, mark, Constants.APP_LIMIT_LOT, Constants.APP_OFFSET_LOT );
 
@@ -200,7 +206,9 @@ export class LotComponent implements OnInit {
 
         if (response.status === 200 && response.data !== null){
 
-          this.dialog.open(LikeDislikeViewerModalComponent, { data: { users: response.data, mark: mark, lot: lot }});
+          response.data.forEach( (user) => { this.usersWithMarks.push(user); } );
+
+          this.dialog.open(LikeDislikeViewerModalComponent, { data: { users: this.usersWithMarks, mark: mark, lot: lot }});
 
         }//if
         else{
