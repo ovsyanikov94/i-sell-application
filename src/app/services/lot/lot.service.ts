@@ -78,9 +78,6 @@ export class LotService {
 
   getTypeLotById( id: number ): Promise<ServerResponse>{
 
-
-
-
       const httpParams: HttpParams = new HttpParams()
         .set('id', id.toString());
 

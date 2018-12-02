@@ -68,7 +68,6 @@ export class LotComponent implements OnInit {
 
   }//constructor
 
-
   onTabChanged( event: MatTabChangeEvent ){
 
     if (event.index === 1 && !this.map ){
@@ -201,7 +200,7 @@ export class LotComponent implements OnInit {
 
         if (response.status === 200 && response.data !== null){
 
-          this.dialog.open(LikeDislikeViewerModalComponent, { data: { users: response.data }});
+          this.dialog.open(LikeDislikeViewerModalComponent, { data: { users: response.data, mark: mark, lot: lot }});
 
         }//if
         else{

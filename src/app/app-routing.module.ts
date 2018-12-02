@@ -37,7 +37,10 @@ const routes: Routes = [
       },
       {
         path: 'card-lot',
-        component: CardLotComponent
+        component: CardLotComponent,
+        resolve: {
+
+        }
       },
       {
         path: 'black-list',

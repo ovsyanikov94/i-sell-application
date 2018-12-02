@@ -16,6 +16,8 @@ import {ServerResponse} from "../../models/server/ServerResponse";
 import {DOCUMENT} from "@angular/common";
 import {Router} from "@angular/router";
 
+import {LotComponent} from '../../components/lot/lot.component';
+
 
 
 
@@ -38,14 +40,17 @@ export class CardLotComponent implements OnInit {
   categoriesControl = new FormControl();
   categories: Category[] = [];
 
+  public likeMarkIcon = null;
+  public dislikeMarkIcon = null;
+
+  public constants: Constants = Constants;
+
   constructor(
     public dialog: MatDialog ,
     private lotService: LotService,
     private categoryService: CategoryService,
     @Inject(DOCUMENT) private document: Document,
-
   ) {
-
 
     this.categoryService.getCategories(
       Constants.APP_OFFSET,
@@ -56,8 +61,6 @@ export class CardLotComponent implements OnInit {
       this.offset,
       this.limit
     ).then(this.onLotsResponse.bind(this));
-
-
 
   }//constructor
 
@@ -79,11 +82,11 @@ export class CardLotComponent implements OnInit {
       if ( moreLots.length === 0 ){
         this.offset += this.lots.length;
       }//
-      
+
       console.log('this.offset', this.offset);
     }//if
 
-    
+
 
   }//MoreLots
 
@@ -137,10 +140,38 @@ export class CardLotComponent implements OnInit {
     console.log(offset);
 
   }
-  
+
   ngOnInit() {
 
-  }
+    // this.likeMarkIcon = document.querySelector("#likeIcon");
+    // this.dislikeMarkIcon = document.querySelector("#dislikeIcon");
+
+    // for (let i = 0; i < this.lots.length; i++){
+    //
+    //   this.lotService.getCurrentLotMarkFromUser(this.lots[i])
+    //     .then( (response: ServerResponse) => {
+    //
+    //       console.log('response INFO: ', response);
+    //
+    //       if ( response.data === Constants.DISLIKE ){
+    //
+    //         this.dislikeMarkIcon.classList.toggle("DislikeMark");
+    //
+    //       }//if
+    //       else if ( response.data === Constants.LIKE ){
+    //
+    //         this.likeMarkIcon.classList.toggle("LikeMark");
+    //
+    //       }//else if
+    //
+    //     } )
+    //     .catch( error => {
+    //
+    //     } ); //getCurrentLotMarkFromUser
+    //
+    // }//for i
+
+  }//ngOnInit
 
   bet( event, lot: Lot ){
 
@@ -169,5 +200,41 @@ export class CardLotComponent implements OnInit {
 
   }//openDialog
 
+  async addLikeOrDislikeLotOnCardLot(lot: Lot, mark: number){
 
-}
+    try{
+
+      const response: ServerResponse = await this.lotService.addLikeOrDislikeLot(lot , mark);
+
+      console.log('response: ' , response);
+
+      if ( response.status === 200 ){
+
+        const like: number = response.data.like;
+        const dislike: number = response.data.dislike;
+
+        console.log('like, dislike', like, dislike);
+
+        lot.countLikes += +like;
+        lot.countDisLikes += +dislike;
+
+        if (+like !== 0){
+          this.likeMarkIcon.classList.toggle("LikeMark");
+        }//if
+
+        if (+dislike !== 0){
+          this.dislikeMarkIcon.classList.toggle("DislikeMark");
+        }//if
+
+      }//if
+
+    }//try
+    catch (ex){
+
+      console.log('Ex: ' , ex);
+
+    }//catch
+
+  }//addLikeOrDislikeLotOnCardLot
+
+}//CardLotComponent

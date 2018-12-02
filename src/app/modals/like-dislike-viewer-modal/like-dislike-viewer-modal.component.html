@@ -1,3 +1,30 @@
-<p>
-  like-dislike-viewer-modal works!
-</p>
+
+  <div class="row justify-content-center" *ngIf="data.users.length === 0">
+    <div class="col-12">
+      Оценивших пользователей нет
+    </div>
+  </div>
+
+  <div *ngIf="data.users.length > 0">
+
+    <mat-list>
+      <mat-list-item *ngFor="let user of data.users">
+
+        <img  mat-list-avatar src="{{user.userPhoto}}" alt="Desc 1" style="width: 100px; height: 100px">
+        <h3 mat-line><a routerLink="/main/profile/1" >{{user.userLogin}}</a></h3>
+
+      </mat-list-item>
+    </mat-list>
+
+    <div class="row justify-content-center " *ngIf="offset <= data.users.length">
+      <div class="row">
+
+        <div class="col-12" style="margin-top: 5px; margin-left: 5px">
+          <button mat-raised-button color="primary" style="text-decoration: none; " (click)="MoreMarkedUsers(data.lot, data.mark)">Еще</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
