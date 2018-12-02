@@ -35,7 +35,7 @@ export class ProfileService {
     return this.http.post(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_ADD_IN_SUBSCRIBERS}`,
       {
-        'userId': user._id
+        'UserIDInSubscribersList': user._id
       }
     ).toPromise() as Promise<ServerResponse>;
   }//addSubscriber
@@ -44,7 +44,7 @@ export class ProfileService {
     return this.http.post(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_REMOVE_IN_SUBSCRIBERS}`,
       {
-        'userId': user._id
+        'UserIDInSubscribersList': user._id
       }
     ).toPromise() as Promise<ServerResponse>;
   }//addSubscriber

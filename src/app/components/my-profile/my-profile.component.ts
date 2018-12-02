@@ -310,8 +310,24 @@ export class MyProfileComponent implements OnInit {
     if (response.status === 200){
       console.log(response.data);
       this.user = response.data as User;
+
     }
   }//getUserInfo
+
+  async addNewAvatar() {
+
+    console.log('start');
+    if ( this.avatarControl.value !== null){
+      const response = await this.authSersice.addUserAvatar(this.avatarControl.value);
+      if (response.status === 200) {
+        this.user.userPhoto = response.data;
+      }
+      console.log('end', this.avatarControl.value);
+
+    }
+
+
+  }
   openDialog( authData: AuthData ): void {
 
 

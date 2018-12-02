@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
       console.log('params: ' , params);
 
       const responseBuy = await this.authService.getUser(params.id);
+      this.user = responseBuy.data as User;
       console.log(responseBuy);
       this.statusSubscribe = false;
 
@@ -40,11 +41,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user.userName = 'Алексей';
-    this.user.userLastname = 'Фамилия';
-    this.user.userPhone = '+3809238130';
-    this.user.userLogin = 'Alex';
-    this.user.userEmail = 'alex@gmail.com';
   }
 
 
@@ -71,7 +67,7 @@ export class ProfileComponent implements OnInit {
 
     const response = await this.profileService.getSubscriptions(this.user);
     if ( response.status === 200){
-      console.log(response);
+
       this.Subscriptions = response.data as User[];
     }
   }//getSubscriptions
@@ -88,6 +84,7 @@ export class ProfileComponent implements OnInit {
   async unSubscribe(){
     const response = await this.profileService.removeSubscriber(this.user);
     if ( response.status === 200){
+      console.log('resp' , response);
       this.statusSubscribe = response.data;
     }
   }//unSubscribe
