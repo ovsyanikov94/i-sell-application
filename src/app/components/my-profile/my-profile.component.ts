@@ -11,6 +11,9 @@ import {LotService} from '../../services/lot/lot.service';
 import { AuthData} from '../../models/modal.data/auth.data';
 import {ServerResponse} from "../../models/server/ServerResponse";
 import {LotStatus} from "../../models/lot-status/Lot-status";
+
+import { LocalStorageService } from "ngx-webstorage";
+
 import {MatTabChangeEvent} from '@angular/material';
 @Component({
   selector: 'app-my-profile',
@@ -73,15 +76,19 @@ export class MyProfileComponent implements OnInit {
   public avatarControl = new FormControl();
 
   constructor(
+    private localStorage: LocalStorageService,
     public dialog: MatDialog,
     private authSersice: AuthService,
-    private lotService: LotService
+    private lotService: LotService,
+
   ) {
     this.offsetBuy = 0;
     this.offsetSale = 0;
 
     const responseBuy = this.lotService.getStatusLotBuy()
       .then(this.getListLotStatusBuy.bind(this));
+
+    this.getUserInfo();
 
     /*const responseSale = this.lotService.getStatusLotSale()
       .then(this.getListLotStatusSale.bind(this));*/
@@ -293,14 +300,8 @@ export class MyProfileComponent implements OnInit {
       this.getLotBuy( this.lotstatusListBuy[0]);
     }
     if (event.index === 1){
-
       this.getListLotStatusSale();
-
-    }
-   if (event.index === 3){
-     this.getUserInfo();
-
-   }
+    }//if
 
   }//onTabChanged
 
@@ -310,8 +311,18 @@ export class MyProfileComponent implements OnInit {
     if (response.status === 200){
       console.log(response.data);
       this.user = response.data as User;
+
+      this.localStorage.store('user' , {
+
+        'userPhoto': this.user.userPhoto,
+        '_id': this.user._id,
+        'userLogin': this.user.userLogin
+
+      });
+
     }
   }//getUserInfo
+
   openDialog( authData: AuthData ): void {
 
 

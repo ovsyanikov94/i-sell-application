@@ -30,6 +30,7 @@ import { switchMap } from 'rxjs/operators';
 
 
 import * as moment from 'moment';
+import {LocalStorageService} from 'ngx-webstorage';
 declare let L;
 @Component({
   selector: 'app-lot',
@@ -43,6 +44,7 @@ export class LotComponent implements OnInit {
   public currentUser: User = new User();
   public marker: Marker;
   public map: Map;
+  public user: User;
 
   public comments: Comment[];
 
@@ -70,8 +72,12 @@ export class LotComponent implements OnInit {
     private router: Router,
     private lotService: LotService,
     private commentService: CommentService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private localStorage: LocalStorageService
   ) {
+
+    this.user = localStorage.retrieve('user') as User;
+    console.log('user.localStorage:' , this.user);
 
     //Получение всех параметров, указанных через :ИмяПараметра
     this.route.params.subscribe( (params) => {
@@ -271,20 +277,10 @@ export class LotComponent implements OnInit {
 
       if ( CommentResponse.status === 200 ){
 
-        this.comments.push( this.comment );
+        this.comment.userSender.userLogin = this.user.userLogin;
+        this.comments.unshift( this.comment );
 
       }//if
-
-      // const authData: AuthData = {
-      //   message: CommentResponse.message
-      // };
-      //
-      // if ( event instanceof KeyboardEvent && event.code === "Enter" ){
-      //   this.openDialog(authData);
-      // }//if
-      // else if ( event instanceof  MouseEvent){
-      //   this.openDialog(authData);
-      // }//else if
 
     }//try
     catch (ex){
