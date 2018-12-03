@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {User} from '../../models/user/User';
 import {FormControl, Validators} from '@angular/forms';
 import {PasswordConfirmValidator} from '../../Validators/PaswordValidator';
@@ -11,6 +11,10 @@ import {LotService} from '../../services/lot/lot.service';
 import { AuthData} from '../../models/modal.data/auth.data';
 import {ServerResponse} from "../../models/server/ServerResponse";
 import {LotStatus} from "../../models/lot-status/Lot-status";
+
+import { LocalStorageService } from "ngx-webstorage";
+
+import {MatTabChangeEvent} from '@angular/material';
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
@@ -18,6 +22,7 @@ import {LotStatus} from "../../models/lot-status/Lot-status";
 })
 export class MyProfileComponent implements OnInit {
 
+  @ViewChild('selectedBuy')private selectedBuyElement: ElementRef;
   public offsetBuy = 0;
   public offsetSale = 0;
   public selectedBuy: number;
@@ -71,9 +76,11 @@ export class MyProfileComponent implements OnInit {
   public avatarControl = new FormControl();
 
   constructor(
+    private localStorage: LocalStorageService,
     public dialog: MatDialog,
     private authSersice: AuthService,
-    private lotService: LotService
+    private lotService: LotService,
+
   ) {
     this.offsetBuy = 0;
     this.offsetSale = 0;
@@ -81,8 +88,10 @@ export class MyProfileComponent implements OnInit {
     const responseBuy = this.lotService.getStatusLotBuy()
       .then(this.getListLotStatusBuy.bind(this));
 
-    const responseSale = this.lotService.getStatusLotSale()
-      .then(this.getListLotStatusSale.bind(this));
+    this.getUserInfo();
+
+    /*const responseSale = this.lotService.getStatusLotSale()
+      .then(this.getListLotStatusSale.bind(this));*/
 
   }
 
@@ -131,7 +140,6 @@ export class MyProfileComponent implements OnInit {
 
   async getListLotBuy(response: ServerResponse){
 
-    console.log(response);
     try {
       if ( response.status === 200){
 
@@ -143,12 +151,14 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  async getListLotStatusSale(response: ServerResponse){
-    console.log(response);
+  async getListLotStatusSale(){
+
     try {
+      const response = await this.lotService.getStatusLotSale();
       if ( response.status === 200){
         this.lotstatusListSale = response.data as LotStatus[];
         this.selectedSale = this.lotstatusListSale[0].statusID;
+        this.getLotSale(this.selectedSale);
       }
     }
     catch (ex){
@@ -259,7 +269,7 @@ export class MyProfileComponent implements OnInit {
 
       console.log('response: ' , response );
 
-      // тут тело ответа парсим в масив лотов
+      this.lotsBuy = response.data.lots as Lot[];
       if ( selectOld !== value){
         this.offsetBuy = 0;
       }
@@ -284,9 +294,35 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  selectedTabs(event){
+  onTabChanged(event: MatTabChangeEvent){
    console.log(event);
-  }//selectedTabs
+    if (event.index === 0){
+      this.getLotBuy( this.lotstatusListBuy[0]);
+    }
+    if (event.index === 1){
+      this.getListLotStatusSale();
+    }//if
+
+  }//onTabChanged
+
+  async getUserInfo(){
+
+    const response = await this.authSersice.getUser();
+    if (response.status === 200){
+      console.log(response.data);
+      this.user = response.data as User;
+
+      this.localStorage.store('user' , {
+
+        'userPhoto': this.user.userPhoto,
+        '_id': this.user._id,
+        'userLogin': this.user.userLogin
+
+      });
+
+    }
+  }//getUserInfo
+
   openDialog( authData: AuthData ): void {
 
 

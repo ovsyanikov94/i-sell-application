@@ -1,6 +1,6 @@
-import {Component, HostListener, Inject, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnInit, ViewChild} from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSidenav} from '@angular/material';
 import { BetModalComponent } from '../../modals/bet.modal/bet.modal.component';
 import { BetData } from '../../models/modal.bet/bet.data';
 import {FormControl, Validators} from "@angular/forms";
@@ -17,6 +17,7 @@ import {DOCUMENT} from "@angular/common";
 import {Router} from "@angular/router";
 
 
+import { CardLotMarksFromUser } from '../../models/cardLotMarksFromUser/CardLotMarksFromUser';
 
 
 @Component({
@@ -29,6 +30,9 @@ import {Router} from "@angular/router";
 
 export class CardLotComponent implements OnInit {
 
+  @ViewChild('sidenav')
+  sidenav: MatSidenav;
+
   public lots: Lot[] = [];
 
   public moment  = moment;
@@ -38,12 +42,23 @@ export class CardLotComponent implements OnInit {
   categoriesControl = new FormControl();
   categories: Category[] = [];
 
+  close() {
+    this.sidenav.close();
+  }
+
+
+  public likeMarkIcon = null;
+  public dislikeMarkIcon = null;
+
+  public constants: Constants = Constants;
+
+  public cardLotMarksFromUser: CardLotMarksFromUser;
+
   constructor(
     public dialog: MatDialog ,
     private lotService: LotService,
     private categoryService: CategoryService,
-    @Inject(DOCUMENT) private document: Document,
-
+    @Inject(DOCUMENT) private document: Document
   ) {
 
 
@@ -127,20 +142,47 @@ export class CardLotComponent implements OnInit {
 
   }//onLotsResponse
 
-  @HostListener("window:scroll", [])
-
+  //@HostListener("window:scroll", [])
   Top(){
 
-    window.scroll(0, 0 );
-    console.log(window);
-    const offset = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
-    console.log(offset);
+    // window.scroll(0, 0 );
+    // console.log(window);
+    // const offset = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
+    // console.log(offset);
 
   }
   
   ngOnInit() {
 
-  }
+    this.likeMarkIcon = document.querySelectorAll("#likeIcon");
+    this.dislikeMarkIcon = document.querySelectorAll("#dislikeIcon");
+
+    for (let i = 0; i < this.lots.length; i++){
+
+      this.lotService.getCurrentLotMarkFromUser(this.lots[i])
+        .then( (response: ServerResponse) => {
+
+          console.log('response INFO: ', response);
+
+          if ( response.data === Constants.DISLIKE ){
+
+            this.dislikeMarkIcon.classList.toggle("DislikeMark");
+
+          }//if
+          else if ( response.data === Constants.LIKE ){
+
+            this.likeMarkIcon.classList.toggle("LikeMark");
+
+          }//else if
+
+        } )
+        .catch( error => {
+
+        } ); //getCurrentLotMarkFromUser
+
+    }//for i
+
+  }//ngOnInit
 
   bet( event, lot: Lot ){
 
@@ -169,5 +211,41 @@ export class CardLotComponent implements OnInit {
 
   }//openDialog
 
+  async addLikeOrDislikeLotOnCardLot(lot: Lot, mark: number){
 
-}
+    try{
+
+      const response: ServerResponse = await this.lotService.addLikeOrDislikeLot(lot , mark);
+
+      console.log('response: ' , response);
+
+      if ( response.status === 200 ){
+
+        const like: number = response.data.like;
+        const dislike: number = response.data.dislike;
+
+        console.log('like, dislike', like, dislike);
+
+        lot.countLikes += +like;
+        lot.countDisLikes += +dislike;
+
+        if (+like !== 0){
+          //this.likeMarkIcon.classList.toggle("LikeMark");
+        }//if
+
+        if (+dislike !== 0){
+          //this.dislikeMarkIcon.classList.toggle("DislikeMark");
+        }//if
+
+      }//if
+
+    }//try
+    catch (ex){
+
+      console.log('Ex: ' , ex);
+
+    }//catch
+
+  }//addLikeOrDislikeLotOnCardLot
+
+}//CardLotComponent

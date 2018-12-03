@@ -157,6 +157,18 @@ export class LotService {
 
   }//getLot
 
+  getLotById( id: string ): Promise<ServerResponse> {
+
+    const httpParams: HttpParams = new HttpParams().set('id', id);
+
+    return this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_BY_ID}`,
+      {
+        params: httpParams
+      }
+    ).toPromise() as Promise<ServerResponse>;
+  }//getLotById
+
   //поставить лайк или дизлайк лоту
   async addLikeOrDislikeLot( lot: Lot, mark: number ): Promise<ServerResponse>{
 
@@ -171,32 +183,37 @@ export class LotService {
   }//likeLot
 
   //получение списка оценок лота
-  getLikeDislikeList( offset: number, limit: number ): Promise<ServerResponse>{
+  getUsersListWithLikeDislike( lot: Lot, mark: number, limit: number, offset: number ): Promise<ServerResponse>{
 
     const httpParams: HttpParams = new HttpParams()
+      .set('receiver', lot._id.toString())
+      .set('mark', mark.toString())
       .set('limit' , limit.toString())
       .set('offset' , offset.toString());
 
     return this.http.get(
 
-      `${ApiRoutes.SERVER_URL}${ApiRoutes.LOT_MARK_LIST}`,
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.LOT_MARK_USERS_WITH_MARKS}`,
       { params: httpParams }
 
     ).toPromise() as Promise<ServerResponse>;
 
-  }//getLikeDislikeList
+  }//getUsersListWithLikeDislike
 
-  getLotById( id: string ): Promise<ServerResponse> {
+  //получения текущего статуса оценки на лоте от текущего пользователя
+  getCurrentLotMarkFromUser(lot: Lot): Promise<ServerResponse>{
 
-    const httpParams: HttpParams = new HttpParams().set('id', id);
+    const httpParams: HttpParams = new HttpParams()
+      .set('receiver', lot._id.toString());
 
     return this.http.get(
-      `${ApiRoutes.SERVER_URL}${ApiRoutes.GET_LOT_BY_ID}`,
-      {
-        params: httpParams
-      }
+
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.LOT_MARKED_BY_USER}`,
+      { params: httpParams }
+
     ).toPromise() as Promise<ServerResponse>;
-  }//getLotById
+
+  }//getCurrentLotMarkFromUser
 
 }//LotService
 

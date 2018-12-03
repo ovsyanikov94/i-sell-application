@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user/User';
 import { ApiRoutes } from '../../models/ApiRoutes';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServerResponse} from '../../models/server/ServerResponse';
 
 @Injectable({
@@ -13,9 +13,13 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  isAuth(): boolean{
-    return true;
-  }
+  isAuth(): Promise<ServerResponse>{
+
+    return (this.http.get(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.IS_USER_AUTHORIZED}`
+    ).toPromise() as Promise<ServerResponse>);
+
+  }//isAuth
 
   async register( user: User ): Promise<ServerResponse>{
 
@@ -72,11 +76,33 @@ export class AuthService {
 
   }//authorize
 
-  async getUser(): Promise<ServerResponse> {
+  async getUser( id?: string ): Promise<ServerResponse> {
+
+    const params: HttpParams = new HttpParams()
+      .set("userId" , ( id || -1 ).toString() );
 
     return this.http.get(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`,
+      {
+        params: params
+      }
     ).toPromise() as Promise<ServerResponse>;
+
+    // if ( user === null){
+    //   return this.http.post(
+    //     `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`,
+    //     {}
+    //   ).toPromise() as Promise<ServerResponse>;
+    // }
+    // else{
+    //   return this.http.post(
+    //     `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`,
+    //     {
+    //       userId: user._id
+    //     }
+    //   ).toPromise() as Promise<ServerResponse>;
+    // }
+
 
   }//authorize
 }

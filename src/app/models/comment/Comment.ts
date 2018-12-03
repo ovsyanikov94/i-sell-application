@@ -33,13 +33,15 @@ export class Comment{
   set commentText(value: string) {
     this._commentText = value;
   }
-  get userReceiver(): User | Lot {
+
+  get userReceiver(): string{
     return this._userReceiver;
   }
 
-  set userReceiver(value: User | Lot) {
+  set userReceiver(value: string) {
     this._userReceiver = value;
   }
+
   get userSender(): User {
     return this._userSender;
   }
@@ -48,8 +50,17 @@ export class Comment{
     this._userSender = value;
   }
 
-  private _userSender: User;
-  private _userReceiver: User | Lot;
+  get lot(): string {
+    return this._lot;
+  }
+  set lot(value: string){
+    this._lot = value;
+  }
+
+  public _id: string;
+  private _userSender: User = new User();
+  private _userReceiver: string;
+  private _lot: string;
   private _commentText: string;
   private _commentSendDate: string;
   private _commentType: number;
