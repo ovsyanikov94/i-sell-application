@@ -3,39 +3,26 @@ import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
 import {Comment} from "../../models/comment/Comment";
 import { AuthData} from '../../models/modal.data/auth.data';
-import {Category} from "../../models/category/Category";
-import {LotType} from "../../models/lot-type/LotType";
-import {LotStatus} from "../../models/lot-status/Lot-status";
 import {LotImage} from '../../models/LotImage/lotImage';
-import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
-import {ServerResponse} from "../../models/server/ServerResponse";
 
-import {MatDialog} from "@angular/material";
-import {MatTabChangeEvent} from '@angular/material';
+import {MatDialog, MatTabChangeEvent} from '@angular/material';
 
 import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
 import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component';
-import {Router, ActivatedRoute, ParamMap} from "@angular/router";
 import { FormControl , Validators } from '@angular/forms';
 
 import { Constants } from "../../models/Constants";
 
 import {LatLng, Map, Marker} from 'leaflet';
-import {MatTabChangeEvent} from '@angular/material';
-import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
+import {GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
-import {Router, ActivatedRoute, ParamMap} from "@angular/router";
 import {LotService} from "../../services/lot/lot.service";
 import { CommentService } from '../../services/comments/comment.service';
-
-import { switchMap } from 'rxjs/operators';
 import {ServerResponse} from "../../models/server/ServerResponse";
-import {Category} from "../../models/category/Category";
-import {LotType} from "../../models/lot-type/LotType";
-import {LotStatus} from "../../models/lot-status/Lot-status";
-import {logging} from "selenium-webdriver";
+
 import * as moment from 'moment';
 import {LocalStorageService} from 'ngx-webstorage';
+import {ActivatedRoute, Router} from '@angular/router';
 declare let L;
 
 @Component({

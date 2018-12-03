@@ -111,7 +111,12 @@
 
         <div class="row justify-content-center text-center" style="margin-top: 15px ">
 
-          <span style="margin-right: 30px; cursor: pointer" matBadge="{{lot.countLikes}}" matBadgeOverlap="false" >
+          <span style="margin-right: 30px; cursor: pointer" matBadge="{{lot.countLikes}}" matBadgeOverlap="false">
+
+              <i *ngIf="lot.lotMark && lot.lotMark.mark === 0" class="red" ></i>
+              <i *ngIf="lot.lotMark && lot.lotMark.mark === 1" class="green" ></i>
+              <i *ngIf="!lot.lotMark"></i>
+
               <i class="material-icons" id="likeIcon" (click)="addLikeOrDislikeLotOnCardLot(lot, constants.LIKE)">thumb_up</i>
           </span>
 
@@ -162,7 +167,7 @@
                 <button (click)="bet( $event, lot )" class="col-10" mat-raised-button color="primary" style="cursor: pointer" >Сделать ставку</button>
               </div>
               <div class="row justify-content-center text-center">
-                <a target="_blank" style="font-size: small; margin: 3%; cursor: pointer" routerLink="/lot/{{lot._id}}"  >Подробнее о лоте</a>
+                <a style="font-size: small; margin: 3%; cursor: pointer" routerLink="/lot/{{lot._id}}"  >Подробнее о лоте</a>
               </div>
 
             </div>
