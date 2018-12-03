@@ -10,3 +10,11 @@
   height: 30px;
   width: 30px;
 }
+
+.material-icons.LikeMark {
+  color: #216c15;
+}
+
+.material-icons.DislikeMark {
+  color: #880004;
+}

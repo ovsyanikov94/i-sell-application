@@ -146,6 +146,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     PopoverModule.forRoot(),
+
   ],
   providers: [
     GeoSearchService,

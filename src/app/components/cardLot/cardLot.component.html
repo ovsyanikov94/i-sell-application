@@ -113,14 +113,19 @@
 
           <span style="margin-right: 30px; cursor: pointer" matBadge="{{lot.countLikes}}" matBadgeOverlap="false">
 
-              <i *ngIf="lot.lotMark && lot.lotMark.mark === 0" class="red" ></i>
-              <i *ngIf="lot.lotMark && lot.lotMark.mark === 1" class="green" ></i>
-              <i *ngIf="!lot.lotMark"></i>
+            <div [ngSwitch]="lot.lotMark">
+               <i *ngSwitchCase="constants.LIKE" class="material-icons" id="likeIcon LikeMark" (click)="addLikeOrDislikeLotOnCardLot(lot, constants.LIKE)">thumb_up</i>
+              <i *ngSwitchCase="constants.DISLIKE" class="material-icons" id="likeIcon DislikeMark" (click)="addLikeOrDislikeLotOnCardLot(lot, constants.LIKE)">thumb_up</i>
+              <i *ngSwitchCase="!lot.lotMark" class="material-icons" id="likeIcon" (click)="addLikeOrDislikeLotOnCardLot(lot, constants.LIKE)">thumb_up</i>
+            </div>
 
               <i class="material-icons" id="likeIcon" (click)="addLikeOrDislikeLotOnCardLot(lot, constants.LIKE)">thumb_up</i>
           </span>
 
           <span style="margin-right: 30px; cursor: pointer" matBadge="{{lot.countDisLikes}}" matBadgeOverlap="false" >
+
+
+
               <i class="material-icons" (click)="addLikeOrDislikeLotOnCardLot(lot, constants.DISLIKE)" id="dislikeIcon">thumb_down</i>
           </span>
 
