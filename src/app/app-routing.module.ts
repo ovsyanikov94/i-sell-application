@@ -16,31 +16,18 @@ import {ListDialogsComponent} from './components/list-dialogs/list-dialogs.compo
 import {MyDialogsComponent} from './components/my-dialogs/my-dialogs.component';
 import {PasswordRecoveryRequestComponent} from './components/password-recovery-request/password-recovery-request.component';
 import {PasswordRecoveryConfirmComponent} from './components/password-recovery-confirm/password-recovery-confirm.component';
-import {AuthGuardGuard} from './guards/auth-guard.guard';
 import {LotResolverService} from './services/lot/lot-resolver.service';
+import {AuthGuard} from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'main',
     component: MainComponent,
+    canActivateChild: [ AuthGuard ],
     children: [
       {
         path: '',
         component: CardLotComponent
-      },
-      {
-        path: 'lot/:id',
-        component: LotComponent,
-        resolve: {
-          lotResponse: LotResolverService
-        }
-      },
-      {
-        path: 'card-lot',
-        component: CardLotComponent,
-        resolve: {
-
-        }
       },
       {
         path: 'black-list',
@@ -74,15 +61,24 @@ const routes: Routes = [
       {
         path: 'profile/:id',
         component: ProfileComponent,
-        canActivate: [ AuthGuardGuard ]
       },
     ]
+  },
+  {
+    path: 'lot/:id',
+    component: LotComponent,
+    resolve: {
+      lotResponse: LotResolverService,
+    }
+  },
+  {
+    path: 'card-lot',
+    component: CardLotComponent
   },
   {
     path: 'register',
     component: RegistrationComponent
   },
-
   {
     path: 'authorize',
     component: AuthorizeComponent

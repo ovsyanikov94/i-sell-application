@@ -1,6 +1,6 @@
-import {Component, HostListener, Inject, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnInit, ViewChild} from '@angular/core';
 import {Lot} from '../../models/lot/Lot';
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSidenav} from '@angular/material';
 import { BetModalComponent } from '../../modals/bet.modal/bet.modal.component';
 import { BetData } from '../../models/modal.bet/bet.data';
 import {FormControl, Validators} from "@angular/forms";
@@ -16,7 +16,6 @@ import {ServerResponse} from "../../models/server/ServerResponse";
 import {DOCUMENT} from "@angular/common";
 import {Router} from "@angular/router";
 
-import {LotComponent} from '../../components/lot/lot.component';
 
 import { CardLotMarksFromUser } from '../../models/cardLotMarksFromUser/CardLotMarksFromUser';
 
@@ -31,6 +30,9 @@ import { CardLotMarksFromUser } from '../../models/cardLotMarksFromUser/CardLotM
 
 export class CardLotComponent implements OnInit {
 
+  @ViewChild('sidenav')
+  sidenav: MatSidenav;
+
   public lots: Lot[] = [];
 
   public moment  = moment;
@@ -39,6 +41,11 @@ export class CardLotComponent implements OnInit {
 
   categoriesControl = new FormControl();
   categories: Category[] = [];
+
+  close() {
+    this.sidenav.close();
+  }
+
 
   public likeMarkIcon = null;
   public dislikeMarkIcon = null;
@@ -54,6 +61,7 @@ export class CardLotComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document
   ) {
 
+
     this.categoryService.getCategories(
       Constants.APP_OFFSET,
       Constants.APP_LIMIT
@@ -63,6 +71,8 @@ export class CardLotComponent implements OnInit {
       this.offset,
       this.limit
     ).then(this.onLotsResponse.bind(this));
+
+
 
   }//constructor
 
@@ -84,11 +94,11 @@ export class CardLotComponent implements OnInit {
       if ( moreLots.length === 0 ){
         this.offset += this.lots.length;
       }//
-
+      
       console.log('this.offset', this.offset);
     }//if
 
-
+    
 
   }//MoreLots
 
@@ -132,17 +142,16 @@ export class CardLotComponent implements OnInit {
 
   }//onLotsResponse
 
-  @HostListener("window:scroll", [])
-
+  //@HostListener("window:scroll", [])
   Top(){
 
-    window.scroll(0, 0 );
-    console.log(window);
-    const offset = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
-    console.log(offset);
+    // window.scroll(0, 0 );
+    // console.log(window);
+    // const offset = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
+    // console.log(offset);
 
   }
-
+  
   ngOnInit() {
 
     this.likeMarkIcon = document.querySelectorAll("#likeIcon");

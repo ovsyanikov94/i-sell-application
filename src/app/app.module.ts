@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxWebstorageModule } from "ngx-webstorage";
 
 //MY-COMPONENTS
 import { AuthorizeComponent } from './components/authorize/authorize.component';
@@ -30,6 +31,9 @@ import { FeedbackModalComponent } from './modals/feedback-modal/feedback-modal.c
 
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
+
+//TOOLTIP MODULE
+import {TooltipModule} from "ngx-tooltip";
 
 //DATE-TIME PICKER
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -143,6 +147,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     MatAutocompleteModule,
     MatPaginatorModule,
     HttpClientModule,
+    TooltipModule,
+    NgxWebstorageModule.forRoot(),
     PopoverModule.forRoot(),
     TooltipModule.forRoot(),
   ],
