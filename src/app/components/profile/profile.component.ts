@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
       const response = await this.profileService.inListSubstriber(this.user);
       if (response.status === 200){
-        console.log('RESPONE', response);
+        console.log('RESPONE IN BD', response);
         this.statusSubscribe = response.data;
       }//if
     } );
