@@ -41,11 +41,12 @@ export class Comment{
   set userReceiver(value: string) {
     this._userReceiver = value;
   }
-  get userSender(): string {
+
+  get userSender(): User {
     return this._userSender;
   }
 
-  set userSender(value: string) {
+  set userSender(value: User) {
     this._userSender = value;
   }
 
@@ -57,7 +58,7 @@ export class Comment{
   }
 
   public _id: string;
-  private _userSender: string;
+  private _userSender: User = new User();
   private _userReceiver: string;
   private _lot: string;
   private _commentText: string;

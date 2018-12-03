@@ -38,6 +38,7 @@
     "ngx-material-file-input": "^0.3.0",
     "ngx-siema": "^2.0.1",
     "ngx-tooltip": "0.0.9",
+    "ngx-webstorage": "^3.0.0-beta.14",
     "owl.carousel": "^2.3.4",
     "rxjs": "~6.2.0",
     "ui-carousel": "^0.2.0",

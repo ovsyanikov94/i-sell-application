@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgxWebstorageModule } from "ngx-webstorage";
 
 //MY-COMPONENTS
 import { AuthorizeComponent } from './components/authorize/authorize.component';
@@ -144,7 +144,8 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     MatAutocompleteModule,
     MatPaginatorModule,
     HttpClientModule,
-    TooltipModule
+    TooltipModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [
     GeoSearchService,
