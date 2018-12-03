@@ -142,13 +142,10 @@ export class CardLotComponent implements OnInit {
 
   }//onLotsResponse
 
-  //@HostListener("window:scroll", [])
+
   Top(){
 
-    // window.scroll(0, 0 );
-    // console.log(window);
-    // const offset = window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
-    // console.log(offset);
+    window.scroll(0, 0 );
 
   }
   

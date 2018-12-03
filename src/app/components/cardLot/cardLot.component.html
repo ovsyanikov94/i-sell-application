@@ -95,16 +95,9 @@
               <div class="row justify-content-center text-center">
                 <h6 >{{lot.lotTitle}}</h6>
               </div>
-              <div class="row justify-content-center text-center" >
-                <small class="text-muted">Категории: </small>
-              </div>
-
-              <div class="row justify-content-center text-center" >
-                <small class="text-muted"><span  *ngFor="let cat of lot.categories" style="font-weight: bold "> {{cat.title}}</span></small>
-              </div>
 
               <div>
-                <img src="{{lot.lotImagePath[0].path}}"  style="width: 100%">
+                <img src="{{lot.lotImagePath[0].path}}"  style="width: 100%; height: 180px">
               </div>
 
         <!-----------------------LIKE-DISLIKE-COMMENTS-BUDGES----------------------->
@@ -186,23 +179,24 @@
 
         </div>
 
-
-        <!--<div class="row justify-content-center " >-->
-
-        <!--<div class="row">-->
-        <!--<div class="col-12" style="margin-top: 5px; margin-left: 5px">-->
-        <!--<button  mat-raised-button color="primary" style="text-decoration: none" (click)="Top( )">Вверх</button>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--</div>-->
-
-
-
       </div>
 
     </div>
+
+
+
+
+
+
   </mat-sidenav-content>
+
 </mat-sidenav-container>
 
+<div class="custom-class">
+  <button mat-button (click)="Top()" style="width: 60px; height:  60px" >
+    <mat-icon >
+      present_to_all
+    </mat-icon>
+  </button>
+</div>
 

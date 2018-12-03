@@ -79,6 +79,7 @@ import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-mo
 import {LotResolverService} from './services/lot/lot-resolver.service';
 
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { BiddingComponent } from './components/bidding/bidding.component';
 
 
 @NgModule({
@@ -110,6 +111,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     PasswordRecoveryConfirmComponent,
     PasswordRecoveryRequestComponent,
     LikeDislikeViewerModalComponent,
+    BiddingComponent,
 
   ],
   imports: [

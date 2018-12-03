@@ -14,10 +14,10 @@ import { FormControl , Validators } from '@angular/forms';
 import { Constants } from "../../models/Constants";
 
 import {LatLng, Map, Marker} from 'leaflet';
-import {MatTabChangeEvent} from '@angular/material';
+
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
-import {Router, ActivatedRoute, ParamMap} from "@angular/router";
+
 import {LotService} from "../../services/lot/lot.service";
 import { CommentService } from '../../services/comments/comment.service';
 import {ServerResponse} from "../../models/server/ServerResponse";
@@ -25,6 +25,8 @@ import {ServerResponse} from "../../models/server/ServerResponse";
 import * as moment from 'moment';
 import {LocalStorageService} from 'ngx-webstorage';
 import {ActivatedRoute, Router} from '@angular/router';
+import {LotStatus} from "../../models/lot-status/Lot-status";
+import {LotType} from "../../models/lot-type/LotType";
 declare let L;
 
 @Component({
@@ -185,7 +187,7 @@ export class LotComponent implements OnInit {
 
     const myIcon = L.icon(
       {
-        iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
+        iconUrl: 'modules/leaflet/dist/images/marker-icon.png',
         iconSize: [38, 55],
       }
     );

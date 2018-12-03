@@ -18,6 +18,7 @@ import {PasswordRecoveryRequestComponent} from './components/password-recovery-r
 import {PasswordRecoveryConfirmComponent} from './components/password-recovery-confirm/password-recovery-confirm.component';
 import {LotResolverService} from './services/lot/lot-resolver.service';
 import {AuthGuard} from './guards/auth.guard';
+import {BiddingComponent} from "./components/bidding/bidding.component";
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
       {
         path: 'profile/:id',
         component: ProfileComponent,
+      },
+      {
+        path: 'bidding',
+        component: BiddingComponent,
       },
     ]
   },
