@@ -41,6 +41,7 @@ export class ProfileComponent implements OnInit {
 
       const response = await this.profileService.inListSubstriber(this.user);
       if (response.status === 200){
+        console.log('RESPONE', response);
         this.statusSubscribe = response.data;
       }//if
     } );
@@ -67,7 +68,7 @@ export class ProfileComponent implements OnInit {
     if ( response.status === 200){
       console.log(response.data);
       this.subscribers = response.data as User[];
-      console.log('USER : ',this.subscribers);
+      console.log('USER : ', this.subscribers);
     }
   }//getSubscribe
 
@@ -75,8 +76,9 @@ export class ProfileComponent implements OnInit {
 
     const response = await this.profileService.getSubscriptions(this.user);
     if ( response.status === 200){
-
+      console.log(response.data);
       this.Subscriptions = response.data as User[];
+      console.log('USER : ', this.Subscriptions);
     }
   }//getSubscriptions
 
