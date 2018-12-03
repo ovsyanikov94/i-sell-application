@@ -65,8 +65,9 @@ export class ProfileComponent implements OnInit {
 
     const response = await this.profileService.getSubscriber(this.user);
     if ( response.status === 200){
-      console.log(response);
+      console.log(response.data);
       this.subscribers = response.data as User[];
+      console.log('USER : ',this.subscribers);
     }
   }//getSubscribe
 
