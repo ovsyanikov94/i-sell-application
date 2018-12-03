@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4201",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -34,6 +34,7 @@
     "moment": "^2.22.2",
     "ng-mat-search-bar": "^2.0.0",
     "ng-pick-datetime": "^6.0.16",
+    "ngx-bootstrap": "^3.1.2",
     "ngx-hm-carousel": "^1.2.6",
     "ngx-material-file-input": "^0.3.0",
     "ngx-siema": "^2.0.1",

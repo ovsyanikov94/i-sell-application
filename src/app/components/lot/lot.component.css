@@ -1,7 +1,16 @@
+
+.material-icons.LikeMark {
+  color: #216c15;
+}
+
+.material-icons.DislikeMark {
+  color: #880004;
+}
+
+
 .form-lot{
   padding: 20px;
 }
-
 
 .slide{
   position: absolute;

@@ -16,16 +16,42 @@
   </div>
 
   <!-----------------------LIKE-DISLIKE-COMMENTS-BUDGES----------------------->
-    <div   class="row justify-content-end" style="margin-top: 1%">
+
+    <ng-template #likeListLink>
+      <div style="cursor: pointer;" (click)="likePopover.hide()" (click)="showLikeDislikeModal(lot, constants.LIKE, constants.APP_LIMIT_LOT, constants.APP_OFFSET_LOT)">
+        Показать всех
+      </div>
+    </ng-template>
+
+
+    <div class="row justify-content-end" style="margin-top: 1%">
       <div class="col-1" >
          <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="{{lot.countLikes}}" matBadgeOverlap="false" >
-                <i (click)="addLikeOrDislikeLot(lot, constants.LIKE)" class="material-icons">thumb_up</i>
-            </span>
+                <i data-toggle="tooltip" title="Нравится" triggers="mouseenter" [isOpen]="false" container="body" [outsideClick]="true" #likePopover="bs-popover" [popover]="likeListLink" (click)="addLikeOrDislikeLot(lot, constants.LIKE)" class="material-icons" id="likeIcon">thumb_up</i>
+          </span>
       </div>
+
+
+      <ng-template #dislikeListLink>
+        <div style="cursor: pointer;" (click)="dislikePopover.hide()" (click)="showLikeDislikeModal(lot, constants.DISLIKE, constants.APP_LIMIT_LOT, constants.APP_OFFSET_LOT)" >
+          Показать всех
+        </div>
+      </ng-template>
 
     <div class="col-1">
         <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.countDisLikes}}" matBadgeOverlap="false" >
-              <i (click)="addLikeOrDislikeLot(lot, constants.DISLIKE)" class="material-icons">thumb_down</i>
+              <i
+                data-toggle="tooltip"
+                title="Не нравится"
+                triggers="mouseenter"
+                container="body"
+                [isOpen]="false"
+                [outsideClick]="true"
+                #dislikePopover="bs-popover"
+                [popover]="dislikeListLink"
+                (click)="addLikeOrDislikeLot(lot, constants.DISLIKE)"
+                class="material-icons"
+                id="dislikeIcon">thumb_down</i>
         </span>
     </div>
 
@@ -34,14 +60,6 @@
             <i class="material-icons">speaker_notes</i>
           </span>
     </div>
-
-    <button (click)="showLikeDislikeModal()" mat-button color="primary">Like/Dislike</button>
-
-      <tooltip-content #myTooltip>
-        <b>tooltip</b>
-      </tooltip-content>
-
-      <button mat-button color="primary" [tooltip]="myTooltip">hover this button to see a tooltip</button>
 
   </div>
 

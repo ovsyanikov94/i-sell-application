@@ -32,8 +32,6 @@ import { FeedbackModalComponent } from './modals/feedback-modal/feedback-modal.c
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
 
-//TOOLTIP MODULE
-import {TooltipModule} from "ngx-tooltip";
 
 //DATE-TIME PICKER
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -79,6 +77,8 @@ import { PasswordRecoveryRequestComponent } from './components/password-recovery
 import { PasswordRecoveryConfirmComponent } from './components/password-recovery-confirm/password-recovery-confirm.component';
 import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component';
 import {LotResolverService} from './services/lot/lot-resolver.service';
+
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 
 @NgModule({
@@ -144,8 +144,8 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     MatAutocompleteModule,
     MatPaginatorModule,
     HttpClientModule,
-    TooltipModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    PopoverModule.forRoot(),
   ],
   providers: [
     GeoSearchService,
