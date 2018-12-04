@@ -23,6 +23,7 @@ export class ProfileService {
   }//getSubscriber
 
   async getSubscriptions(user: User): Promise<ServerResponse>{
+
     return this.http.post(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_SUBSCRIPTION}`,
       {
