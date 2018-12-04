@@ -11,7 +11,7 @@ import {HttpClient, HttpParams, HttpRequest} from "@angular/common/http";
 import { Lot } from '../../models/lot/Lot';
 import {FileInput} from 'ngx-material-file-input';
 
-import {User} from '../../models/user/User';
+
 
 @Injectable({
   providedIn: 'root'

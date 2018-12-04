@@ -4,9 +4,15 @@
 
 
 .custom-class {
+  right: 5px;
   position: fixed;
-  background-color: pink;
-  border-color: green;
-  height: 30px;
-  width: 30px;
+  bottom: 0px;
+width: 60px;
+height: 60px;
+  z-index: 9999999999;
+}
+
+.open-button{
+  position: fixed;
+  z-index: 9999999999;
 }

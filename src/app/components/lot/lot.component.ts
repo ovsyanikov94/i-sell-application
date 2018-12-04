@@ -14,8 +14,10 @@ import { FormControl , Validators } from '@angular/forms';
 import { Constants } from "../../models/Constants";
 
 import {LatLng, Map, Marker} from 'leaflet';
-import {GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
+
+import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
 import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
+
 import {LotService} from "../../services/lot/lot.service";
 import { CommentService } from '../../services/comments/comment.service';
 import {ServerResponse} from "../../models/server/ServerResponse";
@@ -23,6 +25,8 @@ import {ServerResponse} from "../../models/server/ServerResponse";
 import * as moment from 'moment';
 import {LocalStorageService} from 'ngx-webstorage';
 import {ActivatedRoute, Router} from '@angular/router';
+import {LotStatus} from "../../models/lot-status/Lot-status";
+import {LotType} from "../../models/lot-type/LotType";
 declare let L;
 
 @Component({
@@ -101,14 +105,38 @@ export class LotComponent implements OnInit {
 
     } );
 
-    // this.commentService.getLotComments(
-    //   this.lot._id,
-    //   Constants.APP_OFFSET,
-    //   Constants.APP_LIMIT
-    // ).then( this.onCommentResponse.bind(this) );
-
+    this.onLotResponse();
   }//constructor
 
+  async onLotResponse(){
+
+    try{
+
+
+
+        const typeLotResponse = await this.lotService.getTypeLotById(+this.lot.typeLot);
+
+        if (typeLotResponse.status === 200){
+          this.lot.typeLot = typeLotResponse.data as LotType;
+        }//if
+
+        const statusLotResponse = await this.lotService.getStatusLotById(+this.lot.statusLot);
+
+        if (statusLotResponse.status === 200){
+          this.lot.statusLot = statusLotResponse.data as LotStatus;
+        }//if
+
+
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+
+  }//onLotsResponse
 
   onTabChanged( event: MatTabChangeEvent ){
 
@@ -159,7 +187,7 @@ export class LotComponent implements OnInit {
 
     const myIcon = L.icon(
       {
-        iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
+        iconUrl: 'modules/leaflet/dist/images/marker-icon.png',
         iconSize: [38, 55],
       }
     );
