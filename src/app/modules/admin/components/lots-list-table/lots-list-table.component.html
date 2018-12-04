@@ -1,0 +1,79 @@
+
+
+
+<div class="container justify-content-center">
+
+  <div class="row justify-content-start text-left">
+    <a style="font-size: small; margin-left: 2%; margin-bottom: 1%" routerLink="/main/lots-list">&larr; Вернуться назад</a>
+  </div>
+
+  <div class="mat-elevation-z8">
+
+    <mat-form-field >
+      <input #filter matInput (keyup)="applyFilter(filter.value)" placeholder="Filter"  >
+    </mat-form-field>
+
+    <div class="row justify-content-center">
+
+        <h1>Лоты для рассмотрения</h1>
+
+    </div>
+
+    <mat-paginator #paginator
+                   [length]="lotListSource.data.length"
+                   [pageIndex]="0"
+                   [pageSize]="50"
+                   [pageSizeOptions]="[25, 50, 100, 250]">
+    </mat-paginator>
+
+
+    <table mat-table #table [dataSource]="lotListSource" matSort aria-label="Elements">
+
+      <!-- Колонка "Продавец" -->
+      <ng-container matColumnDef="lotSeller">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Продавец</th>
+          <td mat-cell *matCellDef="let row">{{row.seller.userLogin}}</td>
+      </ng-container>
+
+      <!-- Колонка "Имя" -->
+      <ng-container matColumnDef="lotName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Имя</th>
+        <td mat-cell *matCellDef="let row"><a routerLink="/main/approve-lot-request/{{row._id}}" style="text-decoration: none">{{row.lotTitle}}</a></td>
+      </ng-container>
+
+      <!-- Колонка "Типа лота" -->
+      <ng-container matColumnDef="lotType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Тип лота</th>
+        <td mat-cell *matCellDef="let row">{{row.typeLot.typeTitle}}</td>
+      </ng-container>
+
+      <!-- Колонка "Стартовой цены" -->
+      <ng-container matColumnDef="lotStartPrice">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Стартовая цена</th>
+        <td mat-cell *matCellDef="let row">{{row.startPrice}} руб.</td>
+      </ng-container>
+
+      <!-- Колонка "Даты создания" -->
+      <ng-container matColumnDef="lotSendDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Дата создания</th>
+        <td mat-cell *matCellDef="let row">{{moment.unix(row.datePlacement).format('DD-MM-YYYY HH:mm')}}</td>
+      </ng-container>
+
+      <!-- Клонка статуса -->
+      <ng-container matColumnDef="lotStatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Статус</th>
+        <td mat-cell *matCellDef="let row">{{row.statusLot.statusTitle}}</td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+
+
+  </div>
+
+</div>

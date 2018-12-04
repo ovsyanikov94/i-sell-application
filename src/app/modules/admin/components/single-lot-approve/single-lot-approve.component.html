@@ -1,0 +1,81 @@
+
+<div class="container mat-elevation-z20">
+
+  <div class="row justify-content-start text-left">
+    <a style="font-size: small; margin-left: 2%; margin-bottom: 1%" routerLink="/main/lots-list">&larr; Вернуться назад</a>
+  </div>
+
+  <div class="row justify-content-center text-center">
+
+    <div class="col">
+      <div class="row justify-content-center text-center" >
+        <div class="container-fluid">
+          <div>
+
+            <angular-image-slider [images]="images"></angular-image-slider>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- СПИСОК ОПИСАНИЯ -->
+      <div class="container justify-content-center">
+        <div class="col-12">
+
+          <mat-list>
+
+            <mat-list-item>{{lot.lotTitle}}</mat-list-item>
+            <mat-divider></mat-divider>
+
+            <mat-list-item><b>Пользователь</b>: {{lot.seller.userLogin}}</mat-list-item>
+            <mat-divider></mat-divider>
+
+            <mat-list-item><b>Наименование товара</b>: {{lot.lotTitle}}</mat-list-item>
+            <mat-divider></mat-divider>
+
+            <mat-list-item><b>Категория товара</b>: <span  *ngFor="let cat of lot.categories" style="margin-left: 5px "> {{cat.title }} </span> </mat-list-item>
+            <mat-divider></mat-divider>
+
+            <mat-list-item><b>Тип лота</b>: {{lot.typeLot.typeTitle}}</mat-list-item>
+            <mat-divider></mat-divider>
+
+            <mat-list-item><b>Дата добавления лота</b>: {{moment.unix(lot.datePlacement).format('DD-MM-YYYY HH:mm')}}</mat-list-item>
+            <mat-divider></mat-divider>
+
+            <mat-list-item *ngIf="lot.typeLot.typeID === constants.LOT_PLANED"><b>Дата начала торга</b>: {{moment.unix(lot.dateStartTrade).format('DD-MM-YYYY HH:mm')}}</mat-list-item>
+            <mat-divider *ngIf="lot.typeLot.typeID === constants.LOT_PLANED"></mat-divider>
+
+            <mat-list-item><b>Начальная цена</b>: {{lot.startPrice}}</mat-list-item>
+            <mat-divider></mat-divider>
+
+
+            <div class="row justify-content-start">
+              <div class="col-12">
+                <b>Описание товара:</b>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                {{lot.lotDescription}}
+              </div>
+              <mat-divider></mat-divider>
+            </div>
+
+
+          </mat-list>
+        </div>
+
+      </div>
+
+      <div class="button-row">
+        <button (click)="openModal()" mat-raised-button color="warn">Отклонить</button>
+        <button (click)="approvedLot()" mat-raised-button color="primary">Одобрить</button>
+
+      </div>
+
+
+    </div>
+  </div>
+

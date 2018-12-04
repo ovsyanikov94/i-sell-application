@@ -1,0 +1,81 @@
+<div class="container-fluid">
+
+  <div class="row justify-content-start text-left">
+    <a style="font-size: small; margin-left: 2%; margin-bottom: 1%" routerLink="/main">&larr; Вернуться на главную</a>
+  </div>
+  <div class="row justify-content-start" style="margin-top: 1%; margin-bottom: 1%">
+    <div class="col">
+      <button (click)="addForm()"  mat-raised-button color="primary">Добавить новую категорию</button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center col-4" [style.display]="visib==true?'block':'none'" style="margin-left: 0px">
+
+    <div class="row justify-content-center mat-elevation-z8 p-2 ">
+
+      <mat-form-field class="col-12 example-full-width ">
+        <input name="nameCategory" matInput placeholder="Введите название категории" [(ngModel)]="cat.title" [formControl]="categoryNameFormControl">
+        <mat-error *ngIf="categoryNameFormControl.hasError('pattern') && !categoryNameFormControl.hasError('required')">
+          Введите корректное название категории
+        </mat-error>
+        <mat-error *ngIf="categoryNameFormControl.hasError('required')">
+          Название категории <strong>не должно быть пустым</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <div class="row justify-content-center text-center">
+        <div class="col-12">
+          <button  (click)="addCategory($event)" mat-raised-button color="primary">Добавить категорию</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="row justify-content-start" style="margin-left: 1%">
+    <h4>Категории</h4>
+  </div>
+    <!-- Checkbox Column -->
+    <div class="mat-elevation-z8 ">
+      <table #categoryTable mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container name="nameCategory" matColumnDef="title" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Название </th>
+          <td mat-cell *matCellDef="let row; let i = index">
+            <mat-form-field class="col-10 example-full-width">
+              <input name="nameCategory" matInput placeholder="Введите название категории" [(ngModel)]="row.title" [formControl]="formControls[i]">
+              <mat-error *ngIf="formControls[i].hasError('pattern') && !formControls[i].hasError('required')">
+                Введите корректное название категории
+              </mat-error>
+              <mat-error *ngIf="formControls[i].hasError('required')">
+                Название категории <strong>не должно быть пустым</strong>
+              </mat-error>
+            </mat-form-field>
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="update">
+          <th mat-header-cell *matHeaderCellDef > Изменить </th>
+          <td mat-cell *matCellDef="let row"><button mat-raised-button color="primary" style="font-size: 0.8em">Изменить</button></td>
+        </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef > Удалить </th>
+        <td mat-cell *matCellDef="let row"><button (click)="delete($event , row )" mat-raised-button color="warn" style="font-size: 0.8em">Удалить</button></td>
+      </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+
+
+        </tr>
+      </table>
+    </div>
+
+
+</div>

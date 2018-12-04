@@ -1,0 +1,19 @@
+<div  style="margin-bottom: 5px">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{lot?.lotName}}</mat-card-title>
+      <mat-card-subtitle>Цена {{lot.lotStartPrice}}</mat-card-subtitle>
+    </mat-card-header>
+    <angular-image-slider *ngIf="lot?.lotFoto.length > 1" [images]="lot.lotFoto"></angular-image-slider>
+    <mat-card-content>
+      <p>
+        {{lot.lotDescription}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" style="width: auto">Подтвердить сделку</button>
+      <button mat-raised-button color="warn">жалоба на продавца</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,17 @@
+<div class="row text-center justify-content-center">
+
+  <h1 mat-dialog-title class="col-12">Вы действительно хотите удалить</h1>
+  <div mat-dialog-content class="col-12">
+    <p>{{categoryData.categoryID}}</p>
+    <p>{{categoryData.categoryTitle}}</p>
+  </div>
+  <div mat-dialog-actions class="col-8" >
+    <button mat-raised-button color="primary" class="col-12" (click)="closeDialog( true )">Ок</button>
+  </div>
+  <div mat-dialog-actions class="col-8" style="margin-top: 25px">
+    <button mat-raised-button color="primary" class="col-12" (click)="closeDialog( false )">Отмена</button>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,85 @@
+<div class="container-fluid" style="margin-top: 20px">
+  <div class="row ">
+    <div class="col-6">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel  hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Добавить новую роль
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <input name="nameRole"[(ngModel)]="newRole" matInput placeholder="Название" [formControl]="roleFormControl">
+            <mat-error *ngIf="roleFormControl.hasError('pattern') && !roleFormControl.hasError('required')">
+              Введите корректное название роли. Длина от 4 до 20 русских символов
+            </mat-error>
+            <mat-error *ngIf="roleFormControl.hasError('required')">
+              Название <strong>обязательно</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-action-row>
+            <button name="newRole" mat-button color="primary"  (click)="addRole()" ngDefaultControl >Добавить</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+    </div>
+  </div>
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.roleID}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Название </th>
+        <td mat-cell *matCellDef="let row; let i=index">
+          <mat-form-field class="example-full-width col-12">
+            <input name="nameRole" matInput [(ngModel)]="row.roleTitle"  [formControl]="formControls[i]">
+              <mat-error *ngIf="formControls[i].hasError('pattern') && !formControls[i].hasError('required')">
+                Введите корректное название роли. Длина от 4 до 20 русских символов
+              </mat-error>
+            <mat-error *ngIf="formControls[i].hasError('required')">
+              Название <strong>обязательно</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef > Кол-во пользователей</th>
+        <td mat-cell *matCellDef="let row"> <a class="link" mat-raised-button routerLink=".">0</a> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef > Изменить </th>
+        <td mat-cell *matCellDef="let row"><button mat-raised-button color="primary">Изменить</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef > Удалить </th>
+        <td mat-cell *matCellDef="let row"><button (click)="deleteModal($event, row)" mat-raised-button color="warn">Удалить</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+
+
+      </tr>
+    </table>
+  </div>
+
+
+
+</div>
+
+
