@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgxWebstorageModule } from "ngx-webstorage";
 
 //MY-COMPONENTS
 import { AuthorizeComponent } from './components/authorize/authorize.component';
@@ -32,8 +32,6 @@ import { FeedbackModalComponent } from './modals/feedback-modal/feedback-modal.c
 //ANGULAR IMAGE SLIDER
 import { SliderModule } from 'angular-image-slider';
 
-//TOOLTIP MODULE
-import {TooltipModule} from "ngx-tooltip";
 
 //DATE-TIME PICKER
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -80,6 +78,9 @@ import { PasswordRecoveryConfirmComponent } from './components/password-recovery
 import { LikeDislikeViewerModalComponent } from './modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component';
 import {LotResolverService} from './services/lot/lot-resolver.service';
 
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { BiddingComponent } from './components/bidding/bidding.component';
+
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     PasswordRecoveryConfirmComponent,
     PasswordRecoveryRequestComponent,
     LikeDislikeViewerModalComponent,
+    BiddingComponent,
 
   ],
   imports: [
@@ -144,7 +146,9 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     MatAutocompleteModule,
     MatPaginatorModule,
     HttpClientModule,
-    TooltipModule
+    NgxWebstorageModule.forRoot(),
+    PopoverModule.forRoot(),
+
   ],
   providers: [
     GeoSearchService,
