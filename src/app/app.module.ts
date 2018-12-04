@@ -148,6 +148,7 @@ import { BiddingComponent } from './components/bidding/bidding.component';
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     PopoverModule.forRoot(),
+
   ],
   providers: [
     GeoSearchService,

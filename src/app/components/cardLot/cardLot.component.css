@@ -16,3 +16,11 @@ height: 60px;
   position: fixed;
   z-index: 9999999999;
 }
+
+.material-icons.LikeMark {
+  color: #216c15;
+}
+
+.material-icons.DislikeMark {
+  color: #880004;
+}
