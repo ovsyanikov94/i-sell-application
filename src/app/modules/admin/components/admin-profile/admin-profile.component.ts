@@ -3,6 +3,9 @@ import {FormControl, Validators} from '@angular/forms';
 
 import {Admin} from '../../models/admin/Admin';
 import {Lot} from '../../models/lot/Lot';
+import {GetUserService} from "../../services/user/get-user.service";
+import {ServerResponse} from "../../models/server/ServerResponse";
+import {User} from "../../models/user/User";
 
 @Component({
   selector: 'app-admin-profile',
@@ -12,9 +15,8 @@ import {Lot} from '../../models/lot/Lot';
 export class AdminProfileComponent implements OnInit {
 
   public admin: Admin = new Admin();
+  public IsRootAdmin: boolean = true;
 
-  public approvedLot: Lot[] =[];
-  public rejectedLot: Lot[] =[];
 
   public nameFormControl = new FormControl('', [
     Validators.required,
@@ -36,17 +38,47 @@ export class AdminProfileComponent implements OnInit {
 
   public avatarFormControl = new FormControl('');
 
-  constructor() {
 
-    for (let i = 0; i < 4; i++) {
-      this.approvedLot.push(this.admin.approvedLot[i]);
-      this.rejectedLot.push(this.admin.rejectedLot[i]);
-    }//for
+  constructor(private getUserService: GetUserService) {
 
-  }//constructor
+    this.getUserService.getUser()
+      .then( this.onUserResponse.bind(this) );
+  }
+
+  onUserResponse(response: ServerResponse) {
+    console.log(response.data);
+    if (response.status === 200) {
+      this.admin = response.data.curentAdmin as Admin;
+      this.admin.user = response.data.userAdmin as User;
+      //console.log(this.admin);
+    }
+    if(this.admin.user.userLogin!=="rootAdmin"){
+      this.IsRootAdmin=false;
+    }
+
+  }
+  onUpdateUserResponse(response: ServerResponse) {
+    console.log(response.data);
+    if (response.status === 200) {
+      this.getUserService.getUser()
+        .then( this.onUserResponse.bind(this) );
+
+    }
+
+  }
 
   ngOnInit(){
 
   }//ngOnInit
+
+  SavePersonData(){
+      this.getUserService.updateUser(this.admin.user, this.avatarFormControl.value)
+        .then( this.onUpdateUserResponse.bind(this) );
+
+
+
+
+  }//SavePersenData
+
 
 }

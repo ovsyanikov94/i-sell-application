@@ -14,7 +14,7 @@
 
                 <mat-list >
                   <mat-list-item>
-                    <img  mat-list-avatar src="{{admin?.adminPhoto}}" alt="Desc 1" style="width: 100px; height: 100px">
+                    <img  mat-list-avatar  src="{{admin.user.userPhoto}}" alt="Desc 1" style="width: 100px; height: 100px">
                   </mat-list-item>
                 </mat-list>
 
@@ -29,7 +29,7 @@
 
               <div class="row justify-content-center col-10">
                 <mat-form-field class="example-full-width col-lg-5 col-xl-5 col-md-10 col-sm-12">
-                  <input name="userName" matInput placeholder="Имя" [(ngModel)]="admin.adminName" [formControl]="nameFormControl">
+                  <input name="userName" matInput placeholder="Имя" [(ngModel)]="admin.user.userName" [formControl]="nameFormControl">
                   <mat-error *ngIf="nameFormControl.hasError('pattern') && !nameFormControl.hasError('required')">
                     Введите корректный имя. Длина от 2 до 25 латинских символов
                   </mat-error>
@@ -39,7 +39,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width col-lg-5 col-xl-5 col-md-10 col-sm-12">
-                  <input name="userLastname" matInput placeholder="Фамилия" [(ngModel)]="admin.adminLastname" [formControl]="lastNameFormControl">
+                  <input name="userLastname" matInput placeholder="Фамилия" [(ngModel)]="admin.user.userName" [formControl]="lastNameFormControl">
                   <mat-error *ngIf="lastNameFormControl.hasError('pattern') && !lastNameFormControl.hasError('required')">
                     Введите корректный фамилию. Длина от 2 до 25 латинских символов
                   </mat-error>
@@ -55,11 +55,11 @@
 
           <div class="row justify-content-center col-12" style="margin: 20px 0px 20px 0px">
             <mat-form-field class="example-full-width col-lg-4 col-xl-4 col-md-8 col-sm-12">
-              <input name="adminLogin" [readonly]="true" matInput placeholder="Логин" [(ngModel)]="admin.adminLogin">
+              <input name="adminLogin" [readonly]="true" matInput placeholder="Логин" [(ngModel)]="admin.user.userLogin">
             </mat-form-field>
 
             <mat-form-field class="example-full-width col-lg-4 col-xl-4 col-md-8 col-sm-12">
-              <input name="userEmail" matInput placeholder="Email" [(ngModel)]="admin.adminEmail" [formControl]="emailFormControl">
+              <input name="userEmail" matInput placeholder="Email" [(ngModel)]="admin.user.userEmail" [formControl]="emailFormControl">
               <mat-error *ngIf="emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')">
                 Введите корректный email. название@наименованиен.домен
               </mat-error>
@@ -69,9 +69,9 @@
             </mat-form-field>
 
             <mat-form-field class="example-full-width col-lg-4 col-xl-4 col-md-8 col-sm-12">
-              <input name="userPhone" matInput placeholder="Телефон" [(ngModel)]="admin.adminPhone" [formControl]="phoneFormControl">
+              <input name="userPhone" matInput placeholder="Телефон" [(ngModel)]="admin.user.userPhone" [formControl]="phoneFormControl">
               <mat-error *ngIf="phoneFormControl.hasError('pattern') && !phoneFormControl.hasError('required')">
-                Введите корректный номер телефона. +380ХХХХХХХХХХ
+                Введите корректный номер телефона. +38(0ХХ)ХХХ-ХХ-ХХ
               </mat-error>
               <mat-error *ngIf="phoneFormControl.hasError('required')">
                 телефон <strong>обязателен</strong>
@@ -80,14 +80,14 @@
           </div>
 
           <div class="row justify-content-end col-12">
-            <a mat-stroked-button routerLink="/main/add-moderator" color="primary" style="text-decoration: none">Добавить модератора</a>
-            <button mat-stroked-button color="primary" style="margin-left: 5px">Сохранить личные данные</button>
+            <a [style.display]="IsRootAdmin==true?'block':'none'" mat-stroked-button routerLink="/main/add-moderator" color="primary" style="text-decoration: none">Добавить модератора</a>
+            <button mat-stroked-button color="primary" (click)="SavePersonData()" style="margin-left: 5px">Сохранить личные данные</button>
           </div>
 
           <a style="text-decoration: none; margin-top: 5px" target="_blank" routerLink="/main/approved-lot" class="text-left row"> <h3>Одобренные лоты</h3></a>
           <div class="row justify-content-center col-12" style="margin: 20px 0px 20px 0px">
 
-            <div *ngFor="let lot of approvedLot" class="col-xl-3 col-lg-3  col-md-4 col-sm-12" style="margin-top: 10px" >
+            <div *ngFor="let lot of admin.approvedLot" class="col-xl-3 col-lg-3  col-md-4 col-sm-12" style="margin-top: 10px" >
               <mat-card class="example-card">
                 <a routerLink="{{lot.lotSeller.userLogin}}" class="link">
                   <mat-card-header >
@@ -129,7 +129,7 @@
           <a style="text-decoration: none" target="_blank" routerLink="/main/rejected-lot" class="text-left row"> <h3>Отклоненные лоты</h3></a>
           <div class="row justify-content-center col-12" style="margin: 20px 0px 20px 0px">
 
-            <div *ngFor="let lot of rejectedLot" class="col-xl-3 col-lg-3  col-md-4 col-sm-12"  style="margin-top: 10px">
+            <div *ngFor="let lot of admin.rejectedLot" class="col-xl-3 col-lg-3  col-md-4 col-sm-12"  style="margin-top: 10px">
               <mat-card class="example-card">
                 <a routerLink="{{lot.lotSeller.userLogin}}" class="link">
                   <mat-card-header >

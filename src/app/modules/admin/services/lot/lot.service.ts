@@ -75,12 +75,13 @@ export class LotService {
 
   }//getLot
 
-  approvedLotById( id: string): Promise<ServerResponse>{
+  updateLotStatusById( id: string, status: number ): Promise<ServerResponse>{
 
     return this.http.post(
-      `${ApiRoutes.SERVER_URL}${ApiRoutes.APPROVED_LOT_BY_ID}`,
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.UPDATE_LOT_STATUS}`,
       {
-        id: id
+        id: id,
+        status: status
       }
     ).toPromise() as Promise<ServerResponse>;
 

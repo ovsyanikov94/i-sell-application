@@ -48,16 +48,17 @@ export class SingleLotApproveComponent implements OnInit {
 
   public openModal(){
 
-    this.dialog.open(RejectModalComponent, {data: {rejectMessage: 'Причина отклонения выставляемого лота'}});
+    this.dialog.open(RejectModalComponent,
+      {data: { lot: this.lot}});
 
   }//openModal
 
-  async approvedLot(){
+  async approvedLot(status: number){
 
-    const response  = await this.lotService.approvedLotById(this.lot._id);
+    const response  = await this.lotService.updateLotStatusById(this.lot._id, status);
 
-    if(response.status === 200){
-      this.route.navigateByUrl('/main/lots-list');
+    if ( response.status === 200){
+      this.route.navigateByUrl('/admin/main/lots-list');
     }
   }
   ngOnInit() {

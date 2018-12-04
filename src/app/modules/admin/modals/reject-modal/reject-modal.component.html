@@ -1,5 +1,6 @@
 <p>
-  {{data.rejectMessage}}
+  Укажите причину отказа лота - {{data.lot.lotTitle}}
+
 </p>
 
 <div class="row">
@@ -12,7 +13,7 @@
   <div class="col">
     <div >
       <button mat-raised-button (click)="close()">Отмена</button>
-      <button mat-raised-button color="warn" (click)="close()">Отклонить</button>
+      <button mat-raised-button color="warn" (click)="rejectLot(constants.LOT_STATUS_REJECTED)">Отклонить</button>
     </div>
 
   </div>

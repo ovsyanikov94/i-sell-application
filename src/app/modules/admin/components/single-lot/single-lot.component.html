@@ -5,7 +5,7 @@
       <mat-card-title>{{lot?.lotName}}</mat-card-title>
       <mat-card-subtitle>Цена {{lot.lotStartPrice}}</mat-card-subtitle>
     </mat-card-header>
-    <angular-image-slider *ngIf="lot?.lotFoto.length > 1" [images]="lot.lotFoto"></angular-image-slider>
+    <angular-image-slider *ngIf="lot?.lotFoto > 1" [images]="lot.lotFoto"></angular-image-slider>
     <mat-card-content>
       <p>
         {{lot.lotDescription}}

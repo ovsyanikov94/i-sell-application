@@ -3,10 +3,6 @@
 
 <div class="container justify-content-center">
 
-  <div class="row justify-content-start text-left">
-    <a style="font-size: small; margin-left: 2%; margin-bottom: 1%" routerLink="/main/lots-list">&larr; Вернуться назад</a>
-  </div>
-
   <div class="mat-elevation-z8">
 
     <mat-form-field >
@@ -38,7 +34,7 @@
       <!-- Колонка "Имя" -->
       <ng-container matColumnDef="lotName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Имя</th>
-        <td mat-cell *matCellDef="let row"><a routerLink="/main/approve-lot-request/{{row._id}}" style="text-decoration: none">{{row.lotTitle}}</a></td>
+        <td mat-cell *matCellDef="let row"><a routerLink="/admin/main/approve-lot-request/{{row._id}}" style="text-decoration: none">{{row.lotTitle}}</a></td>
       </ng-container>
 
       <!-- Колонка "Типа лота" -->

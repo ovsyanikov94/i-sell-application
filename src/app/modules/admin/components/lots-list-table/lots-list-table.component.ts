@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import {Lot} from '../../models/lot/Lot';
-import {LotService} from '../../services/lot/lot.service';
-import {ServerResponse} from '../../models/server/ServerResponse';
-import {LotType} from '../../models/lot-type/LotType';
-import {LotStatus} from '../../models/lot-status/Lot-status';
-import {ActivatedRoute} from '@angular/router';
+import {LotService} from "../../services/lot/lot.service";
+import {ServerResponse} from "../../models/server/ServerResponse";
+import {LotType} from "../../models/lot-type/LotType";
+import {LotStatus} from "../../models/lot-status/Lot-status";
+import {ActivatedRoute} from "@angular/router";
 
 import * as moment from 'moment';
 
@@ -17,21 +17,21 @@ import * as moment from 'moment';
 })
 export class LotsListTableComponent implements OnInit {
 
-  public moment = moment;
+  public moment  = moment;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  private lots: Lot[] = [];
+  public lots: Lot[] = [];
   public lotListSource: MatTableDataSource<Lot>;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['lotSeller',
-    'lotName',
-    'lotType',
-    'lotStartPrice',
-    'lotSendDate',
-    'lotStatus',
+  displayedColumns = [  'lotSeller',
+                        'lotName',
+                        'lotType',
+                        'lotStartPrice',
+                        'lotSendDate',
+                        'lotStatus',
   ];
 
   constructor(
@@ -39,45 +39,45 @@ export class LotsListTableComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
 
-    this.route.data.subscribe((resolvedData: any) => {
+    this.route.data.subscribe( (resolvedData: any ) => {
 
-      console.log('resolved data:', resolvedData);
+      console.log('resolved data:' , resolvedData);
       this.lots = resolvedData.lotsResponse.data as Lot[];
 
-    });
+    } );
 
     this.onLotsResponse();
 
   }//constructor
 
 
-  async onLotsResponse() {
+  async onLotsResponse(){
 
-    try {
+    try{
 
-      for (let i = 0; i < this.lots.length; i++) {
+        for(let i =0; i< this.lots.length; i++){
 
-        const lot = this.lots[i];
+          const lot  = this.lots[i];
 
-        const typeLotResponse = await this.lotService.getTypeLotById(+lot.typeLot);
+          const typeLotResponse = await this.lotService.getTypeLotById(+lot.typeLot);
 
-        if (typeLotResponse.status === 200) {
-          lot.typeLot = typeLotResponse.data as LotType;
-        }//if
+          if(typeLotResponse.status===200){
+            lot.typeLot = typeLotResponse.data as LotType;
+          }//if
 
-        const statusLotResponse = await this.lotService.getStatusLotById(+lot.statusLot);
+          const statusLotResponse = await this.lotService.getStatusLotById(+lot.statusLot);
 
-        if (statusLotResponse.status === 200) {
-          lot.statusLot = statusLotResponse.data as LotStatus;
-        }//if
+          if(statusLotResponse.status===200){
+            lot.statusLot = statusLotResponse.data as LotStatus;
+          }//if
 
-      }//for
+        }//for
 
 
     }//try
-    catch (ex) {
+    catch ( ex ){
 
-      console.log('Exception: ', ex);
+      console.log( "Exception: " , ex );
 
     }//catch
 
@@ -91,6 +91,7 @@ export class LotsListTableComponent implements OnInit {
     this.lotListSource.sort = this.sort;
 
   }//ngOnInit
+
 
 
   applyFilter(filterValue: string) {

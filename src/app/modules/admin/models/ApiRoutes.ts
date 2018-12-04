@@ -10,6 +10,7 @@ export class ApiRoutes{
   static readonly USER_REGISTER: string = 'registryUser';
   static readonly USER_AUTHORIZE: string = 'auth-user';
   static readonly GET_USER_BYID: string = 'getUserByID';
+  static readonly GET_USER_BYLOGIN: string = 'getUserByID';
   static readonly USER_CHANGE_PARAMS: string = 'updateUserInfo';
   static readonly USER_INFO: string = 'getUser';
   static readonly USER_ADD: string = 'addUserWithRole';
@@ -27,7 +28,7 @@ export class ApiRoutes{
   //LOT
   static readonly GET_LOT_LIST_PANEL: string = 'lotListPanel';
   static readonly GET_LOT_BY_ID:     string = 'singleLot';
-  static readonly APPROVED_LOT_BY_ID:     string = 'lotApprovedPanel';
+  static readonly UPDATE_LOT_STATUS:     string = 'updateLotStatusByLotId';
 
   static readonly LOT_MARK_LIST: string = 'lot-mark-list';
   static readonly UPDATE_LOT_MARK: string = 'update-lot-mark';

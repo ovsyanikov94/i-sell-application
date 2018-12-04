@@ -1,6 +1,6 @@
 'use stric'
 
-import {User} from '../user/User';
+import {User} from '../../models/user/User';
 
 export class BlackCardUser{
   get photo(): string {
