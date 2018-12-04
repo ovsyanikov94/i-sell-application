@@ -40,7 +40,8 @@ export class ApiRoutes{
   static readonly USER_ADD_IN_SUBSCRIBERS: string = 'addInSubscribers';
   static readonly USER_REMOVE_IN_SUBSCRIBERS: string = 'removeInSubscribers';
   static readonly IS_USER_AUTHORIZED: string = 'check-user-access';
-
+  static readonly ADD_USER_AVATAR: string = 'addUserAvatar'
+  static readonly IN_LIST_SUBSCRIBERS: string = 'InListSubscribers';
   //COMMENTS
   static readonly COMMENT_ADD_NEW: string = 'comment';
   static readonly UPDATE_COMMENT: string = 'updateComment/:id';

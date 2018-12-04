@@ -5,7 +5,7 @@ import {MatTabChangeEvent} from "@angular/material";
 import {AuthService} from "../../services/user/auth.service";
 import {ProfileService} from "../../services/profile/profile.service";
 import {ServerResponse} from "../../models/server/ServerResponse";
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
 
 
@@ -30,21 +31,24 @@ export class ProfileComponent implements OnInit {
       console.log('params: ' , params);
 
       const responseBuy = await this.authService.getUser(params.id);
-      console.log(responseBuy);
-      this.statusSubscribe = false;
+      if (responseBuy.data === null){
+        this.router.navigateByUrl('main/my-profile');
+        return;
+      }//if
+      if (responseBuy.status === 200){
+        this.user = responseBuy.data as User;
+      }//if
 
-
-
+      const response = await this.profileService.inListSubstriber(this.user);
+      if (response.status === 200){
+        console.log('RESPONE', response);
+        this.statusSubscribe = response.data;
+      }//if
     } );
 
   }
 
   ngOnInit() {
-    this.user.userName = 'Алексей';
-    this.user.userLastname = 'Фамилия';
-    this.user.userPhone = '+3809238130';
-    this.user.userLogin = 'Alex';
-    this.user.userEmail = 'alex@gmail.com';
   }
 
 
@@ -62,8 +66,9 @@ export class ProfileComponent implements OnInit {
 
     const response = await this.profileService.getSubscriber(this.user);
     if ( response.status === 200){
-      console.log(response);
+      console.log(response.data);
       this.subscribers = response.data as User[];
+      console.log('USER : ', this.subscribers);
     }
   }//getSubscribe
 
@@ -71,8 +76,9 @@ export class ProfileComponent implements OnInit {
 
     const response = await this.profileService.getSubscriptions(this.user);
     if ( response.status === 200){
-      console.log(response);
+      console.log(response.data);
       this.Subscriptions = response.data as User[];
+      console.log('USER : ', this.Subscriptions);
     }
   }//getSubscriptions
 
@@ -88,6 +94,7 @@ export class ProfileComponent implements OnInit {
   async unSubscribe(){
     const response = await this.profileService.removeSubscriber(this.user);
     if ( response.status === 200){
+      console.log('resp' , response);
       this.statusSubscribe = response.data;
     }
   }//unSubscribe
