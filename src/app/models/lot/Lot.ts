@@ -31,7 +31,7 @@ export class Lot {
   public countLikes: number;
   public countDisLikes: number;
 
-  //public lotMark: number;
+  public lotMark: number;
 
 
   constructor(){
