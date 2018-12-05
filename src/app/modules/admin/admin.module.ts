@@ -97,7 +97,8 @@ import {CommonModule} from '@angular/common';
     RegistrationComponent,
     AuthModalComponent,
     AddModeratorComponent,
-    MessageModalComponent
+    MessageModalComponent,
+    CategoryComponent
   ],
   imports: [
     CommonModule,

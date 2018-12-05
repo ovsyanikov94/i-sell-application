@@ -23,6 +23,7 @@ export class ApiRoutes{
 
   //CATEGORIES
   static readonly GET_CATEGORIES_LIST: string = 'category/list';
+
   //typelot
 
   static readonly GET_LOT_TYPES_LIST: string = 'lotType';
