@@ -3,7 +3,7 @@
 
 export class ApiRoutes{
 
-  static readonly SERVER_URL: string = 'http://localhost:7000/i-sell-admin-api/api/';
+  static readonly SERVER_URL: string = 'http://localhost:5012/i-sell-admin-api/api/';
 
   //LOT
   static readonly GET_LOT_LIST: string = 'lotList';
@@ -16,8 +16,10 @@ export class ApiRoutes{
   static readonly GET_USER_LOT_BUY: string = 'GetUserBuyLot';
   static readonly GET_USER_LOT_SALE: string = 'GetUserSaleLot';
 
-  static readonly LOT_MARK_LIST: string = 'lot-mark-list';
   static readonly UPDATE_LOT_MARK: string = 'update-lot-mark';
+  static readonly LOT_MARK_USERS_WITH_MARKS = 'users-list-by-mark';
+  static readonly LOT_MARKED_BY_USER = 'get-marked-lot-by-user';
+
 
   //CATEGORIES
   static readonly GET_CATEGORIES_LIST: string = 'category/list';
@@ -44,7 +46,7 @@ export class ApiRoutes{
   static readonly COMMENT_ADD_NEW: string = 'comment';
   static readonly UPDATE_COMMENT: string = 'updateComment/:id';
   static readonly DELETE_COMMENT: string = 'deleteComment/:id';
-  static readonly GET_COMMENTS: string = 'comment/:id';
+  static readonly GET_COMMENTS: string = 'comment/list';
 
 
 }
