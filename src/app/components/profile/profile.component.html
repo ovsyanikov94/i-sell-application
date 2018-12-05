@@ -77,13 +77,12 @@
 
       <div class="row justify-content-center">
 
-        <div class="col-6">
+        <div class="col-6" *ngIf="!isEmptySubscribe; else unSubscribe">
 
           <div class="row justify-content-center">
 
             <div class="mat-elevation-z8">
-
-              <mat-card *ngFor="let user of subscribers">
+              <mat-card  *ngFor="let user of subscribers">
                 <mat-list>
                   <mat-list-item style="width: 600px">
                     <img  mat-list-avatar src="{{user?.userPhoto}}" alt="Desc 1" style="width: 100px; height: 100px">
@@ -95,7 +94,6 @@
                       <span>{{user?.userLastname}}</span>
                     </p>
 
-
                   </mat-list-item>
                 </mat-list>
 
@@ -106,6 +104,13 @@
           </div>
 
         </div>
+        <ng-template #unSubscribe>
+          <div>
+            <h3>
+              Пользователей нет
+            </h3>
+          </div>
+        </ng-template>
 
       </div>
 
@@ -119,7 +124,7 @@
 
       <div class="row justify-content-center">
 
-        <div class="col-6">
+        <div class="col-6" *ngIf="!isEmtrySubscriptions; else unSubscriptions">
 
           <div class="row justify-content-center">
 
@@ -148,6 +153,13 @@
           </div>
 
         </div>
+        <ng-template #unSubscriptions>
+          <div>
+            <h3>
+              Пользователей нет
+            </h3>
+          </div>
+        </ng-template>
 
       </div>
 

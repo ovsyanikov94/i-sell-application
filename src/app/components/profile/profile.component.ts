@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
   public Subscriptions: User[] = [];
   public lots: Lot[] = [];
   public statusSubscribe: boolean;
+  public isEmptySubscribe = true;
+  public isEmtrySubscriptions = true;
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
@@ -64,21 +66,33 @@ export class ProfileComponent implements OnInit {
 
   async getSubscribe() {
 
-    const response = await this.profileService.getSubscriber(this.user);
+    const response = await this.profileService.getSubscriber(this.user._id);
     if ( response.status === 200){
       console.log(response.data);
-      this.subscribers = response.data as User[];
-      console.log('USER : ', this.subscribers);
+      if (response.data !== null){
+        this.subscribers = response.data as User[];
+        this.isEmptySubscribe = false;
+        console.log('USER : ', this.subscribers);
+      }//if
+      else {
+        this.isEmptySubscribe = true;
+      }
     }
   }//getSubscribe
 
   async getSubscriptions() {
 
-    const response = await this.profileService.getSubscriptions(this.user);
+    const response = await this.profileService.getSubscriptions(this.user._id);
     if ( response.status === 200){
-      console.log(response.data);
-      this.Subscriptions = response.data as User[];
-      console.log('USER : ', this.Subscriptions);
+      if (response.data !== null){
+        console.log(response.data);
+        this.Subscriptions = response.data as User[];
+        this.isEmtrySubscriptions = false;
+        console.log('USER : ', this.Subscriptions);
+      }//if
+      else{
+        this.isEmtrySubscriptions = true;
+      }
     }
   }//getSubscriptions
 
