@@ -1,0 +1,64 @@
+<mat-sidenav-container
+  class="example-container" (backdropClick)="close()" >
+  <mat-sidenav #sidenav (keydown.escape)="close()" disableClose class="side_bar">
+
+    <a routerLink="profile" class="link" (click)="close()">
+
+      <mat-card class="example-card">
+        <mat-card-header>
+
+          <div  mat-card-avatar class="example-header-image"></div>
+
+          <mat-card-title>Имя Фамилия</mat-card-title>
+          <mat-card-subtitle>Логин</mat-card-subtitle>
+
+        </mat-card-header>
+
+      </mat-card>
+
+    </a>
+
+    <mat-list>
+      <mat-list-item><a routerLink="/main/category" color="primary" class="col-12 link" (click)="close()">Категории</a></mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item><a routerLink="/main/roles" color="primary" class="col-12 link" (click)="close()">Роли</a></mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item><a routerLink="/main/lots-list" color="primary" class="col-12 link" (click)="close()">Лоты</a></mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item><a routerLink="/main/user-list" color="primary" class="col-12 link" (click)="close()">Пользователи</a></mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item><a routerLink="." color="primary" class="col-12 link" (click)="close()">Сделки</a></mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item><a routerLink="." color="primary" class="col-12 link" (click)="close()">Список запланированных торгов</a></mat-list-item>
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+
+        <a class="col-12 link" routerLink="." color="primary" (click)="close()">
+          <span matBadge="4" matBadgeOverlap="false" >Сообщения</span>
+        </a>
+
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p><button mat-button (click)="sidenav.open()" class="open-button">
+      <mat-icon >
+        format_align_justify
+      </mat-icon>
+    </button></p>
+
+    <div class="container">
+      <!--<app-lot-notification></app-lot-notification>-->
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

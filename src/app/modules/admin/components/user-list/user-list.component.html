@@ -1,0 +1,35 @@
+<div>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          сортировать
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <button mat-button style="width: 100%">Click me!</button>
+      <button mat-button style="width: 100%">Click me!</button>
+      <button mat-button style="width: 100%">Click me!</button>
+      <button mat-button style="width: 100%">Click me!</button>
+      <button mat-button style="width: 100%">Click me!</button>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div>
+    <form class="example-form">
+      <mat-form-field class="example-full-width" style="width: 100%">
+        <input  matInput placeholder="Search" value="">
+      </mat-form-field>
+    </form>
+  </div>
+  <div >
+    <div>
+      <app-single-user
+        *ngFor="let user of users"
+        [user]="user"
+        (onUserClick)="foo( $event )"
+      ></app-single-user>
+    </div>
+
+  </div>
+
+</div>

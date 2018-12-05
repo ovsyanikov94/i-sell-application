@@ -1,0 +1,431 @@
+<div class="container">
+
+
+  <div class="row justify-content-center">
+    <div class="col-10" >
+      <mat-tab-group>
+        <mat-tab label="Подробная информация">
+          <div class="justify-content-center container-fluid" style="width: 65%;">
+            <div >
+              <mat-list>
+
+                <img  mat-list-avatar src="{{user?.userPhoto}}" alt="Desc 1" style="width: 60%; height: 60%">
+                <h3 mat-subheader>Имя</h3>
+                <mat-list-item>{{user.userName}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Фамилия</h3>
+                <mat-list-item>{{user.userLastname}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Логин</h3>
+                <mat-list-item>{{user.userLogin}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>телефон</h3>
+                <mat-list-item>{{user.userPhone}}</mat-list-item>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>email</h3>
+                <mat-list-item>{{user.userEmail}}</mat-list-item>
+                <mat-divider></mat-divider>
+              </mat-list>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="выставленные лоты ">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  сортировать
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <div >
+            <form class="example-form">
+              <mat-form-field class="example-full-width" style="width: 100%">
+                <input  matInput placeholder="Search" value="">
+              </mat-form-field>
+            </form>
+          </div>
+          <app-single-lot *ngFor="let lot of lots"  [lot]="lot"></app-single-lot>
+        </mat-tab>
+        <mat-tab label="выигранные лоты">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  сортировать
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <div >
+            <form class="example-form">
+              <mat-form-field class="example-full-width" style="width: 100%">
+                <input  matInput placeholder="Search" value="">
+              </mat-form-field>
+            </form>
+          </div>
+          <app-single-lot *ngFor="let lot of lots"  [lot]="lot"></app-single-lot>
+        </mat-tab>
+        <mat-tab label="участвует в торгах">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  сортировать
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+              <button mat-button style="width: 100%">Click me!</button>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <div >
+            <form class="example-form">
+              <mat-form-field class="example-full-width" style="width: 100%">
+                <input  matInput placeholder="Search" value="">
+              </mat-form-field>
+            </form>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="pageEvent = $event">
+          </mat-paginator>
+          <app-single-lot *ngFor="let lot of lots"  [lot]="lot"></app-single-lot>
+
+        </mat-tab>
+        <mat-tab label="подписчики">
+          <div >
+            <form class="example-form">
+              <mat-form-field class="example-full-width" style="width: 100%">
+                <input  matInput placeholder="Search" value="">
+              </mat-form-field>
+            </form>
+          </div>
+          <div style="margin: 5px">
+
+            <mat-card>
+              <mat-list>
+                <mat-list-item>
+                  <img  mat-list-avatar src="{{user?.userPhoto}}" alt="Desc 1" style="width: 100px; height: 100px">
+                  <h3 mat-line><a routerLink="." >{{user?.userLogin}}</a></h3>
+                  <p mat-line>
+                    <span>{{user?.userName}}</span>
+                  </p>
+                  <p mat-line>
+                    <span>{{user?.userLastname}}</span>
+                  </p>
+                  <div class="button-row">
+                    <button (click)="onUserMouseClick()" mat-raised-button color="primary" style="width: auto">написать</button>
+                  </div>
+
+                </mat-list-item>
+              </mat-list>
+
+            </mat-card>
+          </div>
+        </mat-tab>
+        <mat-tab label="история транзакция ">
+          <div >
+            <form class="example-form">
+              <mat-form-field class="example-full-width" style="width: 100%">
+                <input  matInput placeholder="Search" value="">
+              </mat-form-field>
+            </form>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="pageEvent = $event">
+          </mat-paginator>
+          <div style="background: #fff2e6">
+            <div style="width: 30%;" class="displayBlock">
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="displayBlock" style="width: 40%">
+
+              <div class="displayBlock" style="width: 40%">
+                <i class="material-icons">
+                  fast_forward
+                </i>
+                <div style="color: red">
+                  1200
+                </div>
+
+              </div>
+              <div class="displayBlock" style="width: 60%">
+                <div>
+                  дата 20.11.2018
+                </div>
+              </div>
+            </div>
+            <div class="displayBlock" style="width: 30%" >
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div style="background:  #e6ffe6">
+            <div style="width: 30%;" class="displayBlock">
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="displayBlock" style="width: 40%">
+
+              <div class="displayBlock" style="width: 40%">
+                <div >
+                  <i class="material-icons" >
+                    fast_rewind
+                  </i>
+                </div>
+
+                <div style="color: green;">
+                  1200
+                </div>
+
+              </div>
+              <div class="displayBlock" style="width: 60%">
+                <div>
+                  дата 20.11.2018
+                </div>
+              </div>
+            </div>
+            <div class="displayBlock" style="width: 30%" >
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div style="background: #fff2e6">
+            <div style="width: 30%;" class="displayBlock">
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="displayBlock" style="width: 40%">
+
+              <div class="displayBlock" style="width: 40%">
+                <i class="material-icons">
+                  fast_forward
+                </i>
+                <div style="color: red">
+                  1200
+                </div>
+
+              </div>
+              <div class="displayBlock" style="width: 60%">
+                <div>
+                  дата 20.11.2018
+                </div>
+              </div>
+            </div>
+            <div class="displayBlock" style="width: 30%" >
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div style="background:  #e6ffe6">
+            <div style="width: 30%;" class="displayBlock">
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="displayBlock" style="width: 40%">
+
+              <div class="displayBlock" style="width: 40%">
+                <div >
+                  <i class="material-icons" >
+                    fast_rewind
+                  </i>
+                </div>
+
+                <div style="color: green;">
+                  1200
+                </div>
+
+              </div>
+              <div class="displayBlock" style="width: 60%">
+                <div>
+                  дата 20.11.2018
+                </div>
+              </div>
+            </div>
+            <div class="displayBlock" style="width: 30%" >
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div style="background: #fff2e6">
+            <div style="width: 30%;" class="displayBlock">
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="displayBlock" style="width: 40%">
+
+              <div class="displayBlock" style="width: 40%">
+                <i class="material-icons">
+                  fast_forward
+                </i>
+                <div style="color: red">
+                  1200
+                </div>
+
+              </div>
+              <div class="displayBlock" style="width: 60%">
+                <div>
+                  дата 20.11.2018
+                </div>
+              </div>
+            </div>
+            <div class="displayBlock" style="width: 30%" >
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div style="background:  #e6ffe6">
+            <div style="width: 30%;" class="displayBlock">
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="displayBlock" style="width: 40%">
+
+              <div class="displayBlock" style="width: 40%">
+                <div >
+                  <i class="material-icons" >
+                    fast_rewind
+                  </i>
+                </div>
+
+                <div style="color: green;">
+                  1200
+                </div>
+
+              </div>
+              <div class="displayBlock" style="width: 60%">
+                <div>
+                  дата 20.11.2018
+                </div>
+              </div>
+            </div>
+            <div class="displayBlock" style="width: 30%" >
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div style="background: #fff2e6">
+            <div style="width: 30%;" class="displayBlock">
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="displayBlock" style="width: 40%">
+
+              <div class="displayBlock" style="width: 40%">
+                <i class="material-icons">
+                  fast_forward
+                </i>
+                <div style="color: red">
+                  1200
+                </div>
+
+              </div>
+              <div class="displayBlock" style="width: 60%">
+                <div>
+                  дата 20.11.2018
+                </div>
+              </div>
+            </div>
+            <div class="displayBlock" style="width: 30%" >
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div style="background:  #e6ffe6">
+            <div style="width: 30%;" class="displayBlock">
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="displayBlock" style="width: 40%">
+
+              <div class="displayBlock" style="width: 40%">
+                <div >
+                  <i class="material-icons" >
+                    fast_rewind
+                  </i>
+                </div>
+
+                <div style="color: green;">
+                  1200
+                </div>
+
+              </div>
+              <div class="displayBlock" style="width: 60%">
+                <div>
+                  дата 20.11.2018
+                </div>
+              </div>
+            </div>
+            <div class="displayBlock" style="width: 30%" >
+              <mat-list>
+                <h6 mat-subheader>{{user.userName}} {{user.userLastname}}</h6>
+                <mat-list-item>{{user?.userLogin}}</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+
+
+
+</div>

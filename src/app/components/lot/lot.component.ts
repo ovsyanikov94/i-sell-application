@@ -3,19 +3,12 @@ import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
 import {Comment} from "../../models/comment/Comment";
 import { AuthData} from '../../models/modal.data/auth.data';
-import {Category} from "../../models/category/Category";
-import {LotType} from "../../models/lot-type/LotType";
-import {LotStatus} from "../../models/lot-status/Lot-status";
 import {LotImage} from '../../models/LotImage/lotImage';
-import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
-import {ServerResponse} from "../../models/server/ServerResponse";
 
-import {MatDialog} from "@angular/material";
-import {MatTabChangeEvent} from '@angular/material';
+import {MatDialog, MatTabChangeEvent} from '@angular/material';
 
 import { LikeDislikeViewerModalComponent } from "../../modals/like-dislike-viewer-modal/like-dislike-viewer-modal.component";
 import { AuthModalComponent } from '../../modals/auth.modal/auth.modal.component';
-import {Router, ActivatedRoute, ParamMap} from "@angular/router";
 import { FormControl , Validators } from '@angular/forms';
 
 import { Constants } from "../../models/Constants";
@@ -23,14 +16,19 @@ import { Constants } from "../../models/Constants";
 import {LatLng, Map, Marker} from 'leaflet';
 
 import { GeoSearchService } from '../../services/LeafletGeoSearch/geo-search.service';
+import {GeoSearchByCoordsModel} from '../../models/geo-search/GeoSearchByCoordsModel';
+
 import {LotService} from "../../services/lot/lot.service";
 import { CommentService } from '../../services/comments/comment.service';
-
-import { switchMap } from 'rxjs/operators';
-
+import {ServerResponse} from "../../models/server/ServerResponse";
 
 import * as moment from 'moment';
+import {LocalStorageService} from 'ngx-webstorage';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LotStatus} from "../../models/lot-status/Lot-status";
+import {LotType} from "../../models/lot-type/LotType";
 declare let L;
+
 @Component({
   selector: 'app-lot',
   templateUrl: './lot.component.html',
@@ -43,6 +41,7 @@ export class LotComponent implements OnInit {
   public currentUser: User = new User();
   public marker: Marker;
   public map: Map;
+  public user: User;
 
   public comments: Comment[];
 
@@ -56,10 +55,18 @@ export class LotComponent implements OnInit {
 
   public moment  = moment;
 
+  public likeMarkIcon = null;
+  public dislikeMarkIcon = null;
+
+  public usersWithMarks = [];
+
   public commentFormControl = new FormControl('', [
     Validators.required
   ]);
 
+  public commentOffset = 0;
+
+  public selectedComment = 0;
 
   constructor(
     private geoService: GeoSearchService,
@@ -67,8 +74,12 @@ export class LotComponent implements OnInit {
     private router: Router,
     private lotService: LotService,
     private commentService: CommentService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private localStorage: LocalStorageService
   ) {
+
+    this.user = localStorage.retrieve('user') as User;
+    console.log('user.localStorage:' , this.user);
 
     //Получение всех параметров, указанных через :ИмяПараметра
     this.route.params.subscribe( (params) => {
@@ -94,14 +105,38 @@ export class LotComponent implements OnInit {
 
     } );
 
-    // this.commentService.getLotComments(
-    //   this.lot._id,
-    //   Constants.APP_OFFSET,
-    //   Constants.APP_LIMIT
-    // ).then( this.onCommentResponse.bind(this) );
-
+    this.onLotResponse();
   }//constructor
 
+  async onLotResponse(){
+
+    try{
+
+
+
+        const typeLotResponse = await this.lotService.getTypeLotById(+this.lot.typeLot);
+
+        if (typeLotResponse.status === 200){
+          this.lot.typeLot = typeLotResponse.data as LotType;
+        }//if
+
+        const statusLotResponse = await this.lotService.getStatusLotById(+this.lot.statusLot);
+
+        if (statusLotResponse.status === 200){
+          this.lot.statusLot = statusLotResponse.data as LotStatus;
+        }//if
+
+
+
+    }//try
+    catch ( ex ){
+
+      console.log( "Exception: " , ex );
+
+    }//catch
+
+
+  }//onLotsResponse
 
   onTabChanged( event: MatTabChangeEvent ){
 
@@ -113,6 +148,26 @@ export class LotComponent implements OnInit {
     }//if
 
   }//onTabChanged
+
+  addCommentsOffset(){
+    this.commentOffset += Constants.APP_OFFSET;
+    this.getCommentsOffset(this.selectedComment);
+  }
+
+  async getCommentsOffset(comment){
+
+    const selectOld =  this.selectedComment;
+    this.selectedComment = comment;
+
+    const response = await this.commentService.getLotComments(this.lot._id, Constants.APP_OFFSET , Constants.APP_LIMIT );
+    if (response.status === 200 ){
+
+      this.comments = response.data.comments as Comment[];
+      if ( selectOld !== comment){
+        this.commentOffset = 0;
+      }
+    }
+  }
 
   async initMap(){
 
@@ -132,7 +187,7 @@ export class LotComponent implements OnInit {
 
     const myIcon = L.icon(
       {
-        iconUrl: '/node_modules/leaflet/dist/images/marker-icon.png',
+        iconUrl: 'modules/leaflet/dist/images/marker-icon.png',
         iconSize: [38, 55],
       }
     );
@@ -156,12 +211,38 @@ export class LotComponent implements OnInit {
 
   }//initMap
 
-  ngOnInit() {
+  ngOnInit(){
 
     //Получение всех параметров, указанных через :ИмяПараметра
     this.route.params.subscribe( (params) => {
       console.log('params: ' , params);
     } );
+
+    this.likeMarkIcon = document.querySelector("#likeIcon");
+    this.dislikeMarkIcon = document.querySelector("#dislikeIcon");
+
+    console.log('this.likeMarkIcon', this.likeMarkIcon);
+
+    this.lotService.getCurrentLotMarkFromUser(this.lot)
+      .then( (response: ServerResponse) => {
+
+          console.log('response INFO: ', response);
+
+          if ( response.data === Constants.DISLIKE ){
+
+            this.dislikeMarkIcon.classList.toggle("DislikeMark");
+
+          }//if
+          else if ( response.data === Constants.LIKE ){
+
+            this.likeMarkIcon.classList.toggle("LikeMark");
+
+          }//else if
+
+      } )
+      .catch( error => {
+
+      } ); //getCurrentLotMarkFromUser
 
     // const idLot = this.router.snapshot.paramMap.get("id");
     //
@@ -202,22 +283,58 @@ export class LotComponent implements OnInit {
       console.log('response: ' , response);
 
       if ( response.status === 200 ){
-        //lot.countLikes++;
+
+        const like: number = response.data.like;
+        const dislike: number = response.data.dislike;
+
+        console.log('like, dislike', like, dislike);
+
+        lot.countLikes += +like;
+        lot.countDisLikes += +dislike;
+
+        if (+like !== 0){
+          this.likeMarkIcon.classList.toggle("LikeMark");
+        }//if
+
+        if (+dislike !== 0){
+          this.dislikeMarkIcon.classList.toggle("DislikeMark");
+        }//if
+
       }//if
 
     }//try
-    catch ( ex ){
+    catch (ex){
 
-      console.log( "Exception: " , ex );
-
+      console.log('Ex: ' , ex);
 
     }//catch
 
   }//addLikeOrDislikeLot
 
-  public showLikeDislikeModal(){
+  async showLikeDislikeModal(lot: Lot, mark: number){
 
-    this.dialog.open(LikeDislikeViewerModalComponent, { data: { message: "Лайки/Дизлайки" }});
+    this.usersWithMarks = [];
+
+    try{
+        const response: ServerResponse = await this.lotService.getUsersListWithLikeDislike(lot, mark, Constants.APP_LIMIT_LOT, Constants.APP_OFFSET_LOT );
+
+        console.log('response1', response);
+
+        if (response.status === 200 && response.data !== null){
+
+          response.data.forEach( (user) => { this.usersWithMarks.push(user); } );
+
+          this.dialog.open(LikeDislikeViewerModalComponent, { data: { users: this.usersWithMarks, mark: mark, lot: lot }});
+
+        }//if
+        else{
+
+        }//else
+
+    }//try
+    catch (ex){
+      console.log('Ex: ' , ex);
+    }//catch
 
   }//showLikeDislikeModal
 
@@ -248,20 +365,10 @@ export class LotComponent implements OnInit {
 
       if ( CommentResponse.status === 200 ){
 
-        this.comments.push( this.comment );
+        this.comment.userSender.userLogin = this.user.userLogin;
+        this.comments.unshift( this.comment );
 
       }//if
-
-      // const authData: AuthData = {
-      //   message: CommentResponse.message
-      // };
-      //
-      // if ( event instanceof KeyboardEvent && event.code === "Enter" ){
-      //   this.openDialog(authData);
-      // }//if
-      // else if ( event instanceof  MouseEvent){
-      //   this.openDialog(authData);
-      // }//else if
 
     }//try
     catch (ex){

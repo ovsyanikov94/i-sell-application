@@ -1,0 +1,29 @@
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+}
+.side_bar{
+  width: 300px;
+
+}
+.example-card {
+  max-width: 300px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.link{
+  text-decoration: none;
+  margin-top: 3px;
+}
+
+.open-button{
+  position: fixed;
+}
