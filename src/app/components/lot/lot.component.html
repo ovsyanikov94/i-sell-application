@@ -152,11 +152,14 @@
                   <div class="row" style="width: 100%">
 
                     <mat-form-field class="col-11">
-                      <textarea rows="7" matInput placeholder="Ваш комментарий..." ></textarea>
+                      <textarea name="commentText" [(ngModel)]="commentText" [formControl]="commentFormControl" rows="7" matInput placeholder="Ваш комментарий..." ></textarea>
+                      <mat-error *ngIf="commentFormControl.hasError('required')">
+                        <strong>Введите комментарий</strong>
+                      </mat-error>
                     </mat-form-field>
 
                     <div class="col-1">
-                      <button mat-fab>
+                      <button (click)="addComment($event)" mat-fab>
                         <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
                       </button>
                     </div>
@@ -170,8 +173,10 @@
             </div>
 
             <h3>Комментарии</h3>
-            <app-comment *ngFor="let comment of lot.comments" [userComment]="comment"></app-comment>
-
+            <app-comment *ngFor="let comment of comments" [userComment]="comment"></app-comment>
+            <div *ngIf = "comments?.length === 0">
+              У данного лота еще нет комментариев
+            </div>
           </div>
 
 

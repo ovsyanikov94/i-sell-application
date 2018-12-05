@@ -33,7 +33,7 @@ import { FeedbackModalComponent } from './modals/feedback-modal/feedback-modal.c
 import { SliderModule } from 'angular-image-slider';
 
 //TOOLTIP MODULE
-import {TooltipModule} from "ngx-tooltip";
+//import {TooltipModule} from "ngx-tooltip";
 
 //DATE-TIME PICKER
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -144,7 +144,7 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
     MatAutocompleteModule,
     MatPaginatorModule,
     HttpClientModule,
-    TooltipModule
+    //TooltipModule
   ],
   providers: [
     GeoSearchService,

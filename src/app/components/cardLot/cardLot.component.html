@@ -1,137 +1,197 @@
-<div class="container">
+<mat-sidenav-container
+  class="example-container" (backdropClick)="close()" >
+  <mat-sidenav #sidenav (keydown.escape)="close()" disableClose class="side_bar">
 
-  <mat-toolbar color="primary" #topBody>
-    <mat-toolbar-row>
-      <span>Категории</span>
-    </mat-toolbar-row>
+    <a routerLink="my-profile" class="link">
 
-    <mat-toolbar-row>
+      <mat-card class="example-card">
+        <mat-card-header>
 
-      <mat-form-field>
-        <mat-select placeholder="Выбрать категорию" [formControl]="categoriesControl" multiple>
-          <mat-option *ngFor="let category of categories" [value]="category._id">{{category.title}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+          <div  mat-card-avatar class="example-header-image"></div>
 
-    </mat-toolbar-row>
+          <mat-card-title>Имя Фамилия</mat-card-title>
+          <mat-card-subtitle>Логин</mat-card-subtitle>
 
-    <mat-toolbar-row>
-      <button mat-stroked-button>Применить</button>
-    </mat-toolbar-row>
-  </mat-toolbar>
+        </mat-card-header>
 
-  <div class="container">
+      </mat-card>
 
-    <div class="row">
-      <div class="col-12" style="margin-top: 5px; margin-left: 5px">
-        <a target="_blank" mat-raised-button color="primary" style="text-decoration: none" routerLink="/main/add-lot">Добавить новый лот</a>
-      </div>
-    </div>
+    </a>
 
-  </div>
+    <mat-list>
+      <mat-list-item><a routerLink="/card-lot" color="primary" class="col-12 link">Лоты</a></mat-list-item>
+      <mat-divider></mat-divider>
 
+      <mat-list-item><a routerLink="subscribers" color="primary" class="col-12 link">Подписчики</a></mat-list-item>
+      <mat-divider></mat-divider>
 
-  <div class="row justify-content-center form-lot">
+      <mat-list-item><a routerLink="black-list" color="primary" class="col-12 link">Черный список</a></mat-list-item>
+      <mat-divider></mat-divider>
 
-    <div *ngFor="let lot of lots" style="margin-top: 2px;" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <mat-list-item>
 
-      <div style="margin: 2px; box-shadow: 0 2px 4px 2px #666666;">
+        <a class="col-12 link" routerLink="list-dialog" color="primary">
+          <span matBadge="4" matBadgeOverlap="false" >Сообщения</span>
+        </a>
 
-        <div class="row justify-content-center text-center">
-          <h6 >{{lot.lotTitle}}</h6>
+      </mat-list-item>
+
+      <mat-list-item>
+
+        <a class="col-12 link" routerLink="confirmation" color="primary">Активные сделки</a>
+
+      </mat-list-item>
+
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p  ><button mat-button (click)="sidenav.open()" class="open-button">
+      <mat-icon >
+        format_align_justify
+      </mat-icon>
+    </button></p>
+
+    <div class="container-fluid">
+      <div class="container">
+
+        <mat-toolbar color="primary" #topBody>
+          <mat-toolbar-row>
+            <span>Категории</span>
+          </mat-toolbar-row>
+
+          <mat-toolbar-row>
+
+            <mat-form-field>
+              <mat-select placeholder="Выбрать категорию" [formControl]="categoriesControl" multiple>
+                <mat-option *ngFor="let category of categories" [value]="category._id">{{category.title}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </mat-toolbar-row>
+
+          <mat-toolbar-row>
+            <button mat-stroked-button>Применить</button>
+          </mat-toolbar-row>
+        </mat-toolbar>
+
+        <div class="container">
+
+          <div class="row">
+            <div class="col-12" style="margin-top: 5px; margin-left: 5px">
+              <a target="_blank" mat-raised-button color="primary" style="text-decoration: none" routerLink="/main/add-lot">Добавить новый лот</a>
+            </div>
+          </div>
+
         </div>
-        <div class="row justify-content-center text-center" >
-          <small class="text-muted">Категории: </small>
-        </div>
 
-        <div class="row justify-content-center text-center" >
-          <small class="text-muted"><span  *ngFor="let cat of lot.categories" style="font-weight: bold "> {{cat.title}}</span></small>
-        </div>
 
-        <div>
-          <img src="{{lot.lotImagePath[0].path}}"  style="width: 100%">
-        </div>
+        <div class="row justify-content-center form-lot">
 
-        <div class="row justify-content-center text-center" style="margin-top: 15px ">
+          <div *ngFor="let lot of lots" style="margin-top: 2px;" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+
+            <div style="margin: 2px; box-shadow: 0 2px 4px 2px #666666;">
+
+              <div class="row justify-content-center text-center">
+                <h6 >{{lot.lotTitle}}</h6>
+              </div>
+              <div class="row justify-content-center text-center" >
+                <small class="text-muted">Категории: </small>
+              </div>
+
+              <div class="row justify-content-center text-center" >
+                <small class="text-muted"><span  *ngFor="let cat of lot.categories" style="font-weight: bold "> {{cat.title}}</span></small>
+              </div>
+
+              <div>
+                <img src="{{lot.lotImagePath[0].path}}"  style="width: 100%">
+              </div>
+
+              <div class="row justify-content-center text-center" style="margin-top: 15px ">
 
           <span style="margin-right: 30px; cursor: pointer" matBadge="{{lot.countLikes}}" matBadgeOverlap="false" >
                 <i class="material-icons">thumb_up</i>
           </span>
-            <span style="margin-right: 30px; cursor: pointer" matBadge="{{lot.countDisLikes}}" matBadgeOverlap="false" >
+                <span style="margin-right: 30px; cursor: pointer" matBadge="{{lot.countDisLikes}}" matBadgeOverlap="false" >
               <i class="material-icons">thumb_down</i>
           </span>
-            <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.comments.length}}" matBadgeOverlap="false" >
+                <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.comments.length}}" matBadgeOverlap="false" >
               <i class="material-icons">speaker_notes</i>
             </span>
+              </div>
+
+
+              <div class="row justify-content-center text-center" style="margin-top: 5%" >
+
+                <small class="text-muted">Цена за лот: </small>
+
+              </div>
+              <div class="row justify-content-center text-center" >
+                <h4 class="text-muted"><span style="color: red ">{{lot.startPrice}} руб.</span></h4>
+              </div>
+
+              <div class="row justify-content-center text-center" >
+
+                <small class="text-muted">Дата начала торга: </small>
+
+              </div>
+              <div class="row justify-content-center text-center" >
+                <h6 class="text-muted"><span style="color: darkslategrey ">{{moment.unix(lot.dateStartTrade).format('DD-MM-YYYY HH:mm')}}</span></h6>
+              </div>
+              <div class="row justify-content-center text-center" >
+
+                <small class="text-muted">Продавец: </small>
+
+              </div>
+              <div class="row justify-content-center text-center" >
+                <h6 *ngIf="lot.seller.userLogin===''">
+                  Имя продавца
+                </h6>
+                <h6 *ngIf="lot.seller.userLogin!==''">
+                  {{lot.seller.userLogin}}
+                </h6>
+              </div>
+
+              <div class="row justify-content-center text-center" >
+                <button (click)="bet( $event, lot )" class="col-10" mat-raised-button color="primary" style="cursor: pointer" >Сделать ставку</button>
+              </div>
+              <div class="row justify-content-center text-center">
+                <a target="_blank" style="font-size: small; margin: 3%; cursor: pointer" routerLink="/lot/{{lot._id}}"  >Подробнее о лоте</a>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row justify-content-center " *ngIf="offset <= lots.length">
+
+          <div class="row">
+            <div class="col-12" style="margin-top: 5px; margin-left: 5px">
+              <button mat-raised-button color="primary" style="text-decoration: none; " (click)="MoreLots()">Еще</button>
+            </div>
+          </div>
+
         </div>
 
 
-        <div class="row justify-content-center text-center" style="margin-top: 5%" >
+        <!--<div class="row justify-content-center " >-->
 
-          <small class="text-muted">Цена за лот: </small>
-
-        </div>
-        <div class="row justify-content-center text-center" >
-          <h4 class="text-muted"><span style="color: red ">{{lot.startPrice}} руб.</span></h4>
-        </div>
-
-        <div class="row justify-content-center text-center" >
-
-          <small class="text-muted">Дата начала торга: </small>
-
-        </div>
-        <div class="row justify-content-center text-center" >
-          <h6 class="text-muted"><span style="color: darkslategrey ">{{moment.unix(lot.dateStartTrade).format('DD-MM-YYYY HH:mm')}}</span></h6>
-        </div>
-        <div class="row justify-content-center text-center" >
-
-          <small class="text-muted">Продавец: </small>
-
-        </div>
-        <div class="row justify-content-center text-center" >
-          <h6 *ngIf="lot.seller.userLogin===''">
-            Имя продавца
-          </h6>
-          <h6 *ngIf="lot.seller.userLogin!==''">
-            {{lot.seller.userLogin}}
-          </h6>
-        </div>
-
-        <div class="row justify-content-center text-center" >
-          <button (click)="bet( $event, lot )" class="col-10" mat-raised-button color="primary" style="cursor: pointer" >Сделать ставку</button>
-        </div>
-        <div class="row justify-content-center text-center">
-          <a target="_blank" style="font-size: small; margin: 3%; cursor: pointer" routerLink="/main/lot/{{lot._id}}"  >Подробнее о лоте</a>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="row justify-content-center " *ngIf="offset <= lots.length">
-
-    <div class="row">
-      <div class="col-12" style="margin-top: 5px; margin-left: 5px">
-        <button mat-raised-button color="primary" style="text-decoration: none; " (click)="MoreLots()">Еще</button>
-      </div>
-    </div>
-
-  </div>
-
-
-  <!--<div class="row justify-content-center " >-->
-
-    <!--<div class="row">-->
-      <!--<div class="col-12" style="margin-top: 5px; margin-left: 5px">-->
+        <!--<div class="row">-->
+        <!--<div class="col-12" style="margin-top: 5px; margin-left: 5px">-->
         <!--<button  mat-raised-button color="primary" style="text-decoration: none" (click)="Top( )">Вверх</button>-->
-      <!--</div>-->
-    <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
-  <!--</div>-->
+        <!--</div>-->
 
 
 
-</div>
+      </div>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
 
