@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
+import {NavigationEnd, Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-main',
@@ -16,7 +18,21 @@ export class MainComponent implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) {
+
+    this.router.events.subscribe( event => {
+      // event: [ ChildActivationEnd  , NavigationEnd ... ]
+      // console.log(event);
+
+      if ( event instanceof NavigationEnd ){
+        this.close();
+      }//if
+
+    } );
+
+  }
 
   ngOnInit() {
 

@@ -1,0 +1,80 @@
+<div class="container-fluid">
+
+  <div class="container-fluid" style="padding: 15px;">
+
+    <div class="row justify-content-start text-left" style="margin-top:2%">
+
+      <div class="col-12">
+
+        <div style="margin: 5px">
+
+          <mat-card>
+            <mat-card-header>
+
+              <img mat-card-avatar class="user-avatar" width="50" height="50" src="{{currentUser.userPhoto}}" />
+
+              <mat-card-title><a routerLink="." >{{currentUser.userLogin}}</a></mat-card-title>
+
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <div class="row" style="width: 100%">
+
+                <mat-form-field class="col-11">
+                  <input name="commentText" [(ngModel)]="currentRate" [formControl]="rateFormControl" rows="7" matInput placeholder="Ваш ставка " >
+                  <mat-error *ngIf="rateFormControl.hasError('pattern') && !rateFormControl.hasError('required')">
+                    Ставка должна состоять из цифр
+                  </mat-error>
+                  <mat-error *ngIf="rateFormControl.hasError('required')">
+                    <strong>Введите ставку</strong>
+                  </mat-error>
+                </mat-form-field>
+
+                <div class="col-1">
+                  <button (click)="addRate()" mat-fab>
+                    <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
+                  </button>
+                </div>
+
+              </div>
+
+            </mat-card-content>
+
+
+          </mat-card>
+        </div>
+
+        <h3>Ставки</h3>
+
+        <!--*ngFor="let comment of lot.comments"-->
+        <div style="margin: 5px" *ngFor="let rate of rates">
+
+          <mat-card>
+            <mat-card-header>
+
+              <img mat-card-avatar class="user-avatar" width="50" height="50" src="{{rate.user?.userPhoto}}" />
+
+              <mat-card-title><a routerLink="/main/profile/{{rate.user?._id}}" >{{rate.user?.userLogin}}</a></mat-card-title>
+              <p mat-card-subtitle>{{rate?.dateRate | date:'yyyy-MM-dd HH:mm:ss '}}</p>
+
+            </mat-card-header>
+
+            <mat-card-content >
+              <p>{{rate?.rate}} руб. </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+</div>

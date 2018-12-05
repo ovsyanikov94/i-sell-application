@@ -3,7 +3,8 @@ import { User } from '../../models/user/User';
 import { ApiRoutes } from '../../models/ApiRoutes';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServerResponse} from '../../models/server/ServerResponse';
-
+import {promise} from "selenium-webdriver";
+import {FileInput} from 'ngx-material-file-input';
 @Injectable({
   providedIn: 'root'
 })
@@ -87,22 +88,18 @@ export class AuthService {
         params: params
       }
     ).toPromise() as Promise<ServerResponse>;
-
-    // if ( user === null){
-    //   return this.http.post(
-    //     `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`,
-    //     {}
-    //   ).toPromise() as Promise<ServerResponse>;
-    // }
-    // else{
-    //   return this.http.post(
-    //     `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`,
-    //     {
-    //       userId: user._id
-    //     }
-    //   ).toPromise() as Promise<ServerResponse>;
-    // }
-
-
   }//authorize
+
+  async addUserAvatar(files: FileInput): Promise <ServerResponse>{
+
+    console.log(files);
+    const formData = new FormData();
+    formData.append(
+      'image', files.files[0]
+    );
+      return this.http.post(
+        `${ApiRoutes.SERVER_URL}${ApiRoutes.ADD_USER_AVATAR}`,
+        formData
+      ).toPromise() as Promise<ServerResponse>;
+  }//addUserAvatar
 }

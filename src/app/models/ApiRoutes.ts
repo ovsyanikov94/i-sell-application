@@ -16,8 +16,10 @@ export class ApiRoutes{
   static readonly GET_USER_LOT_BUY: string = 'GetUserBuyLot';
   static readonly GET_USER_LOT_SALE: string = 'GetUserSaleLot';
 
-  static readonly LOT_MARK_LIST: string = 'lot-mark-list';
   static readonly UPDATE_LOT_MARK: string = 'update-lot-mark';
+  static readonly LOT_MARK_USERS_WITH_MARKS = 'users-list-by-mark';
+  static readonly LOT_MARKED_BY_USER = 'get-marked-lot-by-user';
+
 
   //CATEGORIES
   static readonly GET_CATEGORIES_LIST: string = 'category/list';
@@ -38,7 +40,8 @@ export class ApiRoutes{
   static readonly USER_ADD_IN_SUBSCRIBERS: string = 'addInSubscribers';
   static readonly USER_REMOVE_IN_SUBSCRIBERS: string = 'removeInSubscribers';
   static readonly IS_USER_AUTHORIZED: string = 'check-user-access';
-
+  static readonly ADD_USER_AVATAR: string = 'addUserAvatar'
+  static readonly IN_LIST_SUBSCRIBERS: string = 'InListSubscribers';
   //COMMENTS
   static readonly COMMENT_ADD_NEW: string = 'comment';
   static readonly UPDATE_COMMENT: string = 'updateComment/:id';

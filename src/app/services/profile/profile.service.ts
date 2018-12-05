@@ -23,6 +23,7 @@ export class ProfileService {
   }//getSubscriber
 
   async getSubscriptions(user: User): Promise<ServerResponse>{
+
     return this.http.post(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_SUBSCRIPTION}`,
       {
@@ -35,16 +36,23 @@ export class ProfileService {
     return this.http.post(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_ADD_IN_SUBSCRIBERS}`,
       {
-        'userId': user._id
+        'UserIDInSubscribersList': user._id
       }
     ).toPromise() as Promise<ServerResponse>;
   }//addSubscriber
-
+  async inListSubstriber(user: User): Promise<ServerResponse>{
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.IN_LIST_SUBSCRIBERS}`,
+      {
+        'UserIDInSubscribersList': user._id
+      }
+    ).toPromise() as Promise<ServerResponse>;
+  } //inListSubstriber
   async removeSubscriber(user: User): Promise<ServerResponse>{
     return this.http.post(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_REMOVE_IN_SUBSCRIBERS}`,
       {
-        'userId': user._id
+        'UserIDInSubscribersList': user._id
       }
     ).toPromise() as Promise<ServerResponse>;
   }//addSubscriber
