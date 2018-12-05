@@ -19,10 +19,12 @@
     <mat-error *ngIf="betFormControl.hasError('pattern') && !betFormControl.hasError('required')">
       Ставка может включать только цифры
     </mat-error>
-
-    <div *ngIf="user.userCountSum < userBet.value">
-      <strong>У Вас недостаточно денег на счету!</strong>
-    </div>
+    <mat-error *ngIf="betFormControl.hasError('min') && !betFormControl.hasError('required')">
+      Ставка должна быть больше текущей
+    </mat-error>
+    <mat-error *ngIf="betFormControl.hasError('max') && !betFormControl.hasError('required') && !betFormControl.hasError('min')">
+      У Вас недостаточно денег на счету!
+    </mat-error>
   </mat-form-field>
 
 
