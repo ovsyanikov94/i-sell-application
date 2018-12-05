@@ -1,6 +1,8 @@
 import { Component, OnInit , Input } from '@angular/core';
 
 import { Comment } from '../../models/comment/Comment';
+import {Lot} from '../../models/lot/Lot';
+import {User} from '../../models/user/User';
 
 
 @Component({
@@ -10,7 +12,7 @@ import { Comment } from '../../models/comment/Comment';
 })
 export class CommentComponent implements OnInit {
 
-  @Input('userComment') comment: Comment;
+  @Input('comment') comment: Comment;
 
   public textColor: string;
 
