@@ -13,11 +13,12 @@ export class ApiRoutes{
   static readonly GET_USER_BYLOGIN: string = 'getUserByID';
   static readonly USER_CHANGE_PARAMS: string = 'updateUserInfo';
   static readonly USER_INFO: string = 'getUser';
-  static readonly USER_ADD: string = 'addUserWithRole';
+
+
   static readonly GET_USER_ROLE_BYID: string = 'getRoleUserById';
   static readonly GET_USER_ROLES_LIST: string = 'listUsersRole';
   static readonly IS_USER_AUTHORIZED: string = 'check-admin-access';
-  static readonly GET_USER_LIST: string = 'getUserList';
+
 
   //CATEGORIES
   static readonly GET_CATEGORIES_LIST: string = 'category/list';
@@ -43,4 +44,11 @@ export class ApiRoutes{
 
   //COMMENTS
   static readonly COMMENT_ADD_NEW: string = 'comment';
+
+
+  //ADMIN
+  static readonly ADMIN_INFO: string = 'getAdmin';
+  static readonly ADMIN_CHANGE_PARAMS: string = 'updateAdminInfo';
+  static readonly GET_USER_LIST: string = 'getUserList';
+  static readonly USER_ADD: string = 'addUserWithRole';
 }

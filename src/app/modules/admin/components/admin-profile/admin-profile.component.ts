@@ -41,7 +41,7 @@ export class AdminProfileComponent implements OnInit {
 
   constructor(private getUserService: GetUserService) {
 
-    this.getUserService.getUser()
+    this.getUserService.getAdmin()
       .then( this.onUserResponse.bind(this) );
   }
 
@@ -52,15 +52,15 @@ export class AdminProfileComponent implements OnInit {
       this.admin.user = response.data.userAdmin as User;
       //console.log(this.admin);
     }
-    if(this.admin.user.userLogin!=="rootAdmin"){
-      this.IsRootAdmin=false;
+    if (+response.data.userRoleId !== 1){
+      this.IsRootAdmin = false;
     }
 
   }
   onUpdateUserResponse(response: ServerResponse) {
     console.log(response.data);
     if (response.status === 200) {
-      this.getUserService.getUser()
+      this.getUserService.getAdmin()
         .then( this.onUserResponse.bind(this) );
 
     }
@@ -72,7 +72,7 @@ export class AdminProfileComponent implements OnInit {
   }//ngOnInit
 
   SavePersonData(){
-      this.getUserService.updateUser(this.admin.user, this.avatarFormControl.value)
+      this.getUserService.updateAdmin(this.admin.user, this.avatarFormControl.value)
         .then( this.onUpdateUserResponse.bind(this) );
 
 

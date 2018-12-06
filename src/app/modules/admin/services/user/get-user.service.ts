@@ -14,18 +14,18 @@ export class GetUserService {
   constructor(private http: HttpClient) {
   }
 
-  getUser(): Promise<ServerResponse>{
+  getAdmin(): Promise<ServerResponse>{
 
     //const httpParams: HttpParams = new HttpParams()
       //.set('userId', login);
 
     return this.http.get(
-      `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_INFO}`
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.ADMIN_INFO}`
     ).toPromise() as Promise<ServerResponse>;
 
   }// getUserByLogin
 
-  updateUser(user: User, files: FileInput): Promise<ServerResponse>{
+  updateAdmin(user: User, files: FileInput): Promise<ServerResponse>{
 
     const formData = new FormData();
     if ( files ){
@@ -41,7 +41,7 @@ export class GetUserService {
 
 
     return this.http.post(
-      `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_CHANGE_PARAMS}`,
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.ADMIN_CHANGE_PARAMS}`,
       formData
     ).toPromise() as Promise<ServerResponse>;
 
