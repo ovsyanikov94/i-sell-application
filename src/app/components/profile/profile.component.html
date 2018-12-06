@@ -44,7 +44,7 @@
               </div>
               <ng-template #unSubscribestatus>
                 <div  class="col-12" style="padding: 15px">
-                  <button (click)="unSubscribe()"  class="col-12" color="warn"  mat-raised-button>Отписаться</button>
+                  <button (click)="DoUnsubscribe()"  class="col-12" color="warn"  mat-raised-button>Отписаться</button>
                 </div>
               </ng-template>
 
@@ -54,7 +54,7 @@
               <div class="row justify-content-center text-center">
 
                 <div class="col-12" style="padding: 15px">
-                  <a routerLink="/main/my-dialog/{{user.userLogin}}" target="_blank" (click)="Subscribe()"  class="col-12" color="primary"  mat-raised-button>Написать</a>
+                  <a routerLink="/main/my-dialog/{{user.userLogin}}" target="_blank" class="col-12" color="primary"  mat-raised-button>Написать</a>
                 </div>
 
               </div>

@@ -176,12 +176,13 @@ export class ProfileComponent implements OnInit {
     }
   }//Subscribe
 
-  async unSubscribe(){
+  async DoUnsubscribe(){
     const response = await this.profileService.removeSubscriber(this.user);
+
     if ( response.status === 200){
       console.log('resp' , response);
       this.statusSubscribe = response.data;
     }
-  }//unSubscribe
+  }
 
 }
