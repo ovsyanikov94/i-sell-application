@@ -6,6 +6,7 @@ import { LotStatus } from '../lot-status/Lot-status';
 import { Category } from "../category/Category";
 import { MapCoord } from "../MapCoord/MapCoord";
 import { LotImage } from "../LotImage/lotImage";
+import {CurrentUserMarkOnCardLot} from "../CurrentUserMarkOnCardLot/CurrentUserMarkOnCardLot";
 
 
 export class Lot {
@@ -30,9 +31,7 @@ export class Lot {
   public categories: Category[];
   public countLikes: number;
   public countDisLikes: number;
-
-  public lotMark: number;
-
+  public lotMark: CurrentUserMarkOnCardLot;
 
   constructor(){
 

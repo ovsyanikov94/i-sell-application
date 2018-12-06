@@ -1,0 +1,111 @@
+<div class="container-fluid">
+
+  <div class="row justify-content-center">
+
+    <div class="col-6">
+
+      <div class="row justify-content-center text-center">
+        <h3>Добавление нового модератора</h3>
+      </div>
+
+      <div class="row justify-content-center">
+
+        <div class="row justify-content-center mat-elevation-z8 form-auth">
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="userName" matInput placeholder="Имя" [(ngModel)]="user.userName" [formControl]="nameFormControl">
+            <mat-error *ngIf="nameFormControl.hasError('pattern') && !nameFormControl.hasError('required')">
+              Введите корректный имя. Длина от 2 до 25 латинских символов
+            </mat-error>
+            <mat-error *ngIf="nameFormControl.hasError('required')">
+              Имя <strong>обязателен</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="userLastname" matInput placeholder="Фамилия" [(ngModel)]="user.userLastname" [formControl]="lastNameFormControl">
+            <mat-error *ngIf="lastNameFormControl.hasError('pattern') && !lastNameFormControl.hasError('required')">
+              Введите корректный фамилию. Длина от 2 до 25 латинских символов
+            </mat-error>
+            <mat-error *ngIf="lastNameFormControl.hasError('required')">
+              фамилия <strong>обязателен</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="userLogin" matInput placeholder="Логин" [(ngModel)]="user.userLogin" [formControl]="loginFormControl">
+            <mat-error *ngIf="loginFormControl.hasError('pattern') && !loginFormControl.hasError('required')">
+              Введите корректный логин. Длина от 4 до 20 латинских символов
+            </mat-error>
+            <mat-error *ngIf="loginFormControl.hasError('required')">
+              Логин <strong>обязателен</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <mat-select  [(ngModel)]="selectedRole" placeholder="Выберите роль" [formControl]="selectedRoleControl" >
+              <mat-option *ngFor="let role of roles" [value]="role.userRoleId">{{role.roleTitle}}</mat-option>
+            </mat-select>
+            <!--<mat-hint>Errors appear instantly!</mat-hint>-->
+            <mat-error *ngIf="selectedRoleControl.hasError('required')">Вы должны выбрать роль</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="userEmail" matInput placeholder="Email" [(ngModel)]="user.userEmail" [formControl]="emailFormControl">
+            <mat-error *ngIf="emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')">
+              Введите корректный email. название@наименованиен.домен
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              email <strong>обязателен</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="userPhone" matInput placeholder="Телефон" [(ngModel)]="user.userPhone" [formControl]="phoneFormControl">
+            <mat-error *ngIf="phoneFormControl.hasError('pattern') && !phoneFormControl.hasError('required')">
+              Введите корректный номер телефона. +38(0ХХ)ХХХХ-ХХ-ХХ
+            </mat-error>
+            <mat-error *ngIf="phoneFormControl.hasError('required')">
+              телефон <strong>обязателен</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="userPassword" matInput type="password" placeholder="Пароль" [(ngModel)]="user.userPassword" [formControl]="passwordFormControl">
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+              Пароль <strong>обязателен</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-12">
+            <input name="userConfirmPassword" matInput type="password" placeholder="Подтвердите пароль" [(ngModel)]="user.userConfirmPassword" [formControl]="passwordConfirmFormControl">
+            <mat-error *ngIf="passwordConfirmFormControl.hasError('required')">
+              Пароль <strong>обязателен</strong>
+            </mat-error>
+            <mat-error *ngIf="passwordConfirmFormControl.errors">
+              <strong>Пароли не совпадают</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <ngx-mat-file-input [formControl]="photoControl" placeholder="Прикрепить фото" ></ngx-mat-file-input>
+            <mat-icon matSuffix >folder</mat-icon>
+          </mat-form-field>
+
+          <div class="row justify-content-center text-center">
+
+            <div class="col-12">
+              <button (click)="addModerator()"  class="col-12" mat-stroked-button>Добавить</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -2,6 +2,60 @@
 
   <div class="container-fluid" style="padding: 15px;">
 
+    <div class="row justify-content-center">
+
+      <div class="col-12">
+
+        <div class="row justify-content-center text-left">
+          <div class="col-6">
+            <div class="row justify-content-center text-center" >
+              <h3>{{lot.lotTitle}} </h3>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <img src="{{lot.lotImagePath[0].path}}"  style="width: 100%; height: 180px">
+        </div>
+
+        <div class="row justify-content-center text-left" >
+          <h5> <small class="text-muted"><span  *ngFor="let cat of lot.categories" style="font-weight: bold "> {{cat.title}}</span></small></h5>
+        </div>
+        <div class="row justify-content-center text-left" >
+          <small class="text-muted">Статус: <span style="font-weight: bold ">{{lot.statusLot.statusTitle}}</span></small>
+        </div>
+        <div class="row justify-content-start text-left" >
+          <small class="text-muted">Тип: <span style="font-weight: bold ">{{lot.typeLot.typeTitle}}</span></small>
+        </div>
+        <div class="row justify-content-start text-left" style="margin-top: 2%">
+
+          <small class="text-muted">Дата начала торга: </small>
+
+        </div>
+        <div class="row justify-content-start text-left" >
+          <h6 class="text-muted"><span style="color: darkslategrey ">{{moment.unix(lot.dateStartTrade).format('DD-MM-YYYY HH:mm')}}</span></h6>
+        </div>
+
+
+        <div class="row justify-content-start text-left" style="margin-top:3%">
+          <small class="text-muted">Текущая ставка:</small>
+        </div>
+        <div class="row justify-content-start text-left" style="color: red">
+          <h1>{{lot.currentRate}} руб.</h1>
+        </div>
+
+        <div class="row justify-content-start text-left" style="margin-top:1%">
+          <small class="text-muted">Начальная ставка:</small>
+        </div>
+        <div class="row justify-content-start text-left" style="color: cadetblue ">
+          <h4>{{lot.startPrice}} руб.</h4>
+        </div>
+
+      </div>
+
+
+    </div>
+
     <div class="row justify-content-start text-left" style="margin-top:2%">
 
       <div class="col-12">

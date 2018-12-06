@@ -1,0 +1,168 @@
+<div class="container-fluid">
+
+  <div class="row justify-content-start text-left">
+    <a style="font-size: small; margin-left: 2%; margin-bottom: 1%" routerLink="/main/card-lot">&larr; Вернуться к лотам</a>
+  </div>
+
+  <div class="row justify-content-center text-center" >
+    <div class="container">
+      <div>
+
+        <angular-image-slider *ngIf="lot.lotFoto.length > 1" [images]="lot.lotFoto"></angular-image-slider>
+
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-end" style="margin-top: 1%">
+    <div class="col-1" >
+       <span  style="margin-right: 30px; cursor: pointer; margin-top: 2%" matBadge="4" matBadgeOverlap="false" >
+              <i class="material-icons">thumb_up</i>
+          </span>
+    </div>
+    <div class="col-1">
+      <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
+            <i class="material-icons">thumb_down</i>
+          </span>
+    </div>
+    <div class="col-1">
+      <span  style="margin-right: 15px; cursor: pointer" matBadge="4" matBadgeOverlap="false" >
+            <i class="material-icons">speaker_notes</i>
+          </span>
+    </div>
+  </div>
+  <mat-tab-group [dynamicHeight]="true" style="padding: 15px" color="primary">
+
+    <mat-tab label="Информация о лоте">
+
+      <div class="container-fluid" style="padding: 15px;">
+
+        <div class="row justify-content-start">
+
+
+          <div class="col-12">
+
+            <div class="row justify-content-start text-left">
+              <div class="col-6">
+                <div class="row justify-content-start text-start" >
+                  <h3>{{lot.lotName}} </h3>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="row justify-content-start text-left" >
+              <h5><small class="text-muted">Категория: <span style="font-weight: bold ">{{lot.lotCategory.categoryTitle}}</span></small></h5>
+            </div>
+            <div class="row justify-content-start text-left" >
+              <small class="text-muted">Статус: <span style="font-weight: bold ">{{lot.lotStatus}}</span></small>
+            </div>
+            <div class="row justify-content-start text-left" style="margin-top: 2%">
+
+              <small class="text-muted">Дата начала торга: </small>
+
+            </div>
+            <div class="row justify-content-start text-left" >
+              <h6 class="text-muted"><span style="color: darkslategrey ">{{lot.lotStartDate.toLocaleDateString()}}  {{lot.lotStartDate.getHours()}}:{{lot.lotStartDate.getMinutes()}}</span></h6>
+            </div>
+
+
+            <div class="row justify-content-start text-left" style="margin-top:3%">
+              <small class="text-muted">Текущая ставка:</small>
+            </div>
+            <div class="row justify-content-start text-left" style="color: red">
+              <h1>{{lot.lotCurrentPrice}} руб.</h1>
+            </div>
+
+            <div class="row justify-content-start text-left" style="margin-top:1%">
+              <small class="text-muted">Начальная ставка:</small>
+            </div>
+            <div class="row justify-content-start text-left" style="color: cadetblue ">
+              <h4>{{lot.lotStartPrice}} руб.</h4>
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+
+      </div>
+
+    </mat-tab>
+    <mat-tab label="Описание">
+
+      <div class="container-fluid" style="padding: 15px;">
+
+        <div class="row justify-content-center">
+
+          <div class="row justify-content-start text-left" style="margin-top:2%;margin-left: 1%">
+            <h5>Описание:
+              <small class="text-muted">{{lot.lotDescription}}</small>
+            </h5>
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+    </mat-tab>
+    <mat-tab label="Комментарии">
+
+      <div class="container-fluid" style="padding: 15px;">
+
+        <div class="row justify-content-start text-left" style="margin-top:2%">
+
+          <div class="col-12">
+
+            <div style="margin: 5px">
+
+              <mat-card>
+                <mat-card-header>
+
+                  <img mat-card-avatar class="user-avatar" width="50" height="50" src="{{currentUser.userPhoto}}" />
+
+                  <mat-card-title><a routerLink="." >{{currentUser.userLogin}}</a></mat-card-title>
+
+                </mat-card-header>
+
+                <mat-card-content>
+
+                  <div class="row" style="width: 100%">
+
+                    <mat-form-field class="col-11">
+                      <textarea rows="7" matInput placeholder="Ваш комментарий..." ></textarea>
+                    </mat-form-field>
+
+                    <div class="col-1">
+                      <button mat-fab>
+                        <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
+                      </button>
+                    </div>
+
+                  </div>
+
+                </mat-card-content>
+
+
+              </mat-card>
+            </div>
+
+            <h3>Комментарии</h3>
+            <app-comment *ngFor="let comment of lot.comments" [userComment]="comment"></app-comment>
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

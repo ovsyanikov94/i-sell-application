@@ -1,28 +1,30 @@
 <div class="row text-center justify-content-center">
 
-  <div mat-dialog-content  class="row justify-content-center text-center">
+  <div mat-dialog-content  class="row justify-content-center text-center col-12">
     <h6 >{{betData.lot.lotTitle}}</h6>
   </div>
 
   <div mat-dialog-content  class="col-12" >
     <img src="{{betData.lot.lotImagePath[0].path}}"  style="width: 50%">
   </div>
-  <div mat-dialog-content class="row justify-content-center text-center"  >
+  <div mat-dialog-content class="row justify-content-center text-center col-12"  >
     <h6 class="col-12">Текущая ставка: <span style="color: red; font-size: larger ">{{betData.lot.currentRate}} руб.</span></h6>
   </div>
-  <div mat-dialog-content class="row justify-content-center text-center"  >
-    <h5 class="col-12">На Вашем счету: <span style="color: red; font-size: larger ">{{user.userCountSum}} руб.</span></h5>
+  <div mat-dialog-content class="row justify-content-center text-center col-12"  >
+    <h5 class="col-12">На Вашем счету: <span style="color: red; font-size: larger ">{{user.userCountSum || 0}} руб.</span></h5>
   </div>
 
-  <mat-form-field class="example-full-width" style="margin-top: 5%">
+  <mat-form-field class="col-12 example-full-width" style="margin-top: 5%">
     <input #userBet type="text" matInput placeholder="Введите Вашу ставку" [(ngModel)]="userCurrentBet" [formControl]="betFormControl">
     <mat-error *ngIf="betFormControl.hasError('pattern') && !betFormControl.hasError('required')">
       Ставка может включать только цифры
     </mat-error>
-
-    <div *ngIf="user.userCountSum < userBet.value">
-      <strong>У Вас недостаточно денег на счету!</strong>
-    </div>
+    <mat-error *ngIf="betFormControl.hasError('min') && !betFormControl.hasError('required')">
+      Ставка должна быть больше текущей
+    </mat-error>
+    <mat-error *ngIf="betFormControl.hasError('max') && !betFormControl.hasError('required') && !betFormControl.hasError('min')">
+      У Вас недостаточно денег на счету!
+    </mat-error>
   </mat-form-field>
 
 

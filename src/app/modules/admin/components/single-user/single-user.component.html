@@ -1,0 +1,22 @@
+<div style="margin: 5px">
+
+  <mat-card>
+    <mat-list>
+      <mat-list-item>
+        <img  mat-list-avatar src="{{user?.userPhoto}}" alt="Desc 1" style="width: 100px; height: 100px">
+        <h3 mat-line><a routerLink="/main/profile/{{user?.userLogin}}" >{{user?.userLogin}}</a></h3>
+        <p mat-line>
+          <span>{{user?.userName}}</span>
+        </p>
+        <p mat-line>
+          <span>{{user?.userLastname}}</span>
+        </p>
+        <div class="button-row">
+          <button (click)="onUserMouseClick()" mat-raised-button color="primary" style="width: auto">Написать</button>
+        </div>
+
+      </mat-list-item>
+    </mat-list>
+
+  </mat-card>
+</div>

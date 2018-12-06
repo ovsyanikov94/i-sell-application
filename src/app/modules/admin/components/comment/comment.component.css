@@ -1,0 +1,83 @@
+textarea {
+  margin: 10px;
+  resize: none;
+  border: 2px solid #666666;
+  border-radius: 7px;
+  outline: none;
+}
+strong{
+  margin: 10px;
+}
+.profileImage{
+  height: 30px;
+}
+div{
+  margin-top: 10px;
+}
+.infoUserDiv{
+  margin-left: 20px;
+}
+.sizeProfileArea{
+  margin-left:15px;
+}
+.iconCommentator{
+  display: inline-block;
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+.iconCommentator > img{
+  height: 40px;
+}
+.oneComment{
+  border-bottom: 1px solid #b5b5b5;
+}
+.actionCommentator{
+  color:#b5b5b5;
+}
+.nickCommentator{
+  display: inline-block;
+  margin-left: 5px;
+}
+.nickCommentator > a{
+  color:#44588c;
+  position: relative;
+}
+.answerCommentator{
+  display: inline-block;
+  margin-left: 5px;
+}
+.answerCommentator > p {
+  color:#b5b5b5;
+  position: relative;
+  display: inline-block;
+}
+.answerCommentator > a {
+  display: inline-block;
+  color:#44588c;
+  position: relative;
+  margin-left: 5px;
+}
+.lastBlockCommentator{
+  margin-left: 45px;
+}
+.lastBlockCommentator > p {
+  display: inline-block;
+  position: relative;
+  color:#b5b5b5;
+}
+.lastBlockCommentator > a {
+  display: inline-block;
+  position: relative;
+  color:#44588c;
+}
+.textCommentator > p {
+  margin-bottom: 20px;
+  margin-left: 45px;
+}
+
+
+.user-avatar{
+  background-size: cover;
+  width: 75px;
+  height: 75px;
+}
