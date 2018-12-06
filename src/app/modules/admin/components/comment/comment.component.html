@@ -1,0 +1,27 @@
+<div style="margin: 5px">
+
+  <mat-card>
+    <mat-card-header>
+
+      <!--<div   mat-card-avatar class="user-avatar" [ngStyle]="{ 'background-image': 'url(' + comment?.userSender.userPhoto + ')'}" ></div>-->
+
+      <img mat-card-avatar class="user-avatar" width="50" height="50" src="{{comment?.userSender.userPhoto}}" />
+
+      <mat-card-title><a routerLink="/main/profile/1" >{{comment?.userSender.userLogin}}</a></mat-card-title>
+      <p mat-card-subtitle>{{comment?.commentSendDate}}</p>
+
+    </mat-card-header>
+
+    <mat-card-content >
+      <p>{{comment?.commentText | lenghtFilter:lenght}} </p>
+    </mat-card-content>
+    <mat-card-footer id="show" [style.display]="More==true?'block':'none'">
+      <button mat-button color="primary" class="small" (click)="ShowMassage()">Читать весь отзыв...</button>
+    </mat-card-footer>
+    <mat-card-footer id="del" [style.display]="Less==true?'block':'none'">
+      <button mat-button color="primary" class="small" (click)="DellMassage()">Свернуть</button>
+    </mat-card-footer>
+  </mat-card>
+</div>
+
+

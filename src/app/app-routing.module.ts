@@ -21,6 +21,12 @@ import {AuthGuard} from './guards/auth.guard';
 import {BiddingComponent} from "./components/bidding/bidding.component";
 
 const routes: Routes = [
+
+  {
+    path: 'admin',
+    loadChildren: './modules/admin/admin.module#AdminModule'
+  },
+
   {
     path: 'main',
     component: MainComponent,
@@ -66,6 +72,7 @@ const routes: Routes = [
       {
         path: 'bidding',
         component: BiddingComponent,
+
       },
     ]
   },

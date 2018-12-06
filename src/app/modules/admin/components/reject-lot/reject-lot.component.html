@@ -1,0 +1,80 @@
+<div class="container-fluid col-12" >
+
+  <div class="row justify-content-center">
+
+    <div class="col-12">
+
+      <div class="row justify-content-center">
+
+        <div class="row justify-content-center mat-elevation-z8 form-auth">
+
+
+          <h3 style="margin-top: 5px">Отклоненные лоты</h3>
+          <div class="row  col-12" style="margin: 10px 0px 20px 0px">
+
+            <div class="col-12">
+              <mat-form-field class="col-12">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Поиск по названию лота">
+              </mat-form-field>
+            </div>
+
+
+            <div *ngFor="let lot of rejected.slice(offset, limit); let i = index;" class="col-lg-3 col-xl-3 col-md-6 col-sm-12" >
+              <mat-card class="example-card" style="margin-top: 10px">
+                <a routerLink="/main/profile/{{lot.lotSeller.userLogin}}" class="link">
+                  <mat-card-header >
+                    <div class="row justify-content-center col-12">
+                      <mat-list class="row justify-content-center ">
+                        <mat-list-item >
+                          <img  mat-list-avatar src="{{lot?.lotSeller.userPhoto}}" alt="Desc 1" style="width: 100px; height: 100px; ">
+                        </mat-list-item>
+                      </mat-list>
+                      <div style="margin-top: 20px">
+                        <mat-card-title>{{lot.lotSeller.userName}} {{lot.lotSeller.userLastname}}</mat-card-title>
+                        <mat-card-subtitle>{{lot.lotSeller.userLogin}}</mat-card-subtitle>
+                      </div>
+                    </div>
+                  </mat-card-header >
+                </a>
+
+                <a routerLink="." class="link">
+                  <div class="row justify-content-center ">
+                    <div class="row justify-content-center text-center col-12" style="margin-top: 10px"><h4>{{lot.lotName}}</h4></div>
+
+                    <img mat-card-image src="{{lot.lotFoto[0]}}" alt="Photo" style="margin-top: 20px; width: 50%; height: 50%">
+                  </div>
+
+                </a>
+                <mat-card-content style="width: 100%">
+                  <div class="row justify-content-center">
+                    <div class="col-12">
+
+                      Дата отклонения:  {{lot.dateChecked | date: 'dd-MM-yyyy'}}
+
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+
+            <div class="col-12 justify-content-center">
+              <mat-paginator showFirstLastButtons
+                             [length]="length"
+                             [pageSize]="pageSize"
+                             [pageSizeOptions]="pageSizeOptions"
+                             (page)="NextPrevPage($event)">
+              </mat-paginator>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
