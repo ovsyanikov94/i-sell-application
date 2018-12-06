@@ -17,13 +17,17 @@ export class ProfileService {
     const params = new HttpParams()
       .set(
         'userId' , ( id || -1).toString()
-      )
-      .set(
+      );
+    if ( limit !== undefined){
+      params.set(
         'limit', limit.toString()
-      )
-      .set(
+      );
+    }//if
+    if ( offset !== undefined ){
+      params.set(
         'offset', offset.toString()
       );
+    }//if
     return this.http.get(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_SUBSCRIBERS}`,
        {
@@ -36,13 +40,18 @@ export class ProfileService {
     const params = new HttpParams()
       .set(
         'userId' , ( id || -1).toString()
-      )
-      .set(
-        'limit', limit.toString()
-      )
-      .set(
-        'offset', offset.toString()
       );
+      if ( limit !== undefined){
+        params.set(
+          'limit', limit.toString()
+        );
+      }//if
+      if (offset !== undefined ){
+        params.set(
+          'offset', offset.toString()
+        );
+      }//if
+
     return this.http.get(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_SUBSCRIPTION}`,
       {

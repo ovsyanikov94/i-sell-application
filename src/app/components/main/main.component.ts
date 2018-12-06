@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {NavigationEnd, Router} from '@angular/router';
-
-
+import {ProfileService} from "../../services/profile/profile.service";
+import {Constants} from "../../../app/models/Constants";
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',

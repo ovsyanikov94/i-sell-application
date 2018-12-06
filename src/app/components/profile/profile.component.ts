@@ -6,6 +6,9 @@ import {AuthService} from "../../services/user/auth.service";
 import {ProfileService} from "../../services/profile/profile.service";
 import {ServerResponse} from "../../models/server/ServerResponse";
 import {ActivatedRoute, Router} from '@angular/router';
+import {Constants} from "../../../app/models/Constants";
+import {SubscribeFunction} from "../../../app/models/ModelFunctionsSubscribe";
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -20,6 +23,19 @@ export class ProfileComponent implements OnInit {
   public statusSubscribe: boolean;
   public isEmptySubscribe = true;
   public isEmtrySubscriptions = true;
+  public OffsetSubscribe = 0;
+  public OffsetSubscriptions = 0;
+
+  private SubscribeFunction = new SubscribeFunction(
+    this.user,
+    this.subscribers,
+    this.Subscriptions,
+    this.isEmtrySubscriptions,
+    this.isEmptySubscribe,
+    this.OffsetSubscriptions,
+    this.OffsetSubscribe,
+    this.profileService
+  );
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
@@ -57,38 +73,68 @@ export class ProfileComponent implements OnInit {
   onTabChanged(event: MatTabChangeEvent){
 
     if ( event.index === 1){
-      this.getSubscribe();
+     this.getSubscribe();
+      //this.SubscribeFunction.getSubscribe();
     }
     if ( event.index === 2){
-      this.getSubscriptions();
+     this.getSubscriptions();
+      //this.SubscribeFunction.getSubscriptions.bind(this);
+      console.log(this.Subscriptions);
     }
   }//onTabChanged
 
+  addOffsetSubscribe(){
+    this.OffsetSubscribe += Constants.APP_LIMIT;
+    this.getSubscribe( );
+  }//addOffsetSubscribe
+
+  addOffsetSubscriptions(){
+    this.OffsetSubscriptions += Constants.APP_LIMIT;
+    this.getSubscriptions();
+  }//addOffsetSubscriptions
   async getSubscribe() {
 
-    const response = await this.profileService.getSubscriber(this.user._id);
+    const response = await this.profileService.getSubscriber(this.user._id, Constants.APP_LIMIT , this.OffsetSubscribe );
     if ( response.status === 200){
       console.log(response.data);
       if (response.data !== null){
-        this.subscribers = response.data as User[];
-        this.isEmptySubscribe = false;
+        const res = response.data as User[];
+        for (let i = 0; i < res.length; i++ ){
+
+            this.subscribers.push(res[i]);
+
+        }//for
+        console.log(' COUNT USER: ', this.subscribers.length);
+
+        if (this.subscribers.length === 0){
+          this.isEmptySubscribe = true;
+        }//if
+        else{
+          this.isEmptySubscribe = false;
+        }//else
         console.log('USER : ', this.subscribers);
       }//if
       else {
         this.isEmptySubscribe = true;
-      }
+      }//else
     }
   }//getSubscribe
 
   async getSubscriptions() {
 
-    const response = await this.profileService.getSubscriptions(this.user._id);
+    const response = await this.profileService.getSubscriptions(this.user._id, Constants.APP_LIMIT , this.OffsetSubscriptions);
     if ( response.status === 200){
       if (response.data !== null){
-        console.log(response.data);
-        this.Subscriptions = response.data as User[];
-        this.isEmtrySubscriptions = false;
-        console.log('USER : ', this.Subscriptions);
+        const res = response.data as User[];
+        for (let i = 0; i < res.length; i++ ){
+          this.Subscriptions.push(res[i]);
+        }//for
+        if (this.Subscriptions.length === 0){
+          this.isEmtrySubscriptions = true;
+        }//if
+        else{
+          this.isEmtrySubscriptions = false;
+        }//else
       }//if
       else{
         this.isEmtrySubscriptions = true;
@@ -112,4 +158,5 @@ export class ProfileComponent implements OnInit {
       this.statusSubscribe = response.data;
     }
   }//unSubscribe
+
 }
