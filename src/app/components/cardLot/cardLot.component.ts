@@ -221,10 +221,11 @@ export class CardLotComponent implements OnInit {
         const like: number = response.data.like;
         const dislike: number = response.data.dislike;
 
-        console.log('like, dislike', like, dislike);
-
         lot.countLikes += +like;
         lot.countDisLikes += +dislike;
+
+        const singleLotResponse: ServerResponse = await this.lotService.getLotById(lot._id);
+        lot.lotMark = singleLotResponse.data.lotMark;
 
       }//if
 
