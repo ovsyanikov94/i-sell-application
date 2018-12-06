@@ -79,7 +79,7 @@ export class CategoryComponent implements OnInit {
         }//if
 
     }//try
-    catch(ex){
+    catch (ex){
 
       console.log( "Exception: " , ex );
 
@@ -114,7 +114,7 @@ export class CategoryComponent implements OnInit {
     }
 
     try{
-
+      console.log(this.cat.title);
       const response: ServerResponse = await this.categoryService.addCategory( this.cat.title );
 
       console.log('response: ' , response );
@@ -137,7 +137,7 @@ export class CategoryComponent implements OnInit {
       }//if
 
     }//try
-    catch(ex){
+    catch (ex){
 
       console.log('ADD CATEGORY EX:' , ex );
 
@@ -145,7 +145,7 @@ export class CategoryComponent implements OnInit {
 
   }
 
-  delete( event , category:Category ) {
+  delete( event , category: Category ) {
 
     console.log('category for delete: ' , category);
 
@@ -167,7 +167,7 @@ export class CategoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( async ( result ) => {
 
-      if( result === true ){
+      if ( result === true ){
 
         console.log( 'catData: ' , catData );
 

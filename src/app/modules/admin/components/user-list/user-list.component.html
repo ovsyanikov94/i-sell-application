@@ -7,9 +7,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <button mat-button style="width: 100%">Click me!</button>
-      <button mat-button style="width: 100%">Click me!</button>
-      <button mat-button style="width: 100%">Click me!</button>
+      <button mat-button (click)="SortByLogin()" style="width: 100%">По логину</button>
+      <button mat-button (click)="SortByName()" style="width: 100%">По имени</button>
+      <button mat-button (click)="SortByLastName()" style="width: 100%">По фамилии</button>
       <button mat-button style="width: 100%">Click me!</button>
       <button mat-button style="width: 100%">Click me!</button>
     </mat-expansion-panel>
