@@ -25,6 +25,11 @@ export class BlockSubscribersComponent implements OnInit {
   }
   onTabChanged(event: MatTabChangeEvent){
 
+    this.Subscriptions.length = 0;
+    this.subscribers.length = 0;
+    this.OffsetSubscribe = 0;
+    this.OffsetSubscriptions = 0;
+
     if ( event.index === 0){
       this.getSubscribe();
 
@@ -49,16 +54,20 @@ export class BlockSubscribersComponent implements OnInit {
   async getSubscribe() {
 
     const response = await this.profileService.getSubscriber('-1', Constants.APP_LIMIT , this.OffsetSubscribe );
+
     if ( response.status === 200){
+
       console.log(response.data);
+
       if (response.data !== null){
+
         const res = response.data as User[];
+
         for (let i = 0; i < res.length; i++ ){
 
           this.subscribers.push(res[i]);
 
         }//for
-        console.log(' COUNT USER: ', this.subscribers.length);
 
         if (this.subscribers.length === 0){
           this.isEmptySubscribe = true;
@@ -66,7 +75,9 @@ export class BlockSubscribersComponent implements OnInit {
         else{
           this.isEmptySubscribe = false;
         }//else
+
         console.log('USER : ', this.subscribers);
+
       }//if
       else {
         this.isEmptySubscribe = true;
@@ -77,7 +88,9 @@ export class BlockSubscribersComponent implements OnInit {
   async getSubscriptions() {
 
     const response = await this.profileService.getSubscriptions('-1', Constants.APP_LIMIT , this.OffsetSubscriptions);
+
     if ( response.status === 200){
+
       if (response.data !== null){
         const res = response.data as User[];
         for (let i = 0; i < res.length; i++ ){

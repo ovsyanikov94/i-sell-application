@@ -30,10 +30,10 @@
             *ngFor="let user of subscribers"
             [user]="user"
           ></app-subscriber>
-          <div  *ngIf="subscribers.length >= 5" class="row justify-content-center text-center" style="width: 100%; padding-top: 1%">
+          <div  *ngIf="subscribers.length >= 1" class="row justify-content-center text-center" style="width: 100%; padding-top: 1%">
 
             <div  class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
-              <button style="width: 100%" color="primary" mat-stroked-button>еще</button>
+              <button (click)="addOffsetSubscribe()" style="width: 100%" color="primary" mat-stroked-button>еще</button>
             </div>
 
 
@@ -55,10 +55,10 @@
             *ngFor="let user of Subscriptions"
             [user]="user"
           ></app-subscriber>
-          <div  *ngIf="Subscriptions.length >= 5" class="row justify-content-center text-center" style="width: 100%; padding-top: 1%">
+          <div  *ngIf="Subscriptions.length >= 1" class="row justify-content-center text-center" style="width: 100%; padding-top: 1%">
 
             <div  class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
-              <button style="width: 100%" color="primary" mat-stroked-button>еще</button>
+              <button (click)="addOffsetSubscriptions()" style="width: 100%" color="primary" mat-stroked-button>еще</button>
             </div>
 
 

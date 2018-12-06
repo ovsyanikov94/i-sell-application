@@ -70,17 +70,25 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  onTabChanged(event: MatTabChangeEvent){
+  async onTabChanged(event: MatTabChangeEvent){
+
+    this.Subscriptions.length = 0;
+    this.subscribers.length = 0;
+    this.OffsetSubscribe = 0;
+    this.OffsetSubscriptions = 0;
 
     if ( event.index === 1){
-     this.getSubscribe();
-      //this.SubscribeFunction.getSubscribe();
-    }
+
+     await this.getSubscribe();
+
+    }//if
+
     if ( event.index === 2){
-     this.getSubscriptions();
-      //this.SubscribeFunction.getSubscriptions.bind(this);
-      console.log(this.Subscriptions);
-    }
+
+     await this.getSubscriptions();
+
+    }//if
+
   }//onTabChanged
 
   addOffsetSubscribe(){
@@ -92,13 +100,19 @@ export class ProfileComponent implements OnInit {
     this.OffsetSubscriptions += Constants.APP_LIMIT;
     this.getSubscriptions();
   }//addOffsetSubscriptions
+
   async getSubscribe() {
 
     const response = await this.profileService.getSubscriber(this.user._id, Constants.APP_LIMIT , this.OffsetSubscribe );
+    console.log('users: ' , response.data );
+    return;
+
     if ( response.status === 200){
       console.log(response.data);
       if (response.data !== null){
+
         const res = response.data as User[];
+
         for (let i = 0; i < res.length; i++ ){
 
             this.subscribers.push(res[i]);
@@ -118,17 +132,27 @@ export class ProfileComponent implements OnInit {
         this.isEmptySubscribe = true;
       }//else
     }
+
   }//getSubscribe
 
   async getSubscriptions() {
 
-    const response = await this.profileService.getSubscriptions(this.user._id, Constants.APP_LIMIT , this.OffsetSubscriptions);
+    const response = await this.profileService.getSubscriptions(
+      this.user._id,
+      Constants.APP_LIMIT ,
+      this.OffsetSubscriptions
+    );
+
     if ( response.status === 200){
+
       if (response.data !== null){
+
         const res = response.data as User[];
+
         for (let i = 0; i < res.length; i++ ){
           this.Subscriptions.push(res[i]);
         }//for
+
         if (this.Subscriptions.length === 0){
           this.isEmtrySubscriptions = true;
         }//if
@@ -138,8 +162,9 @@ export class ProfileComponent implements OnInit {
       }//if
       else{
         this.isEmtrySubscriptions = true;
-      }
-    }
+      }//else
+
+    }//if
   }//getSubscriptions
 
   async Subscribe(){

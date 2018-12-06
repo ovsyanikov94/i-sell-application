@@ -3,6 +3,7 @@ import { User } from '../../models/user/User';
 import { ApiRoutes } from '../../models/ApiRoutes';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServerResponse} from '../../models/server/ServerResponse';
+import {Constants} from '../../models/Constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +14,20 @@ export class ProfileService {
     private http: HttpClient
   ) { }
 
-  async getSubscriber(id?: string, limit?: number, offset?: number): Promise<ServerResponse>{
+  async getSubscriber(
+    id?: string,
+    limit: number  = Constants.APP_LIMIT,
+    offset: number =  Constants.APP_OFFSET
+  ): Promise<ServerResponse>{
+
     const params = new HttpParams()
       .set(
         'userId' , ( id || -1).toString()
-      );
-    if ( limit !== undefined){
-      params.set(
+      ).set(
         'limit', limit.toString()
-      );
-    }//if
-    if ( offset !== undefined ){
-      params.set(
+      ).set(
         'offset', offset.toString()
       );
-    }//if
     return this.http.get(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_SUBSCRIBERS}`,
        {
@@ -36,21 +36,21 @@ export class ProfileService {
       ).toPromise() as Promise<ServerResponse>;
   }//getSubscriber
 
-  async getSubscriptions(id?: string, limit?: number, offset?: number): Promise<ServerResponse>{
+  async getSubscriptions(
+    id?: string,
+    limit: number  = Constants.APP_LIMIT,
+    offset: number =  Constants.APP_OFFSET
+  ): Promise<ServerResponse>{
+
     const params = new HttpParams()
       .set(
         'userId' , ( id || -1).toString()
+      ).set(
+        'limit', limit.toString()
+      ).set(
+        'offset', offset.toString()
       );
-      if ( limit !== undefined){
-        params.set(
-          'limit', limit.toString()
-        );
-      }//if
-      if (offset !== undefined ){
-        params.set(
-          'offset', offset.toString()
-        );
-      }//if
+
 
     return this.http.get(
       `${ApiRoutes.SERVER_URL}${ApiRoutes.USER_SUBSCRIPTION}`,
