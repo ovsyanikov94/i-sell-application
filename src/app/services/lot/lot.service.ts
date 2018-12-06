@@ -215,6 +215,17 @@ export class LotService {
 
   }//getCurrentLotMarkFromUser
 
+   addBidding( lot: Lot, rate: number ): Promise<ServerResponse>{
+
+    return this.http.post(
+      `${ApiRoutes.SERVER_URL}${ApiRoutes.LOT_BIDDING}`,
+      {
+        lotId: lot._id,
+        rate: rate
+      }
+    ).toPromise() as Promise<ServerResponse>;
+
+  }//likeLot
 }//LotService
 
 

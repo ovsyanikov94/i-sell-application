@@ -20,6 +20,8 @@ export class ApiRoutes{
   static readonly LOT_MARK_USERS_WITH_MARKS = 'users-list-by-mark';
   static readonly LOT_MARKED_BY_USER = 'get-marked-lot-by-user';
 
+  static readonly LOT_BIDDING: string = 'addBidding';
+
 
   //CATEGORIES
   static readonly GET_CATEGORIES_LIST: string = 'category/list';

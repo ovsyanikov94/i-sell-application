@@ -70,7 +70,7 @@ const routes: Routes = [
         component: ProfileComponent,
       },
       {
-        path: 'bidding',
+        path: 'bidding/:id',
         component: BiddingComponent,
 
       },

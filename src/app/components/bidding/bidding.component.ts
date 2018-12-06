@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {User} from "../../models/user/User";
 import {Bidding} from "../../models/Bidding/Bidding";
+import {Lot} from "../../models/lot/Lot";
 
 @Component({
   selector: 'app-bidding',
@@ -12,6 +13,7 @@ export class BiddingComponent implements OnInit {
 
   public currentUser: User = new User();
 
+  public lot: Lot = new Lot();
   public currentRate: string;
 
   public rates: Bidding[] = [
