@@ -56,7 +56,7 @@
     </div>
 
     <div class="col-1">
-      <span  style="margin-right: 15px; cursor: pointer" matBadge="{{lot.comments.length}}" matBadgeOverlap="false" >
+      <span  style="margin-right: 15px; cursor: pointer" matBadge="{{comments.length}}" matBadgeOverlap="false" >
             <i class="material-icons">speaker_notes</i>
           </span>
     </div>
@@ -180,7 +180,7 @@
                     </mat-form-field>
 
                     <div class="col-1">
-                      <button (click)="addComment($event)" mat-fab>
+                      <button (click)="addComment()" mat-fab>
                         <mat-icon aria-label="Example icon-button with a heart icon">send</mat-icon>
                       </button>
                     </div>
@@ -194,11 +194,11 @@
             </div>
 
             <h3>Комментарии</h3>
-            <app-comment *ngFor="let comment of lot.comments" [comment]="comment" ></app-comment>
+            <app-comment *ngFor="let comment of comments" [comment]="comment" ></app-comment>
             <div  class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
               <button (click)="addCommentsOffset()" style="width: 100%" color="primary" mat-stroked-button>Еще</button>
             </div>
-            <div *ngIf = "lot.comments?.length === 0">
+            <div *ngIf = "comments?.length === 0">
               У данного лота еще нет комментариев
             </div>
           </div>

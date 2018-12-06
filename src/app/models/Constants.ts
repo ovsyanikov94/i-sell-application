@@ -9,6 +9,9 @@ export class Constants {
   static readonly LOT_PLANED: number = 1; //запланированный
   static readonly LOT_INSTANT: number = 2; //немедленный
 
+  static readonly COMMENT_LIMIT: number = 10;
+  static readonly COMMENT_OFFSET: number = 0;
+
   static readonly DISLIKE: number = 0;
   static readonly LIKE: number = 1;
 

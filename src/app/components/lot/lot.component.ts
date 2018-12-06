@@ -97,7 +97,9 @@ export class LotComponent implements OnInit {
 
       console.log('resolved data:' , resolvedData);
       this.lot = resolvedData.lotResponse.data as Lot;
-      this.comments = this.lot.comments;
+      this.comments = this.lot.comments.slice(0, 10);
+
+      console.log('SLICE:', this.comments);
 
       this.images = this.lot.lotImagePath.map(function(image) {
         return image.path;
@@ -140,6 +142,8 @@ export class LotComponent implements OnInit {
 
   onTabChanged( event: MatTabChangeEvent ){
 
+    this.commentOffset = 0;
+
     if (event.index === 1 && !this.map ){
 
       this.initMap();
@@ -150,23 +154,26 @@ export class LotComponent implements OnInit {
   }//onTabChanged
 
   addCommentsOffset(){
-    this.commentOffset += Constants.APP_OFFSET;
-    this.getCommentsOffset(this.selectedComment);
+    this.commentOffset += Constants.COMMENT_LIMIT;
+    this.getCommentsOffset();
   }
 
-  async getCommentsOffset(comment){
+  async getCommentsOffset(){
 
-    const selectOld =  this.selectedComment;
-    this.selectedComment = comment;
+    const response = await this.commentService.getLotComments(this.lot._id, Constants.COMMENT_LIMIT , this.commentOffset);
 
-    const response = await this.commentService.getLotComments(this.lot._id, Constants.APP_OFFSET , Constants.APP_LIMIT );
     if (response.status === 200 ){
 
-      this.comments = response.data.comments as Comment[];
-      if ( selectOld !== comment){
-        this.commentOffset = 0;
-      }
-    }
+      const res = response.data as Comment[];
+
+      for (let i = 0; i < res.length; i++ ){
+
+        this.comments.push(res[i]);
+
+      }//for
+
+    }//if
+
   }
 
   async initMap(){
@@ -347,7 +354,7 @@ export class LotComponent implements OnInit {
 
   }//openDialog
 
-  async addComment( event ){
+  async addComment(){
 
     try{
 
