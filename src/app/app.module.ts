@@ -81,6 +81,11 @@ import {LotResolverService} from './services/lot/lot-resolver.service';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { BiddingComponent } from './components/bidding/bidding.component';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import {SocketService} from './services/socket/socket.service';
+
+// const config: SocketIoConfig = { url: 'http://localhost:5012/i-sell-admin-api' , options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000' , options: {} };
 
 @NgModule({
   declarations: [
@@ -148,11 +153,12 @@ import { BiddingComponent } from './components/bidding/bidding.component';
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     PopoverModule.forRoot(),
-
+    SocketIoModule.forRoot( config )
   ],
   providers: [
     GeoSearchService,
-    LotResolverService
+    LotResolverService,
+    SocketService
   ],
   entryComponents: [
     AuthModalComponent,

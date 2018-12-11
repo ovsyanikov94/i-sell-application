@@ -3,7 +3,6 @@ import {Lot} from '../../models/lot/Lot';
 import {User} from '../../models/user/User';
 import {Comment} from "../../models/comment/Comment";
 import { AuthData} from '../../models/modal.data/auth.data';
-import {LotImage} from '../../models/LotImage/lotImage';
 
 import {MatDialog, MatTabChangeEvent} from '@angular/material';
 
@@ -28,6 +27,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LotStatus} from "../../models/lot-status/Lot-status";
 import {LotType} from "../../models/lot-type/LotType";
 declare let L;
+
+import { SocketService } from "../../services/socket/socket.service";
+import {SocketMessages} from '../../models/Socket/SocketMessages';
 
 @Component({
   selector: 'app-lot',
@@ -74,8 +76,9 @@ export class LotComponent implements OnInit {
     private router: Router,
     private lotService: LotService,
     private commentService: CommentService,
-    public dialog: MatDialog,
-    private localStorage: LocalStorageService
+    public  dialog: MatDialog,
+    private localStorage: LocalStorageService,
+    private socketService: SocketService
   ) {
 
     this.user = localStorage.retrieve('user') as User;
@@ -105,8 +108,25 @@ export class LotComponent implements OnInit {
 
     } );
 
+    this.socketService.sendMessage( SocketMessages.UserAuth , {
+      id:  this.user._id,
+    });
+
+    this.socketService
+      .getMessage('message:NewComment')
+      .subscribe( data => console.log('data: ' , data) );
+    
     this.onLotResponse();
+
   }//constructor
+
+  EmitAuthMessage(){
+
+    // this.socketService.sendMessage( 'message:auth', {
+    //   id: this.user._id
+    // });
+
+  }//EmitAuthMessage
 
   async onLotResponse(){
 
@@ -348,6 +368,8 @@ export class LotComponent implements OnInit {
   }//openDialog
 
   async addComment( event ){
+
+    this.socketService.sendMessage( 'message:NewComment' , this.commentText);
 
     try{
 

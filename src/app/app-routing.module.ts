@@ -74,18 +74,18 @@ const routes: Routes = [
         component: BiddingComponent,
 
       },
+      {
+        path: 'lot/:id',
+        component: LotComponent,
+        resolve: {
+          lotResponse: LotResolverService,
+        }
+      },
+      {
+        path: 'card-lot',
+        component: CardLotComponent
+      },
     ]
-  },
-  {
-    path: 'lot/:id',
-    component: LotComponent,
-    resolve: {
-      lotResponse: LotResolverService,
-    }
-  },
-  {
-    path: 'card-lot',
-    component: CardLotComponent
   },
   {
     path: 'register',
